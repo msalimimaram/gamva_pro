@@ -1,554 +1,642 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحه در دست ساخت | یه کم صبر داشته باش!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>۴۰۴ | صفحه‌ای که دنبالش بودی عرق نریخته! | GAMva</title>
+
+    <!-- فونت وزیرمتن و آیکون‌ها -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- استایل اصلی پروژه (شیشه‌ای، تم، دارک مود، دکمه‌ها) -->
+    <link rel="stylesheet" href="assets/style.css">
+
     <style>
-        /* ریست و فونت */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* تنظیمات تکمیلی مخصوص 404 با حفظ هویت سلامت و تناسب اندام */
         body {
-            font-family: 'Segoe UI', Tahoma, 'Vazirmatn', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: var(--bg-gradient);
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* ذرات پس‌زمینه (ستاره‌های متحرک) */
-        .stars {
+        /* بلورهای متحرک اختصاصی (با رنگ‌های اسپرت) */
+        .error-blob-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 0;
+            z-index: -2;
+            overflow: hidden;
         }
 
-        .star {
+        .error-blob {
             position: absolute;
-            background: white;
             border-radius: 50%;
-            animation: twinkle 3s infinite alternate;
-            opacity: 0.7;
+            filter: blur(90px);
+            opacity: 0.3;
+            animation: errorBlobFloat 25s infinite alternate;
         }
 
-        @keyframes twinkle {
-            0% { opacity: 0.3; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
+        .error-blob-1 {
+            width: 550px;
+            height: 550px;
+            background: var(--primary);
+            top: -200px;
+            right: -150px;
+            animation-duration: 28s;
         }
 
-        /* کانتینر اصلی */
-        .container {
-            position: relative;
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.08);
+        .error-blob-2 {
+            width: 650px;
+            height: 650px;
+            background: var(--accent);
+            bottom: -250px;
+            left: -180px;
+            animation-duration: 32s;
+        }
+
+        .error-blob-3 {
+            width: 400px;
+            height: 400px;
+            background: var(--secondary);
+            top: 40%;
+            right: 20%;
+            animation-duration: 35s;
+            opacity: 0.2;
+        }
+
+        @keyframes errorBlobFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(80px, 90px) scale(1.2);
+            }
+        }
+
+        /* هدر شیشه‌ای یکدست با صفحه اصلی */
+        .error-header {
+            position: sticky;
+            top: 1rem;
+            z-index: 100;
+            max-width: 1440px;
+            width: calc(100% - 3rem);
+            margin: 1rem auto;
+            background: var(--bg-glass);
             backdrop-filter: blur(20px);
-            border-radius: 3rem;
-            padding: 3rem 2.5rem;
-            max-width: 650px;
-            width: 90%;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-            animation: floatContainer 6s ease-in-out infinite;
-        }
-
-        @keyframes floatContainer {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        /* گروه دکمه‌ها - تغییر مهم */
-        .button-group {
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-full);
+            padding: 0.6rem 2rem;
             display: flex;
-            gap: 1rem;
-            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
             flex-wrap: wrap;
         }
 
-        /* آیکون اصلی (انیمیشن دار) */
-        .icon-wrapper {
-            margin-bottom: 1.5rem;
+        .error-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .error-logo:hover {
+            transform: scale(1.02);
+        }
+
+        .error-logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #4ecdc4, #5a4bda);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .error-logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #5a4bda, #4ecdc4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        /* کارت اصلی خطا با تم ورزشی */
+        .error-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 3rem 2rem;
+            margin: 2rem auto;
+            max-width: 760px;
+            width: 90%;
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .error-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl), 0 0 0 1px var(--primary-glow);
+            border-color: var(--primary-light);
+        }
+
+        .error-code-wrapper {
             position: relative;
             display: inline-block;
-        }
-
-        .construction-icon {
-            font-size: 6rem;
-            animation: bounce 2s infinite, wrenchGlow 1.5s infinite alternate;
-            display: block;
-            filter: drop-shadow(0 10px 15px rgba(255, 215, 0, 0.4));
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(-3deg); }
-            75% { transform: translateY(-10px) rotate(3deg); }
-        }
-
-        @keyframes wrenchGlow {
-            0% { filter: drop-shadow(0 0 10px #fbbf24); }
-            100% { filter: drop-shadow(0 0 25px #f59e0b) drop-shadow(0 0 15px #fbbf24); }
-        }
-
-        .gear-small, .gear-large {
-            position: absolute;
-            font-size: 2.5rem;
-            color: #fbbf24;
-            opacity: 0.9;
-            animation: spinGear 4s linear infinite;
-        }
-
-        .gear-large {
-            font-size: 3.5rem;
-            top: -25px;
-            right: -35px;
-            animation-duration: 7s;
-            animation-direction: reverse;
-        }
-
-        .gear-small {
-            bottom: -15px;
-            left: -30px;
-            font-size: 2rem;
-            animation-duration: 5s;
-        }
-
-        @keyframes spinGear {
-            100% { transform: rotate(360deg); }
-        }
-
-        /* متن اصلی */
-        h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: #f1c40f;
             margin-bottom: 1rem;
-            text-shadow: 0 0 15px rgba(241, 196, 15, 0.6);
-            letter-spacing: 2px;
-            line-height: 1.4;
         }
 
-        .subtitle {
-            font-size: 1.5rem;
-            color: #e2e8f0;
-            margin-bottom: 1.8rem;
-            font-weight: 600;
-            background: linear-gradient(to left, #fbbf24, #f59e0b);
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px var(--primary-glow);
+            letter-spacing: -2px;
         }
 
-        .description {
-            color: #cbd5e1;
-            font-size: 1.2rem;
-            line-height: 2rem;
-            margin-bottom: 2.5rem;
-            background: rgba(0,0,0,0.25);
-            padding: 1.3rem;
-            border-radius: 2rem;
-            border-right: 4px solid #fbbf24;
-        }
-
-        .highlight {
-            color: #fbbf24;
-            font-weight: 700;
-        }
-
-        /* نوار پیشرفت طنز */
-        .progress-area {
-            margin: 2.5rem 0 2rem;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            color: #e2e8f0;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .progress-bar-bg {
-            background: #2d3748;
-            height: 1.3rem;
-            border-radius: 2rem;
-            overflow: hidden;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.6);
-        }
-
-        .progress-fill {
-            width: 73%;
+        .glitch-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, #fbbf24, #f59e0b, #d97706);
-            border-radius: 2rem;
-            position: relative;
-            animation: progressPulse 2s infinite alternate, progressShift 4s infinite;
-            box-shadow: 0 0 20px #f59e0b;
+            background: transparent;
+            text-shadow: 2px 0 var(--accent), -2px 0 var(--secondary);
+            opacity: 0.6;
+            animation: glitchText 0.3s infinite alternate;
+            pointer-events: none;
+            z-index: -1;
         }
 
-        @keyframes progressPulse {
-            0% { opacity: 0.9; }
-            100% { opacity: 1; }
+        @keyframes glitchText {
+            0% {
+                transform: translate(1px, -1px);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: translate(-1px, 1px);
+                opacity: 0.8;
+            }
         }
 
-        @keyframes progressShift {
-            0% { width: 71%; }
-            50% { width: 76%; }
-            100% { width: 71%; }
+        .error-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 1.5rem 0 1rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
-        .progress-text {
-            color: #fbbf24;
-            font-weight: bold;
+        .error-description {
+            color: var(--text-muted);
             font-size: 1rem;
-            margin-top: 0.5rem;
+            line-height: 1.8;
+            max-width: 520px;
+            margin: 0 auto 1rem;
         }
 
-        /* دکمه بازگشت و دکمه شوخی - استایل جدید */
-        .btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(251, 191, 36, 0.6);
-            color: #fbbf24;
-            padding: 0.9rem 2.2rem;
-            border-radius: 3rem;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .highlight-fun {
+            background: linear-gradient(120deg, var(--primary-glow), transparent);
+            padding: 0 0.3rem;
+            border-radius: 12px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .sport-icon-suggestion {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            text-decoration: none;
-            backdrop-filter: blur(10px);
-            margin-top: 0.5rem;
+            background: rgba(78, 205, 196, 0.15);
+            padding: 0.4rem 1rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            margin: 0.8rem 0;
         }
 
-        .btn:hover {
-            background: #fbbf24;
-            color: #0f172a;
-            border-color: #fbbf24;
-            box-shadow: 0 0 30px #f59e0b;
-            transform: scale(1.05);
-        }
-
-        /* شوخی اضافه */
-        .joke-footer {
-            margin-top: 2rem;
-            color: #94a3b8;
-            font-size: 0.95rem;
+        /* دکمه‌ها دقیقاً مشابه صفحه اصلی */
+        .btn-group-404 {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.4rem;
             flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0 1rem;
         }
 
-        .coffee-icon {
-            font-size: 1.3rem;
-            animation: shake 0.7s infinite;
+        .btn-primary,
+        .btn-outline {
+            padding: 0.9rem 2rem;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.95rem;
         }
 
-        @keyframes shake {
-            0% { transform: rotate(0); }
-            25% { transform: rotate(8deg); }
-            50% { transform: rotate(0); }
-            75% { transform: rotate(-8deg); }
-            100% { transform: rotate(0); }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            box-shadow: 0 8px 18px var(--primary-glow);
         }
 
-        /* ========== مودال شخصی‌سازی شده ========== */
-        .custom-modal {
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 28px var(--primary-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-glass);
+            color: var(--text-primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--bg-glass-light);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* نوار پیشرفت تناسب‌اندیشانه */
+        .fit-progress {
+            background: var(--bg-glass-light);
+            border-radius: var(--radius-full);
+            padding: 0.2rem;
+            margin: 1.8rem auto;
+            max-width: 380px;
+            border: 1px solid var(--border-glass);
+        }
+
+        .fit-progress-bar {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-full);
+            height: 12px;
+            width: 73%;
+            position: relative;
+            transition: width 0.3s;
+            box-shadow: 0 0 6px var(--primary-glow);
+        }
+
+        .fit-status {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            padding: 0 0.5rem;
+        }
+
+        /* لینک‌های سریع به صفحات محبوب تناسب اندام */
+        .quick-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            margin: 1.8rem 0 1rem;
+        }
+
+        .quick-link-item {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--bg-glass-light);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            border: 1px solid transparent;
+        }
+
+        .quick-link-item i {
+            color: var(--secondary);
+        }
+
+        .quick-link-item:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            background: var(--bg-glass);
+        }
+
+        /* مودال شیشه‌ای با محتوای تمرینی */
+        .custom-modal-404 {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(12px);
-            z-index: 1000;
+            z-index: 2000;
             justify-content: center;
             align-items: center;
-            animation: fadeInModal 0.3s ease;
         }
 
-        @keyframes fadeInModal {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            background: rgba(15, 25, 45, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 2rem;
-            padding: 2rem 2rem 1.8rem;
-            max-width: 400px;
-            width: 85%;
+        .modal-glass {
+            background: var(--bg-glass);
+            backdrop-filter: blur(32px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 450px;
+            padding: 2rem 1.8rem;
             text-align: center;
-            border: 1px solid rgba(251, 191, 36, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(251, 191, 36, 0.2);
-            animation: bounceIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
         }
 
-        @keyframes bounceIn {
-            0% { transform: scale(0.7); opacity: 0; }
-            80% { transform: scale(1.02); }
-            100% { transform: scale(1); opacity: 1; }
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: scale(0.92);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
-        .modal-icon {
-            font-size: 4rem;
-            margin-bottom: 0.5rem;
-            display: inline-block;
-            animation: modalShake 0.5s infinite alternate;
-        }
-
-        @keyframes modalShake {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(10deg); }
-        }
-
-        .modal-content h3 {
-            color: #fbbf24;
-            font-size: 1.9rem;
+        .modal-glass i {
+            font-size: 3.5rem;
+            color: var(--warning);
             margin-bottom: 1rem;
-            font-weight: 800;
         }
 
-        .modal-message {
-            color: #e2e8f0;
-            font-size: 1.2rem;
-            line-height: 1.7rem;
+        .modal-glass h4 {
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .modal-glass p {
+            color: var(--text-muted);
             margin: 1rem 0;
-            padding: 0.5rem;
+            line-height: 1.7;
         }
 
-        .modal-close-btn {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+        .modal-close {
+            background: var(--gradient-primary);
             border: none;
-            color: #0f172a;
-            padding: 0.6rem 1.8rem;
-            border-radius: 3rem;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
+            padding: 0.6rem 1.6rem;
+            border-radius: var(--radius-full);
+            color: white;
+            font-weight: 600;
             margin-top: 1rem;
-            transition: 0.2s;
+            cursor: pointer;
         }
 
-        .modal-close-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px #fbbf24;
+        .error-footer {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            text-align: center;
+            border-top: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            font-size: 0.75rem;
         }
 
-        /* ریسپانسیو */
-        @media (max-width: 550px) {
-            .container {
-                padding: 2rem 1.5rem;
-                border-radius: 2rem;
+        @media (max-width: 600px) {
+            .error-code {
+                font-size: 5rem;
             }
-            h1 {
-                font-size: 2rem;
+
+            .error-title {
+                font-size: 1.6rem;
             }
-            .construction-icon {
-                font-size: 4.5rem;
+
+            .error-card {
+                padding: 2rem 1.2rem;
             }
-            .gear-large {
-                font-size: 2.5rem;
-                top: -20px;
-                right: -20px;
-            }
-            .gear-small {
-                font-size: 1.8rem;
-                left: -20px;
-            }
-            .btn {
-                padding: 0.7rem 1.5rem;
-                font-size: 1rem;
-            }
-            .modal-content {
-                padding: 1.5rem;
-            }
-            .modal-message {
-                font-size: 1rem;
+
+            .btn-primary,
+            .btn-outline {
+                padding: 0.7rem 1.4rem;
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
-<body>
-    <!-- پس‌زمینه ستاره‌ای تولید شده با جاوااسکریپت -->
-    <div class="stars" id="starsContainer"></div>
 
-    <div class="container">
-        <!-- آیکون با چرخ‌دنده -->
-        <div class="icon-wrapper">
-            <span class="construction-icon">🚧</span>
-            <span class="gear-large">⚙️</span>
-            <span class="gear-small">⚙️</span>
-        </div>
+<body data-theme="light">
+    <!-- بلورهای پس‌زمینه (هماهنگ با برند سلامت) -->
+    <div class="error-blob-bg">
+        <div class="error-blob error-blob-1"></div>
+        <div class="error-blob error-blob-2"></div>
+        <div class="error-blob error-blob-3"></div>
+    </div>
 
-        <!-- متن اصلی -->
-        <h1>صفحه هنوز آماده نیست!</h1>
-        <div class="subtitle">اما داریم روش عرق می‌ریزیم...</div>
-
-        <div class="description">
-            <span class="highlight">✋ دست نگه‌دار!</span> اینجا قراره یه شاهکار بشه،
-            ولی الان یه کارگر خسته داره توی کدها <span class="highlight">چایی</span> می‌ریزه و
-            باگ‌ها رو یکی‌یکی شکار می‌کنه.<br>
-            <strong>قول می‌دم</strong> به زودی اینجا از <span class="highlight">جذابیت</span> ترکیده بشه!
-        </div>
-
-        <!-- نوار پیشرفت طنز -->
-        <div class="progress-area">
-            <div class="progress-label">
-                <span>🧑‍💻 وضعیت ساخت:</span>
-                <span>۷۳٪ (احتمالاً)</span>
+    <!-- هدر شیشه‌ای با قابلیت دارک مود -->
+    <header class="error-header">
+        <div class="error-logo" onclick="window.location.href='main-page.html'">
+            <div class="error-logo-icon">
+                <i class="fas fa-leaf"></i>
             </div>
-            <div class="progress-bar-bg">
-                <div class="progress-fill"></div>
-            </div>
-            <div class="progress-text">
-                ⚡ نزدیکه... فقط یه کم دیگه قهوه لازم داریم ☕
-            </div>
+            <div class="error-logo-text">GAMva</div>
         </div>
-
-        <!-- گروه دکمه‌ها: هم دکمه شوخی و هم دکمه بازگشت -->
-        <div class="button-group">
-            <button class="btn" id="funnyBtn">
-                <span>🔄</span> بزن ببینیم چی میشه!
+        <div class="error-actions">
+            <button class="theme-toggle" id="themeToggle" aria-label="تغییر تم">
+                <i class="fas fa-sun"></i>
             </button>
-            <button class="btn" id="backBtn">
-                <span>🔙</span> برگشت به صفحه قبل
-            </button>
+            <a href="main-page.html" class="action-icon"
+                style="background: var(--bg-glass-light); border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+                <i class="fas fa-home"></i>
+            </a>
         </div>
+    </header>
 
-        <!-- فوتر طنز -->
-        <div class="joke-footer">
-            <span class="coffee-icon">☕</span>
-            <span>توسعه‌دهنده الان خوابه، بیدارش نکنید!</span>
-            <span>😴</span>
+    <main>
+        <div class="error-card fade-up">
+            <div class="error-code-wrapper">
+                <div class="error-code">۴۰۴</div>
+                <div class="glitch-effect">۴۰۴</div>
+            </div>
+            <div class="error-title">این مسیر تمرینی رو گم کردی!</div>
+            <div class="error-description">
+                انگار <span class="highlight-fun">هوش مصنوعی GAMva</span> نتونست این ایستگاه سلامتی رو پیدا کنه.
+                شاید صفحه جابه‌جا شده یا یه مربی بدنسازی باهاش برده باشه 🏋️‍♂️
+                <br>نگران نباش، عضله‌هات تحلیل نمیره! از اینجا می‌تونیم به مسیر درست برگردیم.
+            </div>
+            <div class="sport-icon-suggestion">
+                <i class="fas fa-heartbeat"></i> <span>پیشنهاد لحظه‌ای: ۱۰ تا شنا برو، بعد برگرد صفحه رو پیدا
+                    می‌کنی!</span>
+            </div>
+
+            <!-- نوار پیشرفت شاد با تم سلامت (تغییر رندوم درصد تلاش تیم) -->
+            <div class="fit-progress">
+                <div class="fit-progress-bar" id="fitProgressFill"></div>
+            </div>
+            <div class="fit-status">
+                <span><i class="fas fa-dumbbell"></i> آنالیز شدت تلاش تیم فنی</span>
+                <span id="progressPercent">۷۳</span><span>% بازسازی مسیر</span>
+            </div>
+
+            <div class="btn-group-404">
+                <button class="btn-primary" id="backToHomeBtn">
+                    <i class="fas fa-arrow-left"></i> باشگاه GAMva
+                </button>
+                <button class="btn-outline" id="funnySurpriseBtn">
+                    <i class="fas fa-face-smile"></i> یه حرکت کششی فکری
+                </button>
+                <button class="btn-outline" onclick="window.history.back();">
+                    <i class="fas fa-undo-alt"></i> برگشت به ایستگاه قبل
+                </button>
+            </div>
+
+            <!-- لینک‌های سریع به بخش‌های محبوب تناسب اندام -->
+            <div class="quick-links">
+                <a href="list-coach.html" class="quick-link-item"><i class="fas fa-user-check"></i> مربیان حرفه‌ای</a>
+                <a href="challenges.html" class="quick-link-item"><i class="fas fa-trophy"></i> چالش‌های ۳۰ روزه</a>
+                <a href="coming-soon.html" class="quick-link-item"><i class="fas fa-apple-alt"></i> مکمل‌های ارگانیک</a>
+                <a href="content-list.html" class="quick-link-item"><i class="fas fa-podcast"></i> پادکست‌های
+                    انگیزشی</a>
+                <a href="calculater.html" class="quick-link-item"><i class="fas fa-calculator"></i> محاسبه‌گر کالری</a>
+            </div>
+            <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 1rem;">
+                <i class="fas fa-search"></i> اگه مطمئنی آدرس درسته، با مربیان پشتیبان تماس بگیر (آنلاین ۲۴/۷)
+            </p>
+        </div>
+    </main>
+
+    <footer class="error-footer">
+        <div>© ۲۰۲۵ GAMva | حتی مسیرهای گمشده هم تو رو به سلامتی می‌رسونن، فقط ادامه بده 💪</div>
+    </footer>
+
+    <!-- مودال اختصاصی با پیام‌های طنز تناسب اندام -->
+    <div id="jokeModal" class="custom-modal-404">
+        <div class="modal-glass">
+            <i class="fas fa-dumbbell" id="modalIcon"></i>
+            <h4 id="modalTitle">حرکت اصلاحی!</h4>
+            <p id="modalMessage">متن طنز درباره ورزش و سلامتی اینجا قرار میگیره...</p>
+            <button class="modal-close" id="closeModalBtn">آماده ادامه‌ام 💪</button>
         </div>
     </div>
 
-    <!-- مودال شخصی‌سازی شده (جایگزین alert) -->
-    <div id="customModal" class="custom-modal">
-        <div class="modal-content">
-            <div class="modal-icon" id="modalIcon">🧙‍♂️</div>
-            <h3 id="modalTitle">هی هوی!</h3>
-            <div class="modal-message" id="modalMessage"></div>
-            <button class="modal-close-btn" id="closeModalBtn">باشه 🤝</button>
-        </div>
-    </div>
+    <!-- اسکریپت اصلی پروژه (برای تم، toast و...) -->
+    <script src="assets/scripts.js"></script>
 
+    <!-- اسکریپت تخصصی ۴۰۴ با هماهنگی کامل دارک مود و المان‌های سلامتی -->
     <script>
-        // ساخت ستاره‌های تصادفی در پس‌زمینه
-        function createStars() {
-            const container = document.getElementById('starsContainer');
-            const starCount = 90; // تعداد ستاره‌ها
-            
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                
-                // اندازه تصادفی بین 1px تا 4px
-                const size = Math.random() * 4 + 1;
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
-                
-                // موقعیت تصادفی
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                
-                // تأخیر انیمیشن تصادفی
-                star.style.animationDelay = Math.random() * 3 + 's';
-                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                
-                container.appendChild(star);
+        (function () {
+            // ۱. اطمینان از عملکرد تم (در صورت نبود GAMva از قبل)
+            const themeToggleBtn = document.getElementById('themeToggle');
+            if (themeToggleBtn) {
+                const savedTheme = localStorage.getItem('gamva-theme') || 'light';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                const icon = themeToggleBtn.querySelector('i');
+                if (icon) icon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+                themeToggleBtn.addEventListener('click', () => {
+                    const current = document.documentElement.getAttribute('data-theme');
+                    const newTheme = current === 'light' ? 'dark' : 'light';
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('gamva-theme', newTheme);
+                    const ic = themeToggleBtn.querySelector('i');
+                    if (ic) ic.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+                    if (window.showToast) window.showToast(`تم ${newTheme === 'dark' ? 'شبِ پرانرژی' : 'روزِ با نشاط'} فعال شد`, 'info', 1500);
+                });
             }
-        }
 
-        // ========== مودال شخصی‌سازی شده با طنز بیشتر ==========
-        const modal = document.getElementById('customModal');
-        const modalMessageEl = document.getElementById('modalMessage');
-        const modalTitleEl = document.getElementById('modalTitle');
-        const modalIconEl = document.getElementById('modalIcon');
+            // ۲. نوار پیشرفت متغیر (شبیه به پیشرفت طراحی اپ)
+            const progressFill = document.getElementById('fitProgressFill');
+            const percentSpan = document.getElementById('progressPercent');
+            let currentPercent = 73;
+            function updateProgressRandomly() {
+                const delta = (Math.random() * 8) - 2; // -2 تا +6
+                let newPercent = currentPercent + delta;
+                newPercent = Math.min(84, Math.max(66, newPercent));
+                currentPercent = Math.floor(newPercent);
+                if (progressFill) progressFill.style.width = currentPercent + '%';
+                if (percentSpan) percentSpan.innerText = currentPercent;
+            }
+            setInterval(updateProgressRandomly, 5500);
+            if (progressFill) progressFill.style.width = '73%';
 
-        function showFunnyModal() {
-            // لیست پیام‌های طنز (با آیکون‌ها و حالت‌های مختلف)
-            const funnyList = [
-                { title: "🎉 تق تق!", message: "هنوز آماده نیست، ولی روحت شاد! انگار داریم یه قهوه دیگه سفارش می‌دیم...", icon: "☕" },
-                { title: "🤖 گزارش ویژه", message: "ربات سازنده گفت: «فقط ۴ تا باگ مونده، ولی انگار باگ‌ها بچه دار شدن!»", icon: "🐞" },
-                { title: "🧑‍💻 پیام از آینده", message: "سلام از سال ۱۴۳۰! این صفحه هنوز تموم نشده؟ عجیبه...", icon: "🕰️" },
-                { title: "💥 به روزرسانی لحظه‌ای", message: "توسعه‌دهنده قهوه سوم رو شروع کرد، احتمال دیدن معجزه ۶٪ افزایش یافت.", icon: "⚡" },
-                { title: "🐱 گربه رو کیبرد", message: "میووو... یه گربه اومد روش کیبرد خوابید. یه کم بیشتر صبر کن!", icon: "🐈" },
-                { title: "🧹 جارو کشیدن کدها", message: "داریم کدهای تکراری رو جارو می‌زنیم، فعلاً اینجا گردگیری میشه!", icon: "🧹" },
-                { title: "🎨 نقاشی نیمه‌کاره", message: "رنگ‌ها هنوز خشک نشدن، ولی حس خوبی داره. قول میدم!", icon: "🎨" },
-                { title: "👷‍♂️ گزارش کارگاه", message: "سرکارگر گفت: تا ناهار آماده می‌شه... البته ناهار فردا!", icon: "🍱" },
-                { title: "🚀 پرتاب به فضا", message: "در حال آپلود ایده‌های باحال... اینترنت توسعه‌دهنده یه کم ضعیفه.", icon: "🌌" },
-                { title: "🎭 کمدی اشتباهات", message: "به جای صفحه، یه فیلم کمدی ساختیم. فعلاً از باگ‌ها لذت ببر!", icon: "🎬" }
+            // ۳. مودال با پیام‌های مرتبط با سلامت و ورزش
+            const modal = document.getElementById('jokeModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            const modalIconElem = document.getElementById('modalIcon');
+
+            const fitnessJokes = [
+                { title: "🏋️‍♂️ تمرین جایگزین", message: "به جای گشتن تو صفحه گمشده، ۲۰ تا اسکات بزن! بعد برو صفحه مربیان رو ببین.", icon: "fas fa-running" },
+                { title: "🥗 رژیم گمشده!", message: "این صفحه مثل کالری‌های اضافه است: پیدا نمی‌شه! ولی نگران نباش، مربی تغذیه کمکت می‌کنه.", icon: "fas fa-apple-alt" },
+                { title: "🧘‍♀️ یوگا و خطا", message: "تمرین کن و نفس عمیق بکش. شاید صفحه بعد از چند نفس پیدا شد! (یا حداقل استرستان کم شد)", icon: "fas fa-peace" },
+                { title: "🔥 چربی سوزی", message: "این خطای ۴۰۴ معادل ۵۰ کالری سوزیِ ذهنیه! برو یه چالش ثبت‌نام کن بهتره.", icon: "fas fa-fire" },
+                { title: "🎯 هدف‌گذاری", message: "گم شدی؟ هدف خودتو روی GAMva بذار. مثلاً: پیدا کردن بهترین مربی بدنسازی.", icon: "fas fa-bullseye" },
+                { title: "💪 آماده باش", message: "تیم فنی داره میدویه تا صفحه رو پیدا کنه، تو همین حین ۱۰ تا بارفیکس بزن!", icon: "fas fa-dumbbell" },
+                { title: "🧠 هشیاری ذهنی", message: "ممکنه آدرس اشتباه تایپ شده باشه. مثل این میمونه که به جای دستگاه پرس سینه، بری سمت دستگاه پا!", icon: "fas fa-brain" }
             ];
-            
-            // انتخاب تصادفی
-            const randomItem = funnyList[Math.floor(Math.random() * funnyList.length)];
-            
-            // تغییر محتوا
-            modalTitleEl.innerHTML = randomItem.title;
-            modalMessageEl.innerHTML = randomItem.message;
-            modalIconEl.innerHTML = randomItem.icon;
-            
-            // نمایش مودال با افکت
-            modal.style.display = 'flex';
-        }
 
-        // بستن مودال با دکمه close
-        document.getElementById('closeModalBtn').addEventListener('click', function() {
-            modal.style.display = 'none';
-        });
-        
-        // بستن مودال با کلیک خارج از محتوا
-        window.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
+            function showRandomFitnessModal() {
+                const randomIndex = Math.floor(Math.random() * fitnessJokes.length);
+                const joke = fitnessJokes[randomIndex];
+                modalTitle.innerText = joke.title;
+                modalMessage.innerText = joke.message;
+                modalIconElem.className = joke.icon;
+                modal.style.display = 'flex';
             }
-        });
 
-        // دکمه شوخی (جایگزینی alert جذاب با مودال)
-        document.getElementById('funnyBtn').addEventListener('click', showFunnyModal);
-        
-        // ========== دکمه برگشت به صفحه قبل ==========
-        document.getElementById('backBtn').addEventListener('click', function() {
-            // برگشت به صفحه قبلی در تاریخچه مرورگر
-            window.history.back();
-            // همچنین میشه یه fallback داشت: اگر هیچ صفحه قبلی نبود به صفحه اصلی بره?
-            // ولی طبیعتا توی مرورگر همیشه یه صفحه قبلی هست.
-        });
+            document.getElementById('funnySurpriseBtn')?.addEventListener('click', showRandomFitnessModal);
+            document.getElementById('closeModalBtn')?.addEventListener('click', () => { modal.style.display = 'none'; });
+            window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
 
-        // اجرای ساخت ستاره‌ها وقتی صفحه لود شد
-        window.addEventListener('load', createStars);
+            // ۴. دکمه بازگشت به خانه
+            document.getElementById('backToHomeBtn')?.addEventListener('click', () => {
+                window.location.href = 'main-page.html';
+            });
 
-        // تغییر درصد پیشرفت به صورت رندم برای شوخی (هر 8 ثانیه)
-        setInterval(() => {
-            const progressFill = document.querySelector('.progress-fill');
-            const progressLabelSpan = document.querySelector('.progress-label span:last-child');
-            if (progressFill && progressLabelSpan) {
-                // عدد تصادفی بین 68 تا 79 برای واقعی‌تر شدن
-                const randomPercent = Math.floor(Math.random() * 12) + 68;
-                progressFill.style.width = randomPercent + '%';
-                progressLabelSpan.textContent = randomPercent + '٪ (هنوز...)';
+            // ۵. نمایش نوتیفیکیشن خوشامد (استفاده از toast سیستم اصلی در صورت وجود)
+            setTimeout(() => {
+                if (typeof showToast === 'function') {
+                    showToast('💪 مسیر رو گم کردی؟ بیا تا باهم گرم کنیم!', 'success', 3200);
+                } else if (window.GAMva && window.GAMva.showToast) {
+                    window.GAMva.showToast('🏆 حتی قهرمانا هم گاهی مسیرشونو گم می‌کنن، نگران نباش!', 'info', 3000);
+                }
+            }, 800);
+
+            // ۶. افکت fade-up (مشابه صفحه اصلی)
+            const fadeEl = document.querySelector('.fade-up');
+            if (fadeEl && !fadeEl.classList.contains('visible')) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) entry.target.classList.add('visible');
+                    });
+                }, { threshold: 0.1 });
+                observer.observe(fadeEl);
             }
-        }, 8000);
+        })();
     </script>
 </body>
+
 </html>

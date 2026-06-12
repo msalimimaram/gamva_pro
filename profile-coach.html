@@ -1,115 +1,101 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>پروفایل حرفه‌ای مربی | امیرعلی سلیمی</title>
-    <!-- Font Awesome & Google Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <!-- Swiper JS for carousel -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>پروفایل مربی | امیرعلی سلیمی | GAMva</title>
+
+    <!-- فونت وزیرمتن و آیکون‌ها -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- استایل اصلی پروژه -->
+    <link rel="stylesheet" href="assets/style.css">
+
+    <!-- Swiper JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f5f7fc 0%, #eef2f8 100%);
-            color: #1a2c3e;
-            overflow-x: hidden;
-        }
-
-        /* animated background effect */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: radial-gradient(circle at 20% 30%, rgba(210, 230, 250, 0.4), rgba(240, 248, 255, 0.2));
-        }
-
-        .container {
+        /* تنظیمات اختصاصی صفحه پروفایل مربی - هماهنگ با تم GAMva */
+        .profile-container {
             max-width: 1300px;
-            margin: 0 auto;
-            padding: 30px 24px 60px;
-            position: relative;
+            margin: 1rem auto;
+            padding: 0 1rem;
         }
 
-        /* back button */
-        .back-btn {
+        /* دکمه بازگشت */
+        .back-nav {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(255,255,255,0.7);
-            backdrop-filter: blur(8px);
-            padding: 10px 24px;
-            border-radius: 60px;
+            gap: 0.5rem;
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--radius-full);
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            transition: var(--transition-base);
+            border: 1px solid var(--border-glass);
+            cursor: pointer;
             text-decoration: none;
-            color: #1e4a6e;
-            font-weight: 500;
-            margin-bottom: 30px;
-            transition: 0.2s;
-            border: 1px solid rgba(255,255,245,0.6);
         }
 
-        .back-btn:hover {
-            background: white;
+        .back-nav:hover {
+            background: var(--bg-glass-light);
             transform: translateX(-5px);
+            border-color: var(--primary);
         }
 
-        /* profile header - glassmorphic hero */
+        /* هدر پروفایل - شیشه‌ای */
         .profile-hero {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(18px);
-            border-radius: 56px;
-            padding: 40px 45px;
-            margin-bottom: 40px;
-            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(255,255,250,0.7);
-            transition: all 0.3s;
+            background: var(--bg-glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: var(--transition-base);
+        }
+
+        .profile-hero:hover {
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-glow);
         }
 
         .hero-flex {
             display: flex;
             flex-wrap: wrap;
-            gap: 40px;
+            gap: 2rem;
             align-items: center;
         }
 
         .avatar-section {
             position: relative;
+            flex-shrink: 0;
         }
 
         .avatar-img {
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
+            border: 3px solid var(--secondary);
+            box-shadow: var(--shadow-lg);
         }
 
-        .avatar-img:hover {
-            transform: scale(1.02);
-        }
-
-        .status-badge {
+        .online-status-badge {
             position: absolute;
-            bottom: 12px;
-            right: 8px;
-            background: #2ecc71;
-            width: 28px;
-            height: 28px;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--success);
             border-radius: 50%;
-            border: 3px solid white;
+            border: 2px solid var(--bg-glass);
         }
 
         .profile-info {
@@ -117,132 +103,151 @@
         }
 
         .profile-info h1 {
-            font-size: 2.6rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            background: linear-gradient(125deg, #1f4870, #2c7a9e);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 8px;
+            margin-bottom: 0.3rem;
         }
 
         .specialty-tag {
             display: inline-block;
-            background: #eef3fc;
-            padding: 6px 18px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            margin: 12px 0 16px;
+            background: var(--bg-glass-light);
+            border: 1px solid var(--border-glass);
+            padding: 0.3rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: var(--font-sm);
+            color: var(--secondary);
+            margin: 0.5rem 0 1rem;
         }
 
         .stats-mini {
             display: flex;
             flex-wrap: wrap;
-            gap: 28px;
-            margin-top: 18px;
+            gap: 1.5rem;
+            margin: 1rem 0;
         }
 
         .stat-mini-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-weight: 500;
+            gap: 0.5rem;
+            font-size: var(--font-sm);
+            color: var(--text-muted);
         }
 
         .action-buttons {
             display: flex;
-            gap: 16px;
-            margin-top: 24px;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
 
         .btn-primary {
-            background: #2c7a9e;
+            background: var(--gradient-primary);
             border: none;
-            padding: 12px 28px;
-            border-radius: 40px;
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--radius-full);
             color: white;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
+            transition: var(--transition-base);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
         }
 
         .btn-outline {
             background: transparent;
-            border: 1.5px solid #2c7a9e;
-            padding: 12px 28px;
-            border-radius: 40px;
+            border: 1px solid var(--border-glass);
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--radius-full);
             font-weight: 600;
             cursor: pointer;
+            transition: var(--transition-base);
+            color: var(--text-primary);
         }
 
-        /* grid sections */
+        .btn-outline:hover {
+            background: var(--bg-glass-light);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* شبکه دو ستونه */
         .grid-2cols {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            border-radius: 40px;
-            padding: 28px;
-            border: 1px solid rgba(255,255,240,0.8);
-            transition: all 0.25s;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: var(--transition-base);
         }
 
         .glass-card:hover {
-            background: rgba(255, 255, 255, 0.85);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+            border-color: var(--primary-light);
+            transform: translateY(-3px);
         }
 
         .card-title {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 20px;
-            border-right: 5px solid #2c8faa;
-            padding-right: 16px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-right: 3px solid var(--secondary);
+            padding-right: 0.8rem;
+            color: var(--text-primary);
         }
 
-        /* skills chips */
         .skills-chips {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
         }
 
         .chip {
-            background: #eef2fa;
-            padding: 8px 20px;
-            border-radius: 60px;
-            font-size: 0.85rem;
-            font-weight: 500;
+            background: var(--bg-glass-light);
+            border: 1px solid var(--border-glass);
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-full);
+            font-size: var(--font-xs);
+            color: var(--secondary);
         }
 
-        /* achievements list */
         .achievement-item {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 18px;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            font-size: var(--font-sm);
         }
 
-        /* students list */
         .student-list {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 1rem;
         }
 
         .student-row {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            gap: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-glass);
         }
 
         .student-avatar {
@@ -252,297 +257,408 @@
             object-fit: cover;
         }
 
-        /* reviews */
         .review-item {
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-glass);
         }
 
         .rating-stars {
-            color: #f4b942;
-            margin: 8px 0;
+            color: var(--warning);
+            margin: 0.3rem 0;
+            font-size: var(--font-sm);
         }
 
-        /* gallery swiper */
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        /* گالری */
         .gallery-swiper {
-            margin-top: 20px;
-            border-radius: 32px;
+            margin-top: 1rem;
+            border-radius: var(--radius-lg);
             overflow: hidden;
         }
 
         .swiper-slide img {
             width: 100%;
-            height: 260px;
+            height: 220px;
             object-fit: cover;
-            border-radius: 24px;
+            border-radius: var(--radius-md);
         }
 
-        /* stats & charts */
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #22668d;
-        }
+        @media (max-width: 900px) {
+            .grid-2cols {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
 
-        .like-bookmark-bar {
-            display: flex;
-            gap: 25px;
-            margin-top: 20px;
-        }
+            .hero-flex {
+                flex-direction: column;
+                text-align: center;
+            }
 
-        .like-stat, .bookmark-stat {
-            font-size: 1.1rem;
-        }
+            .stats-mini {
+                justify-content: center;
+            }
 
-        @media (max-width: 780px) {
-            .hero-flex { flex-direction: column; text-align: center; }
-            .profile-info h1 { font-size: 2rem; }
-            .stats-mini { justify-content: center; }
-            .action-buttons { justify-content: center; }
-            .glass-card { padding: 22px; }
+            .action-buttons {
+                justify-content: center;
+            }
         }
     </style>
 </head>
-<body>
-<div class="bg-animation"></div>
-<div class="container">
-    <a href="list-coach.html" class="back-btn"><i class="fas fa-arrow-right"></i> بازگشت به لیست مربیان</a>
 
-    <!-- هدر پروفایل -->
-    <div class="profile-hero">
-        <div class="hero-flex">
-            <div class="avatar-section">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="مربی" class="avatar-img" id="coachAvatar">
-                <div class="status-badge"></div>
-            </div>
-            <div class="profile-info">
-                <h1 id="coachFullName">امیرعلی سلیمی</h1>
-                <span class="specialty-tag" id="coachMainSpecialty"><i class="fas fa-dumbbell"></i> بدنسازی حرفه‌ای</span>
-                <div class="stats-mini">
-                    <div class="stat-mini-item"><i class="fas fa-users"></i> <span id="studentsCount">124</span> شاگرد فعال</div>
-                    <div class="stat-mini-item"><i class="fas fa-star"></i> <span id="ratingValue">4.98</span> (۱۸۹ نظر)</div>
-                    <div class="stat-mini-item"><i class="fas fa-calendar-alt"></i> <span id="experienceYears">۹</span> سال سابقه</div>
-                </div>
-                <div class="action-buttons">
-                    <button class="btn-primary" id="contactCoachBtn"><i class="fas fa-phone-alt"></i> ارتباط با مربی</button>
-                    <button class="btn-outline" id="followCoachBtn"><i class="far fa-heart"></i> دنبال کردن</button>
-                    <button class="btn-outline" id="bookmarkProfileBtn"><i class="far fa-bookmark"></i> ذخیره</button>
-                </div>
-            </div>
-        </div>
+<body data-theme="light">
+    <!-- پس‌زمینه بلور متحرک -->
+    <div class="dynamic-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
 
-    <!-- شبکه ۲ ستونه -->
-    <div class="grid-2cols">
-        <!-- سمت راست: تخصص‌ها و دستاوردها و آمار -->
-        <div>
-            <div class="glass-card">
-                <div class="card-title"><i class="fas fa-chalkboard-user"></i> تخصص‌های مربی</div>
-                <div class="skills-chips" id="specialtiesList">
-                    <!-- js dynamic -->
-                </div>
-                <div class="card-title" style="margin-top:20px;"><i class="fas fa-trophy"></i> دستاوردها & افتخارات</div>
-                <div id="achievementsList"></div>
+    <!-- هدر شیشه‌ای -->
+    <header class="glass-header">
+        <div class="logo" onclick="window.location.href='main-page.html'">
+            <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+            <div class="logo-text-container">
+                <span class="logo-val">lueva <span class="logo-gam">GAM</span></span>
             </div>
-            <div class="glass-card" style="margin-top:30px;">
-                <div class="card-title"><i class="fas fa-chart-line"></i> آمار حرفه‌ای</div>
-                <div class="stats-mini" style="flex-direction:column; gap:16px;">
-                    <div><span class="stat-number" id="totalSessions">۱,۲۸۰</span> جلسه برگزار شده</div>
-                    <div><span class="stat-number" id="successRate">۹۶٪</span> رضایت شاگردان</div>
-                    <div><span class="stat-number" id="totalLikes">۳۴۵</span> لایک دریافت شده</div>
-                    <div class="like-bookmark-bar">
-                        <div class="like-stat"><i class="fas fa-heart" style="color:#e63946;"></i> <span id="likesCount">۳۴۵</span></div>
-                        <div class="bookmark-stat"><i class="fas fa-bookmark" style="color:#f4a261;"></i> <span id="bookmarksCount">۱۲۸</span></div>
+        </div>
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun"></i>
+            </button>
+            <div class="action-icon" onclick="window.location.href='main-page.html'">
+                <i class="fas fa-home"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="profile-container">
+        <a href="list-coach.html" class="back-nav">
+            <i class="fas fa-arrow-right"></i> بازگشت به لیست مربیان
+        </a>
+
+        <!-- بخش هدر پروفایل -->
+        <div class="profile-hero fade-up">
+            <div class="hero-flex">
+                <div class="avatar-section">
+                    <img src="assets/img/stoke/download (1).jpg" alt="امیرعلی سلیمی" class="avatar-img"
+                        id="coachAvatar">
+                    <div class="online-status-badge"></div>
+                </div>
+                <div class="profile-info">
+                    <h1 id="coachFullName">امیرعلی سلیمی</h1>
+                    <span class="specialty-tag" id="coachMainSpecialty"><i class="fas fa-dumbbell"></i> بدنسازی حرفه‌ای
+                        و توانبخشی</span>
+                    <div class="stats-mini">
+                        <div class="stat-mini-item"><i class="fas fa-users"></i> <span id="studentsCount">۱۲۴</span>
+                            شاگرد فعال</div>
+                        <div class="stat-mini-item"><i class="fas fa-star"></i> <span id="ratingValue">۴.۹۸</span> (۱۸۹
+                            نظر)</div>
+                        <div class="stat-mini-item"><i class="fas fa-calendar-alt"></i> <span
+                                id="experienceYears">۹</span> سال سابقه</div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-primary" id="contactCoachBtn"><i class="fas fa-phone-alt"></i> ارتباط با
+                            مربی</button>
+                        <button class="btn-outline" id="followCoachBtn"><i class="far fa-heart"></i> دنبال کردن</button>
+                        <button class="btn-outline" id="bookmarkProfileBtn"><i class="far fa-bookmark"></i>
+                            ذخیره</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- شاگردان برجسته و نظرات -->
-        <div>
-            <div class="glass-card">
-                <div class="card-title"><i class="fas fa-user-graduate"></i> شاگردان ویژه</div>
-                <div class="student-list" id="studentsList"></div>
-            </div>
-            <div class="glass-card" style="margin-top:30px;">
-                <div class="card-title"><i class="fas fa-comments"></i> نظرات شاگردان</div>
-                <div id="reviewsList"></div>
-                <button id="showAllReviews" style="margin-top:15px; background:none; border:none; color:#2c7a9e; cursor:pointer;">مشاهده همه نظرات <i class="fas fa-chevron-left"></i></button>
-            </div>
-        </div>
-    </div>
+        <!-- شبکه دو ستونه -->
+        <div class="grid-2cols fade-up">
+            <!-- ستون راست: تخصص‌ها، دستاوردها، آمار -->
+            <div>
+                <div class="glass-card">
+                    <div class="card-title"><i class="fas fa-chalkboard-user"></i> تخصص‌های مربی</div>
+                    <div class="skills-chips" id="specialtiesList"></div>
 
-    <!-- گالری تصاویر و ویدیوها با Swiper -->
-    <div class="glass-card" style="margin-bottom: 30px;">
-        <div class="card-title"><i class="fas fa-images"></i> گالری تمرینات و لحظات حرفه‌ای</div>
-        <div class="swiper gallery-swiper">
-            <div class="swiper-wrapper" id="galleryWrapper"></div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-        </div>
-    </div>
+                    <div class="card-title" style="margin-top: 1.2rem;"><i class="fas fa-trophy"></i> دستاوردها و
+                        افتخارات</div>
+                    <div id="achievementsList"></div>
+                </div>
 
-    <!-- بخش بیوگرافی جامع -->
-    <div class="glass-card">
-        <div class="card-title"><i class="fas fa-address-card"></i> بیوگرافی و سبک مربیگری</div>
-        <p id="bioText" style="line-height:1.7; font-size:1rem;">امیرعلی سلیمی، مربی بین‌المللی بدنسازی با بیش از ۹ سال تجربه، فارغ‌التحصیل علوم ورزشی و دارای مدرک مربیگری از فدراسیون جهانی بدنسازی. رویکرد تخصصی ایشان تلفیق علم تمرین و تغذیه پیشرفته برای رسیدن به حداکثر پتانسیل ورزشکاران است. تاکنون بیش از ۳۰ شاگرد به قهرمانی در مسابقات کشوری رسیده‌اند.</p>
-    </div>
-</div>
-
-<script>
-    // ---------- داده‌های کامل مربی (شبیه‌سازی API) ----------
-    const coachProfile = {
-        id: 1,
-        fullName: "امیرعلی سلیمی",
-        avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-        mainSpecialty: "بدنسازی حرفه‌ای و توانبخشی",
-        experienceYears: 9,
-        studentsActive: 124,
-        rating: 4.98,
-        totalReviews: 189,
-        totalLikes: 345,
-        totalBookmarks: 128,
-        totalSessions: 1280,
-        successRate: "۹۶٪",
-        specialties: ["بدنسازی قدرتی", "تمرینات اصلاحی", "کات و حجم دهی", "تغذیه ورزشی", "آماده‌سازی مسابقات"],
-        achievements: [
-            { icon: "fas fa-medal", text: "مربی سال ۱۴۰۲ استان تهران" },
-            { icon: "fas fa-globe", text: "مدرک مربیگری بین‌المللی (IFBB)" },
-            { icon: "fas fa-chart-line", text: "پرورش ۱۲ قهرمان ملی و استانی" },
-            { icon: "fas fa-award", text: "نویسنده کتاب اصول تمرین هوشمند" }
-        ],
-        students: [
-            { name: "مهدی سلیمی", avatar: "https://randomuser.me/api/portraits/men/15.jpg", desc: "قهرمان مسابقات باشگاهی", progress: "پیشرفت ۸۰٪" },
-            { name: "سارا حسینی", avatar: "https://randomuser.me/api/portraits/women/68.jpg", desc: "کاهش وزن ۳۰ کیلو", progress: "هدف نزدیک" },
-            { name: "رضا کریمی", avatar: "https://randomuser.me/api/portraits/men/44.jpg", desc: "رکورد ددلیفت ۲۰۰ کیلو", progress: "عضویت ۲ ساله" }
-        ],
-        reviews: [
-            { user: "مهدی احمدی", rating: 5, comment: "بسیار حرفه‌ای و با دانش، تکنیک‌های منحصربفردی یاد گرفتم.", date: "۱۴۰۳/۰۸/۱۵" },
-            { user: "فاطمه موسوی", rating: 5, comment: "برنامه تمرینی عالی، نتیجه رو بعد ۳ ماه دیدم. ممنونم از استاد.", date: "۱۴۰۳/۰۹/۰۲" },
-            { user: "نیما فرجی", rating: 4.8, comment: "رویکرد اصلاحی بینظیر، کمر درد مزمنم برطرف شد.", date: "۱۴۰۳/۱۰/۱۰" }
-        ],
-        gallery: [
-            "https://picsum.photos/id/100/600/400", "https://picsum.photos/id/131/600/400", "https://picsum.photos/id/95/600/400", "https://picsum.photos/id/98/600/400"
-        ],
-        bio: "امیرعلی سلیمی، مربی بین‌المللی بدنسازی با بیش از ۹ سال تجربه، فارغ‌التحصیل علوم ورزشی و دارای مدرک مربیگری از فدراسیون جهانی بدنسازی. رویکرد تخصصی ایشان تلفیق علم تمرین و تغذیه پیشرفته برای رسیدن به حداکثر پتانسیل ورزشکاران است. تاکنون بیش از ۳۰ شاگرد به قهرمانی در مسابقات کشوری رسیده‌اند."
-    };
-
-    // نمایش اطلاعات در پروفایل
-    function renderProfile() {
-        document.getElementById('coachFullName').innerText = coachProfile.fullName;
-        document.getElementById('coachAvatar').src = coachProfile.avatar;
-        document.getElementById('coachMainSpecialty').innerHTML = `<i class="fas fa-dumbbell"></i> ${coachProfile.mainSpecialty}`;
-        document.getElementById('studentsCount').innerText = coachProfile.studentsActive;
-        document.getElementById('ratingValue').innerHTML = `${coachProfile.rating} (${coachProfile.totalReviews} نظر)`;
-        document.getElementById('experienceYears').innerText = coachProfile.experienceYears;
-        document.getElementById('totalSessions').innerHTML = coachProfile.totalSessions.toLocaleString();
-        document.getElementById('successRate').innerText = coachProfile.successRate;
-        document.getElementById('totalLikes').innerText = coachProfile.totalLikes;
-        document.getElementById('likesCount').innerText = coachProfile.totalLikes;
-        document.getElementById('bookmarksCount').innerText = coachProfile.totalBookmarks;
-
-        // تخصص‌ها
-        const specialtiesContainer = document.getElementById('specialtiesList');
-        specialtiesContainer.innerHTML = coachProfile.specialties.map(spec => `<span class="chip">${spec}</span>`).join('');
-
-        // دستاوردها
-        const achievementsContainer = document.getElementById('achievementsList');
-        achievementsContainer.innerHTML = coachProfile.achievements.map(ach => `
-            <div class="achievement-item">
-                <i class="${ach.icon}" style="font-size:1.6rem; width:40px; color:#e6a017;"></i>
-                <span>${ach.text}</span>
-            </div>
-        `).join('');
-
-        // شاگردان ویژه
-        const studentsContainer = document.getElementById('studentsList');
-        studentsContainer.innerHTML = coachProfile.students.map(std => `
-            <div class="student-row">
-                <img src="${std.avatar}" class="student-avatar">
-                <div>
-                    <strong>${std.name}</strong><br>
-                    <small>${std.desc} | ${std.progress}</small>
+                <div class="glass-card" style="margin-top: 1.5rem;">
+                    <div class="card-title"><i class="fas fa-chart-line"></i> آمار حرفه‌ای</div>
+                    <div class="stats-mini" style="flex-direction: column; gap: 0.8rem;">
+                        <div><span class="stat-number" id="totalSessions">۱,۲۸۰</span> جلسه برگزار شده</div>
+                        <div><span class="stat-number" id="successRate">۹۶٪</span> رضایت شاگردان</div>
+                        <div><span class="stat-number" id="totalLikes">۳۴۵</span> لایک دریافت شده</div>
+                        <div class="like-bookmark-bar" style="display: flex; gap: 1.5rem; margin-top: 0.5rem;">
+                            <div><i class="fas fa-heart" style="color: var(--error);"></i> <span
+                                    id="likesCount">۳۴۵</span></div>
+                            <div><i class="fas fa-bookmark" style="color: var(--warning);"></i> <span
+                                    id="bookmarksCount">۱۲۸</span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        `).join('');
 
-        // نظرات
-        const reviewsContainer = document.getElementById('reviewsList');
-        reviewsContainer.innerHTML = coachProfile.reviews.slice(0,2).map(rev => `
-            <div class="review-item">
-                <div><strong>${rev.user}</strong> <span style="font-size:0.7rem;">${rev.date}</span></div>
-                <div class="rating-stars">${'★'.repeat(Math.floor(rev.rating))}${rev.rating % 1 ? '½' : ''} (${rev.rating})</div>
-                <p>${rev.comment}</p>
+            <!-- ستون چپ: شاگردان ویژه و نظرات -->
+            <div>
+                <div class="glass-card">
+                    <div class="card-title"><i class="fas fa-user-graduate"></i> شاگردان ویژه</div>
+                    <div class="student-list" id="studentsList"></div>
+                </div>
+
+                <div class="glass-card" style="margin-top: 1.5rem;">
+                    <div class="card-title"><i class="fas fa-comments"></i> نظرات شاگردان</div>
+                    <div id="reviewsList"></div>
+                    <button id="showAllReviews"
+                        style="margin-top: 1rem; background: transparent; border: none; color: var(--primary); cursor: pointer; font-size: var(--font-sm);">
+                        مشاهده همه نظرات <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
             </div>
-        `).join('');
-        
-        // گالری Swiper
-        const galleryWrapper = document.getElementById('galleryWrapper');
-        galleryWrapper.innerHTML = coachProfile.gallery.map(img => `
-            <div class="swiper-slide"><img src="${img}" alt="گالری"></div>
-        `).join('');
-        new Swiper('.gallery-swiper', {
-            slidesPerView: 1.2,
-            spaceBetween: 16,
-            loop: true,
-            pagination: { el: '.swiper-pagination', clickable: true },
-            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-            breakpoints: { 768: { slidesPerView: 2.2 }, 1024: { slidesPerView: 3 } }
-        });
-        
-        document.getElementById('bioText').innerText = coachProfile.bio;
-    }
+        </div>
 
-    // متغیرهای تعاملات (لایک و بوکمارک پروفایل)
-    let isFollowed = false;
-    let isBookmarkedProfile = false;
+        <!-- گالری تصاویر -->
+        <div class="glass-card fade-up">
+            <div class="card-title"><i class="fas fa-images"></i> گالری تمرینات و لحظات حرفه‌ای</div>
+            <div class="swiper gallery-swiper">
+                <div class="swiper-wrapper" id="galleryWrapper"></div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
 
-    document.getElementById('followCoachBtn').addEventListener('click', () => {
-        isFollowed = !isFollowed;
-        const btn = document.getElementById('followCoachBtn');
-        if(isFollowed) {
-            btn.innerHTML = '<i class="fas fa-heart"></i> دنبال شده';
-            btn.style.background = '#e63946'; btn.style.color='white'; btn.style.border='none';
-            coachProfile.totalLikes += 1;
-        } else {
-            btn.innerHTML = '<i class="far fa-heart"></i> دنبال کردن';
-            btn.style.background = 'transparent'; btn.style.color='#2c7a9e'; btn.style.border='1.5px solid #2c7a9e';
-            coachProfile.totalLikes -= 1;
-        }
-        document.getElementById('totalLikes').innerText = coachProfile.totalLikes;
-        document.getElementById('likesCount').innerText = coachProfile.totalLikes;
-    });
+        <!-- بیوگرافی جامع -->
+        <div class="glass-card fade-up">
+            <div class="card-title"><i class="fas fa-address-card"></i> بیوگرافی و سبک مربیگری</div>
+            <p id="bioText" style="line-height: 1.8; color: var(--text-secondary);">
+                امیرعلی سلیمی، مربی بین‌المللی بدنسازی با بیش از ۹ سال تجربه، فارغ‌التحصیل علوم ورزشی و دارای مدرک
+                مربیگری از فدراسیون جهانی بدنسازی.
+                رویکرد تخصصی ایشان تلفیق علم تمرین و تغذیه پیشرفته برای رسیدن به حداکثر پتانسیل ورزشکاران است.
+                تاکنون بیش از ۳۰ شاگرد به قهرمانی در مسابقات کشوری رسیده‌اند.
+            </p>
+        </div>
+    </main>
 
-    document.getElementById('bookmarkProfileBtn').addEventListener('click', () => {
-        isBookmarkedProfile = !isBookmarkedProfile;
-        const btn = document.getElementById('bookmarkProfileBtn');
-        if(isBookmarkedProfile) {
-            btn.innerHTML = '<i class="fas fa-bookmark"></i> ذخیره شده';
-            btn.style.background = '#f4a261'; btn.style.color='white'; btn.style.border='none';
-            coachProfile.totalBookmarks += 1;
-        } else {
-            btn.innerHTML = '<i class="far fa-bookmark"></i> ذخیره';
-            btn.style.background = 'transparent'; btn.style.color='#2c7a9e'; btn.style.border='1.5px solid #2c7a9e';
-            coachProfile.totalBookmarks -= 1;
-        }
-        document.getElementById('bookmarksCount').innerText = coachProfile.totalBookmarks;
-    });
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">GAMva</div>
+                    <p class="footer-text">اکوسیستم هوشمند سلامت و توسعه فردی با قدرت هوش مصنوعی.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">مربیان</h3>
+                    <ul class="footer-links">
+                        <li><a href="list-coach.html"><i class="fas fa-chevron-left"></i> همه مربیان</a></li>
+                        <li><a href="specialty-coaches.html"><i class="fas fa-chevron-left"></i> تخصص‌ها</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">پشتیبانی</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> سوالات متداول</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© ۲۰۲۵ GAMva · بهترین همراه برای رسیدن به اهداف ورزشی</div>
+            </div>
+        </div>
+    </footer>
 
-    document.getElementById('contactCoachBtn').addEventListener('click', () => {
-        alert("📞 اطلاعات تماس مربی: ۰۹۱۲۱۲۳۴۵۶۷ (شبیه‌سازی)");
-    });
-    document.getElementById('showAllReviews').addEventListener('click', () => {
-        let allReviewsText = coachProfile.reviews.map(r => `${r.user} (${r.rating}⭐): ${r.comment}`).join('\n');
-        alert("نظرات کامل:\n" + allReviewsText);
-    });
-    document.getElementById('backBtn').addEventListener('click', (e) => {
-        e.preventDefault();
-        alert("در حالت واقعی به صفحه لیست مربیان برمی‌گردد.");
-    });
+    <!-- ویجت پشتیبانی -->
+    <div class="support-widget">
+        <a href="telegram_user.html">
+            <button class="support-btn"><i class="fas fa-headset"></i><span class="support-tooltip">پشتیبانی
+                    ۲۴/۷</span></button>
+        </a>
+    </div>
 
-    renderProfile();
-</script>
+    <script src="assets/scripts.js"></script>
+    <script>
+        (function () {
+            // ========== داده‌های مربی ==========
+            const coachData = {
+                id: 1,
+                fullName: "امیرعلی سلیمی",
+                avatar: "assets/img/stoke/download (1).jpg",
+                mainSpecialty: "بدنسازی حرفه‌ای و توانبخشی",
+                experienceYears: 9,
+                studentsActive: 124,
+                rating: 4.98,
+                totalReviews: 189,
+                totalLikes: 345,
+                totalBookmarks: 128,
+                totalSessions: 1280,
+                successRate: "۹۶٪",
+                specialties: ["بدنسازی قدرتی", "تمرینات اصلاحی", "کات و حجم دهی", "تغذیه ورزشی", "آماده‌سازی مسابقات"],
+                achievements: [
+                    { icon: "fas fa-medal", text: "مربی سال ۱۴۰۲ استان تهران" },
+                    { icon: "fas fa-globe", text: "مدرک مربیگری بین‌المللی (IFBB)" },
+                    { icon: "fas fa-chart-line", text: "پرورش ۱۲ قهرمان ملی و استانی" },
+                    { icon: "fas fa-award", text: "نویسنده کتاب اصول تمرین هوشمند" }
+                ],
+                students: [
+                    { name: "مهدی سلیمی", avatar: "assets/img/stoke/download (2).jpg", desc: "قهرمان مسابقات باشگاهی", progress: "پیشرفت ۸۰٪" },
+                    { name: "سارا حسینی", avatar: "assets/img/stoke/download (3).jpg", desc: "کاهش وزن ۳۰ کیلو", progress: "هدف نزدیک" },
+                    { name: "رضا کریمی", avatar: "assets/img/stoke/download (4).jpg", desc: "رکورد ددلیفت ۲۰۰ کیلو", progress: "عضویت ۲ ساله" }
+                ],
+                reviews: [
+                    { user: "مهدی احمدی", rating: 5, comment: "بسیار حرفه‌ای و با دانش، تکنیک‌های منحصربه‌فردی یاد گرفتم.", date: "۱۴۰۳/۰۸/۱۵" },
+                    { user: "فاطمه موسوی", rating: 5, comment: "برنامه تمرینی عالی، نتیجه رو بعد ۳ ماه دیدم. ممنونم از استاد.", date: "۱۴۰۳/۰۹/۰۲" },
+                    { user: "نیما فرجی", rating: 4.8, comment: "رویکرد اصلاحی بی‌نظیر، کمر درد مزمنم برطرف شد.", date: "۱۴۰۳/۱۰/۱۰" }
+                ],
+                gallery: [
+                    "assets/img/stoke/download (1).jpg",
+                    "assets/img/stoke/download (2).jpg",
+                    "assets/img/stoke/download (3).jpg",
+                    "assets/img/stoke/download (4).jpg"
+                ],
+                bio: "امیرعلی سلیمی، مربی بین‌المللی بدنسازی با بیش از ۹ سال تجربه، فارغ‌التحصیل علوم ورزشی و دارای مدرک مربیگری از فدراسیون جهانی بدنسازی. رویکرد تخصصی ایشان تلفیق علم تمرین و تغذیه پیشرفته برای رسیدن به حداکثر پتانسیل ورزشکاران است. تاکنون بیش از ۳۰ شاگرد به قهرمانی در مسابقات کشوری رسیده‌اند."
+            };
+
+            // پر کردن اطلاعات
+            document.getElementById('coachFullName').innerText = coachData.fullName;
+            document.getElementById('coachAvatar').src = coachData.avatar;
+            document.getElementById('coachMainSpecialty').innerHTML = `<i class="fas fa-dumbbell"></i> ${coachData.mainSpecialty}`;
+            document.getElementById('studentsCount').innerText = coachData.studentsActive;
+            document.getElementById('ratingValue').innerHTML = `${coachData.rating} (${coachData.totalReviews} نظر)`;
+            document.getElementById('experienceYears').innerText = coachData.experienceYears;
+            document.getElementById('totalSessions').innerText = coachData.totalSessions.toLocaleString();
+            document.getElementById('successRate').innerText = coachData.successRate;
+            document.getElementById('totalLikes').innerText = coachData.totalLikes;
+            document.getElementById('likesCount').innerText = coachData.totalLikes;
+            document.getElementById('bookmarksCount').innerText = coachData.totalBookmarks;
+            document.getElementById('bioText').innerText = coachData.bio;
+
+            // تخصص‌ها
+            document.getElementById('specialtiesList').innerHTML = coachData.specialties.map(s => `<span class="chip">${s}</span>`).join('');
+
+            // دستاوردها
+            document.getElementById('achievementsList').innerHTML = coachData.achievements.map(ach => `
+                <div class="achievement-item">
+                    <i class="${ach.icon}" style="font-size: 1.3rem; width: 2rem; color: var(--warning);"></i>
+                    <span>${ach.text}</span>
+                </div>
+            `).join('');
+
+            // شاگردان
+            document.getElementById('studentsList').innerHTML = coachData.students.map(std => `
+                <div class="student-row">
+                    <img src="${std.avatar}" class="student-avatar" alt="${std.name}">
+                    <div>
+                        <strong>${std.name}</strong><br>
+                        <small style="color: var(--text-muted);">${std.desc} | ${std.progress}</small>
+                    </div>
+                </div>
+            `).join('');
+
+            // نظرات
+            document.getElementById('reviewsList').innerHTML = coachData.reviews.slice(0, 2).map(rev => `
+                <div class="review-item">
+                    <div><strong>${rev.user}</strong> <span style="font-size: var(--font-xs); color: var(--text-muted);">${rev.date}</span></div>
+                    <div class="rating-stars">${'★'.repeat(Math.floor(rev.rating))}${rev.rating % 1 ? '½' : ''} (${rev.rating})</div>
+                    <p style="font-size: var(--font-sm); color: var(--text-secondary);">${rev.comment}</p>
+                </div>
+            `).join('');
+
+            // گالری Swiper
+            const galleryWrapper = document.getElementById('galleryWrapper');
+            galleryWrapper.innerHTML = coachData.gallery.map(img => `
+                <div class="swiper-slide"><img src="${img}" alt="گالری"></div>
+            `).join('');
+            new Swiper('.gallery-swiper', {
+                slidesPerView: 1.2,
+                spaceBetween: 16,
+                loop: true,
+                pagination: { el: '.swiper-pagination', clickable: true },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                breakpoints: { 768: { slidesPerView: 2.2 }, 1024: { slidesPerView: 3 } }
+            });
+
+            // دکمه مشاهده همه نظرات
+            document.getElementById('showAllReviews').addEventListener('click', () => {
+                let allReviews = coachData.reviews.map(r => `${r.user} (${r.rating}⭐): ${r.comment}`).join('\n\n');
+                if (window.showToast) window.showToast('نظرات کامل در کنسول نمایش داده شد', 'info');
+                else alert("نظرات:\n" + allReviews);
+            });
+
+            // دکمه‌های تعامل
+            let isFollowed = false;
+            let isBookmarked = false;
+            let currentLikes = coachData.totalLikes;
+            let currentBookmarks = coachData.totalBookmarks;
+
+            document.getElementById('followCoachBtn').addEventListener('click', function () {
+                isFollowed = !isFollowed;
+                if (isFollowed) {
+                    this.innerHTML = '<i class="fas fa-heart"></i> دنبال شده';
+                    this.style.background = 'var(--error)';
+                    this.style.color = 'white';
+                    this.style.border = 'none';
+                    currentLikes++;
+                } else {
+                    this.innerHTML = '<i class="far fa-heart"></i> دنبال کردن';
+                    this.style.background = 'transparent';
+                    this.style.color = 'var(--text-primary)';
+                    this.style.border = '1px solid var(--border-glass)';
+                    currentLikes--;
+                }
+                document.getElementById('totalLikes').innerText = currentLikes;
+                document.getElementById('likesCount').innerText = currentLikes;
+                if (window.showToast) window.showToast(isFollowed ? '❤️ مربی مورد علاقه شما شد' : '💔 از علاقه‌مندی‌ها حذف شد', 'info');
+            });
+
+            document.getElementById('bookmarkProfileBtn').addEventListener('click', function () {
+                isBookmarked = !isBookmarked;
+                if (isBookmarked) {
+                    this.innerHTML = '<i class="fas fa-bookmark"></i> ذخیره شده';
+                    this.style.background = 'var(--warning)';
+                    this.style.color = '#1e272e';
+                    this.style.border = 'none';
+                    currentBookmarks++;
+                } else {
+                    this.innerHTML = '<i class="far fa-bookmark"></i> ذخیره';
+                    this.style.background = 'transparent';
+                    this.style.color = 'var(--text-primary)';
+                    this.style.border = '1px solid var(--border-glass)';
+                    currentBookmarks--;
+                }
+                document.getElementById('bookmarksCount').innerText = currentBookmarks;
+                if (window.showToast) window.showToast(isBookmarked ? '📌 پروفایل ذخیره شد' : '📌 ذخیره حذف شد', 'info');
+            });
+
+            document.getElementById('contactCoachBtn').addEventListener('click', () => {
+                if (window.showToast) window.showToast('📞 شماره تماس مربی: ۰۹۱۲۱۲۳۴۵۶۷ (شبیه‌سازی)', 'info');
+                else alert('شماره تماس: ۰۹۱۲۱۲۳۴۵۶۷');
+            });
+
+            // افکت fade-up
+            const fadeEls = document.querySelectorAll('.fade-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) e.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            fadeEls.forEach(el => observer.observe(el));
+
+            // پیام خوش‌آمد
+            setTimeout(() => {
+                if (window.showToast) window.showToast('🏆 پروفایل حرفه‌ای امیرعلی سلیمی | رزرو جلسه مشاوره', 'info', 4000);
+            }, 800);
+        })();
+    </script>
 </body>
+
 </html>

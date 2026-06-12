@@ -1,173 +1,129 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>چالش‌های فیت‌تولز | فراتر از محدودیت‌ها</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>چالش‌های هوشمند | GAMva - باشگاه انگیزش تو</title>
+
+    <!-- فونت وزیرمتن و آیکون‌ها -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- استایل اصلی پروژه -->
+    <link rel="stylesheet" href="assets/style.css">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* تنظیمات مخصوص صفحه چالش‌ها - هماهنگ با تم اصلی */
+        .challenges-hero {
+            text-align: center;
+            margin: 2rem 0 3rem;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0a0a12 0%, #1a1a2e 100%);
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-
-        /* پس‌زمینه داینامیک */
-        .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(78,205,196,0.08), transparent);
-            z-index: -2;
-        }
-
-        /* هدر */
-        .main-header {
-            background: rgba(10,10,18,0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(78,205,196,0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 18px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-
-        .logo h1 {
-            font-size: 1.8rem;
+        .challenges-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 800;
-            background: linear-gradient(135deg, #4ecdc4, #ff6b6b);
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            margin-bottom: 1rem;
         }
 
-        .home-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255,255,255,0.08);
-            padding: 10px 22px;
-            border-radius: 40px;
-            text-decoration: none;
-            color: white;
-            font-weight: 500;
-            transition: 0.2s;
-        }
-
-        .home-link:hover {
-            background: #4ecdc4;
-            color: #0a0a12;
-        }
-
-        /* بخش هرو */
-        .hero-section {
-            max-width: 1400px;
-            margin: 60px auto 40px;
-            padding: 0 24px;
-            text-align: center;
+        .challenges-hero p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .hero-badge {
-            display: inline-block;
-            background: rgba(78,205,196,0.15);
-            padding: 8px 20px;
-            border-radius: 60px;
-            font-size: 0.8rem;
-            margin-bottom: 20px;
-            border: 1px solid rgba(78,205,196,0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-full);
+            padding: 0.5rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: var(--font-sm);
+            color: var(--secondary);
         }
 
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .hero-title span {
-            background: linear-gradient(135deg, #4ecdc4, #ff6b6b);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* فیلتر چالش‌ها */
+        /* فیلترها */
         .filters-bar {
-            max-width: 1400px;
-            margin: 40px auto;
-            padding: 0 24px;
             display: flex;
-            gap: 12px;
             flex-wrap: wrap;
             justify-content: center;
+            gap: 0.8rem;
+            margin: 2rem 0 2.5rem;
         }
 
         .filter-chip {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 10px 24px;
-            border-radius: 40px;
+            background: var(--bg-glass-light);
+            border: 1px solid var(--border-glass);
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--radius-full);
             cursor: pointer;
-            transition: 0.2s;
+            transition: var(--transition-base);
             font-weight: 500;
+            color: var(--text-secondary);
         }
 
-        .filter-chip.active, .filter-chip:hover {
-            background: #4ecdc4;
-            color: #0a0a12;
-            border-color: #4ecdc4;
+        .filter-chip:hover,
+        .filter-chip.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
         }
 
         /* گرید چالش‌ها */
         .challenges-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 24px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 32px;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0 3rem;
         }
 
-        /* کارت چالش */
+        /* کارت چالش - مشابه کارت‌های NFT صفحه اصلی */
         .challenge-card {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 32px;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            border: 1px solid rgba(255,255,255,0.08);
+            transition: var(--transition-bounce);
             position: relative;
+        }
+
+        .challenge-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-lg);
+            z-index: -2;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .challenge-card:hover::after {
+            opacity: 1;
+            animation: borderPulse 2s infinite;
         }
 
         .challenge-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(78,205,196,0.4);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
         .card-header {
             position: relative;
-            height: 180px;
+            height: 200px;
             overflow: hidden;
         }
 
@@ -175,365 +131,514 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.6s ease;
         }
 
         .challenge-card:hover .card-header img {
-            transform: scale(1.05);
+            transform: scale(1.1);
+        }
+
+        .difficulty-badge,
+        .type-badge {
+            position: absolute;
+            padding: 0.3rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: var(--font-xs);
+            font-weight: 600;
+            backdrop-filter: blur(4px);
         }
 
         .difficulty-badge {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            font-weight: 700;
+            top: 1rem;
+            right: 1rem;
         }
 
-        .difficulty-badge.easy { background: #2ecc71; }
-        .difficulty-badge.medium { background: #f39c12; }
-        .difficulty-badge.hard { background: #e74c3c; }
+        .difficulty-badge.easy {
+            background: var(--success);
+            color: white;
+        }
+
+        .difficulty-badge.medium {
+            background: var(--warning);
+            color: #1e272e;
+        }
+
+        .difficulty-badge.hard {
+            background: var(--error);
+            color: white;
+        }
 
         .type-badge {
-            position: absolute;
-            bottom: 16px;
-            right: 16px;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(4px);
-            padding: 6px 12px;
-            border-radius: 30px;
-            font-size: 0.7rem;
+            bottom: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
         }
 
         .card-body {
-            padding: 24px;
+            padding: 1.5rem;
         }
 
         .challenge-title {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
 
         .challenge-desc {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.7);
-            line-height: 1.5;
-            margin-bottom: 16px;
+            font-size: var(--font-sm);
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1rem;
         }
 
         .challenge-stats {
             display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-            font-size: 0.8rem;
-            color: #4ecdc4;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: var(--font-sm);
+            color: var(--secondary);
         }
 
         .progress-bar {
-            background: rgba(255,255,255,0.1);
-            border-radius: 30px;
+            background: var(--bg-glass-light);
+            border-radius: var(--radius-full);
             height: 8px;
-            margin-bottom: 20px;
+            margin: 1rem 0;
             overflow: hidden;
         }
 
         .progress-fill {
-            background: linear-gradient(90deg, #4ecdc4, #ff6b6b);
-            width: 0%;
+            background: var(--gradient-primary);
             height: 100%;
-            border-radius: 30px;
-            transition: width 0.5s;
+            border-radius: var(--radius-full);
+            width: 0%;
+            transition: width 0.5s ease;
         }
 
         .join-btn {
             width: 100%;
-            background: linear-gradient(135deg, #4ecdc4, #2c7a9e);
+            background: var(--gradient-primary);
             border: none;
-            padding: 14px;
-            border-radius: 40px;
+            padding: 0.8rem;
+            border-radius: var(--radius-full);
             color: white;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.2s;
-            font-family: inherit;
+            transition: var(--transition-base);
         }
 
         .join-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(78,205,196,0.4);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
         }
 
         .joined-badge {
-            background: rgba(78,205,196,0.2);
-            padding: 12px;
-            border-radius: 40px;
+            background: rgba(78, 205, 196, 0.15);
+            border: 1px solid var(--secondary);
+            padding: 0.8rem;
+            border-radius: var(--radius-full);
             text-align: center;
-            color: #4ecdc4;
+            color: var(--secondary);
+            font-weight: 600;
         }
 
-        /* مودال ثبت‌نام */
-        .modal-overlay {
+        /* رتبه‌بندی */
+        .rankings-section {
+            margin: 4rem 0;
+        }
+
+        .rankings-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .rankings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ranking-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition-base);
+        }
+
+        .ranking-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .rank-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--warning);
+        }
+
+        .rank-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+
+        .rank-score {
+            color: var(--secondary);
+            font-size: var(--font-sm);
+        }
+
+        /* مودال ثبت‌نام شیشه‌ای */
+        .custom-modal-404 {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(12px);
-            display: flex;
-            align-items: center;
+            z-index: 2000;
             justify-content: center;
-            z-index: 1000;
-            visibility: hidden;
-            opacity: 0;
-            transition: 0.25s;
+            align-items: center;
         }
 
-        .modal-overlay.active {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .modal-container {
-            background: linear-gradient(135deg, #1a1a2e, #0a0a12);
-            border-radius: 48px;
-            max-width: 500px;
+        .modal-glass {
+            background: var(--bg-glass);
+            backdrop-filter: blur(32px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
             width: 90%;
-            padding: 32px;
-            border: 1px solid rgba(78,205,196,0.3);
+            max-width: 450px;
+            padding: 2rem;
+            text-align: center;
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
         }
 
-        .modal-container h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: scale(0.92);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
-        .modal-container input {
+        .modal-glass h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .modal-glass input {
             width: 100%;
-            padding: 14px;
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.05);
-            color: white;
-            margin-bottom: 16px;
-            font-family: inherit;
+            padding: 0.8rem 1rem;
+            margin: 0.8rem 0;
+            background: var(--bg-glass-light);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: 'Vazirmatn', sans-serif;
         }
 
-        /* رتبه‌بندی */
-        .rankings-section {
-            max-width: 1400px;
-            margin: 60px auto;
-            padding: 0 24px;
+        .modal-glass input:focus {
+            outline: none;
+            border-color: var(--primary);
         }
 
-        .rankings-title {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .rankings-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-        }
-
-        .ranking-card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 24px;
-            padding: 24px;
-            text-align: center;
-        }
-
-        .rank-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #ffd93d;
-        }
-
-        .rank-name {
-            font-size: 1.2rem;
-            margin: 10px 0;
-        }
-
-        .rank-score {
-            color: #4ecdc4;
-            font-weight: 600;
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            cursor: pointer;
         }
 
         @media (max-width: 768px) {
-            .hero-title { font-size: 2rem; }
-            .challenges-grid { grid-template-columns: 1fr; }
-            .filters-bar { gap: 8px; }
-            .filter-chip { padding: 6px 16px; font-size: 0.8rem; }
+            .challenges-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters-bar {
+                gap: 0.5rem;
+            }
+
+            .filter-chip {
+                padding: 0.4rem 1rem;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
-<body>
 
-<div class="bg-gradient"></div>
+<body data-theme="light">
+    <!-- پس‌زمینه بلور متحرک -->
+    <div class="dynamic-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
 
-<div class="main-header">
-    <div class="header-inner">
-        <div class="logo">
-            <h1>🏆 چالش‌ها</h1>
+    <!-- هدر شیشه‌ای یکسان با main-page -->
+    <header class="glass-header">
+        <div class="logo" onclick="window.location.href='main-page.html'">
+            <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+            <div class="logo-text-container">
+                <span class="logo-val">lueva <span class="logo-gam">GAM</span></span>
+            </div>
         </div>
-        <a href="main-page.html" class="home-link">
-            <i class="fas fa-home"></i> صفحه اصلی
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun"></i>
+            </button>
+            <div class="action-icon" onclick="window.location.href='main-page.html'">
+                <i class="fas fa-home"></i>
+                <span class="badge" style="display: none;"></span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="challenges-hero">
+            <div class="hero-badge">
+                <i class="fas fa-trophy"></i> بیش از ۱۵,۰۰۰ شرکت‌کننده فعال
+            </div>
+            <h1>چالش‌های <span class="gradient-text">هوشمند</span> GAMva</h1>
+            <p>با هر قدم، رکورد خودت رو بشکن. چالش‌های انگیزشی، جوایز ویژه و مسیر پیشرفت شخصی‌شده</p>
+        </div>
+
+        <div class="filters-bar" id="filtersBar">
+            <div class="filter-chip active" data-filter="all">همه چالش‌ها</div>
+            <div class="filter-chip" data-filter="تمرینی">💪 تمرینی</div>
+            <div class="filter-chip" data-filter="تغذیه‌ای">🥗 تغذیه‌ای</div>
+            <div class="filter-chip" data-filter="روحیه‌سازی">🧘 روحیه‌سازی</div>
+            <div class="filter-chip" data-filter="گروهی">👥 گروهی</div>
+        </div>
+
+        <div id="challengesGrid" class="challenges-grid"></div>
+
+        <div class="rankings-section">
+            <h2 class="rankings-title">
+                <i class="fas fa-crown" style="color: var(--warning);"></i>
+                برترین‌های این هفته
+                <i class="fas fa-fire" style="color: var(--accent);"></i>
+            </h2>
+            <div id="rankingsGrid" class="rankings-grid"></div>
+        </div>
+    </main>
+
+    <!-- فوتر یکسان با صفحه اصلی -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">GAMva</div>
+                    <p class="footer-text">اکوسیستم هوشمند سلامت و توسعه فردی با قدرت هوش مصنوعی.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">لینک‌های سریع</h3>
+                    <ul class="footer-links">
+                        <li><a href="list-coach.html"><i class="fas fa-chevron-left"></i> مربیان</a></li>
+                        <li><a href="challenges.html"><i class="fas fa-chevron-left"></i> چالش‌ها</a></li>
+                        <li><a href="calculater.html"><i class="fas fa-chevron-left"></i> محاسبه‌گر سلامت</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">پشتیبانی</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> سوالات متداول</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© ۲۰۲۵ GAMva | هر قدم تو، یک پیروزی است 💪</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ویجت پشتیبانی -->
+    <div class="support-widget">
+        <a href="telegram_user.html">
+            <button class="support-btn"><i class="fas fa-headset"></i><span class="support-tooltip">پشتیبانی
+                    ۲۴/۷</span></button>
         </a>
     </div>
-</div>
 
-<div class="hero-section">
-    <div class="hero-badge">
-        <i class="fas fa-fire"></i> ۱۲,۴۵۰+ شرکت‌کننده فعال
+    <!-- مودال ثبت‌نام شیشه‌ای -->
+    <div id="joinModal" class="custom-modal-404">
+        <div class="modal-glass">
+            <i class="fas fa-user-plus" style="font-size: 2.5rem; color: var(--secondary);"></i>
+            <h3>ثبت‌نام در چالش</h3>
+            <input type="text" id="userName" placeholder="نام و نام خانوادگی">
+            <input type="email" id="userEmail" placeholder="ایمیل">
+            <button id="confirmJoinBtn" class="join-btn">تأیید و شروع ماجراجویی</button>
+            <button id="closeModalBtn" class="modal-close"><i class="fas fa-times"></i> بستن</button>
+        </div>
     </div>
-    <h1 class="hero-title">
-        به <span>چالش</span> بپیوند<br>
-        و بهترین نسخه خودت شو
-    </h1>
-</div>
 
-<div class="filters-bar" id="filtersBar">
-    <div class="filter-chip active" data-filter="all">همه</div>
-    <div class="filter-chip" data-filter="تمرینی">تمرینی</div>
-    <div class="filter-chip" data-filter="تغذیه‌ای">تغذیه‌ای</div>
-    <div class="filter-chip" data-filter="روحیه‌سازی">روحیه‌سازی</div>
-    <div class="filter-chip" data-filter="گروهی">گروهی</div>
-</div>
+    <script src="assets/scripts.js"></script>
+    <script>
+        // ========== داده‌های چالش‌ها با محتوای تناسب اندام ==========
+        let challenges = [
+            { id: 1, title: "۳۰ روز پلانک معجزه‌گر", desc: "هر روز پلانک بزن و عضلات مرکزی خودت رو مثل فولاد کن", type: "تمرینی", difficulty: "easy", duration: "۳۰ روز", participants: 3420, progress: 0, image: "assets/img/stoke/download (1).jpg", joined: false },
+            { id: 2, title: "۷ روز سم‌زدایی طبیعی", desc: "رژیم پاکسازی با سبزیجات و میوه‌های ارگانیک", type: "تغذیه‌ای", difficulty: "medium", duration: "۷ روز", participants: 2890, progress: 0, image: "assets/img/stoke/download (2).jpg", joined: false },
+            { id: 3, title: "۱۰۰۰۰ قدم انرژی‌بخش", desc: "هر روز ده هزار قدم راه برو و قلب خودت رو جوان کن", type: "تمرینی", difficulty: "easy", duration: "۲۱ روز", participants: 6780, progress: 0, image: "assets/img/stoke/download (3).jpg", joined: false },
+            { id: 4, title: "مدیتیشن صبحگاهی", desc: "۱۰ دقیقه آرامش ذهنی برای شروع روزی پرانرژی", type: "روحیه‌سازی", difficulty: "easy", duration: "۱۴ روز", participants: 4210, progress: 0, image: "assets/img/stoke/download (4).jpg", joined: false },
+            { id: 5, title: "چالش آهنین اسکوات", desc: "۱۰۰ اسکوات در روز، پاهایی مثل الماس", type: "تمرینی", difficulty: "hard", duration: "۳۰ روز", participants: 5560, progress: 0, image: "assets/img/stoke/download (1).jpg", joined: false },
+            { id: 6, title: "هیدراتاسیون طلایی", desc: "روزی ۳ لیتر آب بنوش و پوست و انرژیت رو متحول کن", type: "تغذیه‌ای", difficulty: "easy", duration: "۱۰ روز", participants: 8920, progress: 0, image: "assets/img/stoke/download (2).jpg", joined: false },
+            { id: 7, title: "تیم‌سازی قهرمانان", desc: "با دوستات تیم تشکیل بده و جایزه گروهی ببرید", type: "گروهی", difficulty: "medium", duration: "۴۵ روز", participants: 3340, progress: 0, image: "assets/img/stoke/download (3).jpg", joined: false },
+            { id: 8, title: "یوگای انعطاف‌پذیری", desc: "۳۰ دقیقه یوگا روزانه، بدن منعطف و ذهن متمرکز", type: "روحیه‌سازی", difficulty: "medium", duration: "۲۱ روز", participants: 2980, progress: 0, image: "assets/img/stoke/download (4).jpg", joined: false }
+        ];
 
-<div class="challenges-grid" id="challengesGrid"></div>
+        // ========== رتبه‌بندی ==========
+        let rankings = [
+            { rank: 1, name: "امیرعلی سلیمی", score: 2840, badge: "🥇" },
+            { rank: 2, name: "سارا حسینی", score: 2760, badge: "🥈" },
+            { rank: 3, name: "رضا کریمی", score: 2590, badge: "🥉" },
+            { rank: 4, name: "نرگس تقوی", score: 2410 },
+            { rank: 5, name: "مهدی نوروزی", score: 2280 }
+        ];
 
-<div class="rankings-section">
-    <h2 class="rankings-title">
-        <i class="fas fa-trophy"></i> برترین‌های این هفته
-    </h2>
-    <div class="rankings-grid" id="rankingsGrid"></div>
-</div>
+        let currentFilter = "all";
+        let selectedChallenge = null;
 
-<!-- مودال ثبت‌نام -->
-<div id="joinModal" class="modal-overlay">
-    <div class="modal-container">
-        <h3><i class="fas fa-user-plus"></i> ثبت‌نام در چالش</h3>
-        <input type="text" id="userName" placeholder="نام و نام خانوادگی">
-        <input type="email" id="userEmail" placeholder="ایمیل">
-        <button id="confirmJoinBtn" class="join-btn" style="margin-top:10px;">تأیید و ثبت‌نام</button>
-        <button id="closeModalBtn" style="margin-top:16px; background:none; border:none; color:#888; cursor:pointer;">بستن</button>
-    </div>
-</div>
-
-<script>
-    // داده‌های چالش‌ها
-    let challenges = [
-        { id: 1, title: "۳۰ روز پلانک", desc: "هر روز پلانک بزن و قدرت هسته مرکزی خودت رو افزایش بده", type: "تمرینی", difficulty: "easy", duration: "۳۰ روز", participants: 2340, progress: 0, image: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", joined: false },
-        { id: 2, title: "۷ روز سم زدایی", desc: "رژیم غذایی پاک و سم‌زدایی طبیعی بدن", type: "تغذیه‌ای", difficulty: "medium", duration: "۷ روز", participants: 1890, progress: 0, image: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", joined: false },
-        { id: 3, title: "۱۰۰۰۰ قدم روزانه", desc: "هر روز ۱۰ هزار قدم راه برو و سلامت قلبت رو تضمین کن", type: "تمرینی", difficulty: "easy", duration: "۲۱ روز", participants: 5670, progress: 0, image: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", joined: false },
-        { id: 4, title: "مدیتیشن صبحگاهی", desc: "۱۰ دقیقه مدیتیشن هر روز برای آرامش ذهن", type: "روحیه‌سازی", difficulty: "easy", duration: "۱۴ روز", participants: 3210, progress: 0, image: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", joined: false },
-        { id: 5, title: "چالش اسکوات", desc: "۱۰۰ اسکوات در روز برای پاهای نیرومند", type: "تمرینی", difficulty: "hard", duration: "۳۰ روز", participants: 4560, progress: 0, image: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", joined: false },
-        { id: 6, title: "نوشیدن آب کافی", desc: "روزی ۳ لیتر آب بنوش و انرژی بگیر", type: "تغذیه‌ای", difficulty: "easy", duration: "۱۰ روز", participants: 7890, progress: 0, image: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", joined: false },
-        { id: 7, title: "چالش گروهی: تیم خودت رو بساز", desc: "با دوستانت تیم تشکیل بده و با هم پیشرفت کنید", type: "گروهی", difficulty: "medium", duration: "۴۵ روز", participants: 2340, progress: 0, image: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", joined: false },
-        { id: 8, title: "یوگای روزانه", desc: "۳۰ دقیقه یوگا برای انعطاف و آرامش", type: "روحیه‌سازی", difficulty: "medium", duration: "۲۱ روز", participants: 1980, progress: 0, image: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", joined: false }
-    ];
-
-    // رتبه‌بندی
-    let rankings = [
-        { rank: 1, name: "امیرعلی سلیمی", score: 2840, badge: "🥇" },
-        { rank: 2, name: "سارا حسینی", score: 2760, badge: "🥈" },
-        { rank: 3, name: "رضا کریمی", score: 2590, badge: "🥉" },
-        { rank: 4, name: "نرگس تقوی", score: 2410 },
-        { rank: 5, name: "مهدی نوروزی", score: 2280 }
-    ];
-
-    let currentFilter = "all";
-    let selectedChallenge = null;
-
-    function renderChallenges() {
-        let filtered = challenges.filter(c => currentFilter === "all" || c.type === currentFilter);
-        const grid = document.getElementById('challengesGrid');
-        grid.innerHTML = filtered.map(ch => `
-            <div class="challenge-card" data-id="${ch.id}">
-                <div class="card-header">
-                    <img src="${ch.image}" alt="${ch.title}">
-                    <span class="difficulty-badge ${ch.difficulty}">
-                        ${ch.difficulty === 'easy' ? 'آسان' : ch.difficulty === 'medium' ? 'متوسط' : 'سخت'}
-                    </span>
-                    <span class="type-badge">
-                        <i class="fas ${ch.type === 'تمرینی' ? 'fa-dumbbell' : ch.type === 'تغذیه‌ای' ? 'fa-apple-alt' : ch.type === 'روحیه‌سازی' ? 'fa-peace' : 'fa-users'}"></i>
-                        ${ch.type}
-                    </span>
+        // رندر چالش‌ها
+        function renderChallenges() {
+            let filtered = challenges.filter(c => currentFilter === "all" || c.type === currentFilter);
+            const grid = document.getElementById('challengesGrid');
+            if (!grid) return;
+            grid.innerHTML = filtered.map(ch => `
+                <div class="challenge-card" data-id="${ch.id}">
+                    <div class="card-header">
+                        <img src="${ch.image}" alt="${ch.title}">
+                        <span class="difficulty-badge ${ch.difficulty}">
+                            ${ch.difficulty === 'easy' ? 'آسان' : ch.difficulty === 'medium' ? 'متوسط' : 'سخت'}
+                        </span>
+                        <span class="type-badge">
+                            <i class="fas ${ch.type === 'تمرینی' ? 'fa-dumbbell' : ch.type === 'تغذیه‌ای' ? 'fa-apple-alt' : ch.type === 'روحیه‌سازی' ? 'fa-peace' : 'fa-users'}"></i>
+                            ${ch.type}
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="challenge-title">${ch.title}</h3>
+                        <p class="challenge-desc">${ch.desc}</p>
+                        <div class="challenge-stats">
+                            <span><i class="fas fa-clock"></i> ${ch.duration}</span>
+                            <span><i class="fas fa-users"></i> ${ch.participants.toLocaleString()} نفر</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${ch.progress}%"></div>
+                        </div>
+                        ${ch.joined ?
+                    `<div class="joined-badge"><i class="fas fa-check-circle"></i> شما در این چالش ثبت‌نام کرده‌اید</div>` :
+                    `<button class="join-btn" onclick="window.openJoinModal(${ch.id})">ثبت‌نام در چالش</button>`
+                }
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h3 class="challenge-title">${ch.title}</h3>
-                    <p class="challenge-desc">${ch.desc}</p>
-                    <div class="challenge-stats">
-                        <span><i class="fas fa-clock"></i> ${ch.duration}</span>
-                        <span><i class="fas fa-users"></i> ${ch.participants.toLocaleString()} نفر</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${ch.progress}%"></div>
-                    </div>
-                    ${ch.joined ? 
-                        `<div class="joined-badge"><i class="fas fa-check-circle"></i> شما در این چالش ثبت‌نام کرده‌اید</div>` :
-                        `<button class="join-btn" onclick="openJoinModal(${ch.id})">ثبت‌نام در چالش</button>`
+            `).join('');
+        }
+
+        // رندر رتبه‌بندی
+        function renderRankings() {
+            const grid = document.getElementById('rankingsGrid');
+            if (!grid) return;
+            grid.innerHTML = rankings.map(r => `
+                <div class="ranking-card">
+                    <div class="rank-number">${r.badge || r.rank}</div>
+                    <div class="rank-name">${r.name}</div>
+                    <div class="rank-score">${r.score.toLocaleString()} امتیاز</div>
+                </div>
+            `).join('');
+        }
+
+        // باز کردن مودال
+        window.openJoinModal = (challengeId) => {
+            selectedChallenge = challenges.find(c => c.id === challengeId);
+            const modal = document.getElementById('joinModal');
+            if (modal) modal.style.display = 'flex';
+        };
+
+        // تأیید ثبت‌نام
+        const confirmBtn = document.getElementById('confirmJoinBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modal = document.getElementById('joinModal');
+
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', () => {
+                const name = document.getElementById('userName').value.trim();
+                const email = document.getElementById('userEmail').value.trim();
+                if (!name || !email) {
+                    if (window.showToast) window.showToast('لطفاً نام و ایمیل خود را وارد کنید', 'warning');
+                    else alert('لطفاً نام و ایمیل خود را وارد کنید');
+                    return;
+                }
+                if (selectedChallenge) {
+                    selectedChallenge.joined = true;
+                    selectedChallenge.participants++;
+                    if (window.showToast) {
+                        window.showToast(`🎉 تبریک! شما در چالش "${selectedChallenge.title}" ثبت‌نام کردید`, 'success');
+                    } else {
+                        alert(`تبریک! شما در چالش "${selectedChallenge.title}" ثبت‌نام کردید`);
                     }
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function renderRankings() {
-        const grid = document.getElementById('rankingsGrid');
-        grid.innerHTML = rankings.map(r => `
-            <div class="ranking-card">
-                <div class="rank-number">${r.badge || r.rank}</div>
-                <div class="rank-name">${r.name}</div>
-                <div class="rank-score">${r.score.toLocaleString()} امتیاز</div>
-            </div>
-        `).join('');
-    }
-
-    window.openJoinModal = (challengeId) => {
-        selectedChallenge = challenges.find(c => c.id === challengeId);
-        document.getElementById('joinModal').classList.add('active');
-    };
-
-    document.getElementById('confirmJoinBtn').addEventListener('click', () => {
-        const name = document.getElementById('userName').value.trim();
-        const email = document.getElementById('userEmail').value.trim();
-        if (!name || !email) {
-            alert("لطفاً نام و ایمیل خود را وارد کنید");
-            return;
+                    modal.style.display = 'none';
+                    document.getElementById('userName').value = '';
+                    document.getElementById('userEmail').value = '';
+                    renderChallenges();
+                }
+            });
         }
-        if (selectedChallenge) {
-            selectedChallenge.joined = true;
-            selectedChallenge.participants++;
-            alert(`🎉 تبریک! شما در چالش "${selectedChallenge.title}" ثبت‌نام کردید.`);
-            document.getElementById('joinModal').classList.remove('active');
-            document.getElementById('userName').value = '';
-            document.getElementById('userEmail').value = '';
-            renderChallenges();
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
         }
-    });
-
-    document.getElementById('closeModalBtn').addEventListener('click', () => {
-        document.getElementById('joinModal').classList.remove('active');
-    });
-
-    // فیلترها
-    document.querySelectorAll('.filter-chip').forEach(chip => {
-        chip.addEventListener('click', () => {
-            document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-            chip.classList.add('active');
-            currentFilter = chip.dataset.filter;
-            renderChallenges();
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) modal.style.display = 'none';
         });
-    });
 
-    renderChallenges();
-    renderRankings();
-</script>
+        // فیلترها
+        const filters = document.querySelectorAll('.filter-chip');
+        filters.forEach(chip => {
+            chip.addEventListener('click', () => {
+                filters.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                currentFilter = chip.dataset.filter;
+                renderChallenges();
+            });
+        });
+
+        // مقداردهی اولیه
+        renderChallenges();
+        renderRankings();
+
+        // هماهنگی با تم دارک مود (اسکریپت اصلی قبلاً themeToggle را هندل می‌کند)
+        // اطمینان از عملکرد toast اگر در اسکریپت اصلی موجود باشد
+        setTimeout(() => {
+            if (window.showToast) {
+                window.showToast('🔥 به چالش‌های GAMva خوش آمدی! آماده‌ای رکورد بزنی؟', 'info', 3000);
+            }
+        }, 800);
+    </script>
 </body>
+
 </html>

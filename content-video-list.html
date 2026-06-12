@@ -1,671 +1,632 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>GAMva | ویدیوهای تخصصی ورزش</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>پخش ویدیو | GAMva</title>
+
+    <!-- فونت وزیرمتن و آیکون‌ها -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- استایل اصلی پروژه -->
+    <link rel="stylesheet" href="assets/style.css">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* تنظیمات اختصاصی صفحه پخش ویدیو - هماهنگ با تم GAMva */
+        .video-player-container {
+            max-width: 1300px;
+            margin: 1rem auto;
+            padding: 0 1rem;
         }
 
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            background: linear-gradient(145deg, #f5f7fc 0%, #eef2f8 100%);
-            color: #1a2c3e;
-            overflow-x: hidden;
-        }
-
-        /* پس‌زمینه */
-        .global-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            overflow: hidden;
-        }
-
-        .global-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: blur(22px) brightness(0.55) saturate(1.2);
-            transform: scale(1.08);
-        }
-
-        .global-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.15) 100%);
-            backdrop-filter: blur(3px);
-            z-index: -1;
-        }
-
-        /* هدر */
-        .main-header {
-            background: rgba(255, 255, 255, 0.9);
+        /* پخش‌کننده ویدیو */
+        .video-wrapper {
+            background: var(--bg-glass);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(78, 205, 196, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            transition: var(--transition-base);
         }
 
-        .header-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 16px 24px;
+        .video-wrapper:hover {
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .video-element {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            object-fit: contain;
+        }
+
+        /* اطلاعات ویدیو */
+        .video-info-section {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .video-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .video-meta {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-glass);
+            margin-bottom: 1rem;
         }
 
-        .logo h1 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #1E3C72, #2A5298);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .home-link {
+        .channel-info {
             display: flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(30, 60, 114, 0.1);
-            padding: 10px 22px;
-            border-radius: 40px;
-            text-decoration: none;
-            color: #1E3C72;
-            font-weight: 600;
-            transition: 0.3s;
+            gap: 1rem;
         }
 
-        .home-link:hover {
-            background: #1E3C72;
-            color: white;
-            transform: translateX(-5px);
-        }
-
-        /* کانتینر */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 24px 60px;
-        }
-
-        /* هدر صفحه */
-        .page-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .page-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(78, 205, 196, 0.12);
-            padding: 8px 20px;
-            border-radius: 60px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #4ecdc4;
-            margin-bottom: 20px;
-        }
-
-        .page-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 16px;
-        }
-
-        .page-title span {
-            background: linear-gradient(135deg, #1E3C72, #4ecdc4);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .page-desc {
-            color: #6c8db0;
-            font-size: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* ویدیوی ویژه */
-        .featured-video {
-            background: linear-gradient(135deg, rgba(30, 60, 114, 0.08), rgba(78, 205, 196, 0.05));
-            border-radius: 48px;
-            padding: 32px;
-            margin-bottom: 48px;
-            border: 1px solid rgba(78, 205, 196, 0.2);
-            display: flex;
-            gap: 32px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .featured-thumb {
-            position: relative;
-            flex-shrink: 0;
-            cursor: pointer;
-        }
-
-        .featured-thumb img {
-            width: 280px;
-            height: 180px;
-            border-radius: 24px;
-            object-fit: cover;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .featured-play {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 55px;
-            height: 55px;
-            background: rgba(255, 255, 255, 0.9);
+        .channel-avatar {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: #1E3C72;
-            transition: 0.3s;
+            object-fit: cover;
+            border: 2px solid var(--secondary);
         }
 
-        .featured-thumb:hover .featured-play {
-            transform: translate(-50%, -50%) scale(1.1);
-            background: #4ecdc4;
-            color: white;
-        }
-
-        .featured-info {
-            flex: 1;
-        }
-
-        .featured-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: linear-gradient(135deg, #ff6b6b, #ffb347);
-            padding: 4px 14px;
-            border-radius: 40px;
-            font-size: 0.7rem;
+        .channel-name {
             font-weight: 700;
-            color: white;
-            margin-bottom: 12px;
+            font-size: 1.1rem;
         }
 
-        .featured-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 12px;
-        }
-
-        .featured-desc {
-            color: #4a627a;
-            line-height: 1.6;
-            margin-bottom: 16px;
-        }
-
-        .featured-meta {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .featured-meta span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.8rem;
-            color: #8ca3c0;
-        }
-
-        .featured-btn {
-            background: linear-gradient(135deg, #1E3C72, #2A5298);
+        .subscribe-btn {
+            background: var(--gradient-primary);
             border: none;
-            padding: 10px 28px;
-            border-radius: 40px;
+            padding: 0.4rem 1.2rem;
+            border-radius: var(--radius-full);
             color: white;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
+            transition: var(--transition-base);
         }
 
-        .featured-btn:hover {
+        .subscribe-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(30, 60, 114, 0.3);
+            box-shadow: var(--shadow-glow);
         }
 
-        /* فیلترها */
-        .filters-section {
+        .video-stats {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: var(--font-sm);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-video {
+            background: var(--bg-glass-light);
+            border: 1px solid var(--border-glass);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: var(--transition-base);
+            display: flex;
             align-items: center;
-            gap: 20px;
-            margin-bottom: 32px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            border-radius: 60px;
+            gap: 0.5rem;
+            color: var(--text-primary);
         }
 
-        .filter-tabs {
+        .action-video:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .video-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-top: 1rem;
+        }
+
+        /* تب‌های مرتبط */
+        .tabs-video {
             display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 0.5rem;
         }
 
-        .filter-btn {
-            background: rgba(255, 255, 255, 0.8);
+        .tab-video-btn {
+            background: transparent;
             border: none;
-            padding: 8px 20px;
-            border-radius: 40px;
+            padding: 0.5rem 1.2rem;
             font-family: inherit;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
-            color: #6c8db0;
+            border-radius: var(--radius-full);
+            transition: var(--transition-base);
+            color: var(--text-muted);
         }
 
-        .filter-btn.active {
-            background: linear-gradient(135deg, #1E3C72, #2A5298);
+        .tab-video-btn.active {
+            background: var(--gradient-primary);
             color: white;
         }
 
-        .sort-select {
-            padding: 8px 20px;
-            border-radius: 40px;
-            border: 1px solid #cfdfed;
-            background: white;
-            font-family: inherit;
-            font-weight: 500;
-            color: #2c3e66;
+        .tab-video-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
         }
 
-        /* گرید ویدیوها */
-        .videos-grid {
+        .tab-video-content.active {
+            display: block;
+        }
+
+        /* لیست ویدیوهای مرتبط */
+        .related-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 28px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
         }
 
-        /* کارت ویدیو */
-        .video-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 32px;
+        .related-card {
+            background: var(--bg-glass-light);
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            border: 1px solid rgba(255, 255, 255, 0.7);
             cursor: pointer;
+            transition: var(--transition-base);
+            border: 1px solid var(--border-glass);
         }
 
-        .video-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(78, 205, 196, 0.4);
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+        .related-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--secondary);
         }
 
-        .video-thumb {
+        .related-thumb {
             position: relative;
-            height: 180px;
+            aspect-ratio: 16/9;
             overflow: hidden;
         }
 
-        .video-thumb img {
+        .related-thumb img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
         }
 
-        .video-card:hover .video-thumb img {
+        .related-card:hover .related-thumb img {
             transform: scale(1.05);
         }
 
-        .play-icon {
+        .related-duration {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
+            bottom: 0.5rem;
+            right: 0.5rem;
             background: rgba(0, 0, 0, 0.7);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: white;
-            opacity: 0;
-            transition: 0.3s;
-        }
-
-        .video-card:hover .play-icon {
-            opacity: 1;
-        }
-
-        .video-duration {
-            position: absolute;
-            bottom: 12px;
-            right: 12px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(4px);
-            padding: 4px 8px;
-            border-radius: 8px;
-            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: var(--font-xs);
             color: white;
         }
 
-        .card-content {
-            padding: 18px;
+        .related-info {
+            padding: 0.8rem;
         }
 
-        .video-title {
-            font-size: 1rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            line-height: 1.4;
+        .related-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
-        .video-channel {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 10px;
-            font-size: 0.75rem;
-            color: #8ca3c0;
+        .related-channel {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
         }
 
-        .video-channel img {
-            width: 24px;
-            height: 24px;
+        /* نظرات */
+        .comments-section {
+            margin-top: 1rem;
+        }
+
+        .comment-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .comment-avatar {
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .video-stats {
-            display: flex;
-            gap: 14px;
-            font-size: 0.7rem;
-            color: #8ca3c0;
-        }
-
-        .video-stats i {
-            color: #4ecdc4;
-            margin-left: 4px;
-        }
-
-        /* صفحه‌بندی */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 40px;
-        }
-
-        .page-link {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
+            background: var(--gradient-primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: white;
-            border: 1px solid #cfdfed;
-            cursor: pointer;
-            transition: 0.2s;
-            font-weight: 600;
-        }
-
-        .page-link.active, .page-link:hover {
-            background: linear-gradient(135deg, #1E3C72, #2A5298);
             color: white;
-            border-color: transparent;
+            font-weight: 700;
+            flex-shrink: 0;
         }
 
-        @media (max-width: 1100px) {
-            .videos-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        .comment-content {
+            flex: 1;
         }
 
-        @media (max-width: 900px) {
-            .videos-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .featured-video {
+        .comment-author {
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .comment-date {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .comment-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .add-comment {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .add-comment input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            background: var(--bg-glass-light);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-full);
+            color: var(--text-primary);
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .add-comment input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .video-meta {
                 flex-direction: column;
-                text-align: center;
+                align-items: flex-start;
             }
-            .featured-meta {
-                justify-content: center;
-            }
-            .filters-section {
-                flex-direction: column;
-            }
-            .featured-thumb img {
+
+            .action-buttons {
                 width: 100%;
-                height: auto;
+                justify-content: space-between;
             }
-        }
 
-        @media (max-width: 550px) {
-            .videos-grid {
+            .related-grid {
                 grid-template-columns: 1fr;
-            }
-            .page-title {
-                font-size: 1.8rem;
             }
         }
     </style>
 </head>
-<body>
 
-<div class="global-bg">
-    <img src="assets/img/skate-park-with-ramps-in-tropical-city.jpg" alt="GAMva">
-</div>
-<div class="global-overlay"></div>
+<body data-theme="light">
+    <!-- پس‌زمینه بلور متحرک -->
+    <div class="dynamic-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
 
-<div class="main-header">
-    <div class="header-inner">
-        <div class="logo">
-            <h1><i class="fas fa-video"></i> GAMva | ویدیو</h1>
+    <!-- هدر شیشه‌ای یکسان با صفحه اصلی -->
+    <header class="glass-header">
+        <div class="logo" onclick="window.location.href='main-page.html'">
+            <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+            <div class="logo-text-container">
+                <span class="logo-val">lueva <span class="logo-gam">GAM</span></span>
+            </div>
         </div>
-        <a href="main-page.html" class="home-link">
-            <i class="fas fa-home"></i> صفحه اصلی
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun"></i>
+            </button>
+            <div class="action-icon" onclick="window.location.href='main-page.html'">
+                <i class="fas fa-home"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="video-player-container" id="videoPlayerRoot">
+        <!-- محتوا توسط جاوااسکریپت رندر می‌شود -->
+        <div class="video-wrapper fade-up">
+            <video id="mainVideo" class="video-element" controls controlsList="nodownload">
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                    type="video/mp4">
+            </video>
+        </div>
+        <div id="videoInfo"></div>
+        <div class="tabs-video">
+            <button class="tab-video-btn active" data-tab="related">🎬 ویدیوهای مرتبط</button>
+            <button class="tab-video-btn" data-tab="comments">💬 نظرات</button>
+        </div>
+        <div id="relatedTab" class="tab-video-content active"></div>
+        <div id="commentsTab" class="tab-video-content"></div>
+    </main>
+
+    <!-- فوتر یکسان -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">GAMva</div>
+                    <p class="footer-text">اکوسیستم هوشمند سلامت و توسعه فردی با قدرت هوش مصنوعی.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">ویدیوها</h3>
+                    <ul class="footer-links">
+                        <li><a href="content-video-list.html"><i class="fas fa-chevron-left"></i> همه ویدیوها</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> آموزش حرکات</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> مصاحبه‌ها</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">پشتیبانی</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> سوالات متداول</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© ۲۰۲۵ GAMva · بهترین ویدیوهای آموزشی ورزشی</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ویجت پشتیبانی -->
+    <div class="support-widget">
+        <a href="telegram_user.html">
+            <button class="support-btn"><i class="fas fa-headset"></i><span class="support-tooltip">پشتیبانی
+                    ۲۴/۷</span></button>
         </a>
     </div>
-</div>
 
-<div class="container">
-    <div class="page-header">
-        <div class="page-badge">
-            <i class="fas fa-play-circle"></i> آموزش‌های تصویری
-        </div>
-        <h1 class="page-title">
-            ویدیوهای <span>تخصصی ورزش</span>
-        </h1>
-        <p class="page-desc">
-            آموزش حرکات ورزشی، تکنیک‌های حرفه‌ای، آنالیز مسابقات و مصاحبه‌های اختصاصی
-        </p>
-    </div>
+    <script src="assets/scripts.js"></script>
+    <script>
+        (function () {
+            // ========== داده‌های ویدیو (مشابه صفحه لیست) ==========
+            const videoData = {
+                id: 1,
+                title: "آموزش کامل حرکت ددلیفت با تکنیک حرفه‌ای",
+                channel: "امیرعلی سلیمی",
+                channelAvatar: "https://randomuser.me/api/portraits/men/32.jpg",
+                thumbnail: "assets/img/stoke/download (1).jpg",
+                duration: "24:30",
+                views: 12450,
+                likes: 3450,
+                date: "۱۴۰۳/۱۰/۱۵",
+                description: "در این ویدیو، حرکت ددلیفت را از صفر تا صد با تکنیک صحیح و نکات ایمنی آموزش می‌بینید. مناسب برای تمام سطوح از مبتدی تا حرفه‌ای. نکات کلیدی: ۱. وضعیت صحیح ستون فقرات ۲. فاصله مناسب پاها ۳. تکنیک نفس‌گیری ۴. رفع خطاهای رایج",
+                videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+            };
 
-    <!-- ویدیوی ویژه -->
-    <div class="featured-video">
-        <div class="featured-thumb" onclick="window.location.href='video-player.html?id=1'">
-            <img src="assets/img/skate-park-with-ramps-in-tropical-city.jpg" alt="ویدیوی ویژه">
-            <div class="featured-play">
-                <i class="fas fa-play"></i>
-            </div>
-        </div>
-        <div class="featured-info">
-            <div class="featured-badge">
-                <i class="fas fa-crown"></i> ویدیوی ویژه هفته
-            </div>
-            <h2 class="featured-title">آموزش کامل حرکت ددلیفت با تکنیک حرفه‌ای</h2>
-            <p class="featured-desc">
-                در این ویدیو، حرکت ددلیفت را از صفر تا صد با تکنیک صحیح و نکات ایمنی آموزش می‌بینید. 
-                مناسب برای تمام سطوح از مبتدی تا حرفه‌ای.
-            </p>
-            <div class="featured-meta">
-                <span><i class="fas fa-user"></i> امیرعلی سلیمی</span>
-                <span><i class="fas fa-clock"></i> ۲۴ دقیقه</span>
-                <span><i class="fas fa-eye"></i> ۱۲,۴۵۰ بازدید</span>
-            </div>
-            <button class="featured-btn" onclick="window.location.href='video-player.html?id=1'">
-                تماشا کنید <i class="fas fa-arrow-left"></i>
-            </button>
-        </div>
-    </div>
+            // ویدیوهای مرتبط
+            const relatedVideos = [
+                { id: 2, title: "حرکت اسکوات هالتر - نکات کلیدی", channel: "سارا حسینی", thumbnail: "assets/img/stoke/download (2).jpg", duration: "18:45", views: 8900 },
+                { id: 3, title: "مصاحبه اختصاصی با قهرمان بدنسازی ایران", channel: "GAMva Sport", thumbnail: "assets/img/stoke/download (3).jpg", duration: "45:00", views: 15600 },
+                { id: 4, title: "تکنیک صحیح زیربغل هالتر", channel: "رضا کریمی", thumbnail: "assets/img/stoke/download (4).jpg", duration: "12:20", views: 6700 },
+                { id: 5, title: "تمرینات هوازی در خانه", channel: "نرگس تقوی", thumbnail: "assets/img/stoke/download (1).jpg", duration: "20:00", views: 7800 }
+            ];
 
-    <!-- فیلترها -->
-    <div class="filters-section">
-        <div class="filter-tabs">
-            <button class="filter-btn active" data-filter="all">همه</button>
-            <button class="filter-btn" data-filter="آموزش">آموزش حرکات</button>
-            <button class="filter-btn" data-filter="تکنیک">تکنیک حرفه‌ای</button>
-            <button class="filter-btn" data-filter="مصاحبه">مصاحبه</button>
-            <button class="filter-btn" data-filter="آنالیز">آنالیز</button>
-        </div>
-        <select class="sort-select" id="sortSelect">
-            <option value="newest">جدیدترین</option>
-            <option value="popular">محبوب‌ترین</option>
-            <option value="oldest">قدیمی‌ترین</option>
-        </select>
-    </div>
+            // نظرات نمونه
+            let comments = [
+                { author: "علی محمدی", avatar: "ع", date: "۱۴۰۳/۱۰/۱۴", text: "واقعاً عالی بود! ممنون از تیم GAMva", likes: 12 },
+                { author: "سارا احمدی", avatar: "س", date: "۱۴۰۳/۱۰/۱۲", text: "لطفاً ادامه بدید. خیلی کمک کننده بود", likes: 8 }
+            ];
 
-    <!-- گرید ویدیوها -->
-    <div class="videos-grid" id="videosGrid"></div>
+            let isSubscribed = false;
+            let currentLikes = videoData.likes;
+            let isLiked = false;
 
-    <!-- صفحه‌بندی -->
-    <div class="pagination" id="pagination">
-        <div class="page-link active">۱</div>
-        <div class="page-link">۲</div>
-        <div class="page-link">۳</div>
-    </div>
-</div>
-
-<script>
-    // داده‌های ویدیوها
-    const videos = [
-        { id: 1, title: "آموزش کامل حرکت ددلیفت با تکنیک حرفه‌ای", channel: "امیرعلی سلیمی", channelAvatar: "https://randomuser.me/api/portraits/men/32.jpg", thumbnail: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", category: "آموزش", duration: "24:30", views: 12450, likes: 3450, date: "۱۴۰۳/۱۰/۱۵", featured: true },
-        { id: 2, title: "حرکت اسکوات هالتر - نکات کلیدی", channel: "سارا حسینی", channelAvatar: "https://randomuser.me/api/portraits/women/44.jpg", thumbnail: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", category: "آموزش", duration: "18:45", views: 8900, likes: 2100, date: "۱۴۰۳/۱۰/۱۲" },
-        { id: 3, title: "مصاحبه اختصاصی با قهرمان بدنسازی ایران", channel: "GAMva Sport", channelAvatar: "https://randomuser.me/api/portraits/men/45.jpg", thumbnail: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", category: "مصاحبه", duration: "45:00", views: 15600, likes: 4200, date: "۱۴۰۳/۱۰/۰۸" },
-        { id: 4, title: "تکنیک صحیح زیربغل هالتر", channel: "رضا کریمی", channelAvatar: "https://randomuser.me/api/portraits/men/22.jpg", thumbnail: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", category: "تکنیک", duration: "12:20", views: 6700, likes: 1890, date: "۱۴۰۳/۱۰/۰۵" },
-        { id: 5, title: "آنالیز فینال مستر المپیا ۲۰۲۴", channel: "مهدی نوروزی", channelAvatar: "https://randomuser.me/api/portraits/men/75.jpg", thumbnail: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", category: "آنالیز", duration: "52:00", views: 23400, likes: 6700, date: "۱۴۰۳/۱۰/۰۱" },
-        { id: 6, title: "حرکات اصلاحی برای گردن درد", channel: "دکتر زهرا رضاییان", channelAvatar: "https://randomuser.me/api/portraits/women/33.jpg", thumbnail: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", category: "آموزش", duration: "15:30", views: 4500, likes: 1200, date: "۱۴۰۳/۰۹/۲۸" },
-        { id: 7, title: "تمرینات هوازی در خانه", channel: "نرگس تقوی", channelAvatar: "https://randomuser.me/api/portraits/women/68.jpg", thumbnail: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", category: "تکنیک", duration: "20:00", views: 7800, likes: 2300, date: "۱۴۰۳/۰۹/۲۴" },
-        { id: 8, title: "مصاحبه با مربی تیم ملی", channel: "GAMva Sport", channelAvatar: "https://randomuser.me/api/portraits/men/65.jpg", thumbnail: "assets/img/skate-park-with-ramps-in-tropical-city.jpg", category: "مصاحبه", duration: "38:00", views: 11200, likes: 3400, date: "۱۴۰۳/۰۹/۲۰" }
-    ];
-
-    let currentFilter = "all";
-    let currentSort = "newest";
-
-    function formatNumber(num) {
-        if (num >= 10000) {
-            return (num / 1000).toFixed(0) + "K";
-        }
-        if (num >= 1000) {
-            return (num / 1000).toFixed(1) + "K";
-        }
-        return num.toString();
-    }
-
-    function renderVideos() {
-        let filtered = [...videos];
-        
-        // فیلتر بر اساس دسته‌بندی
-        if (currentFilter !== "all") {
-            filtered = filtered.filter(v => v.category === currentFilter);
-        }
-        
-        // مرتب‌سازی
-        if (currentSort === "newest") {
-            filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
-        } else if (currentSort === "popular") {
-            filtered.sort((a, b) => b.views - a.views);
-        } else if (currentSort === "oldest") {
-            filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
-        }
-        
-        const grid = document.getElementById('videosGrid');
-        grid.innerHTML = filtered.map(video => `
-            <div class="video-card" data-id="${video.id}" onclick="window.location.href='video-player.html?id=${video.id}'">
-                <div class="video-thumb">
-                    <img src="${video.thumbnail}" alt="${video.title}">
-                    <div class="play-icon">
-                        <i class="fas fa-play"></i>
+            // رندر اطلاعات ویدیو
+            function renderVideoInfo() {
+                const container = document.getElementById('videoInfo');
+                container.innerHTML = `
+                    <div class="video-info-section fade-up">
+                        <h1 class="video-title">${videoData.title}</h1>
+                        <div class="video-meta">
+                            <div class="channel-info">
+                                <img src="${videoData.channelAvatar}" class="channel-avatar" alt="">
+                                <div>
+                                    <div class="channel-name">${videoData.channel}</div>
+                                    <div style="font-size: var(--font-xs); color: var(--text-muted);">۱۲٫۴K عضو</div>
+                                </div>
+                                <button class="subscribe-btn" id="subscribeBtn">${isSubscribed ? 'عضو شده‌اید ✓' : 'عضو شوید'}</button>
+                            </div>
+                            <div class="video-stats">
+                                <span><i class="fas fa-calendar"></i> ${videoData.date}</span>
+                                <span><i class="fas fa-eye"></i> ${formatNumber(videoData.views)} بازدید</span>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="action-video" id="likeBtn"><i class="fas fa-heart"></i> <span id="likeCount">${formatNumber(currentLikes)}</span></button>
+                                <button class="action-video" id="shareBtn"><i class="fas fa-share-alt"></i> اشتراک</button>
+                                <button class="action-video" id="saveBtn"><i class="fas fa-bookmark"></i> ذخیره</button>
+                            </div>
+                        </div>
+                        <div class="video-description">
+                            <p>${videoData.description}</p>
+                        </div>
                     </div>
-                    <div class="video-duration">${video.duration}</div>
-                </div>
-                <div class="card-content">
-                    <h3 class="video-title">${video.title}</h3>
-                    <div class="video-channel">
-                        <img src="${video.channelAvatar}" alt="${video.channel}">
-                        <span>${video.channel}</span>
+                `;
+
+                // رویدادها
+                document.getElementById('subscribeBtn').addEventListener('click', () => {
+                    isSubscribed = !isSubscribed;
+                    const btn = document.getElementById('subscribeBtn');
+                    btn.textContent = isSubscribed ? 'عضو شده‌اید ✓' : 'عضو شوید';
+                    if (window.showToast) window.showToast(isSubscribed ? '✅ به کانال عضو شدید!' : '❌ عضویت لغو شد', 'info');
+                });
+                document.getElementById('likeBtn').addEventListener('click', () => {
+                    if (!isLiked) {
+                        currentLikes++;
+                        isLiked = true;
+                    } else {
+                        currentLikes--;
+                        isLiked = false;
+                    }
+                    document.getElementById('likeCount').innerText = formatNumber(currentLikes);
+                    if (window.showToast) window.showToast(isLiked ? '❤️ لایک کردید!' : '💔 لایک برداشته شد', 'info');
+                });
+                document.getElementById('shareBtn').addEventListener('click', () => {
+                    navigator.clipboard.writeText(window.location.href);
+                    if (window.showToast) window.showToast('🔗 لینک ویدیو کپی شد!', 'success');
+                });
+                document.getElementById('saveBtn').addEventListener('click', () => {
+                    if (window.showToast) window.showToast('📌 ویدیو در لیست ذخیره شده‌ها اضافه شد', 'success');
+                });
+            }
+
+            // رندر ویدیوهای مرتبط
+            function renderRelated() {
+                const container = document.getElementById('relatedTab');
+                container.innerHTML = `
+                    <div class="related-grid">
+                        ${relatedVideos.map(video => `
+                            <div class="related-card" onclick="window.location.href='video-player.html?id=${video.id}'">
+                                <div class="related-thumb">
+                                    <img src="${video.thumbnail}" alt="${video.title}">
+                                    <span class="related-duration">${video.duration}</span>
+                                </div>
+                                <div class="related-info">
+                                    <div class="related-title">${video.title}</div>
+                                    <div class="related-channel">${video.channel}</div>
+                                    <div class="related-channel" style="font-size: var(--font-xs);">${formatNumber(video.views)} بازدید</div>
+                                </div>
+                            </div>
+                        `).join('')}
                     </div>
-                    <div class="video-stats">
-                        <span><i class="fas fa-eye"></i> ${formatNumber(video.views)}</span>
-                        <span><i class="fas fa-heart"></i> ${formatNumber(video.likes)}</span>
+                `;
+            }
+
+            // رندر نظرات
+            function renderComments() {
+                const container = document.getElementById('commentsTab');
+                container.innerHTML = `
+                    <div class="comments-section">
+                        ${comments.map(comment => `
+                            <div class="comment-item">
+                                <div class="comment-avatar">${comment.avatar}</div>
+                                <div class="comment-content">
+                                    <div class="comment-author">${comment.author}</div>
+                                    <div class="comment-date">${comment.date}</div>
+                                    <div class="comment-text">${comment.text}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                        <div class="add-comment">
+                            <input type="text" id="newCommentInput" placeholder="نظر خود را بنویسید...">
+                            <button class="action-video" id="submitCommentBtn">ارسال نظر</button>
+                        </div>
                     </div>
-                </div>
-            </div>
-        `).join('');
-    }
+                `;
+                document.getElementById('submitCommentBtn').addEventListener('click', () => {
+                    const input = document.getElementById('newCommentInput');
+                    const text = input.value.trim();
+                    if (text) {
+                        comments.push({
+                            author: "کاربر GAMva",
+                            avatar: "ک",
+                            date: new Date().toLocaleDateString('fa-IR'),
+                            text: text,
+                            likes: 0
+                        });
+                        renderComments();
+                        input.value = '';
+                        if (window.showToast) window.showToast('نظر شما ثبت شد!', 'success');
+                    }
+                });
+            }
 
-    // رویدادهای فیلتر
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentFilter = btn.dataset.filter;
-            renderVideos();
-        });
-    });
+            function formatNumber(num) {
+                if (num >= 10000) return (num / 1000).toFixed(0) + "K";
+                if (num >= 1000) return (num / 1000).toFixed(1) + "K";
+                return num.toString();
+            }
 
-    // رویدادهای مرتب‌سازی
-    document.getElementById('sortSelect').addEventListener('change', (e) => {
-        currentSort = e.target.value;
-        renderVideos();
-    });
+            // تب‌ها
+            function setupTabs() {
+                const tabs = document.querySelectorAll('.tab-video-btn');
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        tabs.forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+                        const tabId = tab.dataset.tab;
+                        document.getElementById('relatedTab').classList.toggle('active', tabId === 'related');
+                        document.getElementById('commentsTab').classList.toggle('active', tabId === 'comments');
+                    });
+                });
+            }
 
-    // صفحه‌بندی (شبیه‌سازی)
-    document.querySelectorAll('.page-link').forEach(link => {
-        link.addEventListener('click', () => {
-            document.querySelectorAll('.page-link').forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-            renderVideos();
-        });
-    });
+            // مقداردهی اولیه
+            function init() {
+                renderVideoInfo();
+                renderRelated();
+                renderComments();
+                setupTabs();
 
-    // رندر اولیه
-    renderVideos();
-</script>
+                // ویدیو اصلی را تنظیم کن
+                const videoEl = document.getElementById('mainVideo');
+                const source = videoEl.querySelector('source');
+                source.src = videoData.videoUrl;
+                videoEl.load();
+            }
+
+            init();
+
+            // افکت fade-up
+            const fadeEls = document.querySelectorAll('.fade-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) e.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            fadeEls.forEach(el => observer.observe(el));
+
+            // خوشامدگویی
+            setTimeout(() => {
+                if (window.showToast) {
+                    window.showToast('🎬 ویدیو آماده پخش است! کیفیت را تنظیم کنید', 'info', 3000);
+                }
+            }, 800);
+        })();
+    </script>
 </body>
+
 </html>

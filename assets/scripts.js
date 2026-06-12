@@ -687,10 +687,10 @@
                             <span>حساب کاربری</span>
                         </div>
                         <div class="popup-content">
-                            <a href="dashboard-user.html" class="menu-link"><i class="fas fa-chart-line"></i> داشبورد</a>
-                            <a href="dashboard-coach.html" class="menu-link"><i class="fas fa-id-card"></i> پروفایل</a>
-                            <a href="favorites.html" class="menu-link"><i class="fas fa-heart"></i> علاقه‌مندی‌ها</a>
-                            <a href="settings.html" class="menu-link"><i class="fas fa-cog"></i> تنظیمات</a>
+                            <a href="dashboard-user.html" class="menu-link"><i class="fas fa-tachometer-alt"></i> داشبورد</a>
+                            <a href="dashboard-coach.html" class="menu-link"><i class="fas fa-user-circle"></i> پروفایل من</a>
+                            <a href="cart.html" class="menu-link"><i class="fas fa-shopping-cart"></i> سبد خرید</a>
+                            <a href="order-tracking.html" class="menu-link"><i class="fas fa-truck"></i> پیگیری سفارش</a>
                         </div>
                     `;
                 }
@@ -987,8 +987,8 @@
     // ========== 23. Fallback برای مرورگرهای قدیمی ==========
     function checkBrowserSupport() {
         const supportsBackdropFilter = CSS.supports('backdrop-filter', 'blur(10px)') ||
-                                       CSS.supports('-webkit-backdrop-filter', 'blur(10px)');
-        
+            CSS.supports('-webkit-backdrop-filter', 'blur(10px)');
+
         if (!supportsBackdropFilter) {
             const style = document.createElement('style');
             style.textContent = `

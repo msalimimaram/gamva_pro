@@ -1,651 +1,624 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>افق جدید | تحولی عظیم در راه است</title>
-    <!-- Font Awesome & Google Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>افق GAMva | انقلاب بعدی در سلامت هوشمند</title>
+
+    <!-- فونت وزیرمتن و آیکون‌ها -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- استایل اصلی پروژه -->
+    <link rel="stylesheet" href="assets/style.css">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            background: #0a0f1a;
-            overflow-x: hidden;
-        }
-
-        /* پس‌زمینه سینمایی لایه‌لایه */
-        .hero-section {
+        /* تنظیمات اختصاصی صفحه آینده GAMva - چشم‌انداز و انگیزه */
+        .vision-hero {
             position: relative;
-            min-height: 100vh;
+            min-height: 85vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-        }
-
-        /* لایه اول: ویدئو یا تصویر با زوم ملایم */
-        .bg-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .bg-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            animation: slowZoom 25s ease-in-out infinite alternate;
-        }
-
-        @keyframes slowZoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.12); }
-        }
-
-        /* لایه دوم: گرادیانت شفاف با الگو */
-        .gradient-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 40%, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.85) 100%);
-            z-index: 1;
-        }
-
-        /* الگوی نقطهای ظریف */
-        .pattern-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(rgba(78, 205, 196, 0.08) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        /* ذرات درخشان */
-        .glow-particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-            pointer-events: none;
-        }
-
-        .glow {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #4ecdc4;
-            border-radius: 50%;
-            box-shadow: 0 0 12px #4ecdc4;
-            animation: floatGlow 12s linear infinite;
-            opacity: 0;
-        }
-
-        @keyframes floatGlow {
-            0% {
-                transform: translateY(100vh) translateX(0);
-                opacity: 0;
-            }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.4; }
-            100% {
-                transform: translateY(-100vh) translateX(calc(100vw * var(--dx)));
-                opacity: 0;
-            }
-        }
-
-        /* محتوای اصلی - سینمایی و نفس‌گیر */
-        .hero-content {
-            position: relative;
-            z-index: 20;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 32px;
             text-align: center;
+            padding: 2rem 1.5rem 4rem;
+            z-index: 2;
         }
 
-        /* نشان ویژه */
-        .coming-badge {
-            display: inline-block;
-            background: rgba(78, 205, 196, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 8px 24px;
-            border-radius: 60px;
-            border: 1px solid rgba(78, 205, 196, 0.4);
-            margin-bottom: 32px;
-            animation: fadeInUp 0.8s ease;
+        .vision-card {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--bg-glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 3rem 2.5rem;
+            box-shadow: var(--shadow-xl);
+            transition: var(--transition-base);
         }
 
-        .coming-badge span {
-            color: #4ecdc4;
+        .vision-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .badge-future {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary-glow), transparent);
+            border: 1px solid var(--primary);
+            border-radius: var(--radius-full);
+            padding: 0.5rem 1.8rem;
+            margin-bottom: 2rem;
+            font-size: var(--font-sm);
             font-weight: 600;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
+            color: var(--primary);
         }
 
-        /* عنوان اصلی - انیمیشن سینمایی */
-        .epic-title {
-            font-size: 5.5rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 28px;
-            animation: fadeInUp 0.8s ease 0.1s backwards;
+        .vision-title {
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
         }
 
-        .epic-title .line1 {
-            background: linear-gradient(135deg, #FFFFFF, #4ecdc4, #ff6b6b, #4ecdc4);
-            background-size: 300% 300%;
+        .gradient-aim {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: gradientFlow 5s ease infinite;
         }
 
-        .epic-title .line2 {
-            display: block;
-            font-size: 4rem;
-            background: linear-gradient(135deg, #4ecdc4, #ffffff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-top: 8px;
-        }
-
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* متن زیر عنوان - گیرا و احساسی */
-        .captivating-text {
+        .vision-sub {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 1.8rem;
             max-width: 700px;
-            margin: 0 auto 40px;
-            font-size: 1.25rem;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.85);
-            animation: fadeInUp 0.8s ease 0.2s backwards;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .captivating-text i {
-            color: #ff6b6b;
+        .quote-vision {
+            background: var(--bg-glass-light);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-right: 4px solid var(--secondary);
+            text-align: right;
         }
 
-        .highlight {
-            color: #4ecdc4;
-            font-weight: 700;
-            border-bottom: 2px dotted #4ecdc4;
-        }
-
-        /* نقل قول انگیزشی */
-        .quote-block {
-            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(255, 107, 107, 0.05));
-            border-radius: 60px;
-            padding: 28px 32px;
-            margin: 40px auto;
-            max-width: 650px;
-            border: 1px solid rgba(78, 205, 196, 0.3);
-            animation: fadeInUp 0.8s ease 0.3s backwards;
-        }
-
-        .quote-block i {
-            font-size: 2rem;
-            color: #4ecdc4;
-            opacity: 0.6;
-            margin-bottom: 12px;
-            display: inline-block;
-        }
-
-        .quote-block p {
-            font-size: 1.15rem;
-            line-height: 1.7;
-            color: white;
-            font-weight: 500;
-        }
-
-        .quote-author {
-            margin-top: 16px;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.85rem;
-        }
-
-        /* شمارنده - طراحی چشمگیر */
-        .countdown-epic {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(20px);
-            border-radius: 80px;
-            padding: 28px 40px;
-            margin: 48px auto;
-            max-width: 600px;
-            border: 1px solid rgba(78, 205, 196, 0.3);
-            animation: fadeInUp 0.8s ease 0.4s backwards;
-        }
-
-        .countdown-label-epic {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #4ecdc4;
-            margin-bottom: 16px;
+        /* شمارنده معکوس با استیل جدید */
+        .countdown-future {
+            background: var(--bg-glass-light);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-glass);
         }
 
         .countdown-numbers {
             display: flex;
             justify-content: center;
-            gap: 24px;
+            gap: 1.5rem;
             flex-wrap: wrap;
         }
 
         .countdown-block {
-            text-align: center;
-            min-width: 85px;
+            background: var(--bg-glass);
+            border-radius: var(--radius-md);
+            padding: 0.8rem 1.2rem;
+            min-width: 80px;
+            border: 1px solid var(--border-glass);
         }
 
         .countdown-num {
-            font-size: 3rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #fff, #4ecdc4);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: var(--primary);
             line-height: 1;
         }
 
-        .countdown-unit {
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.6);
-            margin-top: 6px;
+        /* نقشه راه (تایم‌لاین) */
+        .roadmap-section {
+            margin: 3rem 0 2rem;
         }
 
-        /* ویژگی‌ها - با کارت‌های سه‌بعدی */
-        .features-epic {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            margin: 60px 0;
-            animation: fadeInUp 0.8s ease 0.5s backwards;
-        }
-
-        .feature-epic-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            border-radius: 32px;
-            padding: 28px 20px;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .feature-epic-card:hover {
-            transform: translateY(-12px);
-            background: rgba(78, 205, 196, 0.12);
-            border-color: rgba(78, 205, 196, 0.4);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .feature-epic-card i {
-            font-size: 2.8rem;
-            color: #4ecdc4;
-            margin-bottom: 20px;
-        }
-
-        .feature-epic-card h3 {
-            color: white;
-            font-size: 1.2rem;
-            margin-bottom: 12px;
-        }
-
-        .feature-epic-card p {
-            color: rgba(255,255,255,0.65);
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-
-        /* CTA بزرگ */
-        .cta-area {
-            margin: 50px 0 30px;
-            animation: fadeInUp 0.8s ease 0.6s backwards;
-        }
-
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: linear-gradient(135deg, #4ecdc4, #2c7a9e);
-            padding: 16px 42px;
-            border-radius: 60px;
-            color: white;
+        .section-title-future {
+            font-size: 1.8rem;
             font-weight: 700;
-            font-size: 1.1rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.3);
-            border: none;
-            cursor: pointer;
+            text-align: center;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
         }
 
-        .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.5);
-        }
-
-        /* فرم ایمیل */
-        .email-form {
+        .timeline {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
             justify-content: center;
-            margin-top: 35px;
+            gap: 1.5rem;
         }
 
-        .email-form input {
-            padding: 16px 24px;
-            border-radius: 60px;
+        .timeline-node {
+            background: var(--bg-glass-light);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            border: 1px solid var(--border-glass);
+            transition: var(--transition-base);
+        }
+
+        .timeline-node:hover {
+            transform: translateY(-6px);
+            border-color: var(--secondary);
+            background: var(--bg-glass);
+        }
+
+        .timeline-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-phase {
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-desc {
+            font-size: var(--font-sm);
+            color: var(--text-muted);
+        }
+
+        /* آمارهای الهام‌بخش */
+        .stats-inspire {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-inspire-card {
+            background: var(--bg-glass-light);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border-glass);
+            transition: var(--transition-base);
+        }
+
+        .stat-inspire-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        /* کارت‌های پیش‌نمایش قابلیت‌ها */
+        .features-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .preview-card {
+            background: var(--bg-glass);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            border: 1px solid var(--border-glass);
+            transition: var(--transition-base);
+        }
+
+        .preview-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .preview-card i {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .preview-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* فرم اطلاع‌رسانی */
+        .notify-area {
+            margin: 2rem 0 1rem;
+        }
+
+        .notify-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .notify-form input {
+            flex: 1;
+            min-width: 240px;
+            padding: 0.9rem 1.2rem;
+            background: var(--bg-glass-light);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-full);
+            color: var(--text-primary);
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
             border: none;
-            width: 300px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
+            padding: 0.9rem 2rem;
+            border-radius: var(--radius-full);
             color: white;
-            font-family: inherit;
-            font-size: 0.95rem;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: 0.2s;
-        }
-
-        .email-form input:focus {
-            outline: none;
-            border-color: #4ecdc4;
-            background: rgba(255,255,255,0.15);
-        }
-
-        .email-form input::placeholder {
-            color: rgba(255,255,255,0.5);
-        }
-
-        .submit-btn {
-            background: white;
-            border: none;
-            padding: 16px 32px;
-            border-radius: 60px;
             font-weight: 700;
-            color: #1a2c3e;
             cursor: pointer;
-            transition: 0.2s;
+            transition: var(--transition-base);
         }
 
-        .submit-btn:hover {
-            transform: scale(1.02);
-            background: #4ecdc4;
-            color: white;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
         }
 
-        /* دکمه بازگشت */
-        .back-home-epic {
+        /* پیوندهای پایین صفحه (جذابیت‌های بیشتر) */
+        .bottom-attractions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-glass);
+        }
+
+        .attract-link {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(12px);
-            padding: 12px 28px;
-            border-radius: 60px;
-            color: white;
+            gap: 0.5rem;
+            background: var(--bg-glass-light);
+            padding: 0.6rem 1.3rem;
+            border-radius: var(--radius-full);
+            color: var(--text-primary);
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: 0.3s;
-            margin-top: 40px;
-            border: 1px solid rgba(255,255,255,0.15);
+            font-size: var(--font-sm);
+            transition: var(--transition-base);
+            border: 1px solid var(--border-glass);
         }
 
-        .back-home-epic:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateX(-5px);
+        .attract-link:hover {
+            background: var(--bg-glass);
+            border-color: var(--secondary);
+            transform: translateY(-3px);
         }
 
-        footer {
-            margin-top: 60px;
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.3);
+        .attract-link i {
+            color: var(--secondary);
         }
 
-        @media (max-width: 1000px) {
-            .features-epic { grid-template-columns: repeat(2, 1fr); }
-            .epic-title { font-size: 3.5rem; }
-            .epic-title .line2 { font-size: 2.8rem; }
-        }
-
-        @media (max-width: 600px) {
-            .features-epic { grid-template-columns: 1fr; }
-            .epic-title { font-size: 2.5rem; }
-            .epic-title .line2 { font-size: 2rem; }
-            .countdown-block { min-width: 60px; }
-            .countdown-num { font-size: 2rem; }
-            .email-form input { width: 100%; }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        @media (max-width: 768px) {
+            .vision-card {
+                padding: 2rem 1.5rem;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            .countdown-block {
+                min-width: 65px;
+                padding: 0.5rem 0.8rem;
+            }
+
+            .countdown-num {
+                font-size: 1.5rem;
+            }
+
+            .timeline-node {
+                min-width: 160px;
             }
         }
     </style>
 </head>
-<body>
 
-<div class="hero-section">
-    <!-- لایه اول: تصویر/ویدئو -->
-    <div class="bg-layer">
-        <img src="assets/img/skate-park-with-ramps-in-tropical-city.jpg" alt="افق جدید" class="bg-video" style="object-fit: cover;">
+<body data-theme="light">
+    <!-- بلورهای متحرک -->
+    <div class="dynamic-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
-    
-    <!-- لایه گرادیانت -->
-    <div class="gradient-overlay"></div>
-    
-    <!-- الگوی نقطهای -->
-    <div class="pattern-overlay"></div>
-    
-    <!-- ذرات درخشان (JS تولید میکند) -->
-    <div class="glow-particles" id="glowParticles"></div>
-    
-    <!-- محتوای اصلی -->
-    <div class="hero-content">
-        <div class="coming-badge">
-            <span>✨ COMING SOON — تحول بزرگ ✨</span>
-        </div>
-        
-        <h1 class="epic-title">
-            <span class="line1">افق جدید</span>
-            <span class="line2">در مربیگری ورزشی</span>
-        </h1>
-        
-        <div class="captivating-text">
-            چیزی که تا امروز <span class="highlight">هیچ‌جا ندیده‌اید</span>،
-            <i class="fas fa-rocket"></i> ترکیبی از <span class="highlight">هوش مصنوعی</span>،
-            <span class="highlight">تحلیل پیشرفته</span> و <span class="highlight">ارتباط انسانی</span>
-            <br>داریم از صفر تا بینهایت می‌سازیم...
-        </div>
-        
-        <div class="quote-block">
-            <i class="fas fa-quote-right"></i>
-            <p>ما نمی‌خواهیم فقط یک پلتفرم دیگر باشیم.<br>می‌خواهیم <strong>استاندارد جدیدی</strong> در صنعت مربیگری تعریف کنیم.</p>
-            <div class="quote-author">— تیم GAMva</div>
-        </div>
-        
-        <!-- شمارنده معکوس -->
-        <div class="countdown-epic">
-            <div class="countdown-label-epic">
-                <i class="fas fa-hourglass-half"></i> رونمایی در
-            </div>
-            <div class="countdown-numbers">
-                <div class="countdown-block">
-                    <div class="countdown-num" id="epicDays">00</div>
-                    <div class="countdown-unit">روز</div>
-                </div>
-                <div class="countdown-block">
-                    <div class="countdown-num" id="epicHours">00</div>
-                    <div class="countdown-unit">ساعت</div>
-                </div>
-                <div class="countdown-block">
-                    <div class="countdown-num" id="epicMinutes">00</div>
-                    <div class="countdown-unit">دقیقه</div>
-                </div>
-                <div class="countdown-block">
-                    <div class="countdown-num" id="epicSeconds">00</div>
-                    <div class="countdown-unit">ثانیه</div>
-                </div>
+
+    <!-- هدر شیشه‌ای (بدون دکمه اضافی بازگشت) -->
+    <header class="glass-header">
+        <div class="logo" onclick="window.location.href='main-page.html'">
+            <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+            <div class="logo-text-container">
+                <span class="logo-val">lueva <span class="logo-gam">GAM</span></span>
             </div>
         </div>
-        
-        <!-- ویژگی‌ها -->
-        <div class="features-epic">
-            <div class="feature-epic-card">
-                <i class="fas fa-brain"></i>
-                <h3>هوش مصنوعی پیشرفته</h3>
-                <p>برنامه تمرینی شخصی‌سازی شده با یادگیری ماشین</p>
-            </div>
-            <div class="feature-epic-card">
-                <i class="fas fa-chart-line"></i>
-                <h3>تحلیل لحظه‌ای</h3>
-                <p>نمودارهای زنده، روندها و پیش‌بینی عملکرد</p>
-            </div>
-            <div class="feature-epic-card">
-                <i class="fas fa-globe"></i>
-                <h3>جامعه جهانی</h3>
-                <p>ارتباط با مربیان و ورزشکاران از سراسر دنیا</p>
-            </div>
-            <div class="feature-epic-card">
-                <i class="fas fa-crown"></i>
-                <h3>تجربه لوکس</h3>
-                <p>طراحی بین‌ظیر، سرعت بالا و امنیت درجه یک</p>
-            </div>
-        </div>
-        
-        <!-- CTA و فرم -->
-        <div class="cta-area">
-            <button class="cta-button" id="epicCtaBtn">
-                <i class="fas fa-gem"></i> من می‌خواهم اولین باشم
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun"></i>
             </button>
-            <div class="email-form" id="emailForm" style="display: none;">
-                <input type="email" id="notifyEmailEpic" placeholder="ایمیل خود را وارد کنید">
-                <button class="submit-btn" id="submitNotifyEpic">اطلاع‌رسانی کن</button>
+            <div class="action-icon" onclick="window.location.href='main-page.html'">
+                <i class="fas fa-home"></i>
             </div>
         </div>
-        
-        <!-- دکمه بازگشت -->
-        <a href="main-page.html" class="back-home-epic">
-            <i class="fas fa-arrow-right"></i> بازگشت به صفحه اصلی
-        </a>
-        
-        <footer>
-            <i class="fas fa-heart" style="color:#ff6b6b;"></i> ما با شور و شوق در حال ساختن آینده‌ای هستیم که شما لایق آنید
-        </footer>
-    </div>
-</div>
+    </header>
 
-<script>
-    // ذرات درخشان
-    function createGlowParticles() {
-        const container = document.getElementById('glowParticles');
-        const particleCount = 80;
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('glow');
-            const size = Math.random() * 5 + 2;
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.setProperty('--dx', (Math.random() - 0.5) * 2);
-            particle.style.animationDuration = Math.random() * 15 + 8 + 's';
-            particle.style.animationDelay = Math.random() * 10 + 's';
-            container.appendChild(particle);
-        }
-    }
-    createGlowParticles();
-    
-    // شمارنده معکوس: 28 روز از امروز
-    function startEpicCountdown() {
-        const targetDate = new Date();
-        targetDate.setDate(targetDate.getDate() + 28);
-        targetDate.setHours(20, 0, 0, 0);
-        
-        function update() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-            
-            if (distance < 0) {
-                document.getElementById('epicDays').innerText = '00';
-                document.getElementById('epicHours').innerText = '00';
-                document.getElementById('epicMinutes').innerText = '00';
-                document.getElementById('epicSeconds').innerText = '00';
-                return;
+    <main>
+        <div class="vision-hero">
+            <div class="vision-card fade-up">
+                <div class="badge-future">
+                    <i class="fas fa-chart-line"></i>
+                    <span>افق GAMva — انقلاب بعدی</span>
+                </div>
+                <h1 class="vision-title">
+                    <span class="gradient-aim">آینده‌ای که می‌سازیم</span><br>
+                    برای تمام خانواده سلامت
+                </h1>
+                <p class="vision-sub">
+                    نه فقط یک پلتفرم، بلکه <strong class="highlight-text">اکوسیستمی زنده</strong> با هوش مصنوعی،
+                    داده‌های لحظه‌ای و ارتباط واقعی.
+                    جایی که هر مربی، هر ورزشکار و هر انسان مشتاق به رشد، ابزارهای بی‌نظیری در اختیار دارد.
+                </p>
+                <div class="quote-vision">
+                    <i class="fas fa-quote-right" style="color: var(--secondary);"></i>
+                    <p>ما آمدیم تا استانداردهای سلامت دیجیتال را بازنویسی کنیم. <strong>GAMva</strong> فقط یک نام نیست؛
+                        یک وعده است برای پیشرفت بی‌وقفه.</p>
+                    <div style="font-size: var(--font-xs); color: var(--text-muted); margin-top: 0.6rem;">— بنیانگذاران
+                        GAMva</div>
+                </div>
+
+                <!-- شمارنده معکوس تا رونمایی بزرگ -->
+                <div class="countdown-future">
+                    <div class="countdown-numbers">
+                        <div class="countdown-block">
+                            <div class="countdown-num" id="futureDays">00</div>
+                            <div class="countdown-unit">روز</div>
+                        </div>
+                        <div class="countdown-block">
+                            <div class="countdown-num" id="futureHours">00</div>
+                            <div class="countdown-unit">ساعت</div>
+                        </div>
+                        <div class="countdown-block">
+                            <div class="countdown-num" id="futureMinutes">00</div>
+                            <div class="countdown-unit">دقیقه</div>
+                        </div>
+                        <div class="countdown-block">
+                            <div class="countdown-num" id="futureSeconds">00</div>
+                            <div class="countdown-unit">ثانیه</div>
+                        </div>
+                    </div>
+                    <div
+                        style="text-align: center; margin-top: 1rem; font-size: var(--font-xs); color: var(--text-muted);">
+                        <i class="fas fa-rocket"></i> تا رویداد بزرگ «افق GAMva»
+                    </div>
+                </div>
+
+                <!-- نقشه راه سه مرحله‌ای -->
+                <div class="roadmap-section">
+                    <div class="section-title-future">
+                        <i class="fas fa-map-signs"></i>
+                        <span>نقشه راه تحول</span>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-node">
+                            <div class="timeline-icon"><i class="fas fa-microchip"></i></div>
+                            <div class="timeline-phase">فاز ۱ · هوشمندسازی</div>
+                            <div class="timeline-desc">موتور AI شخصی‌ساز تمرین و تغذیه</div>
+                        </div>
+                        <div class="timeline-node">
+                            <div class="timeline-icon"><i class="fas fa-chalkboard-user"></i></div>
+                            <div class="timeline-phase">فاز ۲ · آکادمی مربیان</div>
+                            <div class="timeline-desc">ابزارهای پیشرفته تحلیل و رشد درآمد</div>
+                        </div>
+                        <div class="timeline-node">
+                            <div class="timeline-icon"><i class="fas fa-globe"></i></div>
+                            <div class="timeline-phase">فاز ۳ · جامعه جهانی</div>
+                            <div class="timeline-desc">رویدادهای زنده، چالش‌های بین‌المللی</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- آمارهای انگیزشی (چشم‌انداز) -->
+                <div class="stats-inspire">
+                    <div class="stat-inspire-card">
+                        <div class="stat-inspire-number">+۵۰۰۰</div>
+                        <div>مربی متخصص در راه</div>
+                    </div>
+                    <div class="stat-inspire-card">
+                        <div class="stat-inspire-number">۱۰۰K</div>
+                        <div>کاربر اولیه مشتاق</div>
+                    </div>
+                    <div class="stat-inspire-card">
+                        <div class="stat-inspire-number">۴.۹۸</div>
+                        <div>رضایت در آزمایش‌های اولیه</div>
+                    </div>
+                </div>
+
+                <!-- پیش‌نمایش قابلیت‌های جدید -->
+                <div class="features-preview">
+                    <div class="preview-card">
+                        <i class="fas fa-brain"></i>
+                        <h4>کوچ هوشمند GAMva</h4>
+                        <p style="font-size: var(--font-xs); color: var(--text-muted);">برنامه‌های داینامیک که با شما
+                            رشد می‌کند</p>
+                    </div>
+                    <div class="preview-card">
+                        <i class="fas fa-vr-cardboard"></i>
+                        <h4>تمرینات واقعیت افزوده</h4>
+                        <p style="font-size: var(--font-xs); color: var(--text-muted);">تجربه‌ای غوطه‌ور از منزل</p>
+                    </div>
+                    <div class="preview-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>داشبورد پیشرفته</h4>
+                        <p style="font-size: var(--font-xs); color: var(--text-muted);">بینش‌های عمیق از داده‌های زیستی
+                        </p>
+                    </div>
+                </div>
+
+                <!-- فرم ثبت‌نام برای اطلاع‌رسانی -->
+                <div class="notify-area">
+                    <div class="notify-form" id="futureNotifyForm">
+                        <input type="email" id="futureEmail" placeholder="ایمیل خود را وارد کنید">
+                        <button class="btn-primary" id="futureNotifyBtn">
+                            <i class="fas fa-bell"></i> عضویت در خبرنامه رویاها
+                        </button>
+                    </div>
+                    <p style="font-size: var(--font-xs); color: var(--text-dim); margin-top: 0.8rem;">
+                        اولین نفری باش که از رونمایی بزرگ مطلع می‌شوی
+                    </p>
+                </div>
+
+                <!-- جذابیت‌های بیشتر (لینک‌های پایین) -->
+                <div class="bottom-attractions">
+                    <a href="challenges.html" class="attract-link">
+                        <i class="fas fa-trophy"></i> چالش‌های انگیزشی
+                    </a>
+                    <a href="calculater.html" class="attract-link">
+                        <i class="fas fa-calculator"></i> ابزارهای هوشمند محاسبه
+                    </a>
+                    <a href="list-coach.html" class="attract-link">
+                        <i class="fas fa-users"></i> مربیان خبره
+                    </a>
+                    <a href="content-list.html" class="attract-link">
+                        <i class="fas fa-podcast"></i> محتوای انحصاری
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">GAMva</div>
+                    <p class="footer-text">اکوسیستم هوشمند سلامت و توسعه فردی با قدرت هوش مصنوعی.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">افق GAMva</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> درباره ما</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> چشم‌انداز ۱۴۰۶</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> همکاری با ما</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">پشتیبانی</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> سوالات متداول</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© ۲۰۲۵ GAMva · آینده‌ای که اکنون می‌سازیم</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ویجت پشتیبانی -->
+    <div class="support-widget">
+        <a href="telegram_user.html">
+            <button class="support-btn"><i class="fas fa-headset"></i><span class="support-tooltip">پشتیبانی
+                    ۲۴/۷</span></button>
+        </a>
+    </div>
+
+    <script src="assets/scripts.js"></script>
+    <script>
+        (function () {
+            // شمارنده معکوس ۳۵ روز (رونمایی بزرگ)
+            const target = new Date();
+            target.setDate(target.getDate() + 35);
+            target.setHours(19, 0, 0, 0);
+
+            function updateCounter() {
+                const now = new Date().getTime();
+                const dist = target - now;
+                if (dist < 0) {
+                    document.getElementById('futureDays').innerText = '00';
+                    document.getElementById('futureHours').innerText = '00';
+                    document.getElementById('futureMinutes').innerText = '00';
+                    document.getElementById('futureSeconds').innerText = '00';
+                    return;
+                }
+                const days = Math.floor(dist / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((dist % (86400000)) / 3600000);
+                const minutes = Math.floor((dist % 3600000) / 60000);
+                const seconds = Math.floor((dist % 60000) / 1000);
+                document.getElementById('futureDays').innerText = days.toString().padStart(2, '0');
+                document.getElementById('futureHours').innerText = hours.toString().padStart(2, '0');
+                document.getElementById('futureMinutes').innerText = minutes.toString().padStart(2, '0');
+                document.getElementById('futureSeconds').innerText = seconds.toString().padStart(2, '0');
             }
-            
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById('epicDays').innerText = days.toString().padStart(2, '0');
-            document.getElementById('epicHours').innerText = hours.toString().padStart(2, '0');
-            document.getElementById('epicMinutes').innerText = minutes.toString().padStart(2, '0');
-            document.getElementById('epicSeconds').innerText = seconds.toString().padStart(2, '0');
-        }
-        
-        update();
-        setInterval(update, 1000);
-    }
-    startEpicCountdown();
-    
-    // CTA دکمه و فرم
-    const ctaBtn = document.getElementById('epicCtaBtn');
-    const emailForm = document.getElementById('emailForm');
-    let formVisible = false;
-    
-    ctaBtn.addEventListener('click', () => {
-        if (!formVisible) {
-            emailForm.style.display = 'flex';
-            formVisible = true;
-            ctaBtn.innerHTML = '<i class="fas fa-envelope"></i> ایمیل خود را وارد کنید';
-            ctaBtn.style.background = 'linear-gradient(135deg, #ff6b6b, #c92a6a)';
-        }
-    });
-    
-    document.getElementById('submitNotifyEpic').addEventListener('click', () => {
-        const email = document.getElementById('notifyEmailEpic').value.trim();
-        if (!email || !email.includes('@')) {
-            alert('✨ لطفاً ایمیل معتبر وارد کنید تا از این اتفاق بزرگ با خبر شوید!');
-            return;
-        }
-        alert(`💎 تبریک! ایمیل ${email} در لیست ویژه ما ثبت شد. شما جزو اولین کسانی خواهید بود که رونمایی را می‌بینید.`);
-        emailForm.style.display = 'none';
-        formVisible = false;
-        ctaBtn.innerHTML = '<i class="fas fa-gem"></i> من می‌خواهم اولین باشم';
-        ctaBtn.style.background = 'linear-gradient(135deg, #4ecdc4, #2c7a9e)';
-        document.getElementById('notifyEmailEpic').value = '';
-    });
-    
-    // متن‌های الهام‌بخش برای تغییر در console (اختیاری)
-    console.log('%c🔥 تحولی بزرگ در راه است... آماده‌اید؟', 'color: #4ecdc4; font-size: 16px; font-weight: bold;');
-</script>
+            updateCounter();
+            setInterval(updateCounter, 1000);
+
+            // فرم اطلاع‌رسانی
+            const notifyBtn = document.getElementById('futureNotifyBtn');
+            const emailInput = document.getElementById('futureEmail');
+            if (notifyBtn) {
+                notifyBtn.addEventListener('click', () => {
+                    const email = emailInput.value.trim();
+                    if (!email || !email.includes('@')) {
+                        if (window.showToast) window.showToast('ایمیل معتبر وارد کنید', 'warning');
+                        else alert('لطفاً ایمیل معتبر وارد کنید');
+                        return;
+                    }
+                    // ذخیره در localStorage (نمادین)
+                    let subscribers = JSON.parse(localStorage.getItem('gamva_future_subscribers') || '[]');
+                    if (!subscribers.includes(email)) {
+                        subscribers.push(email);
+                        localStorage.setItem('gamva_future_subscribers', JSON.stringify(subscribers));
+                    }
+                    if (window.showToast) {
+                        window.showToast('✨ عضویت شما ثبت شد. به زودی خبرهای بزرگ را برای شما می‌فرستیم! ✨', 'success', 4000);
+                    } else {
+                        alert('عضویت شما با موفقیت ثبت شد.');
+                    }
+                    emailInput.value = '';
+                });
+            }
+
+            // افکت fade-up
+            const fadeEl = document.querySelector('.fade-up');
+            if (fadeEl && !fadeEl.classList.contains('visible')) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) e.target.classList.add('visible');
+                    });
+                }, { threshold: 0.1 });
+                observer.observe(fadeEl);
+            }
+
+            // خوشامدگویی
+            setTimeout(() => {
+                if (window.showToast) {
+                    window.showToast('🚀 به افق GAMva خوش آمدی. اینجا آینده سلامت ساخته می‌شود.', 'info', 4500);
+                }
+            }, 1000);
+        })();
+    </script>
 </body>
+
 </html>

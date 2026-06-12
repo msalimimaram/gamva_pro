@@ -1,295 +1,171 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>محاسبه‌گر پیشرفته ترکیب بدن | Fitness Tools Pro</title>
-    <!-- Font Awesome & Google Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>محاسبه‌گر هوشمند ترکیب بدن | GAMva</title>
+
+    <!-- فونت وزیرمتن و آیکون‌ها -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- استایل اصلی پروژه (شیشه‌ای، دارک مود، دکمه‌ها) -->
+    <link rel="stylesheet" href="assets/style.css">
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            position: relative;
-            background: transparent;
-        }
-
-        /* ===== پس‌زمینه ثابت با بلر حرفه‌ای ===== */
-        .global-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            overflow: hidden;
-        }
-
-        .global-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: blur(5px);
-            transform: scale(1.05);
-        }
-
-        .global-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.3) 100%);
-            backdrop-filter: blur(3px);
-            z-index: -1;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(78, 205, 196, 0.5);
-            border-radius: 10px;
-        }
-
-        .container {
-            max-width: 1450px;
-            margin: 0 auto;
-            padding: 30px 24px 60px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* دکمه برگشت به صفحه اصلی */
-        .home-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255,255,255,0.12);
-            backdrop-filter: blur(12px);
-            padding: 12px 28px;
-            border-radius: 60px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.2);
-            margin-bottom: 25px;
-        }
-
-        .home-btn:hover {
-            background: rgba(255,255,255,0.25);
-            transform: translateX(-4px);
-            border-color: rgba(78, 205, 196, 0.6);
-        }
-
-        /* دکمه بازگشت به لیست (در حالت تک ابزار) */
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255,255,255,0.12);
-            backdrop-filter: blur(12px);
-            padding: 12px 28px;
-            border-radius: 60px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.2);
-            margin-bottom: 25px;
-        }
-
-        .back-btn:hover {
-            background: rgba(255,255,255,0.25);
-            transform: translateX(-5px);
-            border-color: rgba(78, 205, 196, 0.6);
-        }
-
-        /* هدر شیشه‌ای */
-        .hero-glass {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(16px);
-            border-radius: 56px;
-            padding: 28px 38px;
-            margin-bottom: 40px;
+        /* تنظیمات اختصاصی صفحه محاسبه‌گر - کاملاً هماهنگ با سبک اصلی */
+        .calculators-hero {
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 2.5rem;
         }
 
-        .hero-glass h1 {
-            font-size: 2.1rem;
+        .calculators-hero h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: 800;
-            background: linear-gradient(125deg, #FFFFFF, #D4E6F1);
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            margin-bottom: 1rem;
         }
 
-        .hero-glass p {
-            color: rgba(255,255,255,0.85);
-            margin-top: 10px;
+        .calculators-hero p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         /* شبکه ابزارها */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 32px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
         }
 
-        /* ===== کارت با افکت hover ===== */
+        /* کارت ابزار با استایل NFT کارت‌های اصلی */
         .tool-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: var(--transition-bounce);
             position: relative;
-            background: rgba(25, 35, 50, 0.6);
-            backdrop-filter: blur(14px);
-            border-radius: 44px;
-            padding: 26px;
-            transition: all 0.35s ease;
-            border: 1px solid rgba(255,255,255,0.18);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
-            animation: fadeInUp 0.5s ease backwards;
+            overflow: hidden;
         }
 
-        /* باکس شدو گرادیانت نورانی در هاور - بدون تغییر رنگ کارت */
-        .tool-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 0 0 2px rgba(78, 205, 196, 0.2),
-                        0 0 0 5px rgba(78, 205, 196, 0.1),
-                        0 20px 35px rgba(0, 0, 0, 0.25);
-            border-color: rgba(78, 205, 196, 0.4);
-        }
-
-        /* افکت نورانی اضافی روی حاشیه */
         .tool-card::after {
             content: '';
             position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            background: linear-gradient(135deg, 
-                rgba(78, 205, 196, 0.3), 
-                rgba(255, 107, 107, 0.2),
-                rgba(78, 205, 196, 0.3));
-            border-radius: 45px;
-            z-index: -1;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-lg);
+            z-index: -2;
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.5s ease;
         }
 
         .tool-card:hover::after {
             opacity: 1;
+            animation: borderPulse 2s infinite;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .tool-card:hover {
+            transform: translateY(-8px);
         }
-
-        .tool-card:nth-child(1) { animation-delay: 0.05s; }
-        .tool-card:nth-child(2) { animation-delay: 0.1s; }
-        .tool-card:nth-child(3) { animation-delay: 0.15s; }
-        .tool-card:nth-child(4) { animation-delay: 0.2s; }
-        .tool-card:nth-child(5) { animation-delay: 0.25s; }
-        .tool-card:nth-child(6) { animation-delay: 0.3s; }
-        .tool-card:nth-child(7) { animation-delay: 0.35s; }
 
         .tool-title {
-            font-size: 1.55rem;
-            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 22px;
-            border-right: 4px solid #4ecdc4;
-            padding-right: 16px;
-            color: white;
+            gap: 0.75rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-glass);
         }
 
         .tool-title i {
-            color: #4ecdc4;
-            font-size: 1.7rem;
+            color: var(--secondary);
+            font-size: 1.5rem;
         }
 
         .input-group {
-            margin-bottom: 16px;
+            margin-bottom: 1rem;
         }
 
         .input-group label {
             display: block;
-            font-size: 0.75rem;
+            font-size: var(--font-sm);
             font-weight: 600;
-            margin-bottom: 6px;
-            color: rgba(255,255,255,0.8);
-            letter-spacing: 0.3px;
+            color: var(--text-secondary);
+            margin-bottom: 0.3rem;
         }
 
-        .input-group input, .input-group select {
+        .input-group input,
+        .input-group select {
             width: 100%;
-            padding: 12px 18px;
-            border-radius: 30px;
-            border: none;
-            background: rgba(255,255,255,0.92);
-            font-family: inherit;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-            outline: none;
+            padding: 0.8rem 1rem;
+            background: var(--bg-glass-light);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: var(--font-sm);
+            transition: var(--transition-base);
         }
 
-        .input-group input:focus, .input-group select:focus {
-            background: white;
-            box-shadow: 0 0 0 3px rgba(78,205,196,0.3);
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
         }
 
         .result-area {
-            background: rgba(0, 0, 0, 0.35);
-            backdrop-filter: blur(8px);
-            border-radius: 32px;
-            padding: 16px 18px;
-            margin: 20px 0 16px;
+            background: var(--surface-hover);
+            border-radius: var(--radius-md);
+            padding: 1rem;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.12);
+            margin: 1.5rem 0 1rem;
+            border: 1px solid var(--border-glass);
         }
 
         .result-value {
-            font-size: 2.3rem;
+            font-size: 2rem;
             font-weight: 800;
-            color: #4ecdc4;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .result-unit {
+            font-size: var(--font-sm);
+            color: var(--text-muted);
         }
 
         .status-badge {
             display: inline-block;
-            padding: 5px 16px;
-            border-radius: 60px;
-            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            padding: 0.25rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: var(--font-xs);
             font-weight: 600;
-            margin-top: 8px;
-            background: rgba(0,0,0,0.5);
-            color: white;
+            background: var(--bg-glass);
         }
 
         .chart-container {
-            margin-top: 18px;
-            height: 120px;
             display: flex;
             justify-content: center;
+            margin: 1rem 0;
         }
 
         canvas.small-canvas {
@@ -297,61 +173,70 @@
             max-height: 120px;
         }
 
-        /* بخش اطلاعات بصری پایین کارت */
-        .info-section {
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(255,255,255,0.15);
-        }
-
-        .info-title {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
         .visual-range {
-            background: rgba(0,0,0,0.35);
-            border-radius: 40px;
+            background: var(--bg-glass-light);
+            border-radius: var(--radius-full);
             height: 8px;
-            width: 100%;
+            margin: 0.8rem 0;
             overflow: hidden;
-            margin: 10px 0;
         }
 
         .visual-fill {
             height: 100%;
-            border-radius: 40px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             transition: width 0.3s ease;
         }
 
         .range-labels {
             display: flex;
             justify-content: space-between;
-            font-size: 0.65rem;
-            color: rgba(255,255,255,0.6);
-            margin-top: 6px;
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
         }
 
         .advice-text {
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.75);
-            margin-top: 12px;
-            line-height: 1.5;
-            background: rgba(78,205,196,0.1);
-            padding: 10px 12px;
-            border-radius: 20px;
+            background: var(--bg-glass-light);
+            padding: 0.75rem;
+            border-radius: var(--radius-md);
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 0.8rem 0;
+            border-right: 3px solid var(--secondary);
         }
 
         .info-note {
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.55);
-            margin-top: 14px;
+            font-size: var(--font-xs);
+            color: var(--text-dim);
             text-align: center;
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border-glass);
+        }
+
+        /* دکمه بازگشت */
+        .back-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--radius-full);
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            transition: var(--transition-base);
+            border: 1px solid var(--border-glass);
+            cursor: pointer;
+        }
+
+        .back-nav:hover {
+            background: var(--bg-glass-light);
+            transform: translateX(-5px);
+            border-color: var(--primary);
         }
 
         /* حالت تک ابزار */
@@ -360,34 +245,102 @@
             margin: 0 auto;
         }
 
-        @media (max-width: 850px) {
-            .tools-grid { grid-template-columns: 1fr; }
-            .hero-glass h1 { font-size: 1.5rem; }
-            .hero-glass { padding: 20px 24px; }
-            .tool-title { font-size: 1.35rem; }
-            .home-btn, .back-btn { margin-bottom: 18px; }
-        }
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
 
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.75rem;
+            .tool-card {
+                padding: 1.2rem;
+            }
+
+            .result-value {
+                font-size: 1.6rem;
+            }
         }
     </style>
 </head>
-<body>
 
-    <div class="global-bg">
-        <img src="assets/img/skate-park-with-ramps-in-tropical-city.jpg" alt="اسکیت پارک در شهر گرمسیری | پس زمینه ورزشی">
+<body data-theme="light">
+    <!-- پس‌زمینه بلور متحرک مانند صفحه اصلی -->
+    <div class="dynamic-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
-    <div class="global-overlay"></div>
 
-    <div class="container" id="appRoot"></div>
-    <footer>✨ محاسبات دقیق بر اساس جدیدترین معادلات علمی | Fitness Tools Pro</footer>
+    <!-- هدر شیشه‌ای یکسان با main-page -->
+    <header class="glass-header">
+        <div class="logo" onclick="window.location.href='main-page.html'">
+            <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+            <div class="logo-text-container">
+                <span class="logo-val">lueva <span class="logo-gam">GAM</span></span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun"></i>
+            </button>
+            <div class="action-icon" onclick="window.location.href='main-page.html'">
+                <i class="fas fa-home"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="appRoot"></div>
+    </main>
+
+    <!-- فوتر یکسان با صفحه اصلی -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">GAMva</div>
+                    <p class="footer-text">اکوسیستم هوشمند سلامت و توسعه فردی با قدرت هوش مصنوعی. همراه شما در مسیر
+                        سلامتی.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">لینک‌های مفید</h3>
+                    <ul class="footer-links">
+                        <li><a href="list-coach.html"><i class="fas fa-chevron-left"></i> مربیان</a></li>
+                        <li><a href="challenges.html"><i class="fas fa-chevron-left"></i> چالش‌ها</a></li>
+                        <li><a href="content-list.html"><i class="fas fa-chevron-left"></i> محتوا</a></li>
+                        <li><a href="calculater.html"><i class="fas fa-chevron-left"></i> محاسبه‌گر سلامت</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">پشتیبانی</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> سوالات متداول</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© ۲۰۲۵ تمامی حقوق برای GAMva محفوظ است.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ویجت پشتیبانی -->
+    <div class="support-widget">
+        <a href="telegram_user.html">
+            <button class="support-btn"><i class="fas fa-headset"></i><span class="support-tooltip">پشتیبانی
+                    ۲۴/۷</span></button>
+        </a>
+    </div>
+
+    <script src="assets/scripts.js"></script>
 
     <script>
-        // ---------- کتابخانه ابزارها با اطلاعات بصری ----------
+        // ========== ابزارهای محاسبه‌گر با اطلاعات کامل ==========
         const toolsData = {
             bmi: {
                 name: "شاخص توده بدنی (BMI)",
@@ -400,8 +353,7 @@
                 calculate: (vals) => {
                     let h = vals.height_cm / 100;
                     let bmi = vals.weight_kg / (h * h);
-                    let status = "";
-                    let range = "";
+                    let status = "", range = "";
                     if (bmi < 18.5) { status = "کمبود وزن 🍃"; range = "low"; }
                     else if (bmi < 25) { status = "وزن طبیعی ✅"; range = "normal"; }
                     else if (bmi < 30) { status = "اضافه وزن ⚠️"; range = "over"; }
@@ -418,7 +370,7 @@
                 }
             },
             bodyfat: {
-                name: "درصد چربی بدن",
+                name: "درصد چربی بدن (US Navy)",
                 icon: "fas fa-chart-line",
                 unit: "%",
                 inputs: [
@@ -451,10 +403,10 @@
                 info: "روش نیروی دریایی آمریکا (US Navy) با دقت بالا",
                 ranges: { min: 5, max: 45, normalMin: 14, normalMax: 28 },
                 advice: {
-                    low: "درصد چربی بسیار پایین. ممکن است به سیستم ایمنی فشار وارد شود. مشاوره تغذیه توصیه می‌شود.",
-                    normal: "درصد چربی در محدوده سالم. عملکرد بدنی مطلوب و سلامت قلبی-عروقی خوب است.",
-                    over: "چربی نسبتاً بالا. کاهش ۲-۵ درصد چربی می‌تواند بهبود چشمگیری در سلامت ایجاد کند.",
-                    high: "چربی بالا. خطر بیماری‌های متابولیک افزایش یافته. شروع برنامه ورزشی و رژیم ضروری است."
+                    low: "درصد چربی بسیار پایین. ممکن است به سیستم ایمنی فشار وارد شود.",
+                    normal: "درصد چربی در محدوده سالم. عملکرد بدنی مطلوب است.",
+                    over: "چربی نسبتاً بالا. کاهش ۲-۵ درصد چربی بهبود چشمگیری ایجاد می‌کند.",
+                    high: "چربی بالا. خطر بیماری‌های متابولیک افزایش یافته."
                 }
             },
             whtr: {
@@ -477,10 +429,10 @@
                 info: "نسبت کمتر از 0.5 نشان‌دهنده خطر کم بیماری‌های قلبی",
                 ranges: { min: 0.3, max: 0.7, normalMin: 0, normalMax: 0.5 },
                 advice: {
-                    excellent: "نسبت دور کمر به قد عالی! سلامت قلبی-عروقی در وضعیت مطلوب است.",
-                    normal: "نسبت مناسب. خطر بیماری‌های قلبی در محدوده قابل قبول است.",
-                    risk: "نسبت افزایش یافته. کاهش دور کمر با ورزش هوازی و رژیم توصیه می‌شود.",
-                    high: "نسبت بالا. خطر جدی بیماری‌های قلبی و متابولیک. مشاوره پزشکی ضروری است."
+                    excellent: "نسبت عالی! سلامت قلبی-عروقی در وضعیت مطلوب است.",
+                    normal: "نسبت مناسب. خطر بیماری‌ها قابل قبول است.",
+                    risk: "نسبت افزایش یافته. کاهش دور کمر با ورزش هوازی توصیه می‌شود.",
+                    high: "نسبت بالا. خطر جدی بیماری‌های قلبی."
                 }
             },
             lbm: {
@@ -489,18 +441,17 @@
                 unit: "kg",
                 inputs: [
                     { label: "وزن (کیلوگرم)", type: "number", id: "weight_lbm", default: 70, step: 1 },
-                    { label: "درصد چربی بدن", type: "number", id: "bodyfat_percent", default: 18, step: 1, min: 5, max: 45 }
+                    { label: "درصد چربی بدن", type: "number", id: "bodyfat_percent", default: 18, step: 1 }
                 ],
                 calculate: (vals) => {
                     let lbm = vals.weight_lbm * (1 - vals.bodyfat_percent / 100);
-                    let status = "توده عضلانی + استخوان + اعضا";
-                    return { value: lbm.toFixed(1), status, range: "normal" };
+                    return { value: lbm.toFixed(1), status: "توده عضلانی + استخوان", range: "normal" };
                 },
                 info: "LBM = وزن کل × (۱ - درصد چربی/۱۰۰)",
-                advice: { normal: "توده بدون چربی شما. برای افزایش توده عضلانی، تمرینات مقاومتی و پروتئین کافی مصرف کنید." }
+                advice: { normal: "برای افزایش توده عضلانی، تمرینات مقاومتی و پروتئین کافی مصرف کنید." }
             },
             bmr: {
-                name: "نرخ متابولیسم پایه (BMR)",
+                name: "متابولیسم پایه (BMR)",
                 icon: "fas fa-fire",
                 unit: "کالری/روز",
                 inputs: [
@@ -510,11 +461,13 @@
                     { label: "قد (سانتی‌متر)", type: "number", id: "height_bmr", default: 175, step: 1 }
                 ],
                 calculate: (vals) => {
-                    let bmr = (vals.gender_bmr === "مرد") ? (10 * vals.weight_bmr + 6.25 * vals.height_bmr - 5 * vals.age_bmr + 5) : (10 * vals.weight_bmr + 6.25 * vals.height_bmr - 5 * vals.age_bmr - 161);
-                    return { value: Math.round(bmr), status: "کالری مورد نیاز در حالت استراحت", range: "normal" };
+                    let bmr = (vals.gender_bmr === "مرد") ?
+                        (10 * vals.weight_bmr + 6.25 * vals.height_bmr - 5 * vals.age_bmr + 5) :
+                        (10 * vals.weight_bmr + 6.25 * vals.height_bmr - 5 * vals.age_bmr - 161);
+                    return { value: Math.round(bmr), status: "کالری در حالت استراحت", range: "normal" };
                 },
                 info: "معادله Mifflin-St Jeor (دقیق‌ترین روش)",
-                advice: { normal: "BMR میزان کالری مورد نیاز بدن برای عملکردهای پایه است. برای کاهش وزن، کالری دریافتی را کمتر از TDEE قرار دهید." }
+                advice: { normal: "BMR کالری مورد نیاز برای عملکردهای پایه است. برای کاهش وزن، کالری دریافتی را کمتر از TDEE قرار دهید." }
             },
             vo2max: {
                 name: "حداکثر اکسیژن مصرفی (VO₂max)",
@@ -528,11 +481,11 @@
                 calculate: (vals) => {
                     let age = vals.age_vo2, hr = vals.hr_rest, act = vals.activity_level;
                     let vo2 = 35;
-                    if (act === "کم تحرک") vo2 = 15.3 * (age/40) + 30;
+                    if (act === "کم تحرک") vo2 = 15.3 * (age / 40) + 30;
                     else if (act === "نیمه فعال") vo2 = 35 + (60 - age) * 0.2;
                     else if (act === "فعال") vo2 = 42 + (55 - age) * 0.25;
                     else vo2 = 52 + (50 - age) * 0.3;
-                    vo2 = Math.max(25, Math.min(vo2 + (hr<65 ? 3 : (hr>80 ? -2 : 0)), 65));
+                    vo2 = Math.max(25, Math.min(vo2 + (hr < 65 ? 3 : (hr > 80 ? -2 : 0)), 65));
                     let status = "", range = "";
                     if (vo2 < 35) { status = "ضعیف"; range = "poor"; }
                     else if (vo2 < 45) { status = "متوسط"; range = "average"; }
@@ -543,8 +496,8 @@
                 info: "تخمین غیرمستقیم بر اساس سطح فعالیت",
                 ranges: { min: 25, max: 65, normalMin: 35, normalMax: 55 },
                 advice: {
-                    poor: "آمادگی قلبی-تنفسی پایین است. شروع با پیاده روی تند و دوچرخه ثابت توصیه می‌شود.",
-                    average: "آمادگی متوسط. با افزایش تدریجی شدت تمرینات، VO₂max بهبود می‌یابد.",
+                    poor: "آمادگی قلبی-تنفسی پایین. شروع با پیاده روی تند توصیه می‌شود.",
+                    average: "آمادگی متوسط. با افزایش تدریجی شدت تمرینات بهبود می‌یابد.",
                     good: "آمادگی خوب. تمرینات اینتروال می‌تواند شما را به سطح عالی برساند.",
                     excellent: "آمادگی عالی! تداوم برنامه تمرینی فعلی را حفظ کنید."
                 }
@@ -579,23 +532,15 @@
             window.history.pushState({ cat: catId }, '', newUrl);
         }
 
-        function goToHome() {
-            window.location.href = 'main-page.html';
-        }
-
         function renderCategoryList() {
             const app = document.getElementById('appRoot');
             app.innerHTML = `
-                <div class="home-btn" id="homePageBtn">
-                    <i class="fas fa-home"></i> صفحه اصلی سایت
-                </div>
-                <div class="hero-glass">
-                    <h1><i class="fas fa-calculator"></i> ماشین حساب پیشرفته ترکیب بدن</h1>
-                    <p>محاسبات دقیق علمی | BMI · درصد چربی · BMR · VO₂max · کالری مصرفی و بیشتر</p>
+                <div class="calculators-hero">
+                    <h1><i class="fas fa-calculator"></i> محاسبه‌گر هوشمند ترکیب بدن</h1>
+                    <p>ابزارهای پیشرفته برای اندازه‌گیری شاخص‌های سلامتی، تناسب اندام و عملکرد ورزشی</p>
                 </div>
                 <div class="tools-grid" id="toolsGrid"></div>
             `;
-            document.getElementById('homePageBtn').addEventListener('click', goToHome);
             const grid = document.getElementById('toolsGrid');
             Object.entries(toolsData).forEach(([id, tool]) => {
                 const card = createToolCard(id, tool);
@@ -611,7 +556,7 @@
             const app = document.getElementById('appRoot');
             app.innerHTML = `
                 <div class="single-tool-wrapper">
-                    <div class="back-btn" id="backToListBtn">
+                    <div class="back-nav" id="backToListBtn">
                         <i class="fas fa-arrow-right"></i> بازگشت به لیست تمام ابزارها
                     </div>
                     <div id="singleToolContainer"></div>
@@ -632,7 +577,7 @@
             const card = document.createElement('div');
             card.className = 'tool-card';
             card.setAttribute('data-tool-id', id);
-            
+
             let inputsHtml = '';
             tool.inputs.forEach(inp => {
                 if (inp.type === 'select') {
@@ -642,23 +587,22 @@
                     inputsHtml += `<div class="input-group"><label>${inp.label}</label><input type="number" id="${id}_${inp.id}" data-tool="${id}" value="${inp.default}" step="${inp.step || 1}" min="${inp.min || 0}" max="${inp.max || ''}"></div>`;
                 }
             });
-            
+
             card.innerHTML = `
                 <div class="tool-title"><i class="${tool.icon}"></i> ${tool.name}</div>
                 <div class="inputs-area">${inputsHtml}</div>
-                <div class="result-area" id="result_${id}">
-                    <span class="result-value">---</span> <span>${tool.unit || ''}</span>
+                <div class="result-area">
+                    <span class="result-value" id="resultVal_${id}">---</span> <span class="result-unit">${tool.unit || ''}</span>
                     <div class="status-badge" id="status_${id}">-</div>
                 </div>
-                <div class="chart-container" id="chart_${id}"><canvas id="canvas_${id}" width="130" height="120" class="small-canvas"></canvas></div>
-                <div class="info-section" id="info_${id}">
-                    <div class="info-title"><i class="fas fa-chart-simple"></i> وضعیت بصری</div>
-                    <div class="visual-range" id="visualRange_${id}">
-                        <div class="visual-fill" id="visualFill_${id}" style="width: 0%; background: linear-gradient(90deg, #4ecdc4, #ff6b6b);"></div>
-                    </div>
-                    <div class="range-labels" id="rangeLabels_${id}"></div>
-                    <div class="advice-text" id="advice_${id}"></div>
+                <div class="chart-container">
+                    <canvas id="canvas_${id}" width="130" height="120" class="small-canvas"></canvas>
                 </div>
+                <div class="visual-range" id="visualRange_${id}">
+                    <div class="visual-fill" id="visualFill_${id}" style="width: 0%;"></div>
+                </div>
+                <div class="range-labels" id="rangeLabels_${id}"></div>
+                <div class="advice-text" id="advice_${id}"></div>
                 <div class="info-note"><i class="fas fa-info-circle"></i> ${tool.info}</div>
             `;
             return card;
@@ -667,7 +611,6 @@
         function attachToolEvents(card, toolId) {
             const inputs = card.querySelectorAll('input, select');
             inputs.forEach(inp => {
-                inp.removeEventListener('input', () => updateTool(toolId));
                 inp.addEventListener('input', () => updateTool(toolId));
             });
         }
@@ -675,7 +618,7 @@
         function updateTool(toolId) {
             const tool = toolsData[toolId];
             if (!tool) return;
-            
+
             const values = {};
             tool.inputs.forEach(inp => {
                 const el = document.getElementById(`${toolId}_${inp.id}`);
@@ -684,57 +627,42 @@
                     else values[inp.id] = el.value;
                 }
             });
-            
-            const result = tool.calculate(values);
-            const resultDiv = document.getElementById(`result_${toolId}`);
-            if (resultDiv) {
-                const valSpan = resultDiv.querySelector('.result-value');
-                if (valSpan) valSpan.innerText = result.value;
-                const statusSpan = document.getElementById(`status_${toolId}`);
-                if (statusSpan) {
-                    statusSpan.innerText = result.status;
-                    let bgColor = result.range === 'normal' ? 'rgba(72,187,120,0.8)' : (result.range === 'over' || result.range === 'risk' ? 'rgba(237,137,54,0.8)' : 'rgba(220,53,69,0.8)');
-                    if (result.range === 'excellent' || result.range === 'good') bgColor = 'rgba(72,187,120,0.8)';
-                    statusSpan.style.background = bgColor;
-                }
-            }
-            
-            renderMiniChart(toolId, result);
-            updateVisualInfo(toolId, tool, result);
-        }
 
-        function updateVisualInfo(toolId, tool, result) {
-            const fillDiv = document.getElementById(`visualFill_${toolId}`);
-            const labelsDiv = document.getElementById(`rangeLabels_${toolId}`);
-            const adviceDiv = document.getElementById(`advice_${toolId}`);
-            
-            if (!fillDiv) return;
-            
+            const result = tool.calculate(values);
+            const resultSpan = document.getElementById(`resultVal_${toolId}`);
+            if (resultSpan) resultSpan.innerText = result.value;
+            const statusSpan = document.getElementById(`status_${toolId}`);
+            if (statusSpan) statusSpan.innerText = result.status;
+
+            // آپدیت نمودار دایره‌ای
+            updateMiniChart(toolId, result.value);
+
+            // آپدیت نوار وضعیت
             let percent = 0;
-            let val = parseFloat(result.value);
             if (tool.ranges) {
+                let val = parseFloat(result.value);
                 percent = ((val - tool.ranges.min) / (tool.ranges.max - tool.ranges.min)) * 100;
                 percent = Math.min(100, Math.max(0, percent));
-                fillDiv.style.width = `${percent}%`;
-                
+                const fillDiv = document.getElementById(`visualFill_${toolId}`);
+                if (fillDiv) fillDiv.style.width = `${percent}%`;
+                const labelsDiv = document.getElementById(`rangeLabels_${toolId}`);
                 if (labelsDiv) {
                     labelsDiv.innerHTML = `<span>${tool.ranges.min}</span><span>محدوده هدف: ${tool.ranges.normalMin} - ${tool.ranges.normalMax}</span><span>${tool.ranges.max}</span>`;
                 }
             }
-            
+
+            // توصیه
+            const adviceDiv = document.getElementById(`advice_${toolId}`);
             if (adviceDiv && tool.advice) {
                 if (result.range && tool.advice[result.range]) adviceDiv.innerText = tool.advice[result.range];
                 else if (tool.advice.normal) adviceDiv.innerText = tool.advice.normal;
-                else adviceDiv.innerText = "برای اطلاعات بیشتر با متخصص مشورت کنید.";
             }
         }
 
-        function renderMiniChart(toolId, result) {
+        function updateMiniChart(toolId, value) {
             const canvas = document.getElementById(`canvas_${toolId}`);
             if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let val = parseFloat(result.value);
-            if (isNaN(val)) val = 0;
+            const val = parseFloat(value) || 0;
             let percent = 0;
             if (toolId === 'bmi') percent = Math.min(100, (val / 40) * 100);
             else if (toolId === 'bodyfat') percent = Math.min(100, val);
@@ -743,24 +671,26 @@
             else if (toolId === 'bmr' || toolId === 'tdee') percent = Math.min(100, (val / 3500) * 100);
             else if (toolId === 'vo2max') percent = Math.min(100, (val / 65) * 100);
             else percent = 50;
-            
+
             if (activeCharts[toolId]) activeCharts[toolId].destroy();
+            const ctx = canvas.getContext('2d');
             activeCharts[toolId] = new Chart(ctx, {
                 type: 'doughnut',
-                data: { datasets: [{ data: [percent, 100 - percent], backgroundColor: ['#4ecdc4', 'rgba(255,255,255,0.2)'], borderWidth: 0, cutout: '68%' }] },
+                data: { datasets: [{ data: [percent, 100 - percent], backgroundColor: ['#4ecdc4', 'rgba(255,255,255,0.15)'], borderWidth: 0, cutout: '68%' }] },
                 options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false }, tooltip: { enabled: false } } }
             });
             setTimeout(() => {
                 if (activeCharts[toolId] && activeCharts[toolId].ctx) {
-                    activeCharts[toolId].ctx.font = 'bold 14px Inter';
-                    activeCharts[toolId].ctx.fillStyle = '#ffffff';
+                    activeCharts[toolId].ctx.font = 'bold 14px Vazirmatn';
+                    activeCharts[toolId].ctx.fillStyle = 'var(--text-primary)';
                     activeCharts[toolId].ctx.textAlign = 'center';
                     activeCharts[toolId].ctx.textBaseline = 'middle';
-                    activeCharts[toolId].ctx.fillText(result.value, canvas.width/2, canvas.height/2);
+                    activeCharts[toolId].ctx.fillText(value, canvas.width / 2, canvas.height / 2);
                 }
             }, 70);
         }
 
+        // مدیریت مسیر و رندر اولیه
         window.addEventListener('popstate', () => {
             const cat = getCategoryFromURL();
             if (cat && toolsData[cat]) renderSingleTool(cat);
@@ -775,4 +705,5 @@
         init();
     </script>
 </body>
+
 </html>

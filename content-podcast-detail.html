@@ -1,127 +1,47 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>GAMva | پادکست تخصصی ورزش</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>پادکست GAMva | صدای تخصصی سلامت و ورزش</title>
+
+    <!-- فونت وزیرمتن و آیکون‌ها -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- استایل اصلی پروژه -->
+    <link rel="stylesheet" href="assets/style.css">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* تنظیمات اختصاصی صفحه پادکست - کاملاً هماهنگ با تم GAMva */
+        .podcast-hero {
+            margin: 1rem 0 2rem;
         }
 
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            background: linear-gradient(145deg, #f5f7fc 0%, #eef2f8 100%);
-            color: #1a2c3e;
-            overflow-x: hidden;
-        }
-
-        /* پس‌زمینه */
-        .global-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            overflow: hidden;
-        }
-
-        .global-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: blur(22px) brightness(0.55) saturate(1.2);
-            transform: scale(1.08);
-        }
-
-        .global-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.15) 100%);
-            backdrop-filter: blur(3px);
-            z-index: -1;
-        }
-
-        /* هدر */
-        .main-header {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(78, 205, 196, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 16px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-
-        .logo h1 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #1E3C72, #2A5298);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .home-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(30, 60, 114, 0.1);
-            padding: 10px 22px;
-            border-radius: 40px;
-            text-decoration: none;
-            color: #1E3C72;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .home-link:hover {
-            background: #1E3C72;
-            color: white;
-            transform: translateX(-5px);
-        }
-
-        /* کانتینر اصلی */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 24px 60px;
-        }
-
-        /* ========== پخش‌کننده پادکست ========== */
+        /* کارت پخش‌کننده شیشه‌ای */
         .podcast-player {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(16px);
-            border-radius: 48px;
-            padding: 32px;
-            margin-bottom: 40px;
-            border: 1px solid rgba(78, 205, 196, 0.25);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            background: var(--bg-glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            transition: var(--transition-base);
+        }
+
+        .podcast-player:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-glow);
         }
 
         .podcast-header {
             display: flex;
-            gap: 28px;
+            gap: 2rem;
             flex-wrap: wrap;
-            margin-bottom: 28px;
+            margin-bottom: 2rem;
         }
 
         .podcast-cover {
@@ -131,10 +51,10 @@
         .podcast-cover img {
             width: 180px;
             height: 180px;
-            border-radius: 32px;
+            border-radius: var(--radius-lg);
             object-fit: cover;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            border: 3px solid rgba(78, 205, 196, 0.3);
+            border: 2px solid var(--secondary);
+            box-shadow: var(--shadow-lg);
         }
 
         .podcast-info {
@@ -144,196 +64,199 @@
         .podcast-badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(78, 205, 196, 0.12);
-            padding: 4px 14px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: #4ecdc4;
-            margin-bottom: 12px;
+            gap: 0.5rem;
+            background: var(--bg-glass-light);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-full);
+            padding: 0.3rem 1rem;
+            font-size: var(--font-xs);
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 1rem;
         }
 
         .podcast-title {
             font-size: 1.8rem;
             font-weight: 800;
-            margin-bottom: 12px;
-            color: #1a2c3e;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
         }
 
         .podcast-author {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-            color: #6c8db0;
-            font-size: 0.9rem;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
         }
 
         .podcast-author img {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             object-fit: cover;
+            border: 1px solid var(--secondary);
+        }
+
+        .podcast-author span {
+            color: var(--text-muted);
+            font-size: var(--font-sm);
         }
 
         .podcast-desc {
-            color: #4a627a;
-            line-height: 1.6;
-            font-size: 0.9rem;
-            margin-bottom: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
         }
 
         .podcast-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 16px;
+            gap: 1.5rem;
+            margin-top: 0.8rem;
         }
 
         .meta-item {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.8rem;
-            color: #8ca3c0;
+            gap: 0.4rem;
+            font-size: var(--font-sm);
+            color: var(--text-muted);
         }
 
         .meta-item i {
-            color: #4ecdc4;
+            color: var(--secondary);
         }
 
-        /* پلیر صوتی اختصاصی */
+        /* پلیر صوتی پیشرفته */
         .audio-player {
-            background: linear-gradient(135deg, rgba(30, 60, 114, 0.05), rgba(78, 205, 196, 0.05));
-            border-radius: 40px;
-            padding: 24px;
-            margin: 24px 0;
+            background: var(--bg-glass-light);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-glass);
         }
 
         .player-controls {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 24px;
-            margin-bottom: 20px;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .control-btn {
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: white;
-            border: none;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
             cursor: pointer;
-            font-size: 1.2rem;
-            color: #1E3C72;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: var(--transition-base);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
         }
 
         .control-btn:hover {
-            background: #4ecdc4;
+            background: var(--primary);
             color: white;
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         .play-btn {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #1E3C72, #2A5298);
+            width: 64px;
+            height: 64px;
+            background: var(--gradient-primary);
             color: white;
+            border: none;
+            box-shadow: var(--shadow-glow);
         }
 
         .progress-area {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 1rem;
             flex-wrap: wrap;
         }
 
         .progress-bar {
             flex: 1;
             height: 6px;
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+            background: var(--bg-glass-light);
+            border-radius: var(--radius-full);
             cursor: pointer;
             position: relative;
+            overflow: hidden;
         }
 
         .progress-fill {
             width: 0%;
             height: 100%;
-            background: linear-gradient(90deg, #4ecdc4, #1E3C72);
-            border-radius: 10px;
-            position: relative;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+            transition: width 0.1s linear;
         }
 
-        .time-current, .time-duration {
-            font-size: 0.8rem;
-            color: #6c8db0;
-            min-width: 45px;
+        .time-current,
+        .time-duration {
+            font-size: var(--font-sm);
+            color: var(--text-muted);
+            min-width: 50px;
         }
 
         .player-actions {
             display: flex;
-            gap: 16px;
-            margin-top: 20px;
+            gap: 1rem;
             justify-content: center;
+            margin-top: 1.5rem;
         }
 
         .action-btn {
             display: flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(78, 205, 196, 0.2);
-            padding: 8px 20px;
-            border-radius: 40px;
-            font-size: 0.8rem;
+            gap: 0.5rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            padding: 0.5rem 1.2rem;
+            border-radius: var(--radius-full);
+            font-size: var(--font-sm);
             cursor: pointer;
-            transition: 0.2s;
-            color: #2c3e66;
+            transition: var(--transition-base);
+            color: var(--text-primary);
         }
 
         .action-btn:hover {
-            background: #4ecdc4;
+            background: var(--gradient-primary);
             color: white;
-            border-color: #4ecdc4;
+            border-color: transparent;
+            transform: translateY(-2px);
         }
 
-        /* تب‌ها */
+        /* تب‌های محتوا */
         .tabs {
             display: flex;
-            gap: 16px;
-            margin-bottom: 28px;
-            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 0.5rem;
         }
 
         .tab-btn {
-            padding: 12px 24px;
-            background: none;
+            background: transparent;
             border: none;
+            padding: 0.6rem 1.5rem;
             font-family: inherit;
             font-weight: 600;
             cursor: pointer;
-            color: #8ca3c0;
-            transition: 0.2s;
-            position: relative;
+            border-radius: var(--radius-full);
+            transition: var(--transition-base);
+            color: var(--text-muted);
         }
 
         .tab-btn.active {
-            color: #4ecdc4;
-        }
-
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            right: 0;
-            width: 100%;
-            height: 2px;
-            background: #4ecdc4;
+            background: var(--gradient-primary);
+            color: white;
         }
 
         .tab-content {
@@ -346,39 +269,46 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* لیست اپیزودها */
         .episodes-list {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 1rem;
         }
 
         .episode-item {
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding: 16px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 24px;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-glass-light);
+            border-radius: var(--radius-lg);
             cursor: pointer;
-            transition: 0.2s;
-            border: 1px solid rgba(0, 0, 0, 0.03);
+            transition: var(--transition-base);
+            border: 1px solid var(--border-glass);
         }
 
         .episode-item:hover {
-            background: white;
             transform: translateX(-5px);
-            border-color: rgba(78, 205, 196, 0.3);
+            border-color: var(--secondary);
+            background: var(--bg-glass);
         }
 
         .episode-cover {
             width: 60px;
             height: 60px;
-            border-radius: 16px;
+            border-radius: var(--radius-md);
             object-fit: cover;
         }
 
@@ -388,46 +318,47 @@
 
         .episode-title {
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 0.2rem;
+            color: var(--text-primary);
         }
 
         .episode-duration {
-            font-size: 0.7rem;
-            color: #8ca3c0;
+            font-size: var(--font-xs);
+            color: var(--text-muted);
         }
 
         .play-episode-btn {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
-            background: #f0f4f9;
-            border: none;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
             cursor: pointer;
-            transition: 0.2s;
+            transition: var(--transition-base);
         }
 
         .play-episode-btn:hover {
-            background: #4ecdc4;
+            background: var(--secondary);
             color: white;
         }
 
         /* نظرات */
         .comments-section {
-            margin-top: 32px;
+            margin-top: 0;
         }
 
         .comment-item {
             display: flex;
-            gap: 16px;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            gap: 1rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--border-glass);
         }
 
         .comment-avatar {
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #4ecdc4, #2c7a9e);
+            background: var(--gradient-primary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -442,43 +373,55 @@
 
         .comment-author {
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 0.2rem;
+            color: var(--text-primary);
         }
 
         .comment-date {
-            font-size: 0.7rem;
-            color: #8ca3c0;
-            margin-bottom: 8px;
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
         }
 
         .comment-text {
-            color: #4a627a;
-            line-height: 1.5;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
         .add-comment {
-            margin-top: 24px;
             display: flex;
-            gap: 12px;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
 
         .add-comment input {
             flex: 1;
-            padding: 14px 18px;
-            border-radius: 40px;
-            border: 1px solid #cfdfed;
-            background: rgba(255,255,255,0.9);
-            font-family: inherit;
+            padding: 0.8rem 1rem;
+            background: var(--bg-glass-light);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-full);
+            color: var(--text-primary);
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .add-comment input:focus {
+            outline: none;
+            border-color: var(--primary);
         }
 
         .add-comment button {
-            background: linear-gradient(135deg, #1E3C72, #2A5298);
+            background: var(--gradient-primary);
             border: none;
-            padding: 14px 28px;
-            border-radius: 40px;
+            padding: 0.8rem 1.8rem;
+            border-radius: var(--radius-full);
             color: white;
             font-weight: 600;
             cursor: pointer;
+            transition: var(--transition-base);
+        }
+
+        .add-comment button:hover {
+            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
@@ -486,344 +429,435 @@
                 flex-direction: column;
                 text-align: center;
             }
+
             .podcast-cover {
                 display: flex;
                 justify-content: center;
             }
+
             .podcast-author {
                 justify-content: center;
             }
+
             .podcast-meta {
                 justify-content: center;
             }
-            .episode-item {
-                flex-wrap: wrap;
-            }
+
             .player-controls {
-                gap: 12px;
+                gap: 1rem;
             }
+
             .control-btn {
                 width: 40px;
                 height: 40px;
-                font-size: 1rem;
             }
+
             .play-btn {
-                width: 52px;
-                height: 52px;
+                width: 54px;
+                height: 54px;
+            }
+
+            .episode-item {
+                flex-wrap: wrap;
             }
         }
     </style>
 </head>
-<body>
 
-<div class="global-bg">
-    <img src="assets/img/skate-park-with-ramps-in-tropical-city.jpg" alt="GAMva">
-</div>
-<div class="global-overlay"></div>
+<body data-theme="light">
+    <!-- پس‌زمینه بلور متحرک -->
+    <div class="dynamic-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
 
-<div class="main-header">
-    <div class="header-inner">
-        <div class="logo">
-            <h1><i class="fas fa-podcast"></i> GAMva | پادکست</h1>
+    <!-- هدر شیشه‌ای یکسان با صفحه اصلی -->
+    <header class="glass-header">
+        <div class="logo" onclick="window.location.href='main-page.html'">
+            <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+            <div class="logo-text-container">
+                <span class="logo-val">lueva <span class="logo-gam">GAM</span></span>
+            </div>
         </div>
-        <a href="main-page.html" class="home-link">
-            <i class="fas fa-home"></i> صفحه اصلی
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun"></i>
+            </button>
+            <div class="action-icon" onclick="window.location.href='main-page.html'">
+                <i class="fas fa-home"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="podcast-hero fade-up">
+            <!-- کارت پخش‌کننده اصلی -->
+            <div class="podcast-player">
+                <div class="podcast-header">
+                    <div class="podcast-cover">
+                        <img src="assets/img/stoke/download (1).jpg" alt="کاور پادکست GAMva">
+                    </div>
+                    <div class="podcast-info">
+                        <div class="podcast-badge">
+                            <i class="fas fa-microphone-alt"></i> اپیزود جدید
+                        </div>
+                        <h1 class="podcast-title" id="currentTitle">رازهای تغذیه ورزشکاران حرفه‌ای</h1>
+                        <div class="podcast-author">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="دکتر محمد رضایی">
+                            <span>دکتر محمد رضایی | متخصص تغذیه ورزشی</span>
+                        </div>
+                        <p class="podcast-desc" id="currentDesc">
+                            در این اپیزود به بررسی رازهای تغذیه ورزشکاران حرفه‌ای می‌پردازیم.
+                            چه بخوریم تا بهترین عملکرد را داشته باشیم؟ چه مکمل‌هایی واقعاً مؤثر هستند؟
+                        </p>
+                        <div class="podcast-meta">
+                            <div class="meta-item"><i class="fas fa-clock"></i> ۴۵ دقیقه</div>
+                            <div class="meta-item"><i class="fas fa-calendar"></i> ۱۴۰۳/۱۰/۱۵</div>
+                            <div class="meta-item"><i class="fas fa-headphones"></i> ۲,۳۴۰ بار پخش</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- پلیر صوتی پیشرفته -->
+                <div class="audio-player">
+                    <div class="player-controls">
+                        <button class="control-btn" id="prevBtn"><i class="fas fa-backward-step"></i></button>
+                        <button class="control-btn play-btn" id="playPauseBtn"><i class="fas fa-play"></i></button>
+                        <button class="control-btn" id="nextBtn"><i class="fas fa-forward-step"></i></button>
+                    </div>
+                    <div class="progress-area">
+                        <span class="time-current" id="currentTime">00:00</span>
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <span class="time-duration" id="duration">00:00</span>
+                    </div>
+                    <div class="player-actions">
+                        <button class="action-btn" id="downloadBtn"><i class="fas fa-download"></i> دانلود</button>
+                        <button class="action-btn" id="shareBtn"><i class="fas fa-share-alt"></i> اشتراک‌گذاری</button>
+                        <button class="action-btn" id="likePodcastBtn"><i class="fas fa-heart"></i> <span
+                                id="likeCount">۱۲۴</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تب‌های محتوا -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="episodes">🎙️ اپیزودها</button>
+                <button class="tab-btn" data-tab="transcript">📄 متن اپیزود</button>
+                <button class="tab-btn" data-tab="comments">💬 نظرات (۲۴)</button>
+            </div>
+
+            <!-- تب اپیزودها -->
+            <div class="tab-content active" id="episodesTab">
+                <div class="episodes-list" id="episodesList"></div>
+            </div>
+
+            <!-- تب متن اپیزود -->
+            <div class="tab-content" id="transcriptTab">
+                <div class="podcast-player" style="margin-bottom:0; padding:1.8rem;">
+                    <h3 style="margin-bottom:1rem; color:var(--text-primary);"><i class="fas fa-file-alt"></i> متن کامل
+                        اپیزود</h3>
+                    <p style="line-height:1.8; color:var(--text-secondary);" id="transcriptText">
+                        سلام به همه شما ورزشکاران عزیز! امروز می‌خواهیم درباره رازهای تغذیه ورزشکاران حرفه‌ای صحبت
+                        کنیم...
+                    </p>
+                </div>
+            </div>
+
+            <!-- تب نظرات -->
+            <div class="tab-content" id="commentsTab">
+                <div class="comments-section" id="commentsSection">
+                    <!-- نظرات داینامیک -->
+                </div>
+                <div class="add-comment">
+                    <input type="text" id="commentInput" placeholder="نظر خود را بنویسید...">
+                    <button id="submitComment">ارسال نظر</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">GAMva</div>
+                    <p class="footer-text">اکوسیستم هوشمند سلامت و توسعه فردی با قدرت هوش مصنوعی.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">پادکست GAMva</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> همه اپیزودها</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> درباره پادکست</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> دعوت به همکاری</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">پشتیبانی</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> سوالات متداول</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© ۲۰۲۵ GAMva · صدای تخصصی سلامت و ورزش</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ویجت پشتیبانی -->
+    <div class="support-widget">
+        <a href="telegram_user.html">
+            <button class="support-btn"><i class="fas fa-headset"></i><span class="support-tooltip">پشتیبانی
+                    ۲۴/۷</span></button>
         </a>
     </div>
-</div>
 
-<div class="container">
-    <!-- پخش‌کننده اصلی -->
-    <div class="podcast-player">
-        <div class="podcast-header">
-            <div class="podcast-cover">
-                <img src="assets/img/skate-park-with-ramps-in-tropical-city.jpg" alt="کاور پادکست">
-            </div>
-            <div class="podcast-info">
-                <div class="podcast-badge">
-                    <i class="fas fa-microphone-alt"></i> اپیزود جدید
-                </div>
-                <h1 class="podcast-title" id="currentTitle">رازهای تغذیه ورزشکاران حرفه‌ای</h1>
-                <div class="podcast-author">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="مربی">
-                    <span>دکتر محمد رضایی | متخصص تغذیه ورزشی</span>
-                </div>
-                <p class="podcast-desc" id="currentDesc">
-                    در این اپیزود به بررسی رازهای تغذیه ورزشکاران حرفه‌ای می‌پردازیم. 
-                    چه بخوریم تا بهترین عملکرد را داشته باشیم؟ چه مکمل‌هایی واقعاً مؤثر هستند؟
-                </p>
-                <div class="podcast-meta">
-                    <div class="meta-item"><i class="fas fa-clock"></i> ۴۵ دقیقه</div>
-                    <div class="meta-item"><i class="fas fa-calendar"></i> ۱۴۰۳/۱۰/۱۵</div>
-                    <div class="meta-item"><i class="fas fa-headphones"></i> ۲,۳۴۰ بار پخش</div>
-                </div>
-            </div>
-        </div>
+    <script src="assets/scripts.js"></script>
+    <script>
+        (function () {
+            // ========== داده‌های اپیزودها ==========
+            const episodes = [
+                { id: 1, title: "رازهای تغذیه ورزشکاران حرفه‌ای", desc: "در این اپیزود به بررسی رازهای تغذیه ورزشکاران حرفه‌ای می‌پردازیم.", duration: "45:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", cover: "assets/img/stoke/download (1).jpg", transcript: "سلام به همه شما ورزشکاران عزیز! امروز می‌خواهیم درباره رازهای تغذیه ورزشکاران حرفه‌ای صحبت کنیم. یکی از مهم‌ترین سوالاتی که همیشه برای ورزشکاران پیش می‌آید این است که چه بخوریم تا بهترین عملکرد را داشته باشیم؟ در این اپیزود به بررسی دقیق این موضوع می‌پردازیم..." },
+                { id: 2, title: "اهمیت ریکاوری در ورزش", desc: "چرا استراحت به اندازه تمرین مهم است؟", duration: "38:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", cover: "assets/img/stoke/download (2).jpg", transcript: "ریکاوری یکی از مهم‌ترین ارکان پیشرفت ورزشی است. بدون استراحت کافی، عضلات فرصت ترمیم ندارند و خطر آسیب افزایش می‌یابد..." },
+                { id: 3, title: "تمرینات هوازی یا قدرتی؟", desc: "کدام نوع تمرین برای شما مناسب‌تر است؟", duration: "52:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", cover: "assets/img/stoke/download (3).jpg", transcript: "بسیاری از ورزشکاران بین تمرینات هوازی و قدرتی سردرگم می‌شوند. در این اپیزود تفاوت‌ها و بهترین ترکیب را بررسی می‌کنیم..." },
+                { id: 4, title: "مکمل‌های ضروری برای ورزشکاران", desc: "کدام مکمل‌ها واقعاً مؤثر هستند؟", duration: "41:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3", cover: "assets/img/stoke/download (4).jpg", transcript: "دنیای مکمل‌ها پر از ادعاهای بزرگ است. در این اپیزود با رویکرد علمی، مؤثرترین مکمل‌ها را معرفی می‌کنیم..." }
+            ];
 
-        <!-- پلیر صوتی اختصاصی -->
-        <div class="audio-player">
-            <div class="player-controls">
-                <button class="control-btn" id="prevBtn"><i class="fas fa-backward-step"></i></button>
-                <button class="control-btn play-btn" id="playPauseBtn"><i class="fas fa-play"></i></button>
-                <button class="control-btn" id="nextBtn"><i class="fas fa-forward-step"></i></button>
-            </div>
-            <div class="progress-area">
-                <span class="time-current" id="currentTime">00:00</span>
-                <div class="progress-bar" id="progressBar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                <span class="time-duration" id="duration">00:00</span>
-            </div>
-            <div class="player-actions">
-                <button class="action-btn" id="downloadBtn"><i class="fas fa-download"></i> دانلود</button>
-                <button class="action-btn" id="shareBtn"><i class="fas fa-share-alt"></i> اشتراک‌گذاری</button>
-                <button class="action-btn" id="likePodcastBtn"><i class="fas fa-heart"></i> <span id="likeCount">۱۲۴</span></button>
-            </div>
-        </div>
-    </div>
+            // ========== نظرات نمونه ==========
+            let comments = [
+                { author: "علی محمدی", avatar: "ع", date: "۱۴۰۳/۱۰/۱۴", text: "پادکست فوق‌العاده‌ای بود! خیلی استفاده کردم. ممنون از تیم GAMva" },
+                { author: "سارا احمدی", avatar: "س", date: "۱۴۰۳/۱۰/۱۲", text: "لطفاً اپیزود بعدی رو درباره تمرینات اصلاحی بذارید. ممنون" }
+            ];
 
-    <!-- تب‌ها -->
-    <div class="tabs">
-        <button class="tab-btn active" data-tab="episodes">🎙️ اپیزودها</button>
-        <button class="tab-btn" data-tab="transcript">📄 متن اپیزود</button>
-        <button class="tab-btn" data-tab="comments">💬 نظرات (۲۴)</button>
-    </div>
+            // ========== متغیرهای پلیر ==========
+            let audio = new Audio();
+            let isPlaying = false;
+            let currentEpisodeIndex = 0;
 
-    <!-- محتوای تب اپیزودها -->
-    <div class="tab-content active" id="episodesTab">
-        <div class="episodes-list">
-            <div class="episode-item" data-id="1" data-title="رازهای تغذیه ورزشکاران حرفه‌ای" data-desc="در این اپیزود به بررسی رازهای تغذیه ورزشکاران حرفه‌ای می‌پردازیم." data-duration="45:00">
-                <img src="assets/img/skate-park-with-ramps-in-tropical-city.jpg" alt="اپیزود ۱" class="episode-cover">
-                <div class="episode-info">
-                    <div class="episode-title">۱. رازهای تغذیه ورزشکاران حرفه‌ای</div>
-                    <div class="episode-duration">⏱️ ۴۵ دقیقه • ۱۴۰۳/۱۰/۱۵</div>
-                </div>
-                <button class="play-episode-btn"><i class="fas fa-play"></i></button>
-            </div>
-            <div class="episode-item" data-id="2" data-title="اهمیت ریکاوری در ورزش" data-desc="چرا استراحت به اندازه تمرین مهم است؟" data-duration="38:00">
-                <img src="assets/img/skate-park-with-ramps-in-tropical-city.jpg" alt="اپیزود ۲" class="episode-cover">
-                <div class="episode-info">
-                    <div class="episode-title">۲. اهمیت ریکاوری در ورزش</div>
-                    <div class="episode-duration">⏱️ ۳۸ دقیقه • ۱۴۰۳/۱۰/۰۸</div>
-                </div>
-                <button class="play-episode-btn"><i class="fas fa-play"></i></button>
-            </div>
-            <div class="episode-item" data-id="3" data-title="تمرینات هوازی یا قدرتی؟" data-desc="کدام نوع تمرین برای شما مناسب‌تر است؟" data-duration="52:00">
-                <img src="assets/img/skate-park-with-ramps-in-tropical-city.jpg" alt="اپیزود ۳" class="episode-cover">
-                <div class="episode-info">
-                    <div class="episode-title">۳. تمرینات هوازی یا قدرتی؟</div>
-                    <div class="episode-duration">⏱️ ۵۲ دقیقه • ۱۴۰۳/۱۰/۰۱</div>
-                </div>
-                <button class="play-episode-btn"><i class="fas fa-play"></i></button>
-            </div>
-            <div class="episode-item" data-id="4" data-title="مکمل‌های ضروری برای ورزشکاران" data-desc="کدام مکمل‌ها واقعاً مؤثر هستند؟" data-duration="41:00">
-                <img src="assets/img/skate-park-with-ramps-in-tropical-city.jpg" alt="اپیزود ۴" class="episode-cover">
-                <div class="episode-info">
-                    <div class="episode-title">۴. مکمل‌های ضروری برای ورزشکاران</div>
-                    <div class="episode-duration">⏱️ ۴۱ دقیقه • ۱۴۰۳/۰۹/۲۴</div>
-                </div>
-                <button class="play-episode-btn"><i class="fas fa-play"></i></button>
-            </div>
-        </div>
-    </div>
+            // DOM elements
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
+            const currentTimeSpan = document.getElementById('currentTime');
+            const durationSpan = document.getElementById('duration');
+            const currentTitle = document.getElementById('currentTitle');
+            const currentDesc = document.getElementById('currentDesc');
+            const transcriptText = document.getElementById('transcriptText');
+            const episodesList = document.getElementById('episodesList');
+            const commentsSection = document.getElementById('commentsSection');
 
-    <!-- محتوای تب متن اپیزود -->
-    <div class="tab-content" id="transcriptTab">
-        <div class="podcast-player" style="margin-bottom:0;">
-            <h3 style="margin-bottom:16px;">📝 متن کامل اپیزود</h3>
-            <p style="line-height:1.8; color:#4a627a;">
-                سلام به همه شما ورزشکاران عزیز! امروز می‌خواهیم درباره رازهای تغذیه ورزشکاران حرفه‌ای صحبت کنیم...
-            </p>
-            <p style="line-height:1.8; color:#4a627a; margin-top:16px;">
-                یکی از مهم‌ترین سوالاتی که همیشه برای ورزشکاران پیش می‌آید این است که چه بخوریم تا بهترین عملکرد را داشته باشیم؟
-                در این اپیزود به بررسی دقیق این موضوع می‌پردازیم...
-            </p>
-        </div>
-    </div>
+            // توابع کمکی
+            function formatTime(seconds) {
+                if (isNaN(seconds)) return "00:00";
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
 
-    <!-- محتوای تب نظرات -->
-    <div class="tab-content" id="commentsTab">
-        <div class="comments-section">
-            <div class="comment-item">
-                <div class="comment-avatar">ع</div>
-                <div class="comment-content">
-                    <div class="comment-author">علی محمدی</div>
-                    <div class="comment-date">۱۴۰۳/۱۰/۱۴</div>
-                    <div class="comment-text">پادکست فوق‌العاده‌ای بود! خیلی استفاده کردم. ممنون از تیم GAMva</div>
-                </div>
-            </div>
-            <div class="comment-item">
-                <div class="comment-avatar">س</div>
-                <div class="comment-content">
-                    <div class="comment-author">سارا احمدی</div>
-                    <div class="comment-date">۱۴۰۳/۱۰/۱۲</div>
-                    <div class="comment-text">لطفاً اپیزود بعدی رو درباره تمرینات اصلاحی بذارید. ممنون</div>
-                </div>
-            </div>
-            <div class="add-comment">
-                <input type="text" id="commentInput" placeholder="نظر خود را بنویسید...">
-                <button id="submitComment">ارسال نظر</button>
-            </div>
-        </div>
-    </div>
-</div>
+            function loadEpisode(index) {
+                currentEpisodeIndex = index;
+                const ep = episodes[index];
+                audio.src = ep.audioUrl;
+                currentTitle.textContent = ep.title;
+                currentDesc.textContent = ep.desc;
+                transcriptText.textContent = ep.transcript;
+                durationSpan.textContent = ep.duration;
+                audio.load();
+                if (isPlaying) {
+                    audio.play();
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                }
+                // به‌روزرسانی استایل اپیزود فعال
+                document.querySelectorAll('.episode-item').forEach((item, idx) => {
+                    if (idx === index) item.style.borderColor = 'var(--secondary)';
+                    else item.style.borderColor = 'var(--border-glass)';
+                });
+            }
 
-<script>
-    // ========== متغیرهای پلیر ==========
-    let audio = new Audio();
-    let isPlaying = false;
-    let currentEpisodeIndex = 0;
-    
-    const episodes = [
-        { title: "رازهای تغذیه ورزشکاران حرفه‌ای", desc: "در این اپیزود به بررسی رازهای تغذیه ورزشکاران حرفه‌ای می‌پردازیم.", duration: "45:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
-        { title: "اهمیت ریکاوری در ورزش", desc: "چرا استراحت به اندازه تمرین مهم است؟", duration: "38:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
-        { title: "تمرینات هوازی یا قدرتی؟", desc: "کدام نوع تمرین برای شما مناسب‌تر است؟", duration: "52:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
-        { title: "مکمل‌های ضروری برای ورزشکاران", desc: "کدام مکمل‌ها واقعاً مؤثر هستند؟", duration: "41:00", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" }
-    ];
+            // رندر لیست اپیزودها
+            function renderEpisodes() {
+                episodesList.innerHTML = episodes.map((ep, idx) => `
+                    <div class="episode-item" data-idx="${idx}">
+                        <img src="${ep.cover}" alt="${ep.title}" class="episode-cover">
+                        <div class="episode-info">
+                            <div class="episode-title">${idx + 1}. ${ep.title}</div>
+                            <div class="episode-duration">⏱️ ${ep.duration} • ${idx === 0 ? '۱۴۰۳/۱۰/۱۵' : idx === 1 ? '۱۴۰۳/۱۰/۰۸' : idx === 2 ? '۱۴۰۳/۱۰/۰۱' : '۱۴۰۳/۰۹/۲۴'}</div>
+                        </div>
+                        <button class="play-episode-btn"><i class="fas fa-play"></i></button>
+                    </div>
+                `).join('');
 
-    // DOM elements
-    const playPauseBtn = document.getElementById('playPauseBtn');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const progressBar = document.getElementById('progressBar');
-    const progressFill = document.getElementById('progressFill');
-    const currentTimeSpan = document.getElementById('currentTime');
-    const durationSpan = document.getElementById('duration');
-    const currentTitle = document.getElementById('currentTitle');
-    const currentDesc = document.getElementById('currentDesc');
+                // افزودن رویداد به اپیزودها
+                document.querySelectorAll('.episode-item').forEach((item, idx) => {
+                    item.addEventListener('click', () => {
+                        loadEpisode(idx);
+                        isPlaying = true;
+                        audio.play();
+                        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    });
+                    const playBtn = item.querySelector('.play-episode-btn');
+                    playBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        loadEpisode(idx);
+                        isPlaying = true;
+                        audio.play();
+                        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    });
+                });
+            }
 
-    function formatTime(seconds) {
-        const mins = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
-        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    }
+            // رندر نظرات
+            function renderComments() {
+                commentsSection.innerHTML = comments.map(c => `
+                    <div class="comment-item">
+                        <div class="comment-avatar">${c.avatar}</div>
+                        <div class="comment-content">
+                            <div class="comment-author">${c.author}</div>
+                            <div class="comment-date">${c.date}</div>
+                            <div class="comment-text">${c.text}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
 
-    function loadEpisode(index) {
-        currentEpisodeIndex = index;
-        const episode = episodes[index];
-        audio.src = episode.audioUrl;
-        currentTitle.textContent = episode.title;
-        currentDesc.textContent = episode.desc;
-        durationSpan.textContent = episode.duration;
-        audio.load();
-        if (isPlaying) {
-            audio.play();
-            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        } else {
-            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-        }
-    }
+            // ========== رویدادهای پلیر ==========
+            playPauseBtn.addEventListener('click', () => {
+                if (isPlaying) {
+                    audio.pause();
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                } else {
+                    audio.play();
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                }
+                isPlaying = !isPlaying;
+            });
 
-    // رویدادهای پلیر
-    playPauseBtn.addEventListener('click', () => {
-        if (isPlaying) {
-            audio.pause();
-            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-        } else {
-            audio.play();
-            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        }
-        isPlaying = !isPlaying;
-    });
-
-    prevBtn.addEventListener('click', () => {
-        let newIndex = currentEpisodeIndex - 1;
-        if (newIndex < 0) newIndex = episodes.length - 1;
-        loadEpisode(newIndex);
-        isPlaying = true;
-        audio.play();
-        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    });
-
-    nextBtn.addEventListener('click', () => {
-        let newIndex = currentEpisodeIndex + 1;
-        if (newIndex >= episodes.length) newIndex = 0;
-        loadEpisode(newIndex);
-        isPlaying = true;
-        audio.play();
-        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    });
-
-    audio.addEventListener('timeupdate', () => {
-        const progress = (audio.currentTime / audio.duration) * 100;
-        progressFill.style.width = `${progress}%`;
-        currentTimeSpan.textContent = formatTime(audio.currentTime);
-    });
-
-    audio.addEventListener('loadedmetadata', () => {
-        durationSpan.textContent = formatTime(audio.duration);
-    });
-
-    progressBar.addEventListener('click', (e) => {
-        const rect = progressBar.getBoundingClientRect();
-        const percent = (e.clientX - rect.left) / rect.width;
-        audio.currentTime = percent * audio.duration;
-    });
-
-    audio.addEventListener('ended', () => {
-        nextBtn.click();
-    });
-
-    // اپیزودها
-    document.querySelectorAll('.episode-item').forEach((item, idx) => {
-        item.addEventListener('click', () => {
-            loadEpisode(idx);
-            isPlaying = true;
-            audio.play();
-            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        });
-        const playBtn = item.querySelector('.play-episode-btn');
-        if (playBtn) {
-            playBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                loadEpisode(idx);
+            prevBtn.addEventListener('click', () => {
+                let newIndex = currentEpisodeIndex - 1;
+                if (newIndex < 0) newIndex = episodes.length - 1;
+                loadEpisode(newIndex);
                 isPlaying = true;
                 audio.play();
                 playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
             });
-        }
-    });
 
-    // تب‌ها
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = {
-        episodes: document.getElementById('episodesTab'),
-        transcript: document.getElementById('transcriptTab'),
-        comments: document.getElementById('commentsTab')
-    };
+            nextBtn.addEventListener('click', () => {
+                let newIndex = currentEpisodeIndex + 1;
+                if (newIndex >= episodes.length) newIndex = 0;
+                loadEpisode(newIndex);
+                isPlaying = true;
+                audio.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            });
 
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const tabId = btn.dataset.tab;
-            tabBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            Object.values(tabContents).forEach(content => content.classList.remove('active'));
-            if (tabContents[tabId]) tabContents[tabId].classList.add('active');
-        });
-    });
+            audio.addEventListener('timeupdate', () => {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+                currentTimeSpan.textContent = formatTime(audio.currentTime);
+            });
 
-    // دکمه‌های اکشن
-    document.getElementById('downloadBtn').addEventListener('click', () => {
-        alert('دانلود اپیزود شروع شد!');
-    });
-    document.getElementById('shareBtn').addEventListener('click', () => {
-        alert('لینک اشتراک‌گذاری کپی شد!');
-    });
-    document.getElementById('likePodcastBtn').addEventListener('click', () => {
-        let likeSpan = document.getElementById('likeCount');
-        let current = parseInt(likeSpan.innerText);
-        likeSpan.innerText = current + 1;
-    });
-    document.getElementById('submitComment').addEventListener('click', () => {
-        const input = document.getElementById('commentInput');
-        if (input.value.trim()) {
-            alert('نظر شما با موفقیت ثبت شد!');
-            input.value = '';
-        }
-    });
+            audio.addEventListener('loadedmetadata', () => {
+                durationSpan.textContent = formatTime(audio.duration);
+            });
 
-    // بارگذاری اولین اپیزود
-    loadEpisode(0);
-</script>
+            progressBar.addEventListener('click', (e) => {
+                const rect = progressBar.getBoundingClientRect();
+                const percent = (e.clientX - rect.left) / rect.width;
+                audio.currentTime = percent * audio.duration;
+            });
+
+            audio.addEventListener('ended', () => {
+                nextBtn.click();
+            });
+
+            // دکمه‌های اکشن
+            document.getElementById('downloadBtn').addEventListener('click', () => {
+                if (window.showToast) window.showToast('دانلود اپیزود شروع شد! 📥', 'success');
+                else alert('دانلود اپیزود شروع شد!');
+            });
+            document.getElementById('shareBtn').addEventListener('click', () => {
+                navigator.clipboard.writeText(window.location.href);
+                if (window.showToast) window.showToast('لینک پادکست کپی شد! 🔗', 'info');
+                else alert('لینک کپی شد!');
+            });
+            let likeCount = 124;
+            document.getElementById('likePodcastBtn').addEventListener('click', () => {
+                likeCount++;
+                document.getElementById('likeCount').innerText = likeCount;
+                if (window.showToast) window.showToast('❤️ از این اپیزود خوشتان آمد!', 'success');
+            });
+
+            // ارسال نظر جدید
+            document.getElementById('submitComment').addEventListener('click', () => {
+                const input = document.getElementById('commentInput');
+                const text = input.value.trim();
+                if (text) {
+                    const newComment = {
+                        author: "کاربر GAMva",
+                        avatar: "ک",
+                        date: new Date().toLocaleDateString('fa-IR'),
+                        text: text
+                    };
+                    comments.push(newComment);
+                    renderComments();
+                    input.value = '';
+                    if (window.showToast) window.showToast('نظر شما با موفقیت ثبت شد!', 'success');
+                } else {
+                    if (window.showToast) window.showToast('لطفاً متن نظر را وارد کنید', 'warning');
+                }
+            });
+
+            // ========== تب‌ها ==========
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = {
+                episodes: document.getElementById('episodesTab'),
+                transcript: document.getElementById('transcriptTab'),
+                comments: document.getElementById('commentsTab')
+            };
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabId = btn.dataset.tab;
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    Object.values(tabContents).forEach(content => content.classList.remove('active'));
+                    if (tabContents[tabId]) tabContents[tabId].classList.add('active');
+                });
+            });
+
+            // مقداردهی اولیه
+            renderEpisodes();
+            renderComments();
+            loadEpisode(0);
+
+            // افکت fade-up
+            const fadeEl = document.querySelector('.fade-up');
+            if (fadeEl && !fadeEl.classList.contains('visible')) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+                }, { threshold: 0.1 });
+                observer.observe(fadeEl);
+            }
+
+            // خوشامدگویی
+            setTimeout(() => {
+                if (window.showToast) window.showToast('🎧 به پادکست GAMva خوش آمدی! شنیدن این اپیزود رو بهت توصیه می‌کنم', 'info', 4000);
+            }, 800);
+        })();
+    </script>
 </body>
+
 </html>
