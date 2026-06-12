@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>مربی سلامت | پلتفرم حرفه‌ای تناسب اندام</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #f0f7f4 0%, #e8f0ec 30%, #f5faf7 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            margin: 0;
+            color: #1a2e28;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* الگوی پس‌زمینه مینیمال برای دسکتاپ */
+        body::before {
+            content: "";
+            position: fixed;
+            top: -50%;
+            right: -20%;
+            width: 70%;
+            height: 150%;
+            background: radial-gradient(circle at 30% 40%, rgba(130, 200, 170, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            bottom: -30%;
+            left: -10%;
+            width: 60%;
+            height: 120%;
+            background: radial-gradient(circle at 70% 60%, rgba(100, 180, 140, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* کانتینر اصلی */
+        .landing-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        /* ============ استایل موبایل (پیش‌فرض) ============ */
+        .mobile-card {
+            max-width: 460px;
+            width: 100%;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px rgba(0, 30, 20, 0.1), 0 8px 20px rgba(0, 0, 0, 0.06);
+            padding: 2.5rem 1.8rem 2.2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo-area {
+            margin-bottom: 1.5rem;
+        }
+
+        .health-icon {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #e6f7f0, #d4efe4);
+            width: 85px;
+            height: 85px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            color: #0a6b4a;
+            box-shadow: 0 12px 24px rgba(10, 107, 74, 0.12);
+            transition: transform 0.3s ease;
+        }
+
+        .health-icon:hover {
+            transform: scale(1.03);
+        }
+
+        .mobile-card h1 {
+            font-weight: 700;
+            font-size: 2rem;
+            letter-spacing: -0.3px;
+            color: #15382e;
+            margin-bottom: 0.4rem;
+        }
+
+        .subtitle {
+            font-weight: 400;
+            font-size: 1rem;
+            color: #4a5e5a;
+            margin-bottom: 1.8rem;
+            line-height: 1.8;
+            border-bottom: 1px solid #e0ebe5;
+            padding-bottom: 1.3rem;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #0b6b4f;
+            background: #e1f3ec;
+            padding: 0.15rem 0.6rem;
+            border-radius: 1.5rem;
+            display: inline-block;
+            margin: 0 0.1rem;
+        }
+
+        .app-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin: 1.5rem 0 1.5rem;
+        }
+
+        .store-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+            background: #ffffff;
+            border: 1.5px solid #dce7e2;
+            border-radius: 1.2rem;
+            padding: 0.9rem 1.2rem;
+            font-weight: 500;
+            font-size: 1rem;
+            color: #1e3b33;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            background: #fafdfb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            letter-spacing: 0.2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .store-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(130, 200, 170, 0.08), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .store-btn:hover::after {
+            left: 100%;
+        }
+
+        .store-btn:hover {
+            background: #f3faf7;
+            border-color: #9bc8b8;
+            box-shadow: 0 10px 20px rgba(20, 100, 70, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .store-icon {
+            font-size: 1.5rem;
+            line-height: 1;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.05));
+        }
+
+        .direct-download {
+            background: #f5faf7;
+            border-color: #c5dbd0;
+            font-weight: 600;
+            color: #1b4636;
+        }
+
+        .webapp-section {
+            margin-top: 1.2rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #cbdcd2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .webapp-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: transparent;
+            border: 1.5px solid #bdd3c8;
+            color: #1a4b3a;
+            padding: 0.75rem 2rem;
+            border-radius: 2.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.25s;
+            width: fit-content;
+            margin: 0 auto;
+            font-size: 0.95rem;
+        }
+
+        .webapp-link:hover {
+            background: #e2f0e9;
+            border-color: #6f9e8c;
+            color: #0a3829;
+        }
+
+        .web-hint {
+            font-size: 0.8rem;
+            color: #5b6f66;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            opacity: 0.9;
+        }
+
+        .divider-text {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0.3rem 0;
+            color: #7c9389;
+            font-size: 0.8rem;
+            font-weight: 400;
+        }
+
+        .divider-text::before,
+        .divider-text::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #d7e3dc;
+        }
+
+        .footer-note {
+            font-size: 0.75rem;
+            color: #5b7368;
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ============ استایل دسکتاپ (حرفه‌ای) ============ */
+        .desktop-layout {
+            display: none;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            background: #ffffff;
+            border-radius: 3rem;
+            box-shadow: 0 35px 70px rgba(0, 30, 15, 0.1), 0 15px 30px rgba(0, 0, 0, 0.05);
+            padding: 3.5rem 3rem;
+            display: flex;
+            align-items: center;
+            gap: 3.5rem;
+            border: 1px solid rgba(180, 210, 190, 0.3);
+        }
+
+        /* بخش چپ: توضیحات */
+        .desktop-info {
+            flex: 1.1;
+            text-align: right;
+            padding-left: 1rem;
+        }
+
+        .desktop-info .health-icon {
+            margin: 0 0 1.5rem 0;
+            width: 90px;
+            height: 90px;
+            font-size: 3.8rem;
+        }
+
+        .desktop-info h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            line-height: 1.2;
+            color: #0a3022;
+            margin-bottom: 1rem;
+        }
+
+        .desktop-info .gradient-text {
+            background: linear-gradient(135deg, #0b6b4f, #1f8b6a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .desktop-desc {
+            font-size: 1.15rem;
+            color: #3d5550;
+            line-height: 2;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            border-right: 4px solid #c3e0d4;
+            padding-right: 1.2rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 2.2rem;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            color: #1c4236;
+            font-size: 1rem;
+        }
+
+        .feature-icon {
+            background: #e2f3eb;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0a6b4a;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .webapp-desktop-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: white;
+            border: 2px solid #c0d9ce;
+            color: #114b36;
+            padding: 0.85rem 2.2rem;
+            border-radius: 3rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.25s;
+            font-size: 1rem;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .webapp-desktop-btn:hover {
+            background: #f0f9f4;
+            border-color: #7fae99;
+            box-shadow: 0 8px 18px rgba(30, 100, 70, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* بخش راست: دکمه‌های دانلود */
+        .desktop-downloads {
+            flex: 0.95;
+            background: #f9fdfb;
+            border-radius: 2.2rem;
+            padding: 2.2rem 2rem;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.02), 0 15px 30px rgba(0, 40, 25, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            border: 1px solid #e2efe8;
+        }
+
+        .desktop-downloads .store-btn {
+            padding: 1rem 1.3rem;
+            font-size: 1rem;
+            border-radius: 1.3rem;
+            background: white;
+        }
+
+        .desktop-downloads .divider-text {
+            margin: 0.2rem 0;
+            font-size: 0.8rem;
+        }
+
+        .desktop-downloads .direct-download {
+            background: #f3f9f5;
+        }
+
+        .desktop-badge {
+            font-size: 0.7rem;
+            background: #eef6f2;
+            padding: 0.15rem 0.7rem;
+            border-radius: 1rem;
+            color: #25634e;
+            margin-right: auto;
+        }
+
+        /* نمایش هندلینگ */
+        .mobile-view {
+            display: block;
+        }
+        .desktop-view {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding: 2.5rem;
+            }
+            .mobile-view {
+                display: none;
+            }
+            .desktop-view {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .desktop-layout {
+                display: none !important;
+            }
+            .mobile-card {
+                display: block;
+            }
+        }
+
+        /* میکرو اینتراکشن */
+        @media (prefers-reduced-motion: no-preference) {
+            .store-btn, .webapp-link, .webapp-desktop-btn {
+                transition: all 0.25s cubic-bezier(0.2, 0.8, 0.3, 1.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+        <!-- ================= نسخه موبایل ================= -->
+        <div class="mobile-view">
+            <div class="mobile-card">
+                <div class="logo-area">
+                    <div class="health-icon">
+                        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            <polyline points="7 11 10.5 14.5 16 8.5"></polyline>
+                        </svg>
+                    </div>
+                    <h1>مربی سلامت</h1>
+                    <p class="subtitle">
+                        <span class="highlight">داشبورد هوشمند</span> برای مربیان تناسب اندام<br>
+                        برنامه غذایی، تمرین و پیگیری هنرجویان
+                    </p>
+                </div>
+
+                <div class="app-buttons">
+                    <a href="404.html" rel="noopener" class="store-btn">
+                        <span class="store-icon"><img src="assets/img/app-store.svg" width="30" alt=""></span> دانلود از اپ استور
+                    </a>
+                    <a href="404.html" rel="noopener" class="store-btn">
+                        <span class="store-icon"><img src="assets/img/google-play.svg" width="30" alt=""></span> دانلود از گوگل پلی
+                    </a>
+                    <a href="404.html" rel="noopener" class="store-btn">
+                        <span class="store-icon"><img src="assets/img/cafebazaar.svg" width="30" alt=""></span> دانلود از بازار
+                    </a>
+                    <a href="404.html" rel="noopener" class="store-btn">
+                        <span class="store-icon">📦</span> دانلود از مایکت
+                    </a>
+                    <a href="404.html" rel="noopener" class="store-btn direct-download">
+                        <span class="store-icon">⬇️</span> دانلود مستقیم APK
+                    </a>
+                </div>
+
+                <div class="divider-text">یا</div>
+
+                <div class="webapp-section">
+                    <a href="main-page.html" rel="noopener" class="webapp-link">
+                        🌐 ورود به نسخه وب
+                    </a>
+                    <div class="web-hint">💡 بدون نصب، مستقیماً وارد داشبورد شوید</div>
+                </div>
+                <div class="footer-note">طراحی برای مربیان حرفه‌ای • نسخه ۲.۰</div>
+            </div>
+        </div>
+
+        <!-- ================= نسخه دسکتاپ (حرفه‌ای) ================= -->
+        <div class="desktop-view desktop-layout">
+            <!-- سمت راست: معرفی -->
+            <div class="desktop-info">
+                <div class="health-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        <polyline points="7 11 10.5 14.5 16 8.5"></polyline>
+                    </svg>
+                </div>
+                <h1>
+                    <span class="gradient-text">مربی سلامت</span><br>دستیار هوشمند تناسب اندام
+                </h1>
+                <p class="desktop-desc">
+                    پلتفرم جامع مدیریت <strong>برنامه‌های غذایی</strong>، <strong>تمرینات ورزشی</strong> و 
+                    <strong>پایش پیشرفت هنرجویان</strong>. مخصوص مربیان حرفه‌ای که به دنبال ارتقای کسب‌وکار خود هستند.
+                </p>
+                <ul class="feature-list">
+                    <li><span class="feature-icon">📋</span> طراحی برنامه تمرینی اختصاصی</li>
+                    <li><span class="feature-icon">🥗</span> تنظیم رژیم غذایی هوشمند</li>
+                    <li><span class="feature-icon">📊</span> داشبورد تحلیلی پیشرفت</li>
+                    <li><span class="feature-icon">💬</span> ارتباط مستقیم با هنرجویان</li>
+                </ul>
+                <a href="main-page.html" rel="noopener" class="webapp-desktop-btn">
+                    <span>🌐</span> استفاده از نسخه تحت وب (Web App)
+                    <span style="font-size:0.8rem; margin-right:0.2rem;">↗</span>
+                </a>
+                <div style="margin-top: 1.2rem; font-size:0.85rem; color:#4b6b5e; display:flex; align-items:center; gap:0.3rem;">
+                    <span>💻</span> بدون نیاز به نصب • مناسب دسکتاپ و مرورگر
+                </div>
+            </div>
+
+            <!-- سمت چپ: دانلود اپلیکیشن -->
+            <div class="desktop-downloads">
+                <div style="font-weight:700; font-size:1.2rem; color:#15382e; margin-bottom:0.3rem; text-align:center;">
+                    📱 دانلود اپلیکیشن موبایل
+                </div>
+                <a href="404.html" rel="noopener" class="store-btn">
+                    <span class="store-icon"><img src="assets/img/app-store.svg" width="80" alt=""></span> اپ استور (iOS)
+                </a>
+                <a href="404.html" rel="noopener" class="store-btn">
+                    <span class="store-icon"><img src="assets/img/google-play.svg" width="50" alt=""></span> گوگل پلی (Android)
+                </a>
+                <a href="404.html" rel="noopener" class="store-btn">
+                    <span class="store-icon"><img src="assets/img/cafebazaar.svg" width="50" alt=""></span> بازار (کافه بازار)
+                </a>
+                <a href="404.html" rel="noopener" class="store-btn">
+                    <span class="store-icon">📦</span> مایکت
+                </a>
+                <div class="divider-text">یا</div>
+                <a href="404.html" rel="noopener" class="store-btn direct-download">
+                    <span class="store-icon">⬇️</span> دانلود مستقیم فایل APK
+                    <span class="desktop-badge">پیشنهادی</span>
+                </a>
+                <div style="font-size:0.7rem; color:#6b8b7e; text-align:center; margin-top:0.5rem;">
+                    نسخه ۲.۰ • پشتیبانی از تمام دستگاه‌ها
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>داشبورد شاگرد | باشگاه حرفه‌ای</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* استایل پیش‌فرض (کامپیوتر) */
+        .mobile-version {
+            display: none;
+        }
+
+        .desktop-version {
+            display: block;
+        }
+
+        /* خودکار تشخیص موبایل (عرض کمتر از 768px) */
+        @media (max-width: 768px) {
+            .mobile-version {
+                display: block;
+            }
+
+            .desktop-version {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="desktop-version">
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Vazirmatn', sans-serif;
+                background: linear-gradient(135deg, #f5f7fc 0%, #eef2f8 100%);
+                color: #1e2b3c;
+                min-height: 100vh;
+            }
+
+            body.dark {
+                background: linear-gradient(135deg, #0f1724 0%, #0a0f1a 100%);
+                color: #eef2ff;
+            }
+
+            /* Header Navigation - like coach dashboard */
+            .top-nav {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+                padding: 0 2rem;
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+
+            body.dark .top-nav {
+                background: rgba(18, 25, 45, 0.95);
+                border-bottom-color: rgba(255, 255, 255, 0.05);
+            }
+
+            .logo-area {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px 0;
+            }
+
+            .logo-icon {
+                width: 42px;
+                height: 42px;
+                background: linear-gradient(135deg, #2563eb, #7c3aed);
+                border-radius: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 22px;
+            }
+
+            .nav-tabs {
+                display: flex;
+                gap: 6px;
+                flex-wrap: wrap;
+                padding: 8px 0;
+            }
+
+            .nav-tab {
+                padding: 10px 20px;
+                border-radius: 40px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: all 0.2s;
+                color: #5a6e8a;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .nav-tab i {
+                font-size: 1.1rem;
+            }
+
+            .nav-tab:hover {
+                background: rgba(37, 99, 235, 0.1);
+                color: #2563eb;
+            }
+
+            .nav-tab.active {
+                background: linear-gradient(135deg, #2563eb, #7c3aed);
+                color: white;
+                box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            }
+
+            body.dark .nav-tab {
+                color: #9aa9c1;
+            }
+
+            body.dark .nav-tab.active {
+                color: white;
+            }
+
+            .user-actions {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .dark-toggle {
+                background: rgba(0, 0, 0, 0.05);
+                border: none;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                cursor: pointer;
+                font-size: 1.2rem;
+            }
+
+            /* Main Container */
+            .main-container {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+
+            /* Welcome Header */
+            .welcome-header {
+                margin-bottom: 2rem;
+            }
+
+            .welcome-title {
+                font-size: 1.8rem;
+                font-weight: 800;
+                background: linear-gradient(135deg, #2563eb, #7c3aed);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+
+            /* Cards */
+            .card {
+                background: white;
+                border-radius: 24px;
+                padding: 1.5rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+                border: 1px solid rgba(0, 0, 0, 0.05);
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+
+            .card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            }
+
+            body.dark .card {
+                background: #131d2f;
+                border-color: #25324a;
+            }
+
+            .section {
+                display: none;
+                animation: fadeIn 0.3s ease;
+            }
+
+            .section.active {
+                display: block;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* Grids */
+            .grid-2 {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .grid-3 {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                border-right: 4px solid #2563eb;
+                padding-right: 12px;
+            }
+
+            .btn {
+                background: linear-gradient(135deg, #2563eb, #7c3aed);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 40px;
+                font-weight: 600;
+                font-family: 'Vazirmatn';
+                cursor: pointer;
+                transition: 0.2s;
+            }
+
+            .btn-outline {
+                background: transparent;
+                border: 1.5px solid #2563eb;
+                color: #2563eb;
+                padding: 8px 18px;
+                border-radius: 40px;
+                font-weight: 500;
+                cursor: pointer;
+            }
+
+            body.dark .btn-outline {
+                color: #84aaff;
+                border-color: #84aaff;
+            }
+
+            .exercise-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 0;
+                border-bottom: 1px solid #eef2f8;
+            }
+
+            body.dark .exercise-item {
+                border-bottom-color: #25324a;
+            }
+
+            .stat-badge {
+                background: linear-gradient(135deg, #dbeafe, #ede9fe);
+                border-radius: 20px;
+                padding: 12px;
+                text-align: center;
+            }
+
+            body.dark .stat-badge {
+                background: #1e2a44;
+            }
+
+            .progress-bar {
+                height: 8px;
+                background: #e2e8f0;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            .progress-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #2563eb, #7c3aed);
+                border-radius: 10px;
+                width: 0%;
+            }
+
+            .chat-container {
+                height: 300px;
+                overflow-y: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .message {
+                max-width: 80%;
+                padding: 10px 16px;
+                border-radius: 20px;
+                font-size: 0.9rem;
+            }
+
+            .message-sent {
+                background: linear-gradient(135deg, #2563eb, #7c3aed);
+                color: white;
+                align-self: flex-end;
+            }
+
+            .message-received {
+                background: #f1f5f9;
+                color: #1e2b3c;
+                align-self: flex-start;
+            }
+
+            body.dark .message-received {
+                background: #28344e;
+                color: #eef2ff;
+            }
+
+            @media (max-width: 768px) {
+                .top-nav {
+                    flex-direction: column;
+                    padding: 0 1rem;
+                }
+
+                .nav-tabs {
+                    justify-content: center;
+                }
+
+                .main-container {
+                    padding: 1rem;
+                }
+
+                .grid-2,
+                .grid-3 {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+
+        <div class="top-nav">
+            <div class="logo-area">
+                <div class="logo-icon"><i class="fas fa-fist-raised"></i></div>
+                <div><strong style="font-size: 1.2rem;">آکادمی قدرتی</strong><br><span
+                        style="font-size: 0.7rem;">شاگرد</span></div>
+            </div>
+            <div class="nav-tabs">
+                <div class="nav-tab active" data-tab="dashboard"><i class="fas fa-home"></i> پیشخوان</div>
+                <div class="nav-tab" data-tab="workout"><i class="fas fa-dumbbell"></i> برنامه و تمرین</div>
+                <div class="nav-tab" data-tab="progress"><i class="fas fa-chart-line"></i> پیشرفت شخصی</div>
+                <div class="nav-tab" data-tab="chat"><i class="fas fa-comments"></i> ارتباط</div>
+                <div class="nav-tab" data-tab="settings"><i class="fas fa-user-cog"></i> حساب من</div>
+            </div>
+            <div class="user-actions">
+                <button class="dark-toggle" onclick="document.body.classList.toggle('dark')">🌙</button>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <img src="https://ui-avatars.com/api/?name=Amir+Hossein&background=2563eb&color=fff&size=38"
+                        style="border-radius: 50%;">
+                    <span style="font-weight: 500;">امیرحسین</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <div class="welcome-header">
+                <div class="welcome-title">🔥 امیرحسین جان، امروز روز رکوردشکنی است!</div>
+                <p style="color: #5a6e8a;">تمرینت رو شروع کن و بهترین نسخه خودت بساز</p>
+            </div>
+
+            <!-- ===================== SECTION 1: DASHBOARD ===================== -->
+            <div id="dashboardSection" class="section active">
+                <div class="grid-3">
+                    <div class="card"><i class="fas fa-calendar-check" style="font-size: 2rem; color: #2563eb;"></i>
+                        <h2>۴ از ۵</h2>
+                        <p>جلسات این هفته</p>
+                        <div class="progress-bar mt-2">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="card"><i class="fas fa-trophy" style="font-size: 2rem; color: #f59e0b;"></i>
+                        <h2>+۱۲kg</h2>
+                        <p>پرس سینه (رکورد جدید)</p>
+                    </div>
+                    <div class="card"><i class="fas fa-fire" style="font-size: 2rem; color: #ef4444;"></i>
+                        <h2>۱۸۵۰ kcal</h2>
+                        <p>کالری سوزی امروز</p>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-running"></i> تمرین امروز - سینه و سه‌سر</div>
+                        <div class="exercise-item"><span><strong>پرس هالتر شیبدار</strong><br>۴×۸ | ۷۰kg</span><span
+                                class="stat-badge">RPE 7</span></div>
+                        <div class="exercise-item"><span><strong>دمبل سینه</strong><br>۳×۱۰ | ۳۰kg</span></div>
+                        <button class="btn" style="margin-top: 12px;" onclick="switchToWorkoutTab()"><i
+                                class="fas fa-play"></i> شروع تمرین</button>
+                    </div>
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-apple-alt"></i> تغذیه امروز</div>
+                        <p>کالری مصرفی: ۱۹۵۰ / ۲۴۰۰</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 81%;"></div>
+                        </div>
+                        <p>پروتئین ۱۴۵g | کرب ۲۳۰g | چربی ۵۸g</p>
+                        <p><i class="fas fa-utensils"></i> وعده بعد: <strong>سینه مرغ + برنج</strong></p>
+                        <button class="btn-outline" onclick="alert('وعده غذایی با عکس ثبت شد 📸')"><i
+                                class="fas fa-camera"></i> ثبت وعده</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-bell"></i> هشدارها</div>
+                    <p>✅ دیروز تمرین کردی | در صورت ۲ روز عدم فعالیت، به مربی هشدار داده می‌شود.</p>
+                </div>
+            </div>
+
+            <!-- ===================== SECTION 2: برنامه و تمرین (ماژول اصلی) ===================== -->
+            <div id="workoutSection" class="section">
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-calendar-week"></i> تقویم هفتگی</div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span class="stat-badge" style="background: #22c55e20;">شنبه ✅</span>
+                            <span class="stat-badge" style="background: #2563eb20;">یکشنبه 🔥 امروز</span>
+                            <span class="stat-badge">دوشنبه استراحت</span>
+                            <span class="stat-badge">سه‌شنبه پا</span>
+                        </div>
+                        <button class="btn-outline mt-2" onclick="alert('درخواست جابجایی روز به مربی ارسال شد')">درخواست
+                            جابجایی روز</button>
+                    </div>
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-video"></i> کتابخانه حرکات اختصاصی</div>
+                        <div class="exercise-item"><i class="fas fa-play-circle"></i> ویدیو: تکنیک اسکات (مربی علی)
+                        </div>
+                        <div class="exercise-item"><i class="fas fa-play-circle"></i> ویدیو: نکات ددلیفت</div>
+                    </div>
+                </div>
+                <div class="card" id="workoutActivePanel">
+                    <div class="section-title"><i class="fas fa-dumbbell"></i> جلسه امروز - قفسه سینه (با تایمر و
+                        ثبت RPE)</div>
+                    <div id="exerciseList">
+                        <div class="exercise-item"><span>پرس هالتر: ۴ ست × ۸ تکرار (وزن پیشنهادی ۷۰kg)</span><button
+                                class="btn-outline" onclick="startWorkoutSession(0)">شروع ست</button></div>
+                        <div class="exercise-item"><span>دمبل سینه: ۳ ست × ۱۰ تکرار (۳۰kg)</span><button
+                                class="btn-outline" onclick="startWorkoutSession(1)">شروع ست</button></div>
+                    </div>
+                    <div id="workoutTimerPanel" style="display: none; margin-top: 20px; text-align: center;">
+                        <h3>⏱️ استراحت بین ست‌ها</h3>
+                        <div style="font-size: 3rem; font-weight: 800;" id="timerDisplay">۰۱:۳۰</div>
+                        <div>RPE این ست: <input type="range" id="rpeSlider" min="1" max="10" value="7"
+                                style="width: 200px;"> <span id="rpeValue">7</span>/10</div>
+                        <button class="btn" onclick="completeCurrentSet()">ثبت ست ✅</button>
+                        <button class="btn-outline" onclick="skipCurrentSet()">رد کردن ❌</button>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-exchange-alt"></i> جایگزین هوشمند حرکت</div>
+                        <p>اگر دستگاه پرس هالتر اشغال بود → <strong>پرس دمبل روی نیمکت</strong> (تأیید مربی)</p>
+                    </div>
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-shopping-cart"></i> لیست خرید هفتگی</div>
+                        <p>مرغ ۱.۵kg • تخم‌مرغ • برنج • کینوا • آووکادو</p><button class="btn-outline">ارسال به مربی
+                            برای شخصی‌سازی</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== SECTION 3: پیشرفت شخصی ===================== -->
+            <div id="progressSection" class="section">
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-images"></i> گالری پیشرفت</div>
+                        <div style="display: flex; gap: 12px;">
+                            <div
+                                style="width: 80px;height: 80px;background: #dbeafe; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                                قبل</div>
+                            <div style="width: 80px;height: 80px;background: #2563eb30; border-radius: 16px;">بعد
+                            </div>
+                        </div>
+                        <input type="range" min="0" max="100" value="45"
+                            style="width: 100%; margin-top: 10px;"><span>اسلایدر قبل/بعد</span>
+                    </div>
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-chart-simple"></i> اندازه‌های بدن</div>
+                        <p>بازو: ۳۸cm | سینه: ۱۰۵cm | کمر: ۸۲cm | ران: ۵۸cm</p>
+                        <canvas id="bodyChart" height="150"></canvas>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-chart-line"></i> پیشرفت وزنه‌ها (۱RM)</div>
+                        <canvas id="prChart" height="150"></canvas><span class="stat-badge">🔥 رکورد جدید پرس سینه:
+                            ۹۵kg</span>
+                    </div>
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-weight-scale"></i> وزن و درصد چربی</div><canvas
+                            id="weightChart" height="150"></canvas>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-robot"></i> پیش‌بینی هوشمند</div>
+                        <p>با روند فعلی، تا <strong>مهر ۱۴۰۴</strong> به هدف عضلانی ۸۵kg می‌رسی.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 68%;"></div>
+                        </div><span>۶۸% پیشرفت</span>
+                    </div>
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-medal"></i> رکوردها و نشان‌ها</div>
+                        <p>🏆 پرس سینه ۹۵kg • 🏅 ۷ روز متوالی • 🎖️ ۱۰۰ جلسه</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-calendar-alt"></i> گزارش هفتگی خودکار</div>
+                    <p>حجم تمرینی +۱۵% نسبت به هفته قبل • کالری سوزی ۳۲۰۰ • ۴ جلسه کامل</p><button
+                        class="btn-outline">دانلود گزارش کامل</button>
+                </div>
+            </div>
+
+            <!-- ===================== SECTION 4: ارتباط و پشتیبانی ===================== -->
+            <div id="chatSection" class="section">
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-comment-dots"></i> چت خصوصی با مربی</div>
+                        <div class="chat-container" id="chatBox">
+                            <div class="message message-received">مربی: سلام امیر، امروز تمرین سینه رو با RPE مناسب
+                                انجام بده</div>
+                            <div class="message message-sent">باشه مربی، حتماً ثبت می‌کنم</div>
+                        </div>
+                        <div style="display: flex; gap: 8px; margin-top: 12px;"><input type="text" id="chatInput"
+                                placeholder="پیام جدید..."
+                                style="flex:1; padding: 12px; border-radius: 30px; border: 1px solid #ddd;"><button
+                                class="btn" onclick="sendMessage()">ارسال</button></div>
+                    </div>
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-smile"></i> چک-این روزانه</div>
+                        <p>وضعیت روحی: 😊 خوب | انرژی: ⚡ خوب | خواب: ۷.۵h | درد: پاها خفیف</p>
+                        <textarea placeholder="یادداشت برای مربی..." rows="2"
+                            style="width: 100%; border-radius: 16px; padding: 8px;"></textarea>
+                        <button class="btn-outline mt-2">ارسال چک-این</button>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-ticket-alt"></i> تیکت پشتیبانی</div>
+                        <p>تیکت باز: درخواست تغییر برنامه • اولویت: متوسط</p><button class="btn-outline"
+                            onclick="alert('تیکت جدید ثبت شد')">تیکت جدید</button>
+                    </div>
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-video"></i> بررسی فرم حرکتی</div><button
+                            class="btn"><i class="fas fa-upload"></i> آپلود فیلم برای مربی</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-star"></i> بازخورد از مربی</div>
+                    <p>امتیاز شما به مربی: ★★★★☆</p><button class="btn-outline">ارسال بازخورد ماهانه</button>
+                </div>
+            </div>
+
+            <!-- ===================== SECTION 5: حساب کاربری ===================== -->
+            <div id="settingsSection" class="section">
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-user"></i> پروفایل شخصی</div>
+                        <p>قد ۱۷۸cm | وزن ۷۹kg | سن ۲۴ | سابقه ۲ سال</p><button class="btn-outline">ویرایش</button>
+                    </div>
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-chalkboard-user"></i> مربیان من</div>
+                        <p>مربی فعلی: علی کریمی</p><button class="btn-outline">تمدید اشتراک</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-wallet"></i> کیف پول و پرداخت</div>
+                    <p>اعتبار: ۲۴۰,۰۰۰ تومان • اشتراک ویژه فعال</p><button class="btn-outline">شارژ کیف پول</button>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-bell"></i> تنظیمات نوتیفیکیشن</div><label><input
+                            type="checkbox" checked> پیامکی</label> <label><input type="checkbox" checked>
+                        ایمیل</label> <label><input type="checkbox" checked> نوتیفیکیشن تمرین</label>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-database"></i> حریم خصوصی و خروجی داده</div><button
+                        class="btn-outline" onclick="alert('درخواست دانلود داده‌ها ثبت شد')">دانلود تمام اطلاعات من
+                        (GDPR)</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Tab Navigation
+            const tabs = document.querySelectorAll('.nav-tab');
+            const sections = {
+                dashboard: document.getElementById('dashboardSection'),
+                workout: document.getElementById('workoutSection'),
+                progress: document.getElementById('progressSection'),
+                chat: document.getElementById('chatSection'),
+                settings: document.getElementById('settingsSection')
+            };
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.dataset.tab;
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    Object.values(sections).forEach(s => s.classList.remove('active'));
+                    sections[tabId].classList.add('active');
+                });
+            });
+
+            // Workout Timer Logic
+            let currentInterval = null;
+            let currentRemaining = 90;
+            let currentExerciseCallback = null;
+
+            function startWorkoutSession(exerciseIndex) {
+                document.getElementById('workoutTimerPanel').style.display = 'block';
+                startTimer(90);
+            }
+
+            function startTimer(seconds) {
+                if (currentInterval) clearInterval(currentInterval);
+                currentRemaining = seconds;
+                const timerDiv = document.getElementById('timerDisplay');
+                timerDiv.innerText = `${Math.floor(currentRemaining / 60)}:${(currentRemaining % 60).toString().padStart(2, '0')}`;
+                currentInterval = setInterval(() => {
+                    if (currentRemaining <= 0) {
+                        clearInterval(currentInterval);
+                        alert('زمان استراحت تمام شد! ست بعدی رو شروع کن 💪');
+                    } else {
+                        currentRemaining--;
+                        timerDiv.innerText = `${Math.floor(currentRemaining / 60)}:${(currentRemaining % 60).toString().padStart(2, '0')}`;
+                    }
+                }, 1000);
+            }
+
+            function completeCurrentSet() {
+                const rpe = document.getElementById('rpeSlider').value;
+                alert(`✅ ست ثبت شد! RPE: ${rpe} - لاگ برای مربی ارسال شد.`);
+                if (currentInterval) clearInterval(currentInterval);
+                document.getElementById('workoutTimerPanel').style.display = 'none';
+                startTimer(90); // next rest
+            }
+
+            function skipCurrentSet() {
+                alert('❌ حرکت رد شد. مربی مطلع خواهد شد.');
+                if (currentInterval) clearInterval(currentInterval);
+                document.getElementById('workoutTimerPanel').style.display = 'none';
+            }
+
+            document.getElementById('rpeSlider')?.addEventListener('input', (e) => {
+                document.getElementById('rpeValue').innerText = e.target.value;
+            });
+
+            function switchToWorkoutTab() {
+                document.querySelector('.nav-tab[data-tab="workout"]').click();
+            }
+
+            // Chat function
+            function sendMessage() {
+                const input = document.getElementById('chatInput');
+                const msg = input.value.trim();
+                if (!msg) return;
+                const chatContainer = document.getElementById('chatBox');
+                const newMsg = document.createElement('div');
+                newMsg.className = 'message message-sent';
+                newMsg.innerText = msg;
+                chatContainer.appendChild(newMsg);
+                input.value = '';
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+                setTimeout(() => {
+                    const reply = document.createElement('div');
+                    reply.className = 'message message-received';
+                    reply.innerText = 'مربی: پیامت رو دریافت کردم، عالی ادامه بده 💪';
+                    chatContainer.appendChild(reply);
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                }, 800);
+            }
+
+            // Charts rendering
+            window.addEventListener('load', () => {
+                const ctxBody = document.getElementById('bodyChart')?.getContext('2d');
+                if (ctxBody) new Chart(ctxBody, { type: 'line', data: { labels: ['مهر', 'آبان', 'آذر', 'دی'], datasets: [{ label: 'بازو (cm)', data: [36, 37, 37.5, 38], borderColor: '#2563eb' }] } });
+                const ctxPr = document.getElementById('prChart')?.getContext('2d');
+                if (ctxPr) new Chart(ctxPr, { type: 'bar', data: { labels: ['مهر', 'آبان', 'آذر', 'دی'], datasets: [{ label: '۱RM پرس سینه', data: [82, 86, 91, 95], backgroundColor: '#7c3aed' }] } });
+                const ctxWeight = document.getElementById('weightChart')?.getContext('2d');
+                if (ctxWeight) new Chart(ctxWeight, { type: 'line', data: { labels: ['هفته ۱', 'هفته ۴', 'هفته ۸', 'هفته ۱۲'], datasets: [{ label: 'وزن (kg)', data: [82, 81, 80, 79], borderColor: '#22c55e' }, { label: 'چربی %', data: [21, 20, 19.2, 18.5], borderColor: '#ef4444' }] } });
+            });
+        </script>
+
+    </div>
+
+    <div class="mobile-version">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Vazirmatn', sans-serif;
+                background: #f8fafc;
+                color: #1e293b;
+                padding-bottom: 70px;
+            }
+
+            body.dark {
+                background: #0f1724;
+                color: #e2e8f0;
+            }
+
+            /* Header */
+            .app-header {
+                background: white;
+                padding: 16px 20px;
+                border-bottom: 1px solid #e2e8f0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: sticky;
+                top: 0;
+                z-index: 10;
+            }
+
+            body.dark .app-header {
+                background: #111827;
+                border-bottom-color: #1f2937;
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+                background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+            }
+
+            /* Bottom Navigation (Instagram-like) */
+            .bottom-nav {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.96);
+                backdrop-filter: blur(10px);
+                border-top: 1px solid #e2e8f0;
+                display: flex;
+                justify-content: space-around;
+                padding: 10px 16px 20px;
+                z-index: 20;
+            }
+
+            body.dark .bottom-nav {
+                background: rgba(17, 24, 39, 0.96);
+                border-top-color: #1f2937;
+            }
+
+            .nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 4px;
+                cursor: pointer;
+                transition: 0.2s;
+                color: #94a3b8;
+                font-size: 12px;
+            }
+
+            .nav-item i {
+                font-size: 24px;
+            }
+
+            .nav-item.active {
+                color: #3b82f6;
+            }
+
+            body.dark .nav-item.active {
+                color: #60a5fa;
+            }
+
+            /* Main Content */
+            .main-content-mob {
+                padding: 16px;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            /* Cards (same style as coach dashboard) */
+            .card {
+                background: white;
+                border-radius: 20px;
+                padding: 16px;
+                margin-bottom: 16px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+                border: 1px solid #eef2f8;
+            }
+
+            body.dark .card {
+                background: #1e293b;
+                border-color: #334155;
+            }
+
+            .section {
+                display: none;
+                animation: fadeIn 0.25s ease;
+            }
+
+            .section.active {
+                display: block;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(8px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .section-title {
+                font-size: 18px;
+                font-weight: 700;
+                margin-bottom: 12px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                border-right: 3px solid #3b82f6;
+                padding-right: 10px;
+            }
+
+            .exercise-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 0;
+                border-bottom: 1px solid #eef2f8;
+            }
+
+            body.dark .exercise-row {
+                border-bottom-color: #334155;
+            }
+
+            .btn {
+                background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+                color: white;
+                border: none;
+                padding: 10px 18px;
+                border-radius: 30px;
+                font-weight: 600;
+                font-family: 'Vazirmatn';
+                cursor: pointer;
+                width: 100%;
+            }
+
+            .btn-outline {
+                background: transparent;
+                border: 1.5px solid #3b82f6;
+                color: #3b82f6;
+                padding: 8px 16px;
+                border-radius: 30px;
+                font-weight: 500;
+                cursor: pointer;
+            }
+
+            .stat-badge {
+                background: #f1f5f9;
+                border-radius: 16px;
+                padding: 8px 12px;
+                text-align: center;
+                font-size: 14px;
+            }
+
+            body.dark .stat-badge {
+                background: #0f1724;
+            }
+
+            .progress-bar {
+                height: 8px;
+                background: #e2e8f0;
+                border-radius: 10px;
+                overflow: hidden;
+                margin: 8px 0;
+            }
+
+            .progress-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+                width: 0%;
+            }
+
+            .chat-messages {
+                height: 280px;
+                overflow-y: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin-bottom: 12px;
+            }
+
+            .message {
+                max-width: 80%;
+                padding: 10px 14px;
+                border-radius: 20px;
+                font-size: 14px;
+            }
+
+            .message-sent {
+                background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+                color: white;
+                align-self: flex-end;
+            }
+
+            .message-received {
+                background: #f1f5f9;
+                align-self: flex-start;
+            }
+
+            body.dark .message-received {
+                background: #334155;
+                color: #e2e8f0;
+            }
+
+            .timer-display {
+                font-size: 48px;
+                font-weight: 800;
+                text-align: center;
+                font-family: monospace;
+                letter-spacing: 2px;
+            }
+
+            .inline-icon {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            @media (max-width: 480px) {
+                .main-content-mob {
+                    padding: 12px;
+                }
+
+                .card {
+                    padding: 14px;
+                }
+            }
+        </style>
+        <div class="app-header">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-fist-raised"></i></div>
+                <div><strong style="font-size: 16px;">آکادمی قدرتی</strong><br><span
+                        style="font-size: 11px; color: #6c86a3;">شاگرد</span></div>
+            </div>
+            <div><button class="btn-outline" style="padding: 6px 12px; font-size: 12px;"
+                    onclick="document.body.classList.toggle('dark')">🌙</button></div>
+        </div>
+
+        <div class="main-content-mob">
+            <!-- ===================== بخش 1: خانه / پیشخوان ===================== -->
+            <div id="homeSection-mob" class="section active">
+                <div style="margin-bottom: 16px;">
+                    <h2 style="font-size: 22px;">🔥 علی جان، امروز رکورد بزن!</h2>
+                    <p style="color: #6c86a3;">تمرین سینه در برنامه داری</p>
+                </div>
+                <div class="card" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <div><i class="fas fa-calendar-alt"></i> امروز · یکشنبه</div>
+                        <div>۴ از ۵ جلسه این هفته</div>
+                    </div>
+                    <h3 style="margin: 12px 0;">پرس سینه هالتر</h3>
+                    <div>۴ ست × ۸ تکرار · ۷۰kg</div>
+                    <button class="btn" style="background: rgba(255,255,255,0.2); margin-top: 12px;"
+                        onclick="switchToWorkout()">شروع تمرین →</button>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-apple-alt"></i> تغذیه امروز</div>
+                    <div>کالری مصرفی: ۱۹۵۰ / ۲۴۰۰</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 81%;"></div>
+                    </div>
+                    <div class="inline-icon"><i class="fas fa-drumstick-bite"></i> پروتئین ۱۴۵g</div>
+                    <div class="inline-icon"><i class="fas fa-bread-slice"></i> کرب ۲۳۰g</div>
+                    <button class="btn-outline" style="margin-top: 10px;"
+                        onclick="alert('وعده غذایی با عکس ثبت شد 📸')"><i class="fas fa-camera"></i> ثبت وعده</button>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-bell"></i> هشدارها</div>
+                    <div class="inline-icon"><i class="fas fa-check-circle" style="color: #22c55e;"></i> دیروز تمرین
+                        کردی</div>
+                    <div class="inline-icon"><i class="fas fa-clock"></i> ۲ روز عدم فعالیت = هشدار به مربی</div>
+                </div>
+            </div>
+
+            <!-- ===================== بخش 2: تمرین ===================== -->
+            <div id="workoutSection-mob" class="section">
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-calendar-week"></i> تقویم هفتگی</div>
+                    <div style="display: flex; gap: 10px; justify-content: space-around;">
+                        <div class="stat-badge" style="background:#22c55e20;">شنبه ✅</div>
+                        <div class="stat-badge" style="background:#3b82f620;">یکشنبه 🔥</div>
+                        <div class="stat-badge">دوشنبه</div>
+                        <div class="stat-badge">سه‌شنبه</div>
+                    </div>
+                    <button class="btn-outline" style="margin-top: 8px;"
+                        onclick="alert('درخواست جابجایی روز به مربی ارسال شد')">درخواست جابجایی روز</button>
+                </div>
+
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-dumbbell"></i> تمرین امروز - سینه</div>
+                    <div id="exercisesList">
+                        <div class="exercise-row"><span><strong>پرس هالتر شیبدار</strong><br>۴×۸ | ۷۰kg</span><button
+                                class="btn-outline" onclick="startSet()">شروع ست</button></div>
+                        <div class="exercise-row"><span><strong>دمبل سینه</strong><br>۳×۱۰ | ۳۰kg</span><button
+                                class="btn-outline" onclick="startSet()">شروع ست</button></div>
+                        <div class="exercise-row"><span><strong>پارالل</strong><br>۳×۱۲</span><button
+                                class="btn-outline" onclick="startSet()">شروع ست</button></div>
+                    </div>
+                    <div id="timerPanel" style="display: none; margin-top: 16px; text-align: center;">
+                        <div class="timer-display" id="timerDisplay">۰۱:۳۰</div>
+                        <div>RPE: <input type="range" id="rpeSlider" min="1" max="10" value="7" style="width: 80%;">
+                            <span id="rpeValue">7</span>/10</div>
+                        <button class="btn" onclick="completeSet()" style="margin-top: 12px;">ثبت ست ✅</button>
+                        <button class="btn-outline" onclick="skipSet()">رد کردن ❌</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-exchange-alt"></i> جایگزین هوشمند</div>
+                    <p>اگر دستگاه اشغال بود → <strong>پرس دمبل روی نیمکت</strong> (تأیید مربی)</p>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-shopping-cart"></i> لیست خرید هفتگی</div>
+                    <p>مرغ ۱.۵kg · تخم‌مرغ · برنج · کینوا · آووکادو</p>
+                </div>
+            </div>
+
+            <!-- ===================== بخش 3: پیشرفت ===================== -->
+            <div id="progressSection-mob" class="section">
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-images"></i> گالری پیشرفت</div>
+                    <div style="display: flex; gap: 12px;">
+                        <div
+                            style="width: 80px; height: 80px; background: #dbeafe; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                            قبل</div>
+                        <div
+                            style="width: 80px; height: 80px; background: #3b82f630; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                            بعد</div>
+                    </div>
+                    <input type="range" min="0" max="100" value="45" style="width: 100%; margin-top: 8px;">
+                    <span>اسلایدر مقایسه</span>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-chart-line"></i> پیشرفت وزنه (۱RM)</div>
+                    <canvas id="prChart" height="120"></canvas>
+                    <div class="stat-badge" style="margin-top: 8px;">🔥 رکورد جدید پرس سینه: ۹۵kg</div>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-weight-scale"></i> وزن و چربی</div>
+                    <canvas id="weightChart" height="120"></canvas>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-medal"></i> دستاوردها</div>
+                    <div class="inline-icon"><i class="fas fa-trophy" style="color: #f59e0b;"></i> ۷ روز متوالی</div>
+                    <div class="inline-icon"><i class="fas fa-fire"></i> ۱۰۰ جلسه تمرین</div>
+                    <div class="inline-icon"><i class="fas fa-chart-simple"></i> رکوردشکنی در پرس سینه</div>
+                </div>
+            </div>
+
+            <!-- ===================== بخش 4: چت ===================== -->
+            <div id="chatSection-mob" class="section">
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-comment-dots"></i> پیام با مربی</div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message message-received">مربی: سلام علی، امروز تمرین سینه رو با RPE مناسب انجام بده
+                        </div>
+                        <div class="message message-sent">باشه مربی، حتماً ثبت می‌کنم</div>
+                        <div class="message message-received">مربی: عالی، منتظر گزارش تمرینت هستم</div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="chatInput" placeholder="پیام جدید..."
+                            style="flex:1; padding: 10px; border-radius: 30px; border: 1px solid #e2e8f0;">
+                        <button class="btn" style="width: auto; padding: 10px 18px;"
+                            onclick="sendMessage()">ارسال</button>
+                    </div>
+                </div>
+                <!-- <div class="card">
+                    <div class="section-title"><i class="fas fa-smile"></i> چک-این روزانه</div>
+                    <p>وضعیت روحی: 😊 خوب | انرژی: ⚡ عالی | خواب: ۷.۵h</p>
+                    <textarea placeholder="یادداشت برای مربی..." rows="2"
+                        style="width: 100%; border-radius: 16px; padding: 8px;"></textarea>
+                    <button class="btn-outline" style="margin-top: 8px;">ارسال چک-این</button>
+                </div> -->
+            </div>
+
+            <!-- ===================== بخش 5: پروفایل ===================== -->
+            <div id="profileSection-mob" class="section">
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-user"></i> پروفایل من</div>
+                    <p>قد: ۱۷۸cm | وزن: ۷۹kg | سن: ۲۴</p>
+                    <p>هدف: افزایش حجم عضلانی | سابقه: ۲ سال</p>
+                    <button class="btn-outline">ویرایش اطلاعات</button>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-chalkboard-user"></i> مربی من</div>
+                    <p>علی کریمی · مربی بدنسازی</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 60%;"></div>
+                    </div>
+                    <span>۱۲ جلسه از ۲۰ جلسه باقی‌مانده</span>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-wallet"></i> کیف پول</div>
+                    <p>اعتبار: ۲۴۰,۰۰۰ تومان</p>
+                    <button class="btn-outline">شارژ کیف پول</button>
+                </div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-bell"></i> نوتیفیکیشن‌ها</div>
+                    <label><input type="checkbox" checked> پیامکی</label> &nbsp;&nbsp;
+                    <label><input type="checkbox" checked> ایمیل</label> &nbsp;&nbsp;
+                    <label><input type="checkbox" checked> نوتیفیکیشن تمرین</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation (Instagram Style) -->
+        <div class="bottom-nav">
+            <div class="nav-item active" data-section="home"><i class="fas fa-home"></i><span>خانه</span></div>
+            <div class="nav-item" data-section="workout"><i class="fas fa-dumbbell"></i><span>تمرین</span></div>
+            <div class="nav-item" data-section="progress"><i class="fas fa-chart-line"></i><span>پیشرفت</span></div>
+            <div class="nav-item" data-section="chat"><i class="fas fa-comments"></i><span>چت</span></div>
+            <div class="nav-item" data-section="profile"><i class="fas fa-user"></i><span>پروفایل</span></div>
+        </div>
+
+        <script>
+            // Tab Switching
+            const sectionsMap = {
+                home: 'homeSection-mob',
+                workout: 'workoutSection-mob',
+                progress: 'progressSection-mob',
+                chat: 'chatSection-mob',
+                profile: 'profileSection-mob'
+            };
+
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const sectionId = item.dataset.section;
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    item.classList.add('active');
+                    Object.values(sectionsMap).forEach(sec => {
+                        document.getElementById(sec).classList.remove('active');
+                    });
+                    document.getElementById(sectionsMap[sectionId]).classList.add('active');
+                });
+            });
+
+            // Workout Timer Logic
+            let activeInterval = null;
+            let remainingSeconds = 90;
+
+            function startSet() {
+                document.getElementById('timerPanel').style.display = 'block';
+                if (activeInterval) clearInterval(activeInterval);
+                remainingSeconds = 90;
+                updateTimerDisplay();
+                activeInterval = setInterval(() => {
+                    if (remainingSeconds <= 0) {
+                        clearInterval(activeInterval);
+                        alert('زمان استراحت تمام شد! ست بعدی رو شروع کن 💪');
+                    } else {
+                        remainingSeconds--;
+                        updateTimerDisplay();
+                    }
+                }, 1000);
+            }
+
+            function updateTimerDisplay() {
+                const mins = Math.floor(remainingSeconds / 60);
+                const secs = remainingSeconds % 60;
+                document.getElementById('timerDisplay').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            function completeSet() {
+                const rpe = document.getElementById('rpeSlider').value;
+                alert(`✅ ست ثبت شد! RPE: ${rpe} - لاگ برای مربی ارسال شد.`);
+                if (activeInterval) clearInterval(activeInterval);
+                document.getElementById('timerPanel').style.display = 'none';
+            }
+
+            function skipSet() {
+                alert('❌ حرکت رد شد. مربی مطلع خواهد شد.');
+                if (activeInterval) clearInterval(activeInterval);
+                document.getElementById('timerPanel').style.display = 'none';
+            }
+
+            document.getElementById('rpeSlider')?.addEventListener('input', (e) => {
+                document.getElementById('rpeValue').innerText = e.target.value;
+            });
+
+            function switchToWorkout() {
+                document.querySelector('.nav-item[data-section="workout"]').click();
+            }
+
+            // Chat
+            function sendMessage() {
+                const input = document.getElementById('chatInput');
+                const msg = input.value.trim();
+                if (!msg) return;
+                const container = document.getElementById('chatMessages');
+                const newMsg = document.createElement('div');
+                newMsg.className = 'message message-sent';
+                newMsg.innerText = msg;
+                container.appendChild(newMsg);
+                input.value = '';
+                container.scrollTop = container.scrollHeight;
+                setTimeout(() => {
+                    const reply = document.createElement('div');
+                    reply.className = 'message message-received';
+                    reply.innerText = 'مربی: پیامت رو دریافت کردم، بهت افتخار میکنم 💪';
+                    container.appendChild(reply);
+                    container.scrollTop = container.scrollHeight;
+                }, 800);
+            }
+
+            // Charts
+            window.addEventListener('load', () => {
+                const ctxPr = document.getElementById('prChart')?.getContext('2d');
+                if (ctxPr) {
+                    new Chart(ctxPr, {
+                        type: 'line',
+                        data: {
+                            labels: ['مهر', 'آبان', 'آذر', 'دی'],
+                            datasets: [{ label: '۱RM پرس سینه (kg)', data: [82, 86, 91, 95], borderColor: '#3b82f6', tension: 0.3 }]
+                        }
+                    });
+                }
+                const ctxWeight = document.getElementById('weightChart')?.getContext('2d');
+                if (ctxWeight) {
+                    new Chart(ctxWeight, {
+                        type: 'line',
+                        data: {
+                            labels: ['هفته ۱', 'هفته ۴', 'هفته ۸', 'هفته ۱۲'],
+                            datasets: [
+                                { label: 'وزن (kg)', data: [82, 81, 80, 79], borderColor: '#22c55e' },
+                                { label: 'چربی %', data: [21, 20, 19.2, 18.5], borderColor: '#ef4444' }
+                            ]
+                        }
+                    });
+                }
+            });
+        </script>
+
+
+    </div>
+
+</body>
+
+</html>

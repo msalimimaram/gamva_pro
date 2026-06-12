@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>GAMva | ورود و ثبت‌نام حرفه‌ای</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(145deg, #f5f7fc 0%, #eef2f8 100%);
+            color: #1a2c3e;
+            min-height: 100vh;
+        }
+
+        /* پس‌زمینه مثل بقیه صفحات */
+        .global-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .global-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(20px) brightness(0.55) saturate(1.15);
+            transform: scale(1.05);
+        }
+
+        .global-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.15) 100%);
+            backdrop-filter: blur(3px);
+            z-index: -1;
+        }
+
+        /* لینک برگشت به خانه */
+        .home-link {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 10px 22px;
+            border-radius: 40px;
+            text-decoration: none;
+            color: #1e3c72;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .home-link:hover {
+            background: white;
+            transform: translateX(-5px);
+            border-color: #4ecdc4;
+        }
+
+        /* کانتینر اصلی */
+        .auth-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 24px 60px;
+        }
+
+        /* کارت اصلی - مثل بقیه صفحات */
+        .auth-card {
+            max-width: 520px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border-radius: 48px;
+            padding: 42px 36px;
+            border: 1px solid rgba(255,255,245,0.7);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* لوگو */
+        .logo-section {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #1E3C72, #2A5298);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .logo-section h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1E3C72, #2A5298);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo-section p {
+            color: #4a627a;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+
+        /* تب‌ها */
+        .tabs {
+            display: flex;
+            gap: 12px;
+            background: rgba(0,0,0,0.05);
+            border-radius: 60px;
+            padding: 4px;
+            margin-bottom: 32px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 50px;
+            border: none;
+            background: transparent;
+            color: #4a627a;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #1E3C72, #2A5298);
+            color: white;
+            box-shadow: 0 4px 15px rgba(30,60,114,0.3);
+        }
+
+        /* فرم‌ها */
+        .form {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e66;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 48px 14px 16px;
+            border-radius: 30px;
+            border: 1px solid #cfdfed;
+            background: rgba(255,255,255,0.9);
+            color: #1a2c3e;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #2a6f8f;
+            box-shadow: 0 0 0 3px rgba(42,111,143,0.1);
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 16px;
+            top: 45px;
+            color: #8ca3c0;
+            font-size: 1.1rem;
+        }
+
+        .toggle-password {
+            cursor: pointer;
+            z-index: 5;
+        }
+
+        /* گزینه‌های کمکی */
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #4a627a;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .checkbox input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .forgot-link {
+            color: #2a6f8f;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .forgot-link:hover {
+            color: #ff6b6b;
+        }
+
+        /* دکمه اصلی */
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 40px;
+            border: none;
+            background: linear-gradient(135deg, #1E3C72, #2A5298);
+            color: white;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30,60,114,0.3);
+        }
+
+        /* جداکننده */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 24px 0;
+            color: #8ca3c0;
+            font-size: 0.8rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #cfdfed;
+        }
+
+        /* دکمه‌های اجتماعی */
+        .social-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 40px;
+            border: 1px solid #cfdfed;
+            background: rgba(255,255,255,0.8);
+            color: #2c3e66;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .social-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            border-color: #2a6f8f;
+        }
+
+        /* پیام خطا */
+        .error-message {
+            color: #fa5252;
+            font-size: 0.75rem;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* پیام موفقیت */
+        .success-toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #40c057, #2b8a3e);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 100;
+            transform: translateX(200%);
+            transition: transform 0.3s ease;
+        }
+
+        .success-toast.show {
+            transform: translateX(0);
+        }
+
+        /* انگیزشی */
+        .motivation-text {
+            text-align: center;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #cfdfed;
+            font-size: 0.8rem;
+            color: #4a627a;
+        }
+
+        .motivation-text i {
+            color: #ff6b6b;
+        }
+
+        /* واکنش‌گرایی */
+        @media (max-width: 550px) {
+            .auth-card {
+                padding: 32px 24px;
+            }
+            .logo-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 1.5rem;
+            }
+            .social-btn span {
+                display: none;
+            }
+            .social-btn i {
+                font-size: 1.3rem;
+            }
+            .home-link {
+                top: 16px;
+                right: 16px;
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- پس‌زمینه مثل بقیه صفحات -->
+<div class="global-bg">
+    <img src="assets/img/skate-park-with-ramps-in-tropical-city.jpg" alt="پس زمینه">
+</div>
+<div class="global-overlay"></div>
+
+<!-- لینک برگشت به خانه -->
+<a href="main-page.html" class="home-link">
+    <i class="fas fa-home"></i> صفحه اصلی
+</a>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="logo-section">
+            <div class="logo-icon">
+                <i class="fas fa-dumbbell"></i>
+            </div>
+            <h1>GAMva</h1>
+            <p>پلتفرم هوشمند تناسب اندام</p>
+        </div>
+
+        <!-- تب‌ها -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="login">ورود</button>
+            <button class="tab-btn" data-tab="register">ثبت‌نام</button>
+        </div>
+
+        <!-- فرم ورود -->
+        <div class="form active" id="loginForm">
+            <div class="input-group">
+                <label>ایمیل یا شماره موبایل</label>
+                <input type="text" id="loginIdentifier" placeholder="example@email.com یا ۰۹۱۲۱۲۳۴۵۶۷">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="input-group">
+                <label>رمز عبور</label>
+                <input type="password" id="loginPassword" placeholder="••••••••">
+                <i class="fas fa-lock toggle-password" data-target="loginPassword"></i>
+            </div>
+            <div class="form-options">
+                <label class="checkbox">
+                    <input type="checkbox" id="rememberMe"> مرا به خاطر بسپار
+                </label>
+                <a href="#" class="forgot-link" id="forgotPassword">رمز عبور را فراموش کرده‌اید؟</a>
+            </div>
+            <button class="submit-btn" id="loginBtn">
+                <i class="fas fa-arrow-left"></i> ورود به GAMva
+            </button>
+            <div class="divider">یا</div>
+            <div class="social-buttons">
+                <button class="social-btn" id="googleLogin">
+                    <i class="fab fa-google"></i>
+                    <span>گوگل</span>
+                </button>
+                <button class="social-btn" id="appleLogin">
+                    <i class="fab fa-apple"></i>
+                    <span>اپل</span>
+                </button>
+                <button class="social-btn" id="stravaLogin">
+                    <i class="fab fa-strava"></i>
+                    <span>استراوا</span>
+                </button>
+            </div>
+            <div class="motivation-text">
+                <i class="fas fa-quote-right"></i> «هر روز یک قدم به نسخه بهتر خودت نزدیک‌تر شو»
+            </div>
+        </div>
+
+        <!-- فرم ثبت‌نام -->
+        <div class="form" id="registerForm">
+            <div class="input-group">
+                <label>نام کامل</label>
+                <input type="text" id="registerName" placeholder="علی محمدی">
+                <i class="fas fa-user"></i>
+                <div class="error-message" id="nameError">نام کامل حداقل ۳ کاراکتر</div>
+            </div>
+            <div class="input-group">
+                <label>ایمیل</label>
+                <input type="email" id="registerEmail" placeholder="example@email.com">
+                <i class="fas fa-envelope"></i>
+                <div class="error-message" id="emailError">ایمیل معتبر وارد کنید</div>
+            </div>
+            <div class="input-group">
+                <label>شماره موبایل</label>
+                <input type="tel" id="registerPhone" placeholder="۰۹۱۲۱۲۳۴۵۶۷">
+                <i class="fas fa-phone"></i>
+                <div class="error-message" id="phoneError">شماره موبایل معتبر وارد کنید (۰۹۱۲۱۲۳۴۵۶۷)</div>
+            </div>
+            <div class="input-group">
+                <label>رمز عبور</label>
+                <input type="password" id="registerPassword" placeholder="••••••••">
+                <i class="fas fa-lock toggle-password" data-target="registerPassword"></i>
+                <div class="error-message" id="passwordError">رمز عبور حداقل ۶ کاراکتر</div>
+            </div>
+            <div class="input-group">
+                <label>تکرار رمز عبور</label>
+                <input type="password" id="registerConfirmPassword" placeholder="••••••••">
+                <i class="fas fa-check-circle toggle-password" data-target="registerConfirmPassword"></i>
+                <div class="error-message" id="confirmError">رمز عبور مطابقت ندارد</div>
+            </div>
+            <label class="checkbox" style="margin-bottom: 20px;">
+                <input type="checkbox" id="acceptTerms"> 
+                <span style="color: #4a627a;">شرایط و قوانین GAMva را می‌پذیرم</span>
+            </label>
+            <button class="submit-btn" id="registerBtn">
+                <i class="fas fa-user-plus"></i> شروع سفر تناسب اندام
+            </button>
+            <div class="divider">یا</div>
+            <div class="social-buttons">
+                <button class="social-btn" id="googleRegister">
+                    <i class="fab fa-google"></i>
+                    <span>ثبت‌نام با گوگل</span>
+                </button>
+                <button class="social-btn" id="appleRegister">
+                    <i class="fab fa-apple"></i>
+                    <span>ثبت‌نام با اپل</span>
+                </button>
+            </div>
+            <div class="motivation-text">
+                <i class="fas fa-fire"></i> «به جمع ۱۲,۰۰۰+ ورزشکار قدرتمند بپیوند»
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- پیام موفقیت -->
+<div class="success-toast" id="successToast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMessage">با موفقیت وارد شدید!</span>
+</div>
+
+<script>
+    // نمایش پیام
+    function showToast(message, isError = false) {
+        const toast = document.getElementById('successToast');
+        const toastMessage = document.getElementById('toastMessage');
+        toastMessage.textContent = message;
+        toast.style.background = isError ? 'linear-gradient(135deg, #fa5252, #c92a6a)' : 'linear-gradient(135deg, #40c057, #2b8a3e)';
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // اعتبارسنجی ایمیل
+    function isValidEmail(email) {
+        return /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/.test(email);
+    }
+
+    // اعتبارسنجی شماره موبایل ایران (با فرمت ۰۹۱۲۱۲۳۴۵۶۷)
+    function isValidPhone(phone) {
+        return /^09[0-9]{9}$/.test(phone);
+    }
+
+    // ========== تب‌ها ==========
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            if (btn.dataset.tab === 'login') {
+                loginForm.classList.add('active');
+                registerForm.classList.remove('active');
+            } else {
+                registerForm.classList.add('active');
+                loginForm.classList.remove('active');
+            }
+        });
+    });
+
+    // ========== نمایش/مخفی کردن رمز ==========
+    document.querySelectorAll('.toggle-password').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const input = document.getElementById(targetId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                this.classList.remove('fa-lock');
+                this.classList.add('fa-eye');
+            } else {
+                input.type = 'password';
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-lock');
+            }
+        });
+    });
+
+    // ========== فرم ورود ==========
+    document.getElementById('loginBtn').addEventListener('click', () => {
+        const identifier = document.getElementById('loginIdentifier').value.trim();
+        const password = document.getElementById('loginPassword').value;
+        const rememberMe = document.getElementById('rememberMe').checked;
+
+        if (!identifier || !password) {
+            showToast('لطفاً ایمیل/موبایل و رمز عبور را وارد کنید', true);
+            return;
+        }
+
+        showToast(`خوش آمدید! در حال هدایت به داشبورد GAMva...`);
+        
+        if (rememberMe) {
+            localStorage.setItem('rememberedUser', identifier);
+        }
+        
+        setTimeout(() => {
+            // window.location.href = 'dashboard.html';
+            showToast(`ورود با موفقیت انجام شد!`, false);
+        }, 1000);
+    });
+
+    // فراموشی رمز
+    document.getElementById('forgotPassword').addEventListener('click', (e) => {
+        e.preventDefault();
+        showToast('لینک بازیابی رمز عبور به ایمیل شما ارسال شد', false);
+    });
+
+    // ========== فرم ثبت‌نام ==========
+    const registerName = document.getElementById('registerName');
+    const registerEmail = document.getElementById('registerEmail');
+    const registerPhone = document.getElementById('registerPhone');
+    const registerPassword = document.getElementById('registerPassword');
+    const registerConfirm = document.getElementById('registerConfirmPassword');
+    const acceptTerms = document.getElementById('acceptTerms');
+
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const phoneError = document.getElementById('phoneError');
+    const passwordError = document.getElementById('passwordError');
+    const confirmError = document.getElementById('confirmError');
+
+    function validateRegister() {
+        let isValid = true;
+        
+        // نام
+        if (registerName.value.trim().length < 3) {
+            nameError.classList.add('show');
+            isValid = false;
+        } else {
+            nameError.classList.remove('show');
+        }
+        
+        // ایمیل
+        if (!isValidEmail(registerEmail.value.trim())) {
+            emailError.classList.add('show');
+            isValid = false;
+        } else {
+            emailError.classList.remove('show');
+        }
+        
+        // موبایل
+        if (!isValidPhone(registerPhone.value.trim())) {
+            phoneError.classList.add('show');
+            isValid = false;
+        } else {
+            phoneError.classList.remove('show');
+        }
+        
+        // رمز عبور
+        if (registerPassword.value.length < 6) {
+            passwordError.classList.add('show');
+            isValid = false;
+        } else {
+            passwordError.classList.remove('show');
+        }
+        
+        // تطابق رمز
+        if (registerPassword.value !== registerConfirm.value) {
+            confirmError.classList.add('show');
+            isValid = false;
+        } else {
+            confirmError.classList.remove('show');
+        }
+        
+        // قبول شرایط
+        if (!acceptTerms.checked) {
+            showToast('لطفاً شرایط و قوانین را بپذیرید', true);
+            isValid = false;
+        }
+        
+        return isValid;
+    }
+
+    document.getElementById('registerBtn').addEventListener('click', () => {
+        if (!validateRegister()) return;
+        
+        showToast(`ثبت‌نام با موفقیت انجام شد! خوش آمدید ${registerName.value.trim()}`);
+        
+        // ذخیره اطلاعات
+        const userData = {
+            name: registerName.value.trim(),
+            email: registerEmail.value.trim(),
+            phone: registerPhone.value.trim(),
+            registeredAt: new Date().toISOString()
+        };
+        localStorage.setItem('userData', JSON.stringify(userData));
+        
+        // پاک کردن فرم
+        registerName.value = '';
+        registerEmail.value = '';
+        registerPhone.value = '';
+        registerPassword.value = '';
+        registerConfirm.value = '';
+        acceptTerms.checked = false;
+        
+        // رفتن به تب ورود
+        tabBtns[0].click();
+        showToast(`ثبت‌نام موفق! اکنون وارد شوید`, false);
+    });
+
+    // اعتبارسنجی لحظه‌ای
+    registerName.addEventListener('input', () => {
+        if (registerName.value.trim().length >= 3) nameError.classList.remove('show');
+    });
+    registerEmail.addEventListener('input', () => {
+        if (isValidEmail(registerEmail.value.trim())) emailError.classList.remove('show');
+    });
+    registerPhone.addEventListener('input', () => {
+        if (isValidPhone(registerPhone.value.trim())) phoneError.classList.remove('show');
+    });
+    registerPassword.addEventListener('input', () => {
+        if (registerPassword.value.length >= 6) passwordError.classList.remove('show');
+        if (registerPassword.value === registerConfirm.value) confirmError.classList.remove('show');
+    });
+    registerConfirm.addEventListener('input', () => {
+        if (registerPassword.value === registerConfirm.value) confirmError.classList.remove('show');
+    });
+
+    // ========== دکمه‌های اجتماعی (شبیه‌سازی) ==========
+    const socialBtns = document.querySelectorAll('.social-btn');
+    socialBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const provider = btn.innerHTML.includes('گوگل') ? 'Google' : (btn.innerHTML.includes('اپل') ? 'Apple' : 'Strava');
+            showToast(`در حال اتصال به ${provider}...`, false);
+            setTimeout(() => {
+                showToast(`ورود با ${provider} با موفقیت انجام شد!`, false);
+            }, 1000);
+        });
+    });
+
+    // بررسی یادآوری کاربر ذخیره شده
+    const rememberedUser = localStorage.getItem('rememberedUser');
+    if (rememberedUser) {
+        document.getElementById('loginIdentifier').value = rememberedUser;
+        document.getElementById('rememberMe').checked = true;
+    }
+
+    // Enter key support
+    document.querySelectorAll('input').forEach(input => {
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const activeForm = document.querySelector('.form.active');
+                if (activeForm.id === 'loginForm') {
+                    document.getElementById('loginBtn').click();
+                } else {
+                    document.getElementById('registerBtn').click();
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>چت ویو | تجربه تلگرامی کامل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #0088cc;
+            --primary-light: #5ab9e6;
+            --primary-dark: #006699;
+            --bg: #ffffff;
+            --surface: #ffffff;
+            --surface-alt: #f0f2f5;
+            --text: #11181c;
+            --text-secondary: #54656f;
+            --text-tertiary: #8e9a9f;
+            --border: #e9ecef;
+            --shadow: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+            --success: #40c057;
+            --danger: #fa5252;
+            --online: #40c057;
+            --read: #0088cc;
+        }
+
+        .dark {
+            --primary: #339af0;
+            --bg: #0a0a0a;
+            --surface: #17212b;
+            --surface-alt: #202b36;
+            --text: #ffffff;
+            --text-secondary: #a9b7c6;
+            --text-tertiary: #6b7a86;
+            --border: #2b3945;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ========== نسخه دسکتاپ ========== */
+        .desktop-layout {
+            display: flex;
+            height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* سایدبار چپ - همیشه باز در دسکتاپ */
+        .desktop-sidebar {
+            width: 360px;
+            background: var(--surface);
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* ناحیه چت اصلی */
+        .desktop-chat {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg);
+            overflow: hidden;
+        }
+
+        /* سایدبار راست - اطلاعات */
+        .desktop-info {
+            width: 320px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            transition: all 0.3s;
+        }
+
+        .desktop-info.collapsed {
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* ========== نسخه موبایل ========== */
+        .mobile-view {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg);
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-layout {
+                display: none;
+            }
+            .mobile-view {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        /* ========== استایل‌های مشترک ========== */
+        /* هدر چت */
+        .chat-header-custom {
+            background: var(--surface);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        .chat-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .back-btn-mobile {
+            display: none;
+            background: transparent;
+            border: none;
+            font-size: 1.3rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .back-btn-mobile {
+                display: block;
+            }
+        }
+        .chat-avatar-sm {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .chat-title-sm {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        .chat-status-sm {
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+        }
+        .chat-actions-icons {
+            display: flex;
+            gap: 18px;
+        }
+        .action-icon {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        /* پیام‌ها */
+        .messages-area-custom {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .message-item {
+            display: flex;
+            max-width: 75%;
+        }
+        .message-item.received {
+            align-self: flex-start;
+        }
+        .message-item.sent {
+            align-self: flex-end;
+        }
+        .message-bubble-custom {
+            padding: 8px 12px;
+            border-radius: 18px;
+            position: relative;
+        }
+        .received .message-bubble-custom {
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            border-bottom-right-radius: 4px;
+        }
+        .sent .message-bubble-custom {
+            background: var(--primary);
+            color: white;
+            border-bottom-left-radius: 4px;
+        }
+        .message-text-custom {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .message-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
+            margin-top: 4px;
+            font-size: 0.65rem;
+            opacity: 0.7;
+        }
+        .message-status-icon {
+            font-size: 0.7rem;
+        }
+
+        /* ورودی پیام */
+        .input-area-custom {
+            background: var(--surface);
+            padding: 10px 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .attach-group {
+            display: flex;
+            gap: 12px;
+        }
+        .attach-icon-custom {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+        .message-field-custom {
+            flex: 1;
+            background: var(--surface-alt);
+            border-radius: 24px;
+            padding: 8px 16px;
+            border: none;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-family: inherit;
+            resize: none;
+            outline: none;
+        }
+        .send-icon-custom {
+            font-size: 1.3rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* سایدبار چپ (لیست چت‌ها) */
+        .sidebar-header-custom {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-custom {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .profile-avatar-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .search-box-custom {
+            padding: 12px 16px;
+        }
+        .search-box-custom input {
+            width: 100%;
+            padding: 10px 16px;
+            border-radius: 24px;
+            border: none;
+            background: var(--surface-alt);
+            color: var(--text);
+        }
+        .filter-tabs {
+            display: flex;
+            padding: 8px 16px;
+            gap: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        .filter-tab {
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .filter-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        .chats-list-custom {
+            flex: 1;
+            overflow-y: auto;
+        }
+        .chat-row-custom {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .chat-row-custom:hover, .chat-row-custom.active {
+            background: var(--surface-alt);
+        }
+        .chat-avatar-md {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .chat-info-custom {
+            flex: 1;
+        }
+        .chat-name-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        .chat-name-custom {
+            font-weight: 600;
+        }
+        .chat-time-custom {
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+        }
+        .chat-last-msg {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .unread-badge-custom {
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+        .requests-section-custom {
+            border-top: 1px solid var(--border);
+            padding: 12px 16px;
+            background: rgba(250,82,82,0.03);
+        }
+
+        /* پروفایل کاربر */
+        .profile-detail {
+            text-align: center;
+            padding: 24px;
+        }
+        .profile-avatar-lg {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 12px;
+        }
+        .profile-fullname {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .profile-username {
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+        }
+
+        /* موبایل: سایدبارهای کشویی */
+        @media (max-width: 768px) {
+            .mobile-sidebar {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: 85%;
+                max-width: 320px;
+                background: var(--surface);
+                z-index: 200;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                display: flex;
+                flex-direction: column;
+            }
+            .mobile-sidebar.open {
+                transform: translateX(0);
+            }
+            .mobile-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 150;
+                display: none;
+            }
+            .mobile-overlay.show {
+                display: block;
+            }
+            .mobile-info-sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 85%;
+                max-width: 320px;
+                background: var(--surface);
+                z-index: 200;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                overflow-y: auto;
+            }
+            .mobile-info-sidebar.open {
+                transform: translateX(0);
+            }
+        }
+
+        /* اسکرول */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== نسخه دسکتاپ ========== -->
+    <div class="desktop-layout">
+    
+        <!-- سایدبار چپ -->
+        <div class="desktop-sidebar">
+            <div class="sidebar-header-custom">
+                <div class="logo-custom">چت ویو</div>
+                <div class="profile-avatar-btn" id="desktopProfileBtn">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+            <div class="search-box-custom">
+                <input type="text" placeholder="جستجو..." id="desktopSearch">
+            </div>
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">همه</button>
+                <button class="filter-tab" data-filter="personal">شخصی</button>
+                <button class="filter-tab" data-filter="group">گروه</button>
+                <button class="filter-tab" data-filter="channel">کانال</button>
+            </div>
+            <div class="chats-list-custom" id="desktopChatsList"></div>
+            <div class="requests-section-custom" id="desktopRequests"></div>
+        </div>
+
+        <!-- ناحیه چت -->
+        <div class="desktop-chat">
+            <div class="chat-header-custom">
+                <div class="chat-header-left">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="chat-avatar-sm" id="desktopChatAvatar">
+                    <div>
+                        <div class="chat-title-sm" id="desktopChatTitle">علی محمدی</div>
+                        <div class="chat-status-sm" id="desktopChatStatus">آنلاین</div>
+                    </div>
+                </div>
+                <div class="chat-actions-icons">
+                    <i class="fas fa-phone-alt action-icon" id="desktopCall"></i>
+                    <i class="fas fa-video action-icon" id="desktopVideo"></i>
+                    <i class="fas fa-info-circle action-icon" id="desktopInfoBtn"></i>
+                </div>
+            </div>
+            <div class="messages-area-custom" id="desktopMessages"></div>
+            <div class="input-area-custom">
+                <div class="attach-group">
+                    <i class="fas fa-paperclip attach-icon-custom" id="desktopAttach"></i>
+                    <i class="fas fa-image attach-icon-custom" id="desktopImage"></i>
+                </div>
+                <textarea class="message-field-custom" rows="1" placeholder="پیام..." id="desktopInput"></textarea>
+                <i class="fas fa-paper-plane send-icon-custom" id="desktopSend"></i>
+            </div>
+        </div>
+
+        <!-- سایدبار راست اطلاعات -->
+        <div class="desktop-info" id="desktopInfoSidebar">
+            <div class="sidebar-header-custom">
+                <div class="logo-custom">اطلاعات</div>
+                <i class="fas fa-times action-icon" id="desktopCloseInfo" style="cursor:pointer"></i>
+            </div>
+            <div id="desktopInfoContent"></div>
+        </div>
+    </div>
+
+    <!-- ========== نسخه موبایل ========== -->
+    <div class="mobile-view">
+        <div class="chat-header-custom">
+            <div class="chat-header-left">
+                <button class="back-btn-mobile" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="chat-avatar-sm" id="mobileChatAvatar">
+                <div>
+                    <div class="chat-title-sm" id="mobileChatTitle">علی محمدی</div>
+                    <div class="chat-status-sm" id="mobileChatStatus">آنلاین</div>
+                </div>
+            </div>
+            <div class="chat-actions-icons">
+                <i class="fas fa-phone-alt action-icon" id="mobileCall"></i>
+                <i class="fas fa-video action-icon" id="mobileVideo"></i>
+                <i class="fas fa-info-circle action-icon" id="mobileInfoBtn"></i>
+            </div>
+        </div>
+        <div class="messages-area-custom" id="mobileMessages"></div>
+        <div class="input-area-custom">
+            <div class="attach-group">
+                <i class="fas fa-paperclip attach-icon-custom" id="mobileAttach"></i>
+                <i class="fas fa-image attach-icon-custom" id="mobileImage"></i>
+            </div>
+            <textarea class="message-field-custom" rows="1" placeholder="پیام..." id="mobileInput"></textarea>
+            <i class="fas fa-paper-plane send-icon-custom" id="mobileSend"></i>
+        </div>
+    </div>
+
+    <!-- سایدبار چپ موبایل -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="sidebar-header-custom">
+            <div class="logo-custom">چت ویو</div>
+            <div class="profile-avatar-btn" id="mobileProfileBtn">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+        <div class="search-box-custom">
+            <input type="text" placeholder="جستجو..." id="mobileSearch">
+        </div>
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">همه</button>
+            <button class="filter-tab" data-filter="personal">شخصی</button>
+            <button class="filter-tab" data-filter="group">گروه</button>
+            <button class="filter-tab" data-filter="channel">کانال</button>
+        </div>
+        <div class="chats-list-custom" id="mobileChatsList"></div>
+        <div class="requests-section-custom" id="mobileRequests"></div>
+    </div>
+
+    <!-- سایدبار راست موبایل -->
+    <div class="mobile-info-sidebar" id="mobileInfoSidebar">
+        <div class="sidebar-header-custom">
+            <div class="logo-custom">اطلاعات</div>
+            <i class="fas fa-times action-icon" id="mobileCloseInfo" style="cursor:pointer"></i>
+        </div>
+        <div id="mobileInfoContent"></div>
+    </div>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <script>
+        // ========== داده‌ها ==========
+        const chats = [
+            { id: 1, name: "علی محمدی", type: "personal", avatar: "https://randomuser.me/api/portraits/men/32.jpg", lastMsg: "سلام چطوری؟", time: "۱۲:۴۵", unread: 3, online: true, bio: "طراح UI/UX | علاقه‌مند به تکنولوژی", phone: "@alimohammadi" },
+            { id: 2, name: "سارا احمدی", type: "personal", avatar: "https://randomuser.me/api/portraits/women/44.jpg", lastMsg: "فایل ارائه رو برات فرستادم", time: "دیروز", unread: 0, online: false, bio: "توسعه‌دهنده بک‌اند", phone: "@saraahmadi" },
+            { id: 3, name: "تیم طراحی", type: "group", avatar: "https://randomuser.me/api/portraits/men/22.jpg", lastMsg: "مریم: جلسه فردا ساعت ۱۰", time: "دیروز", unread: 12, online: true, bio: "۵ عضو | گروه طراحی", phone: "طراحی محصول" },
+            { id: 4, name: "کانال فناوری", type: "channel", avatar: "https://randomuser.me/api/portraits/women/33.jpg", lastMsg: "مقاله جدید: هوش مصنوعی", time: "سه‌شنبه", unread: 0, online: false, bio: "اخبار فناوری روز", phone: "۱.۲k عضو" }
+        ];
+
+        let currentChat = 1;
+        let messagesDB = {
+            1: [
+                { text: "سلام! چطوری؟ پروژه جدید رو شروع کردی؟", sender: "received", time: "۱۲:۴۵", status: "read" },
+                { text: "سلام! خوبم ممنون. بله، دیروز شروع کردم.", sender: "sent", time: "۱۲:۴۷", status: "read" },
+                { text: "عالیه! راستی اون لینکی که برات فرستاده بودم رو دیدی؟", sender: "received", time: "۱۲:۵۰", status: "read" },
+                { text: "بله دیدم. واقعاً مفید بود. مخصوصاً طراحی Glassmorphism", sender: "sent", time: "۱۲:۵۵", status: "read" },
+                { text: "چه عالی! خوشحالم که مفید بوده.", sender: "received", time: "۱۳:۰۵", status: "read" }
+            ],
+            2: [{ text: "سلام وقت بخیر", sender: "received", time: "۱۰:۲۰", status: "read" }],
+            3: [{ text: "جلسه تیم طراحی ساعت ۳", sender: "received", time: "۰۹:۱۵", status: "read" }],
+            4: [{ text: "مطلب جدید در کانال", sender: "received", time: "۰۸:۰۰", status: "read" }]
+        };
+
+        let requestsData = [
+            { id: 1, name: "رضا کریمی", avatar: "https://randomuser.me/api/portraits/men/65.jpg", bio: "کاربر لینکدین" },
+            { id: 2, name: "نازنین رضایی", avatar: "https://randomuser.me/api/portraits/women/65.jpg", bio: "همکار قدیمی" }
+        ];
+
+        // ========== توابع کمکی ==========
+        function renderChatsList(containerId, isDesktop = true) {
+            const filter = document.querySelector(`.filter-tab.active`)?.dataset.filter || 'all';
+            const searchVal = document.getElementById(isDesktop ? 'desktopSearch' : 'mobileSearch')?.value.toLowerCase() || '';
+            let filtered = chats.filter(c => {
+                if (filter !== 'all' && c.type !== filter) return false;
+                if (searchVal && !c.name.toLowerCase().includes(searchVal)) return false;
+                return true;
+            });
+            const container = document.getElementById(containerId);
+            container.innerHTML = filtered.map(chat => `
+                <div class="chat-row-custom ${currentChat === chat.id ? 'active' : ''}" data-id="${chat.id}">
+                    <img src="${chat.avatar}" class="chat-avatar-md">
+                    <div class="chat-info-custom">
+                        <div class="chat-name-row">
+                            <span class="chat-name-custom">${chat.name}</span>
+                            <span class="chat-time-custom">${chat.time}</span>
+                        </div>
+                        <div class="chat-last-msg">${chat.lastMsg}</div>
+                    </div>
+                    ${chat.unread > 0 ? `<div class="unread-badge-custom">${chat.unread}</div>` : ''}
+                </div>
+            `).join('');
+            document.querySelectorAll(`#${containerId} .chat-row-custom`).forEach(el => {
+                el.addEventListener('click', () => {
+                    currentChat = parseInt(el.dataset.id);
+                    renderChatsList('desktopChatsList', true);
+                    renderChatsList('mobileChatsList', false);
+                    renderMessages('desktopMessages');
+                    renderMessages('mobileMessages');
+                    renderInfoSidebar('desktopInfoContent');
+                    renderInfoSidebar('mobileInfoContent');
+                    updateChatHeader();
+                    if (window.innerWidth <= 768) {
+                        document.getElementById('mobileSidebar').classList.remove('open');
+                        document.getElementById('mobileOverlay').classList.remove('show');
+                    }
+                });
+            });
+        }
+
+        function renderMessages(containerId) {
+            const msgs = messagesDB[currentChat] || [];
+            const container = document.getElementById(containerId);
+            container.innerHTML = msgs.map(msg => `
+                <div class="message-item ${msg.sender}">
+                    <div class="message-bubble-custom">
+                        <div class="message-text-custom">${msg.text}</div>
+                        <div class="message-footer">
+                            <span>${msg.time}</span>
+                            ${msg.sender === 'sent' ? `<span class="message-status-icon"><i class="fas ${msg.status === 'read' ? 'fa-check-double' : 'fa-check'}"></i></span>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            setTimeout(() => {
+                if (container) container.scrollTop = container.scrollHeight;
+            }, 100);
+        }
+
+        function renderInfoSidebar(containerId) {
+            const chat = chats.find(c => c.id === currentChat);
+            const container = document.getElementById(containerId);
+            container.innerHTML = `
+                <div class="profile-detail">
+                    <img src="${chat.avatar}" class="profile-avatar-lg">
+                    <div class="profile-fullname">${chat.name}</div>
+                    <div class="profile-username">${chat.phone}</div>
+                </div>
+                <div style="padding:0 16px 16px 16px">
+                    <div style="background:var(--surface-alt); border-radius:12px; padding:12px; margin-bottom:12px">${chat.bio}</div>
+                    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:12px">
+                        <div class="info-action-item" style="background:var(--surface-alt); border-radius:12px; padding:12px; text-align:center; cursor:pointer" data-action="mute"><i class="fas fa-volume-mute"></i><div>بی‌صدا</div></div>
+                        <div class="info-action-item" style="background:var(--surface-alt); border-radius:12px; padding:12px; text-align:center; cursor:pointer" data-action="pin"><i class="fas fa-thumbtack"></i><div>پین</div></div>
+                        <div class="info-action-item" style="background:var(--surface-alt); border-radius:12px; padding:12px; text-align:center; cursor:pointer" data-action="clear"><i class="fas fa-trash"></i><div>پاک کردن</div></div>
+                        <div class="info-action-item" style="background:var(--surface-alt); border-radius:12px; padding:12px; text-align:center; cursor:pointer" data-action="block"><i class="fas fa-ban"></i><div>بلاک</div></div>
+                    </div>
+                </div>
+            `;
+            document.querySelectorAll(`#${containerId} .info-action-item`).forEach(el => {
+                el.addEventListener('click', () => alert(`عملیات ${el.querySelector('div')?.innerText} انجام شد`));
+            });
+        }
+
+        function renderRequests(containerId, isDesktop = true) {
+            const container = document.getElementById(containerId);
+            if (requestsData.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+            container.innerHTML = `
+                <div style="font-size:0.8rem; color:var(--danger); margin-bottom:8px">درخواست‌های چت <span style="background:var(--danger); padding:2px 8px; border-radius:12px; color:white">${requestsData.length}</span></div>
+                ${requestsData.map(req => `
+                    <div class="chat-row-custom" style="padding:8px 0" data-req="${req.id}">
+                        <img src="${req.avatar}" class="chat-avatar-md" style="width:40px;height:40px">
+                        <div class="chat-info-custom">
+                            <div class="chat-name-custom">${req.name}</div>
+                            <div class="chat-last-msg">${req.bio}</div>
+                        </div>
+                        <div style="display:flex; gap:8px">
+                            <button class="accept-req" style="background:var(--success); border:none; width:32px; height:32px; border-radius:50%; color:white"><i class="fas fa-check"></i></button>
+                            <button class="decline-req" style="background:var(--surface-alt); border:none; width:32px; height:32px; border-radius:50%"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                `).join('')}
+            `;
+            document.querySelectorAll(`#${containerId} .accept-req`).forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const item = btn.closest('[data-req]');
+                    const id = parseInt(item.dataset.req);
+                    requestsData = requestsData.filter(r => r.id !== id);
+                    renderRequests('desktopRequests', true);
+                    renderRequests('mobileRequests', false);
+                    alert('درخواست پذیرفته شد');
+                });
+            });
+            document.querySelectorAll(`#${containerId} .decline-req`).forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const item = btn.closest('[data-req]');
+                    const id = parseInt(item.dataset.req);
+                    requestsData = requestsData.filter(r => r.id !== id);
+                    renderRequests('desktopRequests', true);
+                    renderRequests('mobileRequests', false);
+                    alert('درخواست رد شد');
+                });
+            });
+        }
+
+        function updateChatHeader() {
+            const chat = chats.find(c => c.id === currentChat);
+            document.getElementById('desktopChatTitle').innerText = chat.name;
+            document.getElementById('desktopChatStatus').innerHTML = chat.online ? '<span style="color:var(--online)">●</span> آنلاین' : 'آفلاین';
+            document.getElementById('desktopChatAvatar').src = chat.avatar;
+            document.getElementById('mobileChatTitle').innerText = chat.name;
+            document.getElementById('mobileChatStatus').innerHTML = chat.online ? '<span style="color:var(--online)">●</span> آنلاین' : 'آفلاین';
+            document.getElementById('mobileChatAvatar').src = chat.avatar;
+        }
+
+        function sendMessage(isDesktop = true) {
+            const input = document.getElementById(isDesktop ? 'desktopInput' : 'mobileInput');
+            const text = input.value.trim();
+            if (!text) return;
+            const now = new Date();
+            const time = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
+            const newMsg = { text: text, sender: "sent", time: time, status: "sent" };
+            if (!messagesDB[currentChat]) messagesDB[currentChat] = [];
+            messagesDB[currentChat].push(newMsg);
+            renderMessages('desktopMessages');
+            renderMessages('mobileMessages');
+            input.value = '';
+            setTimeout(() => {
+                const lastMsg = messagesDB[currentChat].findLast(m => m.sender === 'sent');
+                if (lastMsg) lastMsg.status = 'read';
+                renderMessages('desktopMessages');
+                renderMessages('mobileMessages');
+            }, 500);
+            setTimeout(() => {
+                const reply = { text: "دریافت کردم! ممنون.", sender: "received", time: new Date().toLocaleTimeString('fa-IR', {hour:'2-digit', minute:'2-digit'}), status: "read" };
+                messagesDB[currentChat].push(reply);
+                renderMessages('desktopMessages');
+                renderMessages('mobileMessages');
+            }, 1500);
+        }
+
+        // ========== رویدادها ==========
+        function init() {
+            renderChatsList('desktopChatsList', true);
+            renderChatsList('mobileChatsList', false);
+            renderMessages('desktopMessages');
+            renderMessages('mobileMessages');
+            renderInfoSidebar('desktopInfoContent');
+            renderInfoSidebar('mobileInfoContent');
+            renderRequests('desktopRequests', true);
+            renderRequests('mobileRequests', false);
+            updateChatHeader();
+
+            // فیلترها
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    renderChatsList('desktopChatsList', true);
+                    renderChatsList('mobileChatsList', false);
+                });
+            });
+
+            // جستجو
+            document.getElementById('desktopSearch')?.addEventListener('input', () => renderChatsList('desktopChatsList', true));
+            document.getElementById('mobileSearch')?.addEventListener('input', () => renderChatsList('mobileChatsList', false));
+
+            // ارسال پیام
+            document.getElementById('desktopSend').addEventListener('click', () => sendMessage(true));
+            document.getElementById('mobileSend').addEventListener('click', () => sendMessage(false));
+            document.getElementById('desktopInput').addEventListener('keypress', (e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(true); } });
+            document.getElementById('mobileInput').addEventListener('keypress', (e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(false); } });
+
+            // تماس و ویدیو
+            document.getElementById('desktopCall').addEventListener('click', () => alert('شروع تماس صوتی...'));
+            document.getElementById('desktopVideo').addEventListener('click', () => alert('شروع تماس تصویری...'));
+            document.getElementById('mobileCall').addEventListener('click', () => alert('شروع تماس صوتی...'));
+            document.getElementById('mobileVideo').addEventListener('click', () => alert('شروع تماس تصویری...'));
+
+            // پیوست
+            document.getElementById('desktopAttach').addEventListener('click', () => alert('ارسال فایل'));
+            document.getElementById('desktopImage').addEventListener('click', () => alert('ارسال تصویر'));
+            document.getElementById('mobileAttach').addEventListener('click', () => alert('ارسال فایل'));
+            document.getElementById('mobileImage').addEventListener('click', () => alert('ارسال تصویر'));
+
+            // سایدبار راست
+            document.getElementById('desktopInfoBtn').addEventListener('click', () => {
+                document.getElementById('desktopInfoSidebar').classList.remove('collapsed');
+            });
+            document.getElementById('desktopCloseInfo').addEventListener('click', () => {
+                document.getElementById('desktopInfoSidebar').classList.add('collapsed');
+            });
+            document.getElementById('mobileInfoBtn').addEventListener('click', () => {
+                document.getElementById('mobileInfoSidebar').classList.add('open');
+                document.getElementById('mobileOverlay').classList.add('show');
+            });
+            document.getElementById('mobileCloseInfo').addEventListener('click', () => {
+                document.getElementById('mobileInfoSidebar').classList.remove('open');
+                document.getElementById('mobileOverlay').classList.remove('show');
+            });
+
+            // سایدبار چپ موبایل
+            document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                document.getElementById('mobileSidebar').classList.add('open');
+                document.getElementById('mobileOverlay').classList.add('show');
+            });
+            document.getElementById('mobileOverlay').addEventListener('click', () => {
+                document.getElementById('mobileSidebar').classList.remove('open');
+                document.getElementById('mobileInfoSidebar').classList.remove('open');
+                document.getElementById('mobileOverlay').classList.remove('show');
+            });
+
+            // پروفایل
+            document.getElementById('desktopProfileBtn').addEventListener('click', () => alert('پروفایل کاربر'));
+            document.getElementById('mobileProfileBtn').addEventListener('click', () => alert('پروفایل کاربر'));
+
+            // تم تاریک/روشن
+            const style = document.createElement('style');
+            style.innerHTML = `body.dark { --bg: #0a0a0a; --surface: #17212b; --surface-alt: #202b36; --text: #ffffff; --text-secondary: #a9b7c6; --border: #2b3945; }`;
+            document.head.appendChild(style);
+            const themeBtn = document.createElement('i');
+            themeBtn.className = 'fas fa-moon action-icon';
+            themeBtn.style.marginRight = '12px';
+            themeBtn.style.cursor = 'pointer';
+            document.querySelector('.desktop-sidebar .sidebar-header-custom')?.appendChild(themeBtn);
+            themeBtn.addEventListener('click', () => document.body.classList.toggle('dark'));
+        }
+
+        init();
+    </script>
+</body>
+</html>

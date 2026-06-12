@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>مربیان تخصصی | فیلترهای پیشرفته و حرفه‌ای</title>
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f6f9fc 0%, #eef2f5 100%);
+            color: #1e2a3e;
+            padding: 30px 24px 60px;
+            position: relative;
+        }
+
+        /* پس‌زمینه ثابت با بلر */
+        .global-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .global-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(18px) brightness(0.55) saturate(1.2);
+            transform: scale(1.05);
+        }
+
+        .global-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.15) 100%);
+            backdrop-filter: blur(3px);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* هدر با دکمه صفحه اصلی */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .home-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 12px 28px;
+            border-radius: 60px;
+            color: #1e3c72;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            font-size: 0.95rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .home-button:hover {
+            background: white;
+            transform: translateX(-5px);
+            border-color: #4ecdc4;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .home-button i {
+            font-size: 1.1rem;
+            color: #2a5298;
+        }
+
+        /* بخش header تخصص */
+        .specialty-header {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            border-radius: 48px;
+            padding: 32px 36px;
+            margin-bottom: 36px;
+            border: 1px solid rgba(255, 255, 245, 0.7);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+            transition: 0.2s;
+        }
+
+        .specialty-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(125deg, #1F4870, #2C5A7A);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .specialty-desc {
+            margin-top: 16px;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #2c4c6c;
+            max-width: 85%;
+            border-right: 4px solid #4ecdc4;
+            padding-right: 20px;
+        }
+
+        /* فیلترهای جدید */
+        .filters-new {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 38px;
+            padding: 22px 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 250, 0.7);
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: flex-end;
+        }
+
+        .filter-box {
+            flex: 1;
+            min-width: 160px;
+        }
+
+        .filter-box label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #2c5f8a;
+            letter-spacing: 0.3px;
+            margin-bottom: 6px;
+        }
+
+        .filter-box select,
+        .filter-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 34px;
+            border: 1px solid #cbdbe6;
+            background: rgba(255, 255, 240, 0.9);
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .filter-box input:focus,
+        .filter-box select:focus {
+            border-color: #4ecdc4;
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2);
+        }
+
+        .reset-specialty {
+            background: #eef2fa;
+            border: none;
+            padding: 0 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            height: 48px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.2s;
+            color: #1f3a5f;
+        }
+
+        .reset-specialty:hover {
+            background: #dfe6f0;
+            transform: scale(0.97);
+        }
+
+        /* grid کارت مربیان */
+        .coaches-grid-special {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 28px;
+            margin-bottom: 50px;
+        }
+
+        .coach-card-special {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+            transition: all 0.35s cubic-bezier(0.2, 0, 0, 1);
+            border: 1px solid rgba(255, 255, 240, 0.7);
+            cursor: pointer;
+        }
+
+        .coach-card-special:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 0 2px rgba(78, 205, 196, 0.3), 0 28px 38px -12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img {
+            position: relative;
+            height: 230px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .coach-card-special:hover .card-img img {
+            transform: scale(1.05);
+        }
+
+        .card-actions {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            display: flex;
+            gap: 12px;
+            z-index: 3;
+        }
+
+        .action-icon {
+            background: rgba(30, 40, 50, 0.7);
+            backdrop-filter: blur(6px);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .action-icon.liked {
+            background: #ff4d6d;
+        }
+
+        .action-icon.bookmarked {
+            background: #ffb347;
+        }
+
+        .action-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .card-info {
+            padding: 20px 20px 24px;
+        }
+
+        .coach-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .badge-specialty {
+            background: linear-gradient(135deg, #e6f0fa, #d4e4f5);
+            padding: 4px 12px;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #1e5f7a;
+        }
+
+        .details-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0 8px;
+            font-size: 0.85rem;
+            color: #2c4b6e;
+        }
+
+        .price {
+            font-weight: 800;
+            color: #1c6e43;
+        }
+
+        .gender-badge,
+        .session-type {
+            font-size: 0.7rem;
+            background: #eff3f9;
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+
+        .rating-stars {
+            color: #f5b042;
+        }
+
+        /* حالت خالی */
+        .empty-message-creative {
+            grid-column: 1/-1;
+            text-align: center;
+            background: rgba(255, 255, 245, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 70px;
+            padding: 70px 25px;
+            margin: 20px 0;
+        }
+
+        .empty-message-creative i {
+            font-size: 4rem;
+            color: #90a9c4;
+        }
+
+        .suggest-btn {
+            display: inline-block;
+            background: #1f6392;
+            padding: 12px 30px;
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            margin-top: 20px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .suggest-btn:hover {
+            background: #0f4a6f;
+            transform: scale(0.98);
+        }
+
+        /* مودال حرفه‌ای */
+        .modal-glass {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1200;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.25s;
+        }
+
+        .modal-glass.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            width: 90%;
+            max-width: 550px;
+            border-radius: 48px;
+            overflow: hidden;
+            transform: scale(0.95);
+            transition: transform 0.2s;
+        }
+
+        .modal-glass.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 26px;
+            background: linear-gradient(135deg, #f8fafd, #eef2f8);
+            border-bottom: 1px solid #e2edf7;
+        }
+
+        .modal-header h2 {
+            font-weight: 700;
+            color: #1e3c72;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #6c8db0;
+            transition: 0.2s;
+        }
+
+        .close-modal:hover {
+            color: #ff4d6d;
+        }
+
+        .modal-body {
+            padding: 26px;
+            text-align: center;
+        }
+
+        .modal-body img {
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            object-fit: cover;
+            margin-bottom: 16px;
+            border: 4px solid white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-details {
+            text-align: right;
+            margin: 16px 0;
+        }
+
+        .modal-details p {
+            margin: 12px 0;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed #cbdde9;
+            padding: 8px 0;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .modal-btn {
+            background: #eef3fc;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 36px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-btn {
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+            color: white;
+        }
+
+        .profile-btn:hover {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            opacity: 0.6;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 16px;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .specialty-desc {
+                max-width: 100%;
+            }
+
+            .filter-row {
+                flex-direction: column;
+            }
+
+            .reset-specialty {
+                width: 100%;
+                height: auto;
+                padding: 12px;
+            }
+
+            .coaches-grid-special {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .modal-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    
+
+    <div class="container">
+        <!-- هدر با دکمه صفحه اصلی -->
+        <div class="page-header">
+            <div></div>
+            <a href="main-page.html" class="home-button">
+                <i class="fas fa-home"></i> صفحه اصلی
+            </a>
+        </div>
+
+        <!-- بخش بالایی: توضیح تخصص (داینامیک) -->
+        <div class="specialty-header" id="specialtyHeader">
+            <div class="specialty-title">
+                <i class="fas fa-dumbbell" id="specialtyIcon"></i>
+                <span id="specialtyName">بدنسازی</span>
+            </div>
+            <div class="specialty-desc" id="specialtyDescription">
+                تمرینات قدرتی با هدف افزایش حجم عضلات، بهبود استقامت و فرم دهی بدن. مناسب برای تمام سطوح.
+            </div>
+        </div>
+
+        <!-- فیلترهای اختصاصی -->
+        <div class="filters-new">
+            <div class="filter-row">
+                <div class="filter-box">
+                    <label><i class="fas fa-video"></i> نوع جلسه</label>
+                    <select id="filterSessionType">
+                        <option value="all">همه جلسات</option>
+                        <option value="حضوری">حضوری</option>
+                        <option value="آنلاین">آنلاین</option>
+                    </select>
+                </div>
+                <div class="filter-box">
+                    <label><i class="fas fa-venus-mars"></i> جنسیت مربی</label>
+                    <select id="filterGender">
+                        <option value="all">هر جنسیتی</option>
+                        <option value="مرد">مرد</option>
+                        <option value="زن">زن</option>
+                    </select>
+                </div>
+                <div class="filter-box">
+                    <label><i class="fas fa-star"></i> حداقل امتیاز</label>
+                    <select id="filterRating">
+                        <option value="0">همه امتیازها</option>
+                        <option value="4">⭐ ۴ به بالا</option>
+                        <option value="4.5">⭐ ۴.۵ به بالا</option>
+                        <option value="4.8">⭐ ویژه (۴.۸+)</option>
+                    </select>
+                </div>
+                <div class="filter-box">
+                    <label><i class="fas fa-coins"></i> قیمت (هزار تومان)</label>
+                    <select id="filterPriceRange">
+                        <option value="all">همه قیمت‌ها</option>
+                        <option value="0-250">کمتر از ۲۵۰k</option>
+                        <option value="250-500">۲۵۰k - ۵۰۰k</option>
+                        <option value="500-1000">۵۰۰k - ۱ میلیون</option>
+                    </select>
+                </div>
+                <div class="filter-box">
+                    <button class="reset-specialty" id="resetSpecialtyFilters"><i class="fas fa-sync-alt"></i>
+                        بازنشانی</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="coachesSpecialtyGrid" class="coaches-grid-special"></div>
+        <footer>✨ مربی متخصص در رشته مورد نظرتان را پیدا کنید و پیشرفت را تجربه کنید</footer>
+    </div>
+
+    <!-- مودال -->
+    <div id="specialtyModal" class="modal-glass">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>پروفایل مربی</h2>
+                <button class="close-modal" id="closeSpecialtyModal">&times;</button>
+            </div>
+            <div class="modal-body" id="specialtyModalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // داده مربیان با فیلدهای جدید
+        const coachesBySpecialty = [
+            { id: 101, name: "امیرحسین نظری", specialty: "بدنسازی", gender: "مرد", sessionType: "حضوری", price: 390, rating: 4.9, experience: 9, image: "https://randomuser.me/api/portraits/men/11.jpg", likes: false, bookmark: false, bio: "مربی بدنسازی با متدهای نوین، قهرمان کشور با بیش از ۹ سال تجربه موفق." },
+            { id: 102, name: "فاطمه رستمی", specialty: "بدنسازی", gender: "زن", sessionType: "آنلاین", price: 340, rating: 4.7, experience: 6, image: "https://randomuser.me/api/portraits/women/33.jpg", likes: false, bookmark: false, bio: "مربی بدنسازی آنلاین برای بانوان، دارای مدرک بین‌المللی." },
+            { id: 103, name: "کیوان صمدی", specialty: "یوگا", gender: "مرد", sessionType: "حضوری", price: 410, rating: 4.9, experience: 12, image: "https://randomuser.me/api/portraits/men/75.jpg", likes: false, bookmark: false, bio: "یوگا درمانی و مدیتیشن، مدرس بین‌المللی یوگا با ۱۲ سال تجربه." },
+            { id: 104, name: "نگار احمدی", specialty: "یوگا", gender: "زن", sessionType: "آنلاین", price: 290, rating: 4.5, experience: 5, image: "https://randomuser.me/api/portraits/women/55.jpg", likes: false, bookmark: false, bio: "یوگای فلو و آرامش ذهن، برگزاری کلاس‌های آنلاین یوگا." },
+            { id: 105, name: "مریم سادات", specialty: "پیلاتس", gender: "زن", sessionType: "حضوری", price: 380, rating: 4.8, experience: 7, image: "https://randomuser.me/api/portraits/women/92.jpg", likes: false, bookmark: false, bio: "پیلاتس اصلاحی و افزایش انعطاف، متخصص توانبخشی با پیلاتس." },
+            { id: 106, name: "رضا مقدم", specialty: "پیلاتس", gender: "مرد", sessionType: "آنلاین", price: 320, rating: 4.6, experience: 4, image: "https://randomuser.me/api/portraits/men/41.jpg", likes: false, bookmark: false, bio: "پیلاتس مدرن و توانبخشی، آموزش آنلاین پیلاتس." },
+            { id: 107, name: "سارا کریمی", specialty: "کاهش وزن", gender: "زن", sessionType: "حضوری", price: 280, rating: 4.7, experience: 5, image: "https://randomuser.me/api/portraits/women/66.jpg", likes: false, bookmark: false, bio: "کاهش وزن اصولی همراه با برنامه غذایی، موفقیت بیش از ۱۰۰ شاگرد." },
+            { id: 108, name: "علیرضا فتحی", specialty: "کاهش وزن", gender: "مرد", sessionType: "آنلاین", price: 260, rating: 4.4, experience: 3, image: "https://randomuser.me/api/portraits/men/33.jpg", likes: false, bookmark: false, bio: "چربی سوزی و افزایش متابولیسم، برنامه‌های تمرینی آنلاین." }
+        ];
+
+        // دیکشنری توضیحات تخصص ها
+        const specialtyInfo = {
+            "بدنسازی": { desc: "تمرینات قدرتی و حجمی با تجهیزات پیشرفته. مناسب برای افزایش توده عضلانی و بهبود استقامت. مربیان حرفه‌ای بدنسازی همراه شما هستند.", icon: "fas fa-dumbbell" },
+            "یوگا": { desc: "یوگا ترکیبی از حرکات بدنی، تنفس و مدیتیشن. انعطاف پذیری، آرامش ذهنی و کاهش استرس را تجربه کنید.", icon: "fas fa-peace" },
+            "پیلاتس": { desc: "روش پیلاتس بر تقویت هسته مرکزی، تعادل و بهبود وضعیت بدنی تمرکز دارد. مناسب برای توانبخشی و افزایش آگاهی بدنی.", icon: "fas fa-child" },
+            "کاهش وزن": { desc: "برنامه‌های تخصصی کاهش وزن ترکیبی از تمرینات کاردیو، استقامتی و تغذیه سالم. همراه با پشتیبانی مربی.", icon: "fas fa-heartbeat" }
+        };
+
+        let currentSpecialty = "بدنسازی";
+        let activeCoaches = JSON.parse(JSON.stringify(coachesBySpecialty));
+
+        function filterBySpecialtyAndOtherFilters() {
+            let filtered = activeCoaches.filter(coach => coach.specialty === currentSpecialty);
+
+            const sessionVal = document.getElementById('filterSessionType').value;
+            if (sessionVal !== 'all') filtered = filtered.filter(c => c.sessionType === sessionVal);
+
+            const genderVal = document.getElementById('filterGender').value;
+            if (genderVal !== 'all') filtered = filtered.filter(c => c.gender === genderVal);
+
+            const ratingVal = parseFloat(document.getElementById('filterRating').value);
+            if (ratingVal > 0) filtered = filtered.filter(c => c.rating >= ratingVal);
+
+            const priceRange = document.getElementById('filterPriceRange').value;
+            if (priceRange !== 'all') {
+                const [minPrice, maxPrice] = priceRange.split('-').map(Number);
+                filtered = filtered.filter(c => c.price >= minPrice && (maxPrice ? c.price <= maxPrice : true));
+            }
+
+            renderSpecialtyCoaches(filtered);
+        }
+
+        function renderSpecialtyCoaches(coachesArray) {
+            const grid = document.getElementById('coachesSpecialtyGrid');
+            if (coachesArray.length === 0) {
+                grid.innerHTML = `<div class="empty-message-creative">
+                <i class="fas fa-smile-wink"></i>
+                <h3>🤔 هوی! مربی با این ویژگی‌ها پیدا نشد</h3>
+                <p>ما داریم برای تخصص "${currentSpecialty}" و فیلترهای انتخاب شده گشتمون اما چیزی نبود! اگر مربی حرفه‌ای میشناسید، معرفی کنید.</p>
+                <a href="#" class="suggest-btn" id="suggestSpecialtyCoach"><i class="fas fa-user-plus"></i> پیشنهاد مربی جدید</a>
+            </div>`;
+                const suggestLink = document.getElementById('suggestSpecialtyCoach');
+                if (suggestLink) suggestLink.addEventListener('click', (e) => { e.preventDefault(); alert("🙌 ممنون از معرفی شما! تیم ما بررسی میکند."); });
+                return;
+            }
+            grid.innerHTML = coachesArray.map(coach => `
+            <div class="coach-card-special" data-id="${coach.id}">
+                <div class="card-img">
+                    <img src="${coach.image}" alt="${coach.name}">
+                    <div class="card-actions">
+                        <div class="action-icon like-icon ${coach.likes ? 'liked' : ''}" data-id="${coach.id}">
+                            <i class="${coach.likes ? 'fas fa-heart' : 'far fa-heart'}"></i>
+                        </div>
+                        <div class="action-icon bookmark-icon ${coach.bookmark ? 'bookmarked' : ''}" data-id="${coach.id}">
+                            <i class="${coach.bookmark ? 'fas fa-bookmark' : 'far fa-bookmark'}"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="coach-name">
+                        ${coach.name}
+                        <span class="badge-specialty">${coach.specialty}</span>
+                    </div>
+                    <div class="details-row">
+                        <span><i class="fas fa-tag"></i> <span class="price">${coach.price}k</span> تومان</span>
+                        <span class="gender-badge"><i class="fas fa-${coach.gender === 'مرد' ? 'mars' : 'venus'}"></i> ${coach.gender}</span>
+                    </div>
+                    <div class="details-row">
+                        <span><i class="fas fa-calendar-week"></i> ${coach.sessionType}</span>
+                        <span class="rating-stars"><i class="fas fa-star"></i> ${coach.rating}</span>
+                    </div>
+                    <div style="font-size:0.7rem; margin-top:10px; color:#6c8db0;"><i class="fas fa-info-circle"></i> کلیک برای جزئیات بیشتر</div>
+                </div>
+            </div>
+        `).join('');
+            attachLikeBookmarkEvents();
+            attachCardClickModal(coachesArray);
+        }
+
+        function attachLikeBookmarkEvents() {
+            document.querySelectorAll('.like-icon').forEach(el => {
+                el.removeEventListener('click', handleLikeSpecial);
+                el.addEventListener('click', handleLikeSpecial);
+            });
+            document.querySelectorAll('.bookmark-icon').forEach(el => {
+                el.removeEventListener('click', handleBookmarkSpecial);
+                el.addEventListener('click', handleBookmarkSpecial);
+            });
+        }
+
+        function handleLikeSpecial(e) {
+            e.stopPropagation();
+            const icon = e.currentTarget;
+            const coachId = parseInt(icon.getAttribute('data-id'));
+            const coach = activeCoaches.find(c => c.id === coachId);
+            if (coach) {
+                coach.likes = !coach.likes;
+                filterBySpecialtyAndOtherFilters();
+            }
+        }
+
+        function handleBookmarkSpecial(e) {
+            e.stopPropagation();
+            const icon = e.currentTarget;
+            const coachId = parseInt(icon.getAttribute('data-id'));
+            const coach = activeCoaches.find(c => c.id === coachId);
+            if (coach) {
+                coach.bookmark = !coach.bookmark;
+                filterBySpecialtyAndOtherFilters();
+            }
+        }
+
+        function attachCardClickModal(coachesArrayFiltered) {
+            document.querySelectorAll('.coach-card-special').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (e.target.closest('.action-icon')) return;
+                    const id = parseInt(card.getAttribute('data-id'));
+                    const coach = coachesArrayFiltered.find(c => c.id === id);
+                    if (coach) openSpecialtyModal(coach);
+                });
+            });
+        }
+
+        function openSpecialtyModal(coach) {
+            const modalBody = document.getElementById('specialtyModalBody');
+            modalBody.innerHTML = `
+            <img src="${coach.image}" alt="${coach.name}">
+            <h3 style="margin-bottom:8px;">${coach.name}</h3>
+            <div class="modal-details">
+                <p><span><i class="fas fa-dumbbell"></i> تخصص:</span> <strong>${coach.specialty}</strong></p>
+                <p><span><i class="fas fa-video"></i> نوع جلسه:</span> <strong>${coach.sessionType}</strong></p>
+                <p><span><i class="fas fa-venus-mars"></i> جنسیت:</span> <strong>${coach.gender}</strong></p>
+                <p><span><i class="fas fa-tag"></i> قیمت هر جلسه:</span> <strong>${coach.price} هزار تومان</strong></p>
+                <p><span><i class="fas fa-star"></i> امتیاز:</span> <strong>${coach.rating} <i class="fas fa-star" style="color:#f5b042;"></i></strong></p>
+                <p><span><i class="fas fa-history"></i> سابقه:</span> <strong>${coach.experience} سال</strong></p>
+                <p><span><i class="fas fa-address-card"></i> درباره:</span> <strong>${coach.bio}</strong></p>
+                <p><span><i class="fas fa-heart"></i> لایک:</span> <strong>${coach.likes ? '❤️ فعال' : '🩶 غیرفعال'}</strong></p>
+                <p><span><i class="fas fa-bookmark"></i> بوکمارک:</span> <strong>${coach.bookmark ? '⭐ ذخیره شده' : '📌 ذخیره نشده'}</strong></p>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn" id="modalLikeBtnSpecial"><i class="fas fa-heart"></i> ${coach.likes ? 'لغو لایک' : 'لایک'}</button>
+                <button class="modal-btn" id="modalBookmarkBtnSpecial"><i class="fas fa-bookmark"></i> ${coach.bookmark ? 'حذف بوکمارک' : 'بوکمارک'}</button>
+                <button class="modal-btn profile-btn" id="viewProfileBtnSpecial"><i class="fas fa-id-card"></i> مشاهده پروفایل کامل</button>
+                <button class="modal-btn" id="callCoachSpecial"><i class="fas fa-phone"></i> تماس سریع</button>
+            </div>
+        `;
+            document.getElementById('specialtyModal').classList.add('active');
+
+            const modalLike = document.getElementById('modalLikeBtnSpecial');
+            const modalBook = document.getElementById('modalBookmarkBtnSpecial');
+            const viewProfile = document.getElementById('viewProfileBtnSpecial');
+            const callBtn = document.getElementById('callCoachSpecial');
+
+            if (modalLike) modalLike.onclick = () => { toggleLikeFromModal(coach); openSpecialtyModal(coach); };
+            if (modalBook) modalBook.onclick = () => { toggleBookmarkFromModal(coach); openSpecialtyModal(coach); };
+            if (viewProfile) viewProfile.onclick = () => { window.location.href = `coach-profile.html?id=${coach.id}`; };
+            if (callBtn) callBtn.onclick = () => alert(`📞 شماره تماس ${coach.name}: ۰۹۱۲${Math.floor(Math.random() * 9000000) + 1000000}\n(شبیه‌سازی)`);
+        }
+
+        function toggleLikeFromModal(coach) { coach.likes = !coach.likes; filterBySpecialtyAndOtherFilters(); }
+        function toggleBookmarkFromModal(coach) { coach.bookmark = !coach.bookmark; filterBySpecialtyAndOtherFilters(); }
+
+        function updateSpecialtyHeader() {
+            const info = specialtyInfo[currentSpecialty] || specialtyInfo["بدنسازی"];
+            document.getElementById('specialtyName').innerText = currentSpecialty;
+            document.getElementById('specialtyDescription').innerText = info.desc;
+            document.getElementById('specialtyIcon').className = info.icon;
+            filterBySpecialtyAndOtherFilters();
+        }
+
+        function addSpecialtySwitcher() {
+            const headerDiv = document.getElementById('specialtyHeader');
+            const switcherDiv = document.createElement('div');
+            switcherDiv.style.marginTop = "20px";
+            switcherDiv.innerHTML = `
+            <label style="font-weight:600; margin-left:12px; color:#2c5f8a;"><i class="fas fa-exchange-alt"></i> تغییر تخصص: </label>
+            <select id="specialtySwitch" style="padding:8px 16px; border-radius:40px; background:white; border:1px solid #cbdbe6;">
+                <option value="بدنسازی">بدنسازی</option>
+                <option value="یوگا">یوگا</option>
+                <option value="پیلاتس">پیلاتس</option>
+                <option value="کاهش وزن">کاهش وزن</option>
+            </select>
+        `;
+            headerDiv.appendChild(switcherDiv);
+            document.getElementById('specialtySwitch').addEventListener('change', (e) => {
+                currentSpecialty = e.target.value;
+                updateSpecialtyHeader();
+            });
+        }
+
+        // رویدادها
+        document.getElementById('filterSessionType').addEventListener('change', filterBySpecialtyAndOtherFilters);
+        document.getElementById('filterGender').addEventListener('change', filterBySpecialtyAndOtherFilters);
+        document.getElementById('filterRating').addEventListener('change', filterBySpecialtyAndOtherFilters);
+        document.getElementById('filterPriceRange').addEventListener('change', filterBySpecialtyAndOtherFilters);
+        document.getElementById('resetSpecialtyFilters').addEventListener('click', () => {
+            document.getElementById('filterSessionType').value = 'all';
+            document.getElementById('filterGender').value = 'all';
+            document.getElementById('filterRating').value = '0';
+            document.getElementById('filterPriceRange').value = 'all';
+            filterBySpecialtyAndOtherFilters();
+        });
+        document.getElementById('closeSpecialtyModal').addEventListener('click', () => document.getElementById('specialtyModal').classList.remove('active'));
+        window.addEventListener('click', (e) => { if (e.target === document.getElementById('specialtyModal')) document.getElementById('specialtyModal').classList.remove('active'); });
+
+        addSpecialtySwitcher();
+        updateSpecialtyHeader();
+    </script>
+</body>
+
+</html>

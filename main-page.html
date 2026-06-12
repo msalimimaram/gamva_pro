@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAMva | اکوسیستم هوشمند سلامت با هوش مصنوعی</title>
+
+    <!-- فونت وزیرمتن (Variable Font) -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Bootstrap Icons (برای آیکون‌های اضافی) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/style.css">
+    <style>
+        a {
+            text-decoration: none;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body data-theme="light">
+    <!-- پس‌زمینه Blob متحرک -->
+    <div class="dynamic-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- ========== هدر شیشه‌ای با مگامنو ========== -->
+    <header class="glass-header">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-leaf"></i>
+            </div>
+            <div class="logo-text-container">
+                <span class="logo-val" id="dynamicVa">
+                    <span class="value-part">lue</span>va
+                    <span class="logo-gam">GAM</span>
+                </span>
+            </div>
+        </div>
+
+        <!-- مگامنو -->
+        <div class="mega-menu">
+            <nav class="nav">
+                <!-- منو مربیان با مگادراپ -->
+                <div class="nav-item">
+                    <button class="nav-link">
+                        <i class="fas fa-users"></i>
+                        مربیان
+                    </button>
+                    <div class="mega-dropdown">
+                        <div class="mega-grid">
+                            <div class="mega-category">
+                                <div class="mega-title"><i class="fas fa-dumbbell"></i> تخصص‌ها</div>
+                                <ul class="mega-links">
+                                    <li><a href="specialty-coaches.html"><i class="fas fa-chevron-left"></i> مربی
+                                            بدنسازی</a></li>
+                                    <li><a href="specialty-coaches.html"><i class="fas fa-chevron-left"></i> مربی
+                                            تغذیه</a></li>
+                                    <li><a href="specialty-coaches.html"><i class="fas fa-chevron-left"></i> مربی
+                                            یوگا</a></li>
+                                    <li><a href="specialty-coaches.html"><i class="fas fa-chevron-left"></i> روانشناس
+                                            ورزشی</a></li>
+                                    <li><a href="specialty-coaches.html"><i class="fas fa-chevron-left"></i> کوچ توسعه
+                                            فردی</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-category">
+                                <div class="mega-title"><i class="fas fa-medal"></i> برترین‌ها</div>
+                                <ul class="mega-links">
+                                    <li><a href="profile-coach.html"><i class="fas fa-crown"></i> دکتر امیر محمدی</a>
+                                    </li>
+                                    <li><a href="profile-coach.html"><i class="fas fa-crown"></i> مهسا رضایی</a></li>
+                                    <li><a href="profile-coach.html"><i class="fas fa-crown"></i> امیر کریمی</a></li>
+                                    <li><a href="profile-coach.html"><i class="fas fa-crown"></i> سارا احمدی</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-category">
+                                <div class="mega-title"><i class="	fas fa-balance-scale-left"></i> محاسبه گر آنلاین
+                                </div>
+                                <ul class="mega-links">
+                                    <li><a href="calculater.html?cat=bmi"><i class="fas fa-calculator"></i> شاخص توده
+                                            بدنی</a></li>
+                                    <li><a href="calculater.html?cat=bodyfat"><i class="fas fa-calculator"></i> درصد
+                                            چربی بدن</a></li>
+                                    <li><a href="calculater.html?cat=whtr"><i class="fas fa-calculator"></i> نسبت دور
+                                            کمر به قد</a></li>
+                                    <li><a href="calculater.html?cat=lbm"><i class="fas fa-calculator"></i> توده بدون
+                                            چربی</a></li>
+                                    <li><a href="calculater.html?cat=bmr"><i class="fas fa-calculator"></i> نرخ
+                                            متابولیسم پایه</a></li>
+                                    <li><a href="calculater.html?cat=vo2max"><i class="fas fa-calculator"></i> حداکثر
+                                            اکسیژن مصرفی</a></li>
+                                    <li><a href="calculater.html?cat=tdee"><i class="fas fa-calculator"></i> کالری مصرف
+                                            روزانه</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- تبلیغ در مگامنو -->
+                        <div class="mega-ad">
+                            <span>✨ تخفیف ویژه: ۳۰٪ اولین جلسه</span>
+                            <a href="404.html"><button>دریافت کد</button></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- منو فروشگاه -->
+                <div class="nav-item">
+                    <button class="nav-link">
+                        <i class="fas fa-store"></i>
+                        فروشگاه
+                    </button>
+                    <div class="mega-dropdown">
+                        <div class="mega-grid">
+                            <div class="mega-category">
+                                <div class="mega-title">محصولات</div>
+                                <ul class="mega-links">
+                                    <li><a href="coming-soon.html"><i class="fas fa-apple-alt"></i> محصولات ارگانیک</a>
+                                    </li>
+                                    <li><a href="coming-soon.html"><i class="fas fa-tshirt"></i> لباس ورزشی</a></li>
+                                    <li><a href="coming-soon.html"><i class="fas fa-book"></i> کتاب و محتوا</a></li>
+                                    <li><a href="coming-soon.html"><i class="fas fa-clock"></i> تجهیزات</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-category">
+                                <div class="mega-title">تخفیف‌ها</div>
+                                <ul class="mega-links">
+                                    <li><a href="coming-soon.html"><i class="fas fa-fire"></i> شگفت‌انگیز</a></li>
+                                    <li><a href="coming-soon.html"><i class="fas fa-gift"></i> پیشنهاد ویژه</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- منو چالش‌ها -->
+                <div class="nav-item">
+                    <a href="challenges.html" style="text-decoration: none;">
+                        <button class="nav-link">
+                            <i class="fas fa-trophy"></i>
+                            چالش‌ها
+                        </button>
+                    </a>
+                </div>
+
+                <!-- منو محتوا -->
+                <div class="nav-item">
+                    <a href="content-list.html" style="text-decoration: none;">
+                        <button class="nav-link">
+                            <i class="fas fa-podcast"></i>
+                            محتوا
+                        </button></a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- جستجوی هوشمند با میکروفون -->
+        <div class="header-search">
+            <input type="text" placeholder="جستجوی مربی، محصول، دوره..." id="searchInput">
+            <div class="search-actions">
+                <button class="mic-btn" id="micBtn">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- اکشن‌های کاربری -->
+        <div class="header-actions">
+            <div class="action-icon">
+                <i class="far fa-heart"></i>
+                <span class="badge">۳</span>
+            </div>
+            <div class="action-icon">
+                <i class="far fa-bell"></i>
+                <span class="badge">۵</span>
+            </div>
+            <div class="action-icon">
+                <i class="far fa-user"></i>
+                <span class="online-badge"
+                    style="position: absolute; bottom: 2px; right: 2px; width: 10px; height: 10px; background: var(--success); border-radius: 50%; border: 2px solid var(--bg-primary);"></span>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+
+        <!-- همبرگر موبایل -->
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- منوی موبایل -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-menu" id="closeMenu">
+            <i class="fas fa-times"></i>
+        </div>
+        <div style="margin-top: 2rem;">
+            <h3 style="margin-bottom: 1.5rem;">منوی GAMva</h3>
+            <ul style="list-style: none;">
+                <li style="margin-bottom: 1rem;"><a href="list-coach.html"
+                        style="color: var(--text-primary); text-decoration: none;">مربیان</a></li>
+                <li style="margin-bottom: 1rem;"><a href="coming-soon.html"
+                        style="color: var(--text-primary); text-decoration: none;">فروشگاه</a></li>
+                <li style="margin-bottom: 1rem;"><a href="challenges.html"
+                        style="color: var(--text-primary); text-decoration: none;">چالش‌ها</a></li>
+                <li style="margin-bottom: 1rem;"><a href="contents.html"
+                        style="color: var(--text-primary); text-decoration: none;">محتوا</a></li>
+                <li style="margin-bottom: 1rem;"><a href="calculater.html"
+                        style="color: var(--text-primary); text-decoration: none;">محاسبه گر آنلاین</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <main class="container">
+        <!-- ========== بخش قهرمان ========== -->
+        <section class="hero">
+            <div class="hero-content fade-up">
+                <div class="hero-badge">
+                    <i class="fas fa-robot"></i>
+                    <span>قدرت گرفته از هوش مصنوعی پیشرفته</span>
+                </div>
+                <h1 class="hero-title">
+                    سبک زندگی سالم،
+                    <span class="gradient-text">هوشمند</span>
+                    <br>و شخصی‌سازی شده
+                </h1>
+                <p class="hero-description">
+                    با GAMva، به اکوسیستم یکپارچه سلامتی دسترسی دارید. از مربیان متخصص تا محصولات ارگانیک و چالش‌های
+                    انگیزشی، همه در یک پلتفرم.
+                </p>
+                <div class="hero-cta">
+                    <a href="register-login.html">
+                        <button class="btn-primary">
+                            شروع سفر سلامتی <i class="fas fa-arrow-left"></i>
+                        </button></a>
+                    <a href="list-coach.html">
+                        <button class="btn-outline">
+                            مشاهده مربیان
+                        </button></a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">+۵,۰۰۰</div>
+                        <div class="stat-label">کاربر فعال</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">+۱۲۰</div>
+                        <div class="stat-label">مربی متخصص</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">+۳۰۰</div>
+                        <div class="stat-label">محصول ارگانیک</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image fade-up">
+                <!-- کاروسل تصاویر -->
+                <div class="hero-image-carousel">
+                    <div class="hero-image-track" id="heroImageTrack">
+                        <!-- اسلاید ۱ - GAMva -->
+                        <div class="hero-image-slide">
+                            <img src="assets/img/stoke/download (1).jpg" alt="GAMva">
+                        </div>
+                        <!-- اسلاید ۲ - رضا کاظمی -->
+                        <div class="hero-image-slide">
+                            <img src="assets/img/stoke/download (4).jpg" alt="رضا کاظمی">
+                        </div>
+                        <!-- اسلاید ۳ - سارا نادری -->
+                        <div class="hero-image-slide">
+                            <img src="assets/img/stoke/download (3).jpg" alt="سارا نادری">
+                        </div>
+                        <!-- اسلاید ۴ - علی حسینی -->
+                        <div class="hero-image-slide">
+                            <img src="assets/img/stoke/download (2).jpg" alt="علی حسینی">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- کارت‌های شناور با محتوای داینامیک -->
+                <div class="floating-card card-1" id="floatingCard1">
+                    <i class="fas fa-medal" style="color: var(--warning);"></i>
+                    <div>
+                        <div class="card-title-text" style="font-weight: 600;">مربی برتر</div>
+                        <div class="card-subtitle-text" style="font-size: var(--font-xs); color: var(--text-muted);">
+                            دکتر محمدی</div>
+                    </div>
+                </div>
+                <div class="floating-card card-2" id="floatingCard2">
+                    <i class="fas fa-clock" style="color: var(--secondary);"></i>
+                    <div>
+                        <div class="card-title-text" style="font-weight: 600;">پشتیبانی ۲۴/۷</div>
+                        <div class="card-subtitle-text" style="font-size: var(--font-xs); color: var(--text-muted);">
+                            آنلاین</div>
+                    </div>
+                </div>
+
+                <!-- دات‌های نویگیشن برای کاروسل تصویر -->
+                <div class="hero-image-dots" id="heroImageDots"></div>
+            </div>
+        </section>
+
+        <!-- ========== تبلیغات هوشمند (اسپانسر) ========== -->
+        <div class="ad-spot fade-up">
+            <div class="ad-content">
+                <div class="ad-badge">
+                    <i class="fas fa-certificate"></i> اسپانسر ویژه
+                </div>
+                <div class="ad-info">
+                    <h4><i class="fas fa-seedling"></i> فروشگاه ارگانیک "سبز"</h4>
+                    <p>مکمل‌های طبیعی، مواد غذایی ارگانیک و محصولات گیاهی با بالاترین کیفیت</p>
+                    <div class="ad-offer">
+                        <span class="discount-badge">۳۰٪ تخفیف</span>
+                        <span class="offer-text">مخصوص کاربران GAMva</span>
+                    </div>
+                </div>
+                <div class="ad-features">
+                    <span><i class="fas fa-check-circle"></i> تضمین اصل بودن کالا</span>
+                    <span><i class="fas fa-truck"></i> ارسال رایگان به تهران</span>
+                    <span><i class="fas fa-credit-card"></i> پرداخت امن</span>
+                </div>
+            </div>
+            <a href="single-product.html">
+                <button class="ad-btn" id="sponsorBtn">
+                    <i class="fas fa-shopping-bag"></i> خرید با تخفیف ویژه
+                    <span class="btn-badge">فقط امروز</span>
+                </button>
+            </a>
+        </div>
+
+
+
+
+        <!-- ========== جستجوی پیشرفته ========== -->
+        <section class="advanced-search-section fade-up">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h2 style="font-size: var(--font-2xl);">جستجوی هوشمند GAMva</h2>
+                <p style="color: var(--text-muted);">مربی، محصول، دوره یا چالش مورد نظرت رو پیدا کن</p>
+            </div>
+
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div class="header-search" style="width: 100%;">
+                    <input type="text" placeholder="مثلاً: مربی تغذیه در غرب تهران...">
+                    <div class="search-actions">
+                        <button class="mic-btn" id="micBtn"><i class="fas fa-microphone"></i></button>
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-filters">
+                <div class="filter-group">
+                    <span class="filter-chip active">همه</span>
+                    <span class="filter-chip">مربیان</span>
+                    <span class="filter-chip">محصولات</span>
+                    <span class="filter-chip">دوره‌ها</span>
+                    <span class="filter-chip">چالش‌ها</span>
+                </div>
+            </div>
+
+            <div class="location-chips">
+                <span class="loc-chip"><i class="fas fa-map-marker-alt"></i> تهران</span>
+                <span class="loc-chip"><i class="fas fa-map-marker-alt"></i> کرج</span>
+                <span class="loc-chip"><i class="fas fa-map-marker-alt"></i> شیراز</span>
+                <span class="loc-chip"><i class="fas fa-map-marker-alt"></i> اصفهان</span>
+                <span class="loc-chip"><i class="fas fa-map-marker-alt"></i> مشهد</span>
+            </div>
+        </section>
+
+        <!-- ========== FLASH SALE ========== -->
+        <div class="flash-sale fade-up">
+            <i class="bi bi-lightning-charge-fill"></i>
+            <span>فروش ویژه مربیان </span>
+            <div class="countdown" id="countdown">
+                <span class="countdown-item" id="seconds">30</span>
+                <span class="countdown-item" id="minutes">45</span>:
+                <span class="countdown-item" id="hours">02</span>:
+            </div>
+        </div>
+
+        <!-- ========== SEARCH SECTION کیهانی ========== -->
+        <div class="search-cosmic fade-up">
+            <div class="search-icon">
+                <i class="bi bi-search"></i>
+            </div>
+            <input type="text" class="search-input-cosmic" id="searchInputCosmic"
+                placeholder="جستجوی مربیان، دوره‌ها، ...">
+            <div class="search-filters-cosmic">
+                <span class="search-filter-chip-cosmic active" data-search-filter="all">همه</span>
+                <span class="search-filter-chip-cosmic" data-search-filter="coaches">مربیان</span>
+                <span class="search-filter-chip-cosmic" data-search-filter="courses">دوره‌ها</span>
+                <span class="search-filter-chip-cosmic" data-search-filter="nft">محتوا</span>
+            </div>
+            <button class="search-btn-cosmic" id="searchBtnCosmic">
+                <i class="bi bi-arrow-left"></i>
+                جستجو
+            </button>
+        </div>
+
+        <!-- ========== RESULTS TABLE ========== -->
+        <div class="results-table-container" id="resultsTable">
+            <div class="table-header">
+                <div>#</div>
+                <div>نام</div>
+                <div>دسته‌بندی</div>
+                <div>قیمت (ETH)</div>
+                <div>امتیاز</div>
+                <div>عملیات</div>
+            </div>
+            <div id="tableRows">
+                <!-- دیتای داینامیک با جاوااسکریپت پر می‌شود -->
+            </div>
+        </div>
+
+        <!-- ========== MAIN GRID (بخش CTA) ========== -->
+        <!-- دکمه‌های تغییر تب -->
+        <div class="tab-buttons"
+            style="display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.5rem;">
+            <button class="tab-btn active" data-tab="coaches"
+                style="background: none; border: none; padding: 0.75rem 1.5rem; cursor: pointer; font-weight: 600; color: var(--text-primary); border-radius: var(--radius-full); transition: var(--transition-base);">
+                <i class="fas fa-users"></i> مربیان
+            </button>
+            <button class="tab-btn" data-tab="blog"
+                style="background: none; border: none; padding: 0.75rem 1.5rem; cursor: pointer; font-weight: 600; color: var(--text-muted); border-radius: var(--radius-full); transition: var(--transition-base);">
+                <i class="fas fa-blog"></i> وبلاگ
+            </button>
+            <button class="tab-btn" data-tab="shop"
+                style="background: none; border: none; padding: 0.75rem 1.5rem; cursor: pointer; font-weight: 600; color: var(--text-muted); border-radius: var(--radius-full); transition: var(--transition-base);">
+                <i class="fas fa-store"></i> فروشگاه
+            </button>
+            <button class="tab-btn" data-tab="marketplace"
+                style="background: none; border: none; padding: 0.75rem 1.5rem; cursor: pointer; font-weight: 600; color: var(--text-muted); border-radius: var(--radius-full); transition: var(--transition-base);">
+                <i class="fas fa-chart-line"></i> مارکت‌پلیس
+            </button>
+        </div>
+
+
+        <!-- تب‌ها -->
+        <div class="tab-content">
+            <!-- تب مربیان -->
+            <div class="tab-pane active" id="coaches-tab">
+                <div class="nft-grid">
+                    <!-- کارت‌های مربیان -->
+                    <a href="profile-coach.html">
+                        <div class="nft-card" data-category="fitness">
+                            <div class="card-media">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%235a4bda'/%3E%3Ctext x='150' y='170' font-family='Arial' font-size='30' fill='white' text-anchor='middle'%3Eرضا%3C/text%3E%3C/svg%3E"
+                                    alt="مربی">
+                                <div class="card-badge">#001</div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">رضا کاظمی</div>
+                                <div class="card-tags">
+                                    <span class="tag">فیتنس</span>
+                                    <span class="tag">کراسفیت</span>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="price">۲.۵ ETH</span>
+                                    <span class="rating">
+                                        <i class="bi bi-star-fill"></i>
+                                        ۴.۹
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="profile-coach.html">
+                        <div class="nft-card" data-category="yoga">
+                            <div class="card-media">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23e84393'/%3E%3Ctext x='150' y='170' font-family='Arial' font-size='30' fill='white' text-anchor='middle'%3Eسارا%3C/text%3E%3C/svg%3E"
+                                    alt="مربی">
+                                <div class="card-badge">#002</div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">سارا نادری</div>
+                                <div class="card-tags">
+                                    <span class="tag">یوگا</span>
+                                    <span class="tag">پیلاتس</span>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="price">۱.۸ ETH</span>
+                                    <span class="rating">
+                                        <i class="bi bi-star-fill"></i>
+                                        ۵.۰
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a><a href="profile-coach.html">
+                        <div class="nft-card" data-category="nutrition">
+                            <div class="card-media">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%2300b8b8'/%3E%3Ctext x='150' y='170' font-family='Arial' font-size='30' fill='white' text-anchor='middle'%3Eکاوه%3C/text%3E%3C/svg%3E"
+                                    alt="مربی">
+                                <div class="card-badge">#003</div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">دکتر کاوه</div>
+                                <div class="card-tags">
+                                    <span class="tag">تغذیه</span>
+                                    <span class="tag">متابولیسم</span>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="price">۳.۲ ETH</span>
+                                    <span class="rating">
+                                        <i class="bi bi-star-fill"></i>
+                                        ۴.۸
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="profile-coach.html">
+                        <div class="nft-card" data-category="bodybuilding">
+                            <div class="card-media">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23fdcb6e'/%3E%3Ctext x='150' y='170' font-family='Arial' font-size='30' fill='white' text-anchor='middle'%3Eعلی%3C/text%3E%3C/svg%3E"
+                                    alt="مربی">
+                                <div class="card-badge">#004</div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">علی حسینی</div>
+                                <div class="card-tags">
+                                    <span class="tag">بدنسازی</span>
+                                    <span class="tag">فیتنس</span>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="price">۲.۱ ETH</span>
+                                    <span class="rating">
+                                        <i class="bi bi-star-fill"></i>
+                                        ۴.۷
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- تب وبلاگ -->
+            <div class="tab-pane" id="blog-tab">
+                <div class="nft-grid">
+                    <div class="nft-card">
+                        <div class="card-media">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23302b63'/%3E%3Ctext x='150' y='170' font-family='Arial' font-size='30' fill='white' text-anchor='middle'%3Eمقاله%3C/text%3E%3C/svg%3E"
+                                alt="مقاله">
+                            <div class="card-badge">آموزشی</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-title">تمرینات هوشمند با AI</div>
+                            <div class="card-tags">
+                                <span class="tag">هوش مصنوعی</span>
+                                <span class="tag">فیتنس</span>
+                            </div>
+                            <div class="card-footer">
+                                <span class="price">رایگان</span>
+                                <span class="rating">۲۵۰ بازدید</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تب فروشگاه -->
+            <div class="tab-pane" id="shop-tab">
+                <div class="nft-grid">
+                    <div class="nft-card">
+                        <div class="card-media">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23e84393'/%3E%3Ctext x='150' y='170' font-family='Arial' font-size='30' fill='white' text-anchor='middle'%3Eپکیج%3C/text%3E%3C/svg%3E"
+                                alt="محصول">
+                            <div class="card-badge">ویژه</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-title"> پکیج مربیان</div>
+                            <div class="card-tags">
+                                <span class="tag">کلکسیون</span>
+                                <span class="tag">محدود</span>
+                            </div>
+                            <div class="card-footer">
+                                <span class="price">۵ ETH</span>
+                                <span class="rating">۱۰ عدد باقی‌مانده</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تب مارکت‌پلیس -->
+            <div class="tab-pane" id="marketplace-tab">
+                <div class="nft-grid">
+                    <div class="nft-card">
+                        <div class="card-media">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%235a4bda'/%3E%3Ctext x='150' y='170' font-family='Arial' font-size='30' fill='white' text-anchor='middle'%3E#045%3C/text%3E%3C/svg%3E"
+                                alt="NFT">
+                            <div class="card-badge">#045</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-title">Genesis Coach #45</div>
+                            <div class="card-tags">
+                                <span class="tag">لجندری</span>
+                                <span class="tag">نسخه اول</span>
+                            </div>
+                            <div class="card-footer">
+                                <span class="price">۱۲ ETH</span>
+                                <span class="rating">۴.۹</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- ========== CTA SECTION ========== -->
+        <div class="cta-advanced">
+            <div class="cta-glow"></div>
+            <div class="cta-content">
+                <div class="cta-badge">
+                    <i class="fas fa-crown"></i> فرصت ویژه مربیان
+                </div>
+
+                <h2 class="cta-title">
+                    به جمع
+                    <span class="gradient-text">مربیان حرفه‌ای</span>
+                    بپیوند
+                </h2>
+
+                <p class="cta-description">
+                    با <strong>GAMva</strong> به خانواده بزرگ مربیان ورزشی بپیوند.
+                    شاگردان خود را مدیریت کن، برنامه‌های تمرینی حرفه‌ای طراحی کن
+                    و درآمد خود را <strong>چندین برابر</strong> کن. تخصص تو، ارزش واقعی!
+                </p>
+
+                <div class="cta-features">
+                    <div class="feature-pill">
+                        <i class="fas fa-chalkboard-user"></i>
+                        <span>داشبورد حرفه‌ای</span>
+                    </div>
+                    <div class="feature-pill">
+                        <i class="fas fa-chart-line"></i>
+                        <span>تحلیل پیشرفته</span>
+                    </div>
+                    <div class="feature-pill">
+                        <i class="fas fa-users"></i>
+                        <span>مدیریت شاگردان</span>
+                    </div>
+                </div>
+                <a href="request-coach.html">
+                    <button class="cta-button" id="becomeCoachBtn">
+                        <span>شروع کن</span>
+                        <i class="fas fa-arrow-left"></i>
+                        <div class="button-glow"></div>
+                    </button>
+                </a>
+                <div class="cta-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">
+                            <span class="counter" data-target="1240">۱,۲۴۰</span>
+                            <i class="fas fa-chalkboard-user"></i>
+                        </div>
+                        <div class="stat-label">مربی فعال</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">
+                            <span class="counter" data-target="8230">۸,۲۳۰</span>
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-label">شاگرد موفق</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">
+                            <span class="counter" data-target="4.78">۴.۸</span>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-label">رضایت کاربران</div>
+                    </div>
+                </div>
+            </div>
+            <!-- دکوراسیون بصری متناسب با ورزش -->
+            <div class="cta-decoration">
+                <div class="sport-icon">
+                    <i class="fas fa-dumbbell"></i>
+                    <div class="sport-pulse"></div>
+                </div>
+                <div class="floating-coin coin-1">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <div class="floating-coin coin-2">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="floating-coin coin-3">
+                    <i class="fas fa-fire"></i>
+                </div>
+            </div>
+        </div>
+        <!-- دکوراسیون بصری -->
+        <div class="cta-decoration">
+            <div class="nft-card-icon">
+                <i class="fas fa-image"></i>
+                <div class="nft-pulse"></div>
+            </div>
+            <div class="floating-coin coin-1">
+                <i class="fas fa-coins"></i>
+            </div>
+            <div class="floating-coin coin-2">
+                <i class="fas fa-bitcoin"></i>
+            </div>
+            <div class="floating-coin coin-3">
+                <i class="fas fa-chart-line"></i>
+            </div>
+        </div>
+        </div>
+
+        <!-- ========== بخش نظرات مربیان موفق (استاتیک - ۴ کارت) ========== -->
+        <div class="testimonials-section">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-chalkboard-user"></i> حرف دل مربیان
+                </div>
+                <h2 class="section-title">
+                    <span class="gradient-text">مربیان موفق</span> چه می‌گویند؟
+                </h2>
+                <p class="section-desc">
+                    بیش از <strong>۲,۰۰۰ مربی</strong> به GAMva اعتماد کرده‌اند و درآمد خود را چندین برابر کرده‌اند
+                </p>
+                <div class="header-decoration">
+                    <span class="decoration-line"></span>
+                    <i class="fas fa-quote-right"></i>
+                    <span class="decoration-line"></span>
+                </div>
+            </div>
+
+            <div class="testimonials-grid">
+                <!-- کارت ۱ -->
+                <div class="testimonial-card">
+                    <div class="card-glow"></div>
+                    <div class="testimonial-avatar-wrapper">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="علی محمدی"
+                            class="testimonial-avatar">
+                        <div class="verified-badge">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-text">
+                        "کمتر از ۳ ماهه که با GAMva کار میکنم، درآمدم <strong>۳ برابر</strong> شده! الان بیش از ۴۰ شاگرد
+                        فعال دارم و برنامه‌های تمرینیم همیشه پر است."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-name">علی محمدی</div>
+                        <div class="author-title"><i class="fas fa-dumbbell"></i> مربی بدنسازی | ۸ سال سابقه</div>
+                    </div>
+                    <div class="testimonial-stats-mini">
+                        <div class="stat-mini"><i class="fas fa-chart-line"></i><span>+۲۰۰٪ درآمد</span></div>
+                        <div class="stat-mini"><i class="fas fa-users"></i><span>۴۲ شاگرد</span></div>
+                        <div class="stat-mini"><i class="fas fa-calendar"></i><span>۳ ماه</span></div>
+                    </div>
+                </div>
+
+                <!-- کارت ۲ -->
+                <div class="testimonial-card">
+                    <div class="card-glow"></div>
+                    <div class="testimonial-avatar-wrapper">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="سارا احمدی"
+                            class="testimonial-avatar">
+                        <div class="verified-badge">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-text">
+                        "قبلاً به سختی می‌تونستم شاگرد جدید پیدا کنم. با GAMva الان <strong>صف انتظار</strong> برای
+                        جلساتم دارم. پلتفرم بی‌نظیریه!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-name">سارا احمدی</div>
+                        <div class="author-title"><i class="fas fa-heartbeat"></i> مربی اصلاحی | ۶ سال سابقه</div>
+                    </div>
+                    <div class="testimonial-stats-mini">
+                        <div class="stat-mini"><i class="fas fa-chart-line"></i><span>+۱۵۰٪ درآمد</span></div>
+                        <div class="stat-mini"><i class="fas fa-users"></i><span>۳۵ شاگرد</span></div>
+                        <div class="stat-mini"><i class="fas fa-trophy"></i><span>مربی ماه</span></div>
+                    </div>
+                </div>
+
+                <!-- کارت ۳ -->
+                <div class="testimonial-card">
+                    <div class="card-glow"></div>
+                    <div class="testimonial-avatar-wrapper">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="رضا کریمی"
+                            class="testimonial-avatar">
+                        <div class="verified-badge">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="testimonial-text">
+                        "ابزارهای تحلیلی GAMva <strong>فوق‌العاده‌ست</strong>. می‌تونم پیشرفت هر شاگرد رو دقیق رصد کنم و
+                        برنامه رو بهینه کنم. بهترین سرمایه‌گذاری بود."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-name">رضا کریمی</div>
+                        <div class="author-title"><i class="fas fa-apple-alt"></i> مربی تغذیه | ۵ سال سابقه</div>
+                    </div>
+                    <div class="testimonial-stats-mini">
+                        <div class="stat-mini"><i class="fas fa-chart-line"></i><span>+۱۸۰٪ درآمد</span></div>
+                        <div class="stat-mini"><i class="fas fa-users"></i><span>۵۰+ شاگرد</span></div>
+                        <div class="stat-mini"><i class="fas fa-award"></i><span>تأیید شده</span></div>
+                    </div>
+                </div>
+
+                <!-- کارت ۴ -->
+                <div class="testimonial-card">
+                    <div class="card-glow"></div>
+                    <div class="testimonial-avatar-wrapper">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="نرگس تقوی"
+                            class="testimonial-avatar">
+                        <div class="verified-badge">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-text">
+                        "با GAMva تونستم <strong>برند شخصی</strong> خودم رو بسازم. الان شاگردای من از سراسر ایران هستن و
+                        هیچوقت اینقدر راضی نبودم."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-name">نرگس تقوی</div>
+                        <div class="author-title"><i class="fas fa-peace"></i> مربی یوگا | ۹ سال سابقه</div>
+                    </div>
+                    <div class="testimonial-stats-mini">
+                        <div class="stat-mini"><i class="fas fa-chart-line"></i><span>+۲۵۰٪ درآمد</span></div>
+                        <div class="stat-mini"><i class="fas fa-users"></i><span>۶۰+ شاگرد</span></div>
+                        <div class="stat-mini"><i class="fas fa-globe"></i><span>آنلاین</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== کاروسل مربیان برتر (نسخه دوم) ========== -->
+        <section class="coach-carousel-section">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">مربیان برتر GAMva</h2>
+                    <p style="color: var(--text-muted); margin-top: 1rem;">متخصصان برگزیده در کنار شمایند</p>
+                </div>
+                <div class="carousel-nav">
+                    <button class="carousel-btn" id="coachPrev"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-btn" id="coachNext"><i class="fas fa-chevron-left"></i></button>
+                </div>
+            </div>
+
+            <div class="carousel-container">
+                <div class="carousel-track" id="coachTrack">
+                    <!-- کارت مربی ۱ -->
+                    <div class="coach-card">
+                        <span class="card-badge-carousel">ممتاز</span>
+                        <div class="card-header">
+                            <div class="card-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>دکتر امیر محمدی</h3>
+                                <p>متخصص تغذیه ورزشی</p>
+                            </div>
+                        </div>
+                        <div class="coach-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span style="color: var(--text-muted); margin-right: 0.5rem;">۴.۸</span>
+                        </div>
+                        <div class="coach-tags">
+                            <span class="tag">تغذیه</span>
+                            <span class="tag">ورزشی</span>
+                            <span class="tag">کاهش وزن</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: var(--font-sm); margin: 1rem 0;">
+                            بیش از ۱۰ سال سابقه، متخصص تغذیه ورزشی و رژیم‌درمانی
+                        </p>
+                        <div class="card-footer">
+                            <span class="price">از ۲۵۰,۰۰۰ تومان</span>
+                            <button class="btn-card">رزرو جلسه</button>
+                        </div>
+                    </div>
+
+                    <!-- کارت مربی ۲ -->
+                    <div class="coach-card">
+                        <span class="card-badge-carousel">VIP</span>
+                        <div class="card-header">
+                            <div class="card-avatar">
+                                <i class="fas fa-user-nurse"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>مهسا رضایی</h3>
+                                <p>مربی توسعه فردی</p>
+                            </div>
+                        </div>
+                        <div class="coach-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span style="color: var(--text-muted); margin-right: 0.5rem;">۵.۰</span>
+                        </div>
+                        <div class="coach-tags">
+                            <span class="tag">مدیریت استرس</span>
+                            <span class="tag">عادت‌سازی</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: var(--font-sm); margin: 1rem 0;">
+                            کوچ حرفه‌ای توسعه فردی، متخصص ایجاد عادت‌های پایدار
+                        </p>
+                        <div class="card-footer">
+                            <span class="price">از ۱۸۰,۰۰۰ تومان</span>
+                            <button class="btn-card">رزرو جلسه</button>
+                        </div>
+                    </div>
+
+                    <!-- کارت مربی ۳ -->
+                    <div class="coach-card">
+                        <div class="card-header">
+                            <div class="card-avatar">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>دکتر سارا احمدی</h3>
+                                <p>روانشناس بالینی</p>
+                            </div>
+                        </div>
+                        <div class="coach-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span style="color: var(--text-muted); margin-right: 0.5rem;">۴.۹</span>
+                        </div>
+                        <div class="coach-tags">
+                            <span class="tag">سلامت روان</span>
+                            <span class="tag">مشاوره</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: var(--font-sm); margin: 1rem 0;">
+                            دکترای روانشناسی بالینی، متخصص درمان اضطراب و افسردگی
+                        </p>
+                        <div class="card-footer">
+                            <span class="price">از ۳۲۰,۰۰۰ تومان</span>
+                            <button class="btn-card">رزرو جلسه</button>
+                        </div>
+                    </div>
+
+                    <!-- کارت مربی ۴ -->
+                    <div class="coach-card">
+                        <span class="card-badge-carousel">جدید</span>
+                        <div class="card-header">
+                            <div class="card-avatar">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>امیر کریمی</h3>
+                                <p>مربی بدنسازی</p>
+                            </div>
+                        </div>
+                        <div class="coach-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span style="color: var(--text-muted); margin-right: 0.5rem;">۵.۰</span>
+                        </div>
+                        <div class="coach-tags">
+                            <span class="tag">بدنسازی</span>
+                            <span class="tag">فیتنس</span>
+                            <span class="tag">افزایش حجم</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: var(--font-sm); margin: 1rem 0;">
+                            مربی حرفه‌ای بدنسازی با سابقه قهرمانی در مسابقات کشوری
+                        </p>
+                        <div class="card-footer">
+                            <span class="price">از ۱۵۰,۰۰۰ تومان</span>
+                            <button class="btn-card">رزرو جلسه</button>
+                        </div>
+                    </div>
+
+                    <!-- کارت مربی ۵ -->
+                    <div class="coach-card">
+                        <div class="card-header">
+                            <div class="card-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>زهرا محمدیان</h3>
+                                <p>مربی یوگا</p>
+                            </div>
+                        </div>
+                        <div class="coach-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span style="color: var(--text-muted); margin-right: 0.5rem;">۵.۰</span>
+                        </div>
+                        <div class="coach-tags">
+                            <span class="tag">یوگا</span>
+                            <span class="tag">مدیتیشن</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: var(--font-sm); margin: 1rem 0;">
+                            مربی بین‌المللی یوگا، متخصص یوگای درمانی و مدیتیشن
+                        </p>
+                        <div class="card-footer">
+                            <span class="price">از ۱۸۰,۰۰۰ تومان</span>
+                            <button class="btn-card">رزرو جلسه</button>
+                        </div>
+                    </div>
+
+
+                    <!-- کارت مربی ۲ -->
+                    <div class="coach-card">
+                        <span class="card-badge-carousel">VIP</span>
+                        <div class="card-header">
+                            <div class="card-avatar">
+                                <i class="fas fa-user-nurse"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>مهسا رضایی</h3>
+                                <p>مربی توسعه فردی</p>
+                            </div>
+                        </div>
+                        <div class="coach-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span style="color: var(--text-muted); margin-right: 0.5rem;">۵.۰</span>
+                        </div>
+                        <div class="coach-tags">
+                            <span class="tag">مدیریت استرس</span>
+                            <span class="tag">عادت‌سازی</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: var(--font-sm); margin: 1rem 0;">
+                            کوچ حرفه‌ای توسعه فردی، متخصص ایجاد عادت‌های پایدار
+                        </p>
+                        <div class="card-footer">
+                            <span class="price">از ۱۸۰,۰۰۰ تومان</span>
+                            <button class="btn-card">رزرو جلسه</button>
+                        </div>
+                    </div>
+
+                    <!-- کارت مربی ۳ -->
+                    <div class="coach-card">
+                        <div class="card-header">
+                            <div class="card-avatar">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>دکتر سارا احمدی</h3>
+                                <p>روانشناس بالینی</p>
+                            </div>
+                        </div>
+                        <div class="coach-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span style="color: var(--text-muted); margin-right: 0.5rem;">۴.۹</span>
+                        </div>
+                        <div class="coach-tags">
+                            <span class="tag">سلامت روان</span>
+                            <span class="tag">مشاوره</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: var(--font-sm); margin: 1rem 0;">
+                            دکترای روانشناسی بالینی، متخصص درمان اضطراب و افسردگی
+                        </p>
+                        <div class="card-footer">
+                            <span class="price">از ۳۲۰,۰۰۰ تومان</span>
+                            <button class="btn-card">رزرو جلسه</button>
+                        </div>
+                    </div>
+
+                    <!-- کارت مربی ۴ -->
+                    <div class="coach-card">
+                        <span class="card-badge-carousel">جدید</span>
+                        <div class="card-header">
+                            <div class="card-avatar">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>امیر کریمی</h3>
+                                <p>مربی بدنسازی</p>
+                            </div>
+                        </div>
+                        <div class="coach-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span style="color: var(--text-muted); margin-right: 0.5rem;">۵.۰</span>
+                        </div>
+                        <div class="coach-tags">
+                            <span class="tag">بدنسازی</span>
+                            <span class="tag">فیتنس</span>
+                            <span class="tag">افزایش حجم</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: var(--font-sm); margin: 1rem 0;">
+                            مربی حرفه‌ای بدنسازی با سابقه قهرمانی در مسابقات کشوری
+                        </p>
+                        <div class="card-footer">
+                            <span class="price">از ۱۵۰,۰۰۰ تومان</span>
+                            <button class="btn-card">رزرو جلسه</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== چالش‌های گیمیفیکیشن ========== -->
+        <section>
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">چالش‌های سبز و پاداش‌ها</h2>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">با هر قدم، دنیا رو سبزتر کن</p>
+                </div>
+            </div>
+
+            <div class="challenge-grid">
+                <a href="dashboard-user.html">
+                    <div class="challenge-card fade-up">
+                        <div class="challenge-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <h3>چالش درخت‌کاری</h3>
+                        <p>با ۱۰۰,۰۰۰ قدم، یک درخت به نام تو کاشته می‌شود</p>
+                        <div class="challenge-progress">
+                            <div class="progress-bar" style="width: 65%;"></div>
+                        </div>
+                        <span class="reward-badge">+۵۰۰ امتیاز سبز</span>
+                    </div>
+                </a>
+
+                <a href="dashboard-user.html">
+                    <div class="challenge-card fade-up">
+                        <div class="challenge-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <h3>چالش روزانه</h3>
+                        <p>امروز ۲۰ دقیقه ورزش کن و جایزه بگیر</p>
+                        <div class="challenge-progress">
+                            <div class="progress-bar" style="width: 30%;"></div>
+                        </div>
+                        <span class="reward-badge">۲۰۰ سکه</span>
+                    </div>
+                </a>
+
+                <a href="dashboard-user.html">
+                    <div class="challenge-card fade-up">
+                        <div class="challenge-icon">
+                            <i class="fas fa-apple-alt"></i>
+                        </div>
+                        <h3>رژیم هوشمند</h3>
+                        <p>۷ روز بدون قند، ۳۰٪ تخفیف خرید</p>
+                        <div class="challenge-progress">
+                            <div class="progress-bar" style="width: 80%;"></div>
+                        </div>
+                        <span class="reward-badge">ویژه اعضا</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ========== فروشگاه موقعیت‌محور ========== -->
+        <section>
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">فروشگاه نزدیک شما</h2>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">بر اساس موقعیت مکانی و فصل</p>
+                </div>
+            </div>
+
+            <div class="shop-grid">
+                <a href="single-product.html">
+                    <div class="product-card fade-up">
+                        <div class="product-icon">
+                            <i class="fas fa-apple-alt"></i>
+                        </div>
+                        <h3>مکمل پروتئین</h3>
+                        <div class="product-location">
+                            <i class="fas fa-map-marker-alt"></i> ۲ کیلومتری
+                        </div>
+                        <div class="product-price">۳۲۰,۰۰۰ تومان</div>
+                        <span class="product-discount">۲۰٪ تخفیف</span>
+                    </div>
+                </a>
+
+                <a href="single-product.html">
+                    <div class="product-card fade-up">
+                        <div class="product-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <h3>لباس ورزشی</h3>
+                        <div class="product-location">
+                            <i class="fas fa-map-marker-alt"></i> ۳.۵ کیلومتری
+                        </div>
+                        <div class="product-price">۴۵۰,۰۰۰ تومان</div>
+                        <span class="product-discount">۳۰٪ تخفیف</span>
+                    </div>
+                </a>
+
+                <a href="single-product.html">
+                    <div class="product-card fade-up">
+                        <div class="product-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>کتاب عادت‌های اتمی</h3>
+                        <div class="product-location">
+                            <i class="fas fa-map-marker-alt"></i> ارسال رایگان
+                        </div>
+                        <div class="product-price">۱۲۰,۰۰۰ تومان</div>
+                        <span class="product-discount">۵۰٪ تخفیف</span>
+                    </div>
+                </a>
+
+                <a href="single-product.html">
+                    <div class="product-card fade-up">
+                        <div class="product-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>ساعت هوشمند</h3>
+                        <div class="product-location">
+                            <i class="fas fa-map-marker-alt"></i> ۵ کیلومتری
+                        </div>
+                        <div class="product-price">۱,۸۵۰,۰۰۰ تومان</div>
+                        <span class="product-discount">۱۰٪ تخفیف</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ========== بخش ویژه فروشندگان فروشگاهی ========== -->
+        <div class="seller-spot fade-up">
+            <div class="seller-spot-content">
+                <div class="seller-spot-icon">
+                    <i class="fas fa-store"></i>
+                    <div class="icon-pulse"></div>
+                </div>
+                <div class="seller-spot-info">
+                    <div class="seller-badge">
+                        <i class="fas fa-crown"></i> فرصت ویژه فروشندگان
+                    </div>
+                    <h4 class="seller-title">
+                        <span class="highlight">فروشنده شو</span> و فروشت رو چند برابر کن!
+                    </h4>
+                    <p class="seller-desc">
+                        با GAMva به جمع <strong>۵۰۰+ فروشنده موفق</strong> بپیوند.
+                        محصولات ورزشی، مکمل‌ها، لباس و تجهیزات خود را به <strong>۲,۰۰۰+ مربی و شاگرد</strong> معرفی کن
+                    </p>
+                    <div class="seller-features">
+                        <div class="feature-chip">
+                            <i class="fas fa-check-circle"></i>
+                            <span>ثبت‌نام رایگان</span>
+                        </div>
+                        <div class="feature-chip">
+                            <i class="fas fa-gift"></i>
+                            <span>یک ماه رایگان</span>
+                        </div>
+                        <div class="feature-chip">
+                            <i class="fas fa-percent"></i>
+                            <span>کمیسیون ۰٪</span>
+                        </div>
+                        <div class="feature-chip">
+                            <i class="fas fa-chart-line"></i>
+                            <span>بازاریابی هدفمند</span>
+                        </div>
+                        <div class="feature-chip">
+                            <i class="fas fa-headset"></i>
+                            <span>پشتیبانی ویژه</span>
+                        </div>
+                    </div>
+                    <div class="seller-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">۵۰۰+</span>
+                            <span class="stat-label">فروشنده فعال</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">۱۲,۰۰۰+</span>
+                            <span class="stat-label">مشتری هدف</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">۴.۹۵</span>
+                            <span class="stat-label">رضایت فروشندگان</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="request-seller.html">
+                    <button class="seller-cta-btn" id="becomeSellerBtn">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>ثبت‌نام به عنوان فروشنده</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                </a>
+            </div>
+            <div class="seller-spot-bg"></div>
+        </div>
+
+        <!-- ========== محتوا ========== -->
+        <section class="content-showcase">
+            <div class="section-header">
+                <div>
+                    <a href="content-list.html">
+                        <h2 class="section-title">رسانه GAMva</h2>
+                    </a>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">پادکست، ویدئو و مقالات تخصصی</p>
+                </div>
+            </div>
+
+            <!-- دسته‌بندی محتوا -->
+            <div class="content-categories">
+                <span class="category-tab active" data-category="all">همه</span>
+                <span class="category-tab" data-category="podcast"><i class="fas fa-podcast"></i> پادکست</span>
+                <span class="category-tab" data-category="video"><i class="fas fa-video"></i> ویدئو</span>
+                <span class="category-tab" data-category="article"><i class="fas fa-newspaper"></i> مقاله</span>
+            </div>
+
+            <!-- پنل همه محتواها -->
+            <div class="content-panel active" id="all-content">
+                <div class="content-grid">
+                    <!-- پادکست -->
+                    <a href="content-podcast-detail.html">
+                        <div class="content-card-modern">
+                            <div class="content-media">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%235a4bda'/%3E%3Ctext x='200' y='120' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3Eپادکست%3C/text%3E%3C/svg%3E"
+                                    alt="پادکست">
+                                <span class="content-overlay"><i class="fas fa-headphones"></i> پادکست</span>
+                                <span class="content-duration">۳۵ دقیقه</span>
+                            </div>
+                            <div class="content-details">
+                                <h3 class="content-title-modern">#۱۰ - روانشناسی کاهش وزن</h3>
+                                <p class="content-excerpt-modern">با دکتر سارا محمدی، روانشناس بالینی در مورد ریشه‌های
+                                    روانشناسی پرخوری گفتگو می‌کنیم.</p>
+                                <div class="content-meta-modern">
+                                    <div class="content-author">
+                                        <div class="author-avatar">د</div>
+                                        <span class="author-name">دکتر سارا محمدی</span>
+                                    </div>
+                                    <div class="content-stats">
+                                        <span><i class="fas fa-headphones"></i> ۲.۳K</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="content-link-modern">گوش دادن <i class="fas fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- ویدئو -->
+                    <a href="content-video-list.html">
+                        <div class="content-card-modern">
+                            <div class="content-media">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%2300b8b8'/%3E%3Ctext x='200' y='120' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3Eویدئو%3C/text%3E%3C/svg%3E"
+                                    alt="ویدئو">
+                                <span class="content-overlay"><i class="fas fa-video"></i> ویدئو</span>
+                                <span class="content-duration">۱۲ دقیقه</span>
+                            </div>
+                            <div class="content-details">
+                                <h3 class="content-title-modern">حرکات اصلاحی برای گردن درد</h3>
+                                <p class="content-excerpt-modern">تمرینات ساده برای کارمندان و افرادی که ساعات طولانی
+                                    پشت
+                                    میز می‌نشینند.</p>
+                                <div class="content-meta-modern">
+                                    <div class="content-author">
+                                        <div class="author-avatar">ا</div>
+                                        <span class="author-name">امیر کریمی</span>
+                                    </div>
+                                    <div class="content-stats">
+                                        <span><i class="fas fa-eye"></i> ۱.۸K</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="content-link-modern">تماشا <i class="fas fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- مقاله -->
+                    <a href="contents-post.html">
+                        <div class="content-card-modern">
+                            <div class="content-media">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23e84393'/%3E%3Ctext x='200' y='120' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3Eمقاله%3C/text%3E%3C/svg%3E"
+                                    alt="مقاله">
+                                <span class="content-overlay"><i class="fas fa-newspaper"></i> مقاله</span>
+                                <span class="content-duration">۸ دقیقه مطالعه</span>
+                            </div>
+                            <div class="content-details">
+                                <h3 class="content-title-modern">چگونه متابولیسم را افزایش دهیم؟</h3>
+                                <p class="content-excerpt-modern">۱۰ راهکار علمی برای افزایش سوخت و ساز بدن و کاهش وزن
+                                    پایدار.</p>
+                                <div class="content-meta-modern">
+                                    <div class="content-author">
+                                        <div class="author-avatar">د</div>
+                                        <span class="author-name">دکتر کاوه</span>
+                                    </div>
+                                    <div class="content-stats">
+                                        <span><i class="fas fa-eye"></i> ۳.۲K</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="content-link-modern">مطالعه <i class="fas fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- پادکست دوم -->
+                    <a href="content-podcast-detail.html">
+                        <div class="content-card-modern">
+                            <div class="content-media">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%235a4bda'/%3E%3Ctext x='200' y='120' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3Eپادکست%3C/text%3E%3C/svg%3E"
+                                    alt="پادکست">
+                                <span class="content-overlay"><i class="fas fa-headphones"></i> پادکست</span>
+                                <span class="content-duration">۴۲ دقیقه</span>
+                            </div>
+                            <div class="content-details">
+                                <h3 class="content-title-modern">#۹ - عادت‌سازی پایدار</h3>
+                                <p class="content-excerpt-modern">چگونه عادت‌های خوب را در زندگی نهادینه کنیم و از
+                                    عادت‌های
+                                    بد رها شویم.</p>
+                                <div class="content-meta-modern">
+                                    <div class="content-author">
+                                        <div class="author-avatar">م</div>
+                                        <span class="author-name">مهسا رضایی</span>
+                                    </div>
+                                    <div class="content-stats">
+                                        <span><i class="fas fa-headphones"></i> ۱.۹K</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="content-link-modern">گوش دادن <i class="fas fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- پنل اختصاصی پادکست (مخفی بجز وقتی که انتخاب شود) -->
+            <div class="content-panel" id="podcast-content">
+                <div class="content-grid">
+                    <!-- فقط پادکست‌ها -->
+                    <a href="content-podcast-detail.html">
+                        <div class="content-card-modern">
+                            <div class="content-media">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%235a4bda'/%3E%3Ctext x='200' y='120' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3Eپادکست%3C/text%3E%3C/svg%3E"
+                                    alt="پادکست">
+                                <span class="content-overlay"><i class="fas fa-headphones"></i> پادکست</span>
+                                <span class="content-duration">۳۵ دقیقه</span>
+                            </div>
+                            <div class="content-details">
+                                <h3 class="content-title-modern">#۱۰ - روانشناسی کاهش وزن</h3>
+                                <p class="content-excerpt-modern">با دکتر سارا محمدی، روانشناس بالینی در مورد ریشه‌های
+                                    روانشناسی پرخوری گفتگو می‌کنیم.</p>
+                                <div class="content-meta-modern">
+                                    <div class="content-author">
+                                        <div class="author-avatar">د</div>
+                                        <span class="author-name">دکتر سارا محمدی</span>
+                                    </div>
+                                    <div class="content-stats">
+                                        <span><i class="fas fa-headphones"></i> ۲.۳K</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="content-link-modern">گوش دادن <i class="fas fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="content-podcast-detail.html">
+                        <div class="content-card-modern">
+                            <div class="content-media">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%235a4bda'/%3E%3Ctext x='200' y='120' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3Eپادکست%3C/text%3E%3C/svg%3E"
+                                    alt="پادکست">
+                                <span class="content-overlay"><i class="fas fa-headphones"></i> پادکست</span>
+                                <span class="content-duration">۴۲ دقیقه</span>
+                            </div>
+                            <div class="content-details">
+                                <h3 class="content-title-modern">#۹ - عادت‌سازی پایدار</h3>
+                                <p class="content-excerpt-modern">چگونه عادت‌های خوب را در زندگی نهادینه کنیم و از
+                                    عادت‌های
+                                    بد رها شویم.</p>
+                                <div class="content-meta-modern">
+                                    <div class="content-author">
+                                        <div class="author-avatar">م</div>
+                                        <span class="author-name">مهسا رضایی</span>
+                                    </div>
+                                    <div class="content-stats">
+                                        <span><i class="fas fa-headphones"></i> ۱.۹K</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="content-link-modern">گوش دادن <i class="fas fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- پنل اختصاصی ویدئو -->
+            <div class="content-panel" id="video-content">
+                <div class="content-grid">
+                    <a href="content-video-list.html">
+                        <div class="content-card-modern">
+                            <div class="content-media">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%2300b8b8'/%3E%3Ctext x='200' y='120' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3Eویدئو%3C/text%3E%3C/svg%3E"
+                                    alt="ویدئو">
+                                <span class="content-overlay"><i class="fas fa-video"></i> ویدئو</span>
+                                <span class="content-duration">۱۲ دقیقه</span>
+                            </div>
+                            <div class="content-details">
+                                <h3 class="content-title-modern">حرکات اصلاحی برای گردن درد</h3>
+                                <p class="content-excerpt-modern">تمرینات ساده برای کارمندان و افرادی که ساعات طولانی
+                                    پشت
+                                    میز می‌نشینند.</p>
+                                <div class="content-meta-modern">
+                                    <div class="content-author">
+                                        <div class="author-avatar">ا</div>
+                                        <span class="author-name">امیر کریمی</span>
+                                    </div>
+                                    <div class="content-stats">
+                                        <span><i class="fas fa-eye"></i> ۱.۸K</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="content-link-modern">تماشا <i class="fas fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="content-video-list.html">
+                        <div class="content-card-modern">
+                            <div class="content-media">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%2300b8b8'/%3E%3Ctext x='200' y='120' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3Eویدئو%3C/text%3E%3C/svg%3E"
+                                    alt="ویدئو">
+                                <span class="content-overlay"><i class="fas fa-video"></i> ویدئو</span>
+                                <span class="content-duration">۱۸ دقیقه</span>
+                            </div>
+                            <div class="content-details">
+                                <h3 class="content-title-modern">تمرینات اینتروال برای چربی سوزی</h3>
+                                <p class="content-excerpt-modern">برنامه HIIT ۲۰ دقیقه‌ای برای سوزاندن کالری و افزایش
+                                    استقامت.</p>
+                                <div class="content-meta-modern">
+                                    <div class="content-author">
+                                        <div class="author-avatar">ر</div>
+                                        <span class="author-name">رضا کاظمی</span>
+                                    </div>
+                                    <div class="content-stats">
+                                        <span><i class="fas fa-eye"></i> ۲.۱K</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="content-link-modern">تماشا <i class="fas fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- پنل اختصاصی مقاله -->
+            <div class="content-panel" id="article-content">
+                <div class="content-grid">
+                    <a href="contents-post.html">
+                        <div class="content-card-modern">
+                            <div class="content-media">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23e84393'/%3E%3Ctext x='200' y='120' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3Eمقاله%3C/text%3E%3C/svg%3E"
+                                    alt="مقاله">
+                                <span class="content-overlay"><i class="fas fa-newspaper"></i> مقاله</span>
+                                <span class="content-duration">۸ دقیقه مطالعه</span>
+                            </div>
+                            <div class="content-details">
+                                <h3 class="content-title-modern">چگونه متابولیسم را افزایش دهیم؟</h3>
+                                <p class="content-excerpt-modern">۱۰ راهکار علمی برای افزایش سوخت و ساز بدن و کاهش وزن
+                                    پایدار.</p>
+                                <div class="content-meta-modern">
+                                    <div class="content-author">
+                                        <div class="author-avatar">د</div>
+                                        <span class="author-name">دکتر کاوه</span>
+                                    </div>
+                                    <div class="content-stats">
+                                        <span><i class="fas fa-eye"></i> ۳.۲K</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="content-link-modern">مطالعه <i class="fas fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="contents-post.html">
+                        <div class="content-card-modern">
+                            <div class="content-media">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23e84393'/%3E%3Ctext x='200' y='120' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3Eمقاله%3C/text%3E%3C/svg%3E"
+                                    alt="مقاله">
+                                <span class="content-overlay"><i class="fas fa-newspaper"></i> مقاله</span>
+                                <span class="content-duration">۵ دقیقه مطالعه</span>
+                            </div>
+                            <div class="content-details">
+                                <h3 class="content-title-modern">راهنمای تغذیه برای ورزشکاران</h3>
+                                <p class="content-excerpt-modern">قبل و بعد از تمرین چه بخوریم؟ بهترین زمان مصرف پروتئین
+                                    و
+                                    کربوهیدرات.</p>
+                                <div class="content-meta-modern">
+                                    <div class="content-author">
+                                        <div class="author-avatar">د</div>
+                                        <span class="author-name">دکتر کاوه</span>
+                                    </div>
+                                    <div class="content-stats">
+                                        <span><i class="fas fa-eye"></i> ۱.۵K</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="content-link-modern">مطالعه <i class="fas fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========== فوتر ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">GAMva</div>
+                    <p class="footer-text">اکوسیستم هوشمند سلامت و توسعه فردی با قدرت هوش مصنوعی. همراه شما در مسیر
+                        سلامتی.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="footer-title">مربیان</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> مربیان ورزشی</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> مربیان تغذیه</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> توسعه فردی</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> روانشناسان</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="footer-title">فروشگاه</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> محصولات ارگانیک</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> لباس ورزشی</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> مکمل‌ها</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> کتاب‌ها</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="footer-title">پشتیبانی</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> سوالات متداول</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> قوانین و مقررات</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> حریم خصوصی</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="footer-title">خبرنامه</h3>
+                    <p class="footer-text">با عضویت در خبرنامه، از تخفیف‌ها و رویدادها باخبر شوید.</p>
+                    <div class="newsletter-box">
+                        <input type="email" placeholder="ایمیل شما">
+                        <button>عضویت</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>© ۲۰۲۵ تمامی حقوق برای GAMva محفوظ است.</div>
+                <div class="footer-bottom-links">
+                    <a href="#" style="color: var(--text-muted); text-decoration: none;">شرایط استفاده</a>
+                    <a href="#" style="color: var(--text-muted); text-decoration: none; margin-right: 1rem;">حریم
+                        خصوصی</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ویجت پشتیبانی -->
+    <div class="support-widget">
+        <a href="telegram_user.html">
+            <button class="support-btn" id="supportBtn">
+                <i class="fas fa-headset"></i>
+                <span class="support-tooltip">پشتیبانی ۲۴/۷</span>
+            </button></a>
+    </div>
+
+    <!-- ========== اسکریپت‌ها ========== -->
+    <script src="assets/scripts.js"></script>
+</body>
+
+</html>
