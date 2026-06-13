@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>حریم خصوصی | GAMva</title>
+    <meta name="description" content="سیاست حفظ حریم خصوصی GAMva - چگونه از اطلاعات شما محافظت می‌کنیم">
+    
+    <!-- فونت وزیرمتن و آیکون‌ها -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- استایل اصلی پروژه -->
+    <link rel="stylesheet" href="assets/style.css">
+    
+    <style>
+        /* تنظیمات اختصاصی صفحه حریم خصوصی */
+        .privacy-container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .privacy-header h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .glass-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            transition: var(--transition-base);
+            margin-bottom: 2rem;
+        }
+        .glass-card:hover {
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-glow);
+        }
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 1.5rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-right: 3px solid var(--secondary);
+            padding-right: 1rem;
+        }
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+        .privacy-text {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: var(--font-sm);
+        }
+        .privacy-text p {
+            margin-bottom: 1rem;
+        }
+        .privacy-text ul, .privacy-text ol {
+            margin: 0.8rem 0 1rem 1.5rem;
+            padding-right: 1rem;
+        }
+        .privacy-text li {
+            margin-bottom: 0.3rem;
+        }
+        .update-date {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-glass);
+            padding-top: 1.5rem;
+        }
+        .badge-privacy {
+            display: inline-block;
+            background: var(--primary-glow);
+            border-radius: var(--radius-full);
+            padding: 0.2rem 0.8rem;
+            font-size: var(--font-xs);
+            margin-left: 0.5rem;
+            color: var(--primary);
+        }
+        @media (max-width: 650px) {
+            .glass-card {
+                padding: 1.2rem;
+            }
+            .section-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- پس‌زمینه بلور متحرک -->
+    <div class="dynamic-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- هدر شیشه‌ای یکسان -->
+    <header class="glass-header">
+        <div class="logo" onclick="window.location.href='main-page.html'">
+            <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+            <div class="logo-text-container">
+                <span class="logo-val">lueva <span class="logo-gam">GAM</span></span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun"></i>
+            </button>
+            <div class="action-icon" onclick="window.location.href='main-page.html'">
+                <i class="fas fa-home"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="privacy-container">
+        <div class="privacy-header fade-up">
+            <h1>حریم خصوصی <span class="gradient-text">GAMva</span></h1>
+            <p style="color: var(--text-muted);">نحوه جمع‌آوری، استفاده و محافظت از اطلاعات شما</p>
+        </div>
+
+        <div class="glass-card fade-up">
+            <div class="section-title">
+                <i class="fas fa-lock"></i>
+                <span>تعهد ما به حریم خصوصی</span>
+            </div>
+            <div class="privacy-text">
+                <p>در GAMva، حریم خصوصی کاربران برای ما اولویت دارد. این سند نحوه جمع‌آوری، استفاده و محافظت از اطلاعات شخصی شما را توضیح می‌دهد. با استفاده از خدمات ما، شما با شرایط این سیاست موافقت می‌کنید.</p>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-database"></i>
+                <span>چه اطلاعاتی جمع‌آوری می‌کنیم؟</span>
+            </div>
+            <div class="privacy-text">
+                <ul>
+                    <li><strong>اطلاعات ثبت‌نام:</strong> نام، نام خانوادگی، ایمیل، شماره موبایل، تاریخ تولد (اختیاری) و جنسیت.</li>
+                    <li><strong>اطلاعات حرفه‌ای (برای مربیان و فروشندگان):</strong> مدارک تحصیلی، گواهی‌ها، سابقه کاری، اطلاعات فروشگاه و محصولات.</li>
+                    <li><strong>اطلاعات تراکنش:</strong> تاریخچه خرید، اطلاعات ارسال سفارش و صورتحساب (اطلاعات کارت بانکی مستقیماً توسط درگاه پرداخت امن جمع‌آوری می‌شود و در سرورهای ما ذخیره نمی‌گردد).</li>
+                    <li><strong>اطلاعات استفاده:</strong> داده‌های لاگ، نوع دستگاه، مرورگر، آدرس IP، صفحات بازدید شده و مدت زمان بازدید.</li>
+                    <li><strong>ارتباطات:</strong> پیام‌های ارسالی از طریق فرم تماس، چت پشتیبانی، نظرات و بازخوردها.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-info-circle"></i>
+                <span>چرا اطلاعات را جمع‌آوری می‌کنیم؟</span>
+            </div>
+            <div class="privacy-text">
+                <ul>
+                    <li>ارائه، شخصی‌سازی و بهبود خدمات (پیشنهاد مربی، محصول، چالش و محتوا).</li>
+                    <li>پردازش سفارشات و تراکنش‌های مالی.</li>
+                    <li>ارسال اطلاعیه‌های مهم، به‌روزرسانی قوانین و پاسخ به درخواست‌های پشتیبانی.</li>
+                    <li>تحلیل آماری برای بهبود تجربه کاربری و امنیت سکو.</li>
+                    <li>پیشگیری از تقلب و فعالیت‌های غیرمجاز.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-share-alt"></i>
+                <span>اشتراک‌گذاری اطلاعات</span>
+            </div>
+            <div class="privacy-text">
+                <p>ما اطلاعات شخصی شما را بدون رضایت صریح به فروش نمی‌رسانیم. با این حال، ممکن است در موارد زیر اطلاعات را به اشتراک بگذاریم:</p>
+                <ul>
+                    <li><span class="badge-privacy">ارائه‌دهندگان خدمات</span> شرکت‌های همکار (درگاه پرداخت، سامانه ارسال پیامک، سرویس پست) که فقط برای عملیات مشخص به اطلاعات دسترسی دارند و موظف به رعایت امنیت هستند.</li>
+                    <li><span class="badge-privacy">الزام قانونی</span> در صورت درخواست مراجع قضایی یا نهادهای نظارتی بر اساس قوانین جمهوری اسلامی ایران.</li>
+                    <li><span class="badge-privacy">حفاظت از حقوق</span> برای جلوگیری از سوءاستفاده، کلاهبرداری یا نقض حقوق GAMva و کاربران.</li>
+                </ul>
+                <p>اطلاعات عمومی (مانند نظرات، بازخوردها) ممکن است به صورت ناشناس در تحلیل‌ها یا تبلیغات استفاده شود.</p>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-cookie-bite"></i>
+                <span>کوکی‌ها و فناوری‌های مشابه</span>
+            </div>
+            <div class="privacy-text">
+                <p>GAMva از کوکی‌ها برای ذخیره تنظیمات کاربر، بهبود سرعت بارگذاری و تحلیل بازدیدها استفاده می‌کند. شما می‌توانید از طریق تنظیمات مرورگر کوکی‌ها را غیرفعال کنید، اما ممکن است برخی از امکانات سایت به درستی کار نکنند.</p>
+                <p>کوکی‌های شخص ثالث (مانند گوگل آنالیتیکس) نیز برای آمارگیری استفاده می‌شوند که اطلاعات به صورت ناشناس جمع‌آوری می‌گردد.</p>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-shield-virus"></i>
+                <span>امنیت اطلاعات</span>
+            </div>
+            <div class="privacy-text">
+                <p>ما از پروتکل‌های امنیتی مانند رمزنگاری لایه انتقال (TLS) برای انتقال داده‌ها، ذخیره‌سازی رمز شده رمزهای عبور و محدودیت دسترسی به سرورها استفاده می‌کنیم. با این حال، هیچ سیستم امنیتی ۱۰۰٪ غیرقابل نفوذ نیست و کاربران نیز مسئول حفظ امنیت رمز عبور خود هستند.</p>
+                <p>در صورت بروز نقض امنیتی، طبق مقررات ظرف مدت قانونی به کاربران اطلاع داده خواهد شد.</p>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-user-edit"></i>
+                <span>حقوق شما</span>
+            </div>
+            <div class="privacy-text">
+                <ul>
+                    <li><strong>دسترسی و تصحیح:</strong> می‌توانید اطلاعات خود را در بخش "پروفایل" ویرایش کنید.</li>
+                    <li><strong>حذف حساب:</strong> با ارسال درخواست به پشتیبانی، حساب شما ظرف ۳۰ روز حذف می‌شود (به جز اطلاعاتی که به دلایل قانونی باید نگهداری شوند).</li>
+                    <li><strong>انصراف از اطلاعیه‌ها:</strong> با کلیک روی لینک انصراف در ایمیل‌های تبلیغاتی یا تغییر تنظیمات اعلان در داشبورد.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-child"></i>
+                <span>حریم خصوصی کودکان</span>
+            </div>
+            <div class="privacy-text">
+                <p>خدمات GAMva برای افراد بالای ۱۸ سال طراحی شده است. ما آگاهانه اطلاعات کودکان زیر ۱۸ سال را جمع‌آوری نمی‌کنیم. اگر والدین یا سرپرست متوجه شوند فرزندشان بدون رضایت ثبت‌نام کرده است، لطفاً به ما اطلاع دهند تا حساب حذف شود.</p>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-sync-alt"></i>
+                <span>تغییرات این سیاست</span>
+            </div>
+            <div class="privacy-text">
+                <p>ما ممکن است هر از گاهی این صفحه را به‌روزرسانی کنیم. تغییرات مهم از طریق ایمیل یا اعلان در سایت به اطلاع می‌رسد. تاریخ آخرین به‌روزرسانی در انتهای صفحه درج شده است.</p>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-envelope-open-text"></i>
+                <span>تماس با ما</span>
+            </div>
+            <div class="privacy-text">
+                <p>اگر سوالی درباره حریم خصوصی دارید، می‌توانید از طریق <a href="contact.html" style="color: var(--primary);">صفحه تماس با ما</a> یا ایمیل <strong>privacy@gamva.com</strong> با مسئول حفاظت از داده‌های GAMva در ارتباط باشید.</p>
+            </div>
+
+            <div class="update-date">
+                <i class="fas fa-calendar-alt"></i> آخرین به‌روزرسانی: ۲۵ بهمن ۱۴۰۳
+            </div>
+        </div>
+    </main>
+
+    <!-- فوتر یکسان -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">GAMva</div>
+                    <p class="footer-text">اکوسیستم هوشمند سلامت و توسعه فردی با قدرت هوش مصنوعی.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">قوانین</h3>
+                    <ul class="footer-links">
+                        <li><a href="terms.html"><i class="fas fa-chevron-left"></i> قوانین و مقررات</a></li>
+                        <li><a href="privacy.html"><i class="fas fa-chevron-left"></i> حریم خصوصی</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">پشتیبانی</h3>
+                    <ul class="footer-links">
+                        <li><a href="contact.html"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
+                        <li><a href="faq.html"><i class="fas fa-chevron-left"></i> سوالات متداول</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© ۲۰۲۵ GAMva · حفظ حریم خصوصی شما اولویت ماست.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ویجت پشتیبانی -->
+    <div class="support-widget">
+        <a href="telegram_user.html">
+            <button class="support-btn"><i class="fas fa-headset"></i><span class="support-tooltip">پشتیبانی ۲۴/۷</span></button>
+        </a>
+    </div>
+
+    <script src="assets/scripts.js"></script>
+    <script>
+        (function() {
+            const fadeEls = document.querySelectorAll('.fade-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) e.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            fadeEls.forEach(el => observer.observe(el));
+        })();
+    </script>
+</body>
+</html>

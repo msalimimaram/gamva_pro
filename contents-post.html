@@ -1,92 +1,54 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>مربیان حرفه‌ای | GAMva</title>
+    <title>مجله GAMva | مقالات تخصصی ورزش و سلامت</title>
 
     <!-- فونت وزیرمتن و آیکون‌ها -->
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+    
     <!-- استایل اصلی پروژه -->
     <link rel="stylesheet" href="assets/style.css">
-
+    
     <style>
-        /* تنظیمات اختصاصی صفحه لیست مربیان - هماهنگ با تم GAMva */
-        .coaches-hero {
+        /* تنظیمات اختصاصی صفحه مجله - هماهنگ با تم GAMva */
+        .magazine-container {
+            max-width: 1400px;
+            margin: 1rem auto;
+            padding: 0 1rem;
+        }
+
+        /* هدر مجله */
+        .magazine-header {
             text-align: center;
             margin: 1.5rem 0 2rem;
         }
-
-        .coaches-hero h1 {
+        .magazine-header h1 {
             font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: 800;
             background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 0.8rem;
         }
-
-        .coaches-hero p {
+        .magazine-header p {
             color: var(--text-muted);
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* نوار جستجو و فیلترها */
-        .search-filter-bar {
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius-full);
-            padding: 0.5rem;
+        /* دسته‌بندی‌ها (چیپس) */
+        .category-chips {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
             margin-bottom: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0.5rem;
         }
-
-        .search-input-wrapper {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            background: var(--bg-glass-light);
-            border-radius: var(--radius-full);
-            padding: 0.3rem 0.8rem;
-            border: 1px solid var(--border-glass);
-        }
-
-        .search-input-wrapper i {
-            color: var(--text-muted);
-            margin-left: 0.5rem;
-        }
-
-        .search-input-wrapper input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            padding: 0.7rem 0;
-            color: var(--text-primary);
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: var(--font-sm);
-        }
-
-        .search-input-wrapper input:focus {
-            outline: none;
-        }
-
-        .filter-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .filter-chip {
+        .chip-category {
             background: var(--bg-glass-light);
             border: 1px solid var(--border-glass);
             padding: 0.5rem 1.2rem;
@@ -97,60 +59,59 @@
             transition: var(--transition-base);
             color: var(--text-muted);
         }
-
-        .filter-chip.active,
-        .filter-chip:hover {
+        .chip-category.active, .chip-category:hover {
             background: var(--gradient-primary);
             color: white;
             border-color: transparent;
             transform: translateY(-2px);
         }
 
-        /* آمار سریع */
-        .stats-row {
+        /* استوری‌های بالای صفحه */
+        .stories-row {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 1rem;
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius-lg);
-            padding: 1rem 1.5rem;
+            gap: 1.2rem;
+            overflow-x: auto;
+            padding-bottom: 0.8rem;
             margin-bottom: 2rem;
+            scrollbar-width: thin;
         }
-
-        .stat-quick {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
+        .story-item {
+            text-align: center;
+            min-width: 85px;
+            cursor: pointer;
+            transition: var(--transition-base);
         }
-
-        .stat-quick i {
-            font-size: 1.5rem;
-            color: var(--secondary);
+        .story-item:hover {
+            transform: translateY(-3px);
         }
-
-        .stat-quick .stat-number {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--text-primary);
+        .story-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 2px;
+            margin-bottom: 0.5rem;
         }
-
-        .stat-quick .stat-label {
+        .story-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--bg-glass);
+        }
+        .story-name {
             font-size: var(--font-xs);
             color: var(--text-muted);
         }
 
-        /* گرید مربیان - مشابه کارت‌های NFT */
-        .coaches-grid {
+        /* گرید مقالات */
+        .posts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
+            gap: 1.8rem;
             margin: 2rem 0;
         }
-
-        .coach-card {
+        .post-card {
             background: var(--bg-glass);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border-glass);
@@ -160,8 +121,7 @@
             cursor: pointer;
             position: relative;
         }
-
-        .coach-card::after {
+        .post-card::after {
             content: '';
             position: absolute;
             top: -2px;
@@ -174,188 +134,264 @@
             opacity: 0;
             transition: opacity 0.5s ease;
         }
-
-        .coach-card:hover::after {
+        .post-card:hover::after {
             opacity: 1;
             animation: borderPulse 2s infinite;
         }
-
-        .coach-card:hover {
+        .post-card:hover {
             transform: translateY(-6px);
         }
-
-        .coach-cover {
+        .post-card.featured {
+            grid-column: span 2;
+            display: flex;
+            flex-direction: row;
+        }
+        .post-card.featured .card-media {
+            width: 50%;
+            height: auto;
+        }
+        .post-card.featured .card-content {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .card-media {
             position: relative;
-            height: 220px;
+            height: 200px;
             overflow: hidden;
         }
-
-        .coach-cover img {
+        .card-media img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s ease;
         }
-
-        .coach-card:hover .coach-cover img {
+        .post-card:hover .card-media img {
             transform: scale(1.05);
         }
-
-        .coach-badge {
+        .post-badge {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: var(--accent);
-            color: white;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
             padding: 0.2rem 0.8rem;
             border-radius: var(--radius-full);
             font-size: var(--font-xs);
-            font-weight: 600;
+            color: white;
         }
-
-        .online-status {
+        .author-badge {
             position: absolute;
             bottom: 1rem;
-            left: 1rem;
+            right: 1rem;
             display: flex;
             align-items: center;
             gap: 0.3rem;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0,0,0,0.6);
             backdrop-filter: blur(4px);
-            padding: 0.2rem 0.6rem;
+            padding: 0.2rem 0.8rem;
             border-radius: var(--radius-full);
             font-size: var(--font-xs);
             color: white;
         }
-
-        .online-status i {
-            font-size: 0.6rem;
-            color: var(--success);
+        .card-content {
+            padding: 1rem;
         }
-
-        .coach-info {
-            padding: 1.2rem;
-        }
-
-        .coach-name {
-            font-size: 1.2rem;
-            font-weight: 800;
-            margin-bottom: 0.3rem;
+        .post-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
             color: var(--text-primary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
-
-        .coach-title {
+        .post-excerpt {
             font-size: var(--font-sm);
             color: var(--text-muted);
+            line-height: 1.6;
             margin-bottom: 0.8rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
-
-        .coach-specialties {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .specialty-tag {
-            background: var(--bg-glass-light);
-            border: 1px solid var(--border-glass);
-            padding: 0.2rem 0.6rem;
-            border-radius: var(--radius-full);
-            font-size: var(--font-xs);
-            color: var(--secondary);
-        }
-
-        .coach-stats {
+        .post-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
-            font-size: var(--font-sm);
+            font-size: var(--font-xs);
             color: var(--text-muted);
         }
 
-        .rating {
-            color: var(--warning);
+        /* صفحه اختصاصی مقاله */
+        .single-post {
+            max-width: 900px;
+            margin: 0 auto;
         }
-
-        .price {
-            font-weight: 700;
-            color: var(--primary);
+        .single-header {
+            text-align: center;
+            margin-bottom: 2rem;
         }
-
-        .btn-book {
-            width: 100%;
-            background: var(--gradient-primary);
-            border: none;
-            padding: 0.7rem;
+        .single-category {
+            display: inline-block;
+            background: var(--bg-glass-light);
+            border: 1px solid var(--border-glass);
+            padding: 0.3rem 1rem;
             border-radius: var(--radius-full);
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-base);
+            font-size: var(--font-sm);
+            color: var(--secondary);
+            margin-bottom: 1rem;
         }
-
-        .btn-book:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-glow);
+        .single-title {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
         }
-
-        /* صفحه‌بندی */
-        .pagination {
+        .single-meta {
             display: flex;
             justify-content: center;
-            gap: 0.8rem;
-            margin: 2rem 0;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: var(--font-sm);
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
         }
-
-        .page-link {
-            width: 42px;
-            height: 42px;
+        .single-image {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+        }
+        .single-content {
+            color: var(--text-secondary);
+            line-height: 1.9;
+            font-size: 1rem;
+        }
+        .single-content p {
+            margin-bottom: 1.2rem;
+        }
+        .pull-quote {
+            background: var(--bg-glass-light);
+            border-right: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            border-radius: var(--radius-lg);
+        }
+        .interaction-bar {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .interact-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-glass-light);
+            border: 1px solid var(--border-glass);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: var(--transition-base);
+            color: var(--text-primary);
+        }
+        .interact-btn:hover {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        .comments-section {
+            margin-top: 2rem;
+        }
+        .comment-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-glass);
+        }
+        .comment-avatar {
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
+            background: var(--gradient-primary);
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+        .comment-content {
+            flex: 1;
+        }
+        .comment-author {
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+        .comment-date {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        .comment-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .reply-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            font-size: var(--font-xs);
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+        .replies {
+            margin-right: 2rem;
+            margin-top: 1rem;
+            padding-right: 1rem;
+            border-right: 2px solid var(--border-glass);
+        }
+        .add-comment {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .add-comment input {
+            flex: 1;
+            padding: 0.8rem 1rem;
             background: var(--bg-glass-light);
             border: 1px solid var(--border-glass);
-            cursor: pointer;
-            transition: var(--transition-base);
-            font-weight: 600;
+            border-radius: var(--radius-full);
             color: var(--text-primary);
-        }
-
-        .page-link.active,
-        .page-link:hover {
-            background: var(--gradient-primary);
-            color: white;
-            border-color: transparent;
-            transform: translateY(-2px);
+            font-family: 'Vazirmatn', sans-serif;
         }
 
         @media (max-width: 768px) {
-            .search-filter-bar {
+            .post-card.featured {
+                grid-column: span 1;
                 flex-direction: column;
-                border-radius: var(--radius-lg);
-                padding: 1rem;
             }
-
-            .filter-chips {
-                justify-content: center;
+            .post-card.featured .card-media {
+                width: 100%;
+                height: 200px;
             }
-
-            .stats-row {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
+            .post-card.featured .card-content {
+                width: 100%;
             }
-
-            .coaches-grid {
-                grid-template-columns: 1fr;
+            .stories-row {
+                gap: 0.8rem;
+            }
+            .story-avatar {
+                width: 60px;
+                height: 60px;
             }
         }
     </style>
 </head>
-
 <body data-theme="light">
     <!-- پس‌زمینه بلور متحرک -->
     <div class="dynamic-bg">
@@ -364,7 +400,7 @@
         <div class="blob blob-3"></div>
     </div>
 
-    <!-- هدر شیشه‌ای یکسان با صفحه اصلی -->
+    <!-- هدر شیشه‌ای یکسان -->
     <header class="glass-header">
         <div class="logo" onclick="window.location.href='main-page.html'">
             <div class="logo-icon"><i class="fas fa-leaf"></i></div>
@@ -382,58 +418,13 @@
         </div>
     </header>
 
-    <main class="container">
-        <div class="coaches-hero fade-up">
-            <h1>مربیان <span class="gradient-text">حرفه‌ای GAMva</span></h1>
-            <p>با بهترین مربیان ورزشی، تغذیه و توسعه فردی آشنا شوید و مسیر موفقیت خود را هموار کنید</p>
+    <main class="magazine-container" id="magazineApp">
+        <!-- محتوای داینامیک توسط جاوااسکریپت رندر می‌شود -->
+        <div class="magazine-header fade-up">
+            <h1>مجله <span class="gradient-text">GAMva</span></h1>
+            <p>مقالات تخصصی، مصاحبه‌ها و محتوای آموزشی در حوزه ورزش و سلامت</p>
         </div>
-
-        <!-- نوار جستجو و فیلتر -->
-        <div class="search-filter-bar fade-up">
-            <div class="search-input-wrapper">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchCoachInput" placeholder="جستجوی مربی بر اساس نام، تخصص یا شهر...">
-            </div>
-            <div class="filter-chips" id="specialtyFilters">
-                <button class="filter-chip active" data-specialty="all">همه تخصص‌ها</button>
-                <button class="filter-chip" data-specialty="بدنسازی">🏋️ بدنسازی</button>
-                <button class="filter-chip" data-specialty="تغذیه">🥗 تغذیه</button>
-                <button class="filter-chip" data-specialty="یوگا">🧘 یوگا</button>
-                <button class="filter-chip" data-specialty="روانشناسی">🧠 روانشناسی</button>
-                <button class="filter-chip" data-specialty="توسعه فردی">📈 توسعه فردی</button>
-            </div>
-        </div>
-
-        <!-- آمار سریع -->
-        <div class="stats-row fade-up">
-            <div class="stat-quick">
-                <i class="fas fa-users"></i>
-                <div>
-                    <div class="stat-number" id="totalCoachesCount">+۱۲۰</div>
-                    <div class="stat-label">مربی متخصص</div>
-                </div>
-            </div>
-            <div class="stat-quick">
-                <i class="fas fa-star"></i>
-                <div>
-                    <div class="stat-number">۴.۹</div>
-                    <div class="stat-label">میانگین رضایت</div>
-                </div>
-            </div>
-            <div class="stat-quick">
-                <i class="fas fa-chalkboard-user"></i>
-                <div>
-                    <div class="stat-number">+۲,۵۰۰</div>
-                    <div class="stat-label">جلسه فعال</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- گرید مربیان -->
-        <div class="coaches-grid" id="coachesGrid"></div>
-
-        <!-- صفحه‌بندی -->
-        <div class="pagination" id="pagination"></div>
+        <div id="dynamicContent"></div>
     </main>
 
     <!-- فوتر یکسان -->
@@ -442,8 +433,7 @@
             <div class="footer-grid">
                 <div class="footer-about">
                     <div class="footer-logo">GAMva</div>
-                    <p class="footer-text">اکوسیستم هوشمند سلامت و توسعه فردی با قدرت هوش مصنوعی. همراه شما در مسیر
-                        سلامتی.</p>
+                    <p class="footer-text">اکوسیستم هوشمند سلامت و توسعه فردی با قدرت هوش مصنوعی.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
@@ -451,23 +441,23 @@
                     </div>
                 </div>
                 <div>
-                    <h3 class="footer-title">مربیان</h3>
+                    <h3 class="footer-title">مجله GAMva</h3>
                     <ul class="footer-links">
-                        <li><a href="list-coach.html"><i class="fas fa-chevron-left"></i> همه مربیان</a></li>
-                        <li><a href="specialty-coaches.html"><i class="fas fa-chevron-left"></i> تخصص‌ها</a></li>
-                        <li><a href="request-coach.html"><i class="fas fa-chevron-left"></i> درخواست مربیگری</a></li>
+                        <li><a href="contents-post.html"><i class="fas fa-chevron-left"></i> همه مقالات</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> پادکست‌ها</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> ویدیوها</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="footer-title">پشتیبانی</h3>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-left"></i> سوالات متداول</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-left"></i> درباره ما</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <div>© ۲۰۲۵ GAMva · بهترین همراه برای رسیدن به اهداف ورزشی</div>
+                <div>© ۲۰۲۵ GAMva · منبع معتبر محتوای ورزشی و سلامت</div>
             </div>
         </div>
     </footer>
@@ -475,155 +465,284 @@
     <!-- ویجت پشتیبانی -->
     <div class="support-widget">
         <a href="telegram_user.html">
-            <button class="support-btn"><i class="fas fa-headset"></i><span class="support-tooltip">پشتیبانی
-                    ۲۴/۷</span></button>
+            <button class="support-btn"><i class="fas fa-headset"></i><span class="support-tooltip">پشتیبانی ۲۴/۷</span></button>
         </a>
     </div>
 
     <script src="assets/scripts.js"></script>
     <script>
-        (function () {
-            // ========== داده‌های مربیان (هماهنگ با سلامت و تناسب اندام) ==========
-            const coachesData = [
-                { id: 1, name: "دکتر امیر محمدی", title: "متخصص تغذیه ورزشی و رژیم‌درمانی", specialty: "تغذیه", city: "تهران", rating: 4.9, sessions: 1240, price: "۲۵۰,۰۰۰", image: "assets/img/stoke/download (1).jpg", online: true, badge: "ممتاز" },
-                { id: 2, name: "مهسا رضایی", title: "کوچ توسعه فردی و عادت‌سازی", specialty: "توسعه فردی", city: "اصفهان", rating: 5.0, sessions: 890, price: "۱۸۰,۰۰۰", image: "assets/img/stoke/download (2).jpg", online: true, badge: "VIP" },
-                { id: 3, name: "دکتر سارا احمدی", title: "روانشناس بالینی ورزشی", specialty: "روانشناسی", city: "شیراز", rating: 4.8, sessions: 1560, price: "۳۲۰,۰۰۰", image: "assets/img/stoke/download (3).jpg", online: false, badge: null },
-                { id: 4, name: "امیر کریمی", title: "مربی حرفه‌ای بدنسازی", specialty: "بدنسازی", city: "تهران", rating: 5.0, sessions: 2340, price: "۱۵۰,۰۰۰", image: "assets/img/stoke/download (4).jpg", online: true, badge: "جدید" },
-                { id: 5, name: "زهرا محمدیان", title: "مربی بین‌المللی یوگا", specialty: "یوگا", city: "مشهد", rating: 4.9, sessions: 980, price: "۱۸۰,۰۰۰", image: "assets/img/stoke/download (1).jpg", online: false, badge: null },
-                { id: 6, name: "دکتر کاوه رضایی", title: "متخصص متابولیسم و تغذیه", specialty: "تغذیه", city: "تهران", rating: 4.7, sessions: 2100, price: "۲۸۰,۰۰۰", image: "assets/img/stoke/download (2).jpg", online: true, badge: "ممتاز" },
-                { id: 7, name: "علی حسینی", title: "مربی بدنسازی و فیتنس", specialty: "بدنسازی", city: "کرج", rating: 4.8, sessions: 1670, price: "۱۳۰,۰۰۰", image: "assets/img/stoke/download (3).jpg", online: false, badge: null },
-                { id: 8, name: "نرگس تقوی", title: "مربی یوگا و مدیتیشن", specialty: "یوگا", city: "تهران", rating: 5.0, sessions: 1120, price: "۲۰۰,۰۰۰", image: "assets/img/stoke/download (4).jpg", online: true, badge: "VIP" },
-                { id: 9, name: "رضا کاظمی", title: "مربی فیتنس و کراسفیت", specialty: "بدنسازی", city: "اصفهان", rating: 4.6, sessions: 890, price: "۱۴۰,۰۰۰", image: "assets/img/stoke/download (1).jpg", online: true, badge: null },
-                { id: 10, name: "دکتر سیمین بهشتی", title: "روانشناس سلامت و عملکرد", specialty: "روانشناسی", city: "تهران", rating: 4.9, sessions: 740, price: "۳۵۰,۰۰۰", image: "assets/img/stoke/download (2).jpg", online: false, badge: "ممتاز" }
+        (function() {
+            // ========== داده‌های مقالات ==========
+            const baseImage = "assets/img/stoke/download (1).jpg";
+            
+            let posts = [
+                { id: 1, title: "۱۰ تمرین معجزه‌آسا برای عضلات مرکزی", excerpt: "تمریناتی که زندگی شما را متحول می‌کند...", content: "تمرینات پلانک، کرانچ معکوس، پل یک پا و... این حرکات توسط بهترین مربیان جهان توصیه شده‌اند. با انجام منظم این تمرینات، عضلات مرکزی خود را تقویت کرده و از کمردرد جلوگیری کنید.", image: baseImage, type: "article", category: "تمرین", author: "تیم تحریریه", authorAvatar: "https://randomuser.me/api/portraits/men/32.jpg", date: "۱۴۰۳/۱۰/۱۵", likes: 124, bookmarks: 45, comments: [] },
+                { id: 2, title: "مصاحبه اختصاصی با قهرمان بدنسازی ایران", excerpt: "از سختی‌ها تا قهرمانی؛ روایتی شنیدنی...", content: "در این مصاحبه اختصاصی با قهرمان بدنسازی ایران، از رازهای موفقیت، برنامه تمرینی و تغذیه او صحبت کرده‌ایم. او می‌گوید: 'هیچ موفقیتی بدون پشتکار و انضباط به دست نمی‌آید.'", image: baseImage, type: "video", category: "مصاحبه", author: "امیرعلی سلیمی", authorAvatar: "https://randomuser.me/api/portraits/men/45.jpg", date: "۱۴۰۳/۱۰/۱۲", likes: 89, bookmarks: 23, comments: [], featured: true },
+                { id: 3, title: "رازهای تغذیه ورزشکاران حرفه‌ای", excerpt: "چه بخوریم تا بهترین عملکرد را داشته باشیم؟", content: "تغذیه مناسب قبل و بعد از تمرین، اهمیت پروتئین، کربوهیدرات و چربی‌های سالم. در این مقاله به بررسی دقیق برنامه غذایی ورزشکاران حرفه‌ای می‌پردازیم.", image: baseImage, type: "article", category: "تغذیه", author: "دکتر محمد رضایی", authorAvatar: "https://randomuser.me/api/portraits/men/22.jpg", date: "۱۴۰۳/۱۰/۱۰", likes: 67, bookmarks: 31, comments: [] },
+                { id: 4, title: "اهمیت ریکاوری در ورزش", excerpt: "چرا استراحت به اندازه تمرین مهم است؟", content: "ریکاوری فعال، خواب کافی، تغذیه مناسب و... در این پادکست تخصصی با دکتر سارا احمدی درباره اهمیت استراحت در فرآیند ورزش صحبت می‌کنیم.", image: baseImage, type: "podcast", category: "پادکست", author: "دکتر سارا احمدی", authorAvatar: "https://randomuser.me/api/portraits/women/44.jpg", date: "۱۴۰۳/۱۰/۰۸", likes: 45, bookmarks: 18, comments: [] },
+                { id: 5, title: "نکات طلایی برای شروع دویدن", excerpt: "از صفر تا صد؛ راهنمای کامل برای مبتدیان", content: "انتخاب کفش مناسب، گرم کردن، تکنیک صحیح دویدن، برنامه افزایش تدریجی مسافت. اگر تازه تصمیم گرفته‌اید دویدن را شروع کنید، این مقاله برای شماست.", image: baseImage, type: "article", category: "تمرین", author: "تیم تحریریه", authorAvatar: "https://randomuser.me/api/portraits/men/65.jpg", date: "۱۴۰۳/۱۰/۰۵", likes: 56, bookmarks: 22, comments: [] },
+                { id: 6, title: "مدیریت استرس در ورزش", excerpt: "تکنیک‌های روانشناسی برای بهبود عملکرد", content: "استرس می‌تواند عملکرد ورزشی را کاهش دهد. در این مقاله با تکنیک‌های تنفس، مدیتیشن و تمرکز آشنا می‌شوید.", image: baseImage, type: "article", category: "روانشناسی", author: "نرگس تقوی", authorAvatar: "https://randomuser.me/api/portraits/women/68.jpg", date: "۱۴۰۳/۱۰/۰۲", likes: 78, bookmarks: 34, comments: [] }
             ];
 
-            let currentSpecialty = "all";
-            let searchQuery = "";
-            let currentPage = 1;
-            const itemsPerPage = 6;
+            // کامنت نمونه برای پست اول
+            posts[0].comments = [
+                { id: 101, author: "رضا کریمی", avatar: "ر", text: "مقاله فوق‌العاده‌ای بود! ممنون", date: "۱۴۰۳/۱۰/۱۴", replies: [] }
+            ];
 
-            // توابع کمکی
-            function getFilteredCoaches() {
-                let filtered = [...coachesData];
-                if (currentSpecialty !== "all") {
-                    filtered = filtered.filter(c => c.specialty === currentSpecialty);
-                }
-                if (searchQuery.trim()) {
-                    const query = searchQuery.trim().toLowerCase();
-                    filtered = filtered.filter(c =>
-                        c.name.toLowerCase().includes(query) ||
-                        c.title.toLowerCase().includes(query) ||
-                        c.city.toLowerCase().includes(query) ||
-                        c.specialty.toLowerCase().includes(query)
-                    );
-                }
-                return filtered;
+            let currentPost = null;
+            let nextCommentId = 200;
+
+            // ذخیره وضعیت در localStorage
+            function savePosts() {
+                localStorage.setItem('gamva_posts', JSON.stringify(posts));
             }
+            function loadPosts() {
+                const stored = localStorage.getItem('gamva_posts');
+                if (stored) {
+                    try {
+                        const parsed = JSON.parse(stored);
+                        if (parsed.length) posts = parsed;
+                    } catch(e) {}
+                }
+            }
+            loadPosts();
 
-            function renderCoaches() {
-                const filtered = getFilteredCoaches();
-                const totalPages = Math.ceil(filtered.length / itemsPerPage);
-                const start = (currentPage - 1) * itemsPerPage;
-                const pageItems = filtered.slice(start, start + itemsPerPage);
-
-                const grid = document.getElementById('coachesGrid');
-                grid.innerHTML = pageItems.map(coach => `
-                    <div class="coach-card" onclick="window.location.href='profile-coach.html?id=${coach.id}'">
-                        <div class="coach-cover">
-                            <img src="${coach.image}" alt="${coach.name}">
-                            ${coach.badge ? `<span class="coach-badge">${coach.badge}</span>` : ''}
-                            <div class="online-status">
-                                <i class="fas ${coach.online ? 'fa-circle' : 'fa-circle'}"></i>
-                                <span>${coach.online ? 'آنلاین' : 'آفلاین'}</span>
-                            </div>
-                        </div>
-                        <div class="coach-info">
-                            <h3 class="coach-name">${coach.name}</h3>
-                            <div class="coach-title">${coach.title}</div>
-                            <div class="coach-specialties">
-                                <span class="specialty-tag">${coach.specialty}</span>
-                                <span class="specialty-tag"><i class="fas fa-map-marker-alt"></i> ${coach.city}</span>
-                            </div>
-                            <div class="coach-stats">
-                                <span class="rating"><i class="fas fa-star"></i> ${coach.rating}</span>
-                                <span><i class="fas fa-calendar-alt"></i> ${coach.sessions}+ جلسه</span>
-                            </div>
-                            <div class="coach-stats" style="margin-bottom: 1rem;">
-                                <span class="price">از ${coach.price} تومان</span>
-                                <span><i class="fas fa-chalkboard-user"></i> ${coach.sessions} جلسه فعال</span>
-                            </div>
-                            <button class="btn-book">رزرو جلسه مشاوره</button>
-                        </div>
+            // ========== صفحه اصلی (لیست مقالات) ==========
+            function renderHome() {
+                const container = document.getElementById('dynamicContent');
+                container.innerHTML = `
+                    <div class="stories-row fade-up" id="storiesRow"></div>
+                    <div class="category-chips fade-up" id="categoryChips"></div>
+                    <div class="posts-grid fade-up" id="postsGrid"></div>
+                `;
+                
+                // استوری‌ها
+                const storiesRow = document.getElementById('storiesRow');
+                storiesRow.innerHTML = posts.slice(0, 8).map(post => `
+                    <div class="story-item" data-id="${post.id}">
+                        <div class="story-avatar"><img src="${post.image}" alt=""></div>
+                        <div class="story-name">${post.title.substring(0, 10)}..</div>
                     </div>
                 `).join('');
-
-                // رندر صفحه‌بندی
-                renderPagination(totalPages);
-
-                // به‌روزرسانی آمار تعداد مربیان
-                const totalSpan = document.getElementById('totalCoachesCount');
-                if (totalSpan) totalSpan.innerText = `+${filtered.length}`;
-            }
-
-            function renderPagination(totalPages) {
-                const paginationDiv = document.getElementById('pagination');
-                if (totalPages <= 1) {
-                    paginationDiv.innerHTML = '';
-                    return;
+                document.querySelectorAll('.story-item').forEach(el => {
+                    el.addEventListener('click', () => openSinglePost(parseInt(el.dataset.id)));
+                });
+                
+                // دسته‌بندی‌ها
+                const categories = ['همه', 'تمرین', 'تغذیه', 'مصاحبه', 'پادکست', 'روانشناسی'];
+                const chipsDiv = document.getElementById('categoryChips');
+                chipsDiv.innerHTML = categories.map(cat => `
+                    <button class="chip-category ${cat === 'همه' ? 'active' : ''}" data-cat="${cat}">${cat}</button>
+                `).join('');
+                
+                let currentCategory = 'همه';
+                function filterPosts() {
+                    let filtered = currentCategory === 'همه' ? posts : posts.filter(p => p.category === currentCategory);
+                    const grid = document.getElementById('postsGrid');
+                    grid.innerHTML = filtered.map(post => `
+                        <div class="post-card ${post.featured ? 'featured' : ''}" data-id="${post.id}">
+                            <div class="card-media">
+                                <img src="${post.image}" alt="${post.title}">
+                                <span class="post-badge">${post.type === 'article' ? '📄 مقاله' : post.type === 'video' ? '🎬 ویدیو' : '🎙️ پادکست'}</span>
+                                <span class="author-badge"><i class="fas fa-user"></i> ${post.author}</span>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="post-title">${post.title}</h3>
+                                <p class="post-excerpt">${post.excerpt}</p>
+                                <div class="post-meta">
+                                    <span><i class="fas fa-calendar"></i> ${post.date}</span>
+                                    <span><i class="fas fa-heart"></i> ${post.likes}</span>
+                                    <span><i class="fas fa-comment"></i> ${post.comments.length}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                    document.querySelectorAll('.post-card').forEach(card => {
+                        card.addEventListener('click', () => openSinglePost(parseInt(card.dataset.id)));
+                    });
                 }
-                let pagesHtml = '';
-                for (let i = 1; i <= totalPages; i++) {
-                    pagesHtml += `<div class="page-link ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</div>`;
-                }
-                paginationDiv.innerHTML = pagesHtml;
-                document.querySelectorAll('.page-link').forEach(link => {
-                    link.addEventListener('click', () => {
-                        currentPage = parseInt(link.dataset.page);
-                        renderCoaches();
-                        window.scrollTo({ top: document.querySelector('.search-filter-bar').offsetTop - 100, behavior: 'smooth' });
+                filterPosts();
+                
+                document.querySelectorAll('.chip-category').forEach(chip => {
+                    chip.addEventListener('click', () => {
+                        document.querySelectorAll('.chip-category').forEach(c => c.classList.remove('active'));
+                        chip.classList.add('active');
+                        currentCategory = chip.dataset.cat;
+                        filterPosts();
                     });
                 });
             }
-
-            // رویدادهای فیلتر تخصص
-            document.querySelectorAll('#specialtyFilters .filter-chip').forEach(chip => {
-                chip.addEventListener('click', () => {
-                    document.querySelectorAll('#specialtyFilters .filter-chip').forEach(c => c.classList.remove('active'));
-                    chip.classList.add('active');
-                    currentSpecialty = chip.dataset.specialty;
-                    currentPage = 1;
-                    renderCoaches();
+            
+            // ========== صفحه اختصاصی مقاله ==========
+            function openSinglePost(postId) {
+                const post = posts.find(p => p.id === postId);
+                if (!post) return;
+                currentPost = post;
+                const container = document.getElementById('dynamicContent');
+                container.innerHTML = `
+                    <div class="single-post fade-up">
+                        <div class="single-header">
+                            <span class="single-category">${post.category}</span>
+                            <h1 class="single-title">${post.title}</h1>
+                            <div class="single-meta">
+                                <span><i class="fas fa-user"></i> ${post.author}</span>
+                                <span><i class="fas fa-calendar"></i> ${post.date}</span>
+                                <span><i class="fas fa-clock"></i> ۵ دقیقه مطالعه</span>
+                            </div>
+                        </div>
+                        <img src="${post.image}" class="single-image" alt="${post.title}">
+                        <div class="interaction-bar">
+                            <button class="interact-btn" id="likeBtn"><i class="fas fa-heart"></i> <span id="likeCount">${post.likes}</span></button>
+                            <button class="interact-btn" id="bookmarkBtn"><i class="fas fa-bookmark"></i> <span id="bookmarkCount">${post.bookmarks}</span></button>
+                            <button class="interact-btn" id="shareBtn"><i class="fas fa-share-alt"></i> اشتراک‌گذاری</button>
+                            <button class="interact-btn" id="backBtn"><i class="fas fa-arrow-right"></i> بازگشت</button>
+                        </div>
+                        <div class="single-content">
+                            <p>${post.content}</p>
+                            <div class="pull-quote">
+                                <i class="fas fa-quote-right"></i> "ورزش فقط یک فعالیت نیست؛ یک سبک زندگی است"
+                            </div>
+                            <p>تمرینات منظم و تغذیه مناسب، کلید اصلی رسیدن به اهداف ورزشی است. فراموش نکنید که صبوری و پشتکار، مهم‌ترین عوامل موفقیت هستند. با GAMva همراه باشید تا بهترین نسخه خودتان شوید.</p>
+                        </div>
+                        <div class="comments-section">
+                            <h3 style="margin-bottom: 1rem;">نظرات (${post.comments.length})</h3>
+                            <div id="commentsContainer"></div>
+                            <div class="add-comment">
+                                <input type="text" id="newCommentInput" placeholder="نظر خود را بنویسید...">
+                                <button class="interact-btn" id="addCommentBtn">ارسال نظر</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                renderComments();
+                
+                document.getElementById('likeBtn').addEventListener('click', () => {
+                    currentPost.likes++;
+                    document.getElementById('likeCount').innerText = currentPost.likes;
+                    savePosts();
                 });
-            });
-
-            // رویداد جستجو
-            const searchInput = document.getElementById('searchCoachInput');
-            searchInput.addEventListener('input', (e) => {
-                searchQuery = e.target.value;
-                currentPage = 1;
-                renderCoaches();
-            });
-
-            // رندر اولیه
-            renderCoaches();
-
+                document.getElementById('bookmarkBtn').addEventListener('click', () => {
+                    currentPost.bookmarks++;
+                    document.getElementById('bookmarkCount').innerText = currentPost.bookmarks;
+                    savePosts();
+                });
+                document.getElementById('shareBtn').addEventListener('click', () => {
+                    navigator.clipboard.writeText(window.location.href);
+                    if (window.showToast) window.showToast('🔗 لینک مقاله کپی شد!', 'success');
+                });
+                document.getElementById('backBtn').addEventListener('click', () => {
+                    renderHome();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+                document.getElementById('addCommentBtn').addEventListener('click', addComment);
+            }
+            
+            function renderComments() {
+                const container = document.getElementById('commentsContainer');
+                if (!container || !currentPost) return;
+                container.innerHTML = currentPost.comments.map(comment => `
+                    <div class="comment-item">
+                        <div class="comment-avatar">${comment.avatar || comment.author.charAt(0)}</div>
+                        <div class="comment-content">
+                            <div class="comment-author">${comment.author}</div>
+                            <div class="comment-date">${comment.date}</div>
+                            <div class="comment-text">${comment.text}</div>
+                            <button class="reply-btn" onclick="window.showReplyForm(${comment.id})">پاسخ</button>
+                            <div id="replyForm-${comment.id}" style="display:none; margin-top:0.5rem;">
+                                <input type="text" id="replyInput-${comment.id}" placeholder="پاسخ خود را بنویسید..." style="width:100%; padding:0.5rem; border-radius:20px; border:1px solid var(--border-glass); background:var(--bg-glass-light);">
+                                <button class="interact-btn" style="margin-top:0.3rem;" onclick="window.submitReply(${comment.id})">ارسال پاسخ</button>
+                            </div>
+                            <div class="replies" id="replies-${comment.id}">
+                                ${comment.replies.map(reply => `
+                                    <div class="comment-item">
+                                        <div class="comment-avatar">${reply.avatar || reply.author.charAt(0)}</div>
+                                        <div class="comment-content">
+                                            <div class="comment-author">${reply.author}</div>
+                                            <div class="comment-date">${reply.date}</div>
+                                            <div class="comment-text">${reply.text}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            window.showReplyForm = (commentId) => {
+                const form = document.getElementById(`replyForm-${commentId}`);
+                if (form) form.style.display = form.style.display === 'none' ? 'flex' : 'none';
+            };
+            
+            window.submitReply = (commentId) => {
+                const input = document.getElementById(`replyInput-${commentId}`);
+                const text = input.value.trim();
+                if (!text) return;
+                const comment = currentPost.comments.find(c => c.id === commentId);
+                if (comment) {
+                    comment.replies.push({
+                        id: nextCommentId++,
+                        author: "کاربر GAMva",
+                        avatar: "ک",
+                        text: text,
+                        date: new Date().toLocaleDateString('fa-IR'),
+                        likes: 0
+                    });
+                    savePosts();
+                    renderComments();
+                }
+                input.value = '';
+                const form = document.getElementById(`replyForm-${commentId}`);
+                if (form) form.style.display = 'none';
+            };
+            
+            function addComment() {
+                const input = document.getElementById('newCommentInput');
+                const text = input.value.trim();
+                if (!text) {
+                    if (window.showToast) window.showToast('لطفاً متن نظر را وارد کنید', 'warning');
+                    return;
+                }
+                currentPost.comments.push({
+                    id: nextCommentId++,
+                    author: "کاربر GAMva",
+                    avatar: "ک",
+                    text: text,
+                    date: new Date().toLocaleDateString('fa-IR'),
+                    likes: 0,
+                    replies: []
+                });
+                savePosts();
+                renderComments();
+                input.value = '';
+                if (window.showToast) window.showToast('نظر شما با موفقیت ثبت شد!', 'success');
+            }
+            
+            // بررسی پارامتر URL برای نمایش مستقیم مقاله
+            function getPostIdFromURL() {
+                const params = new URLSearchParams(window.location.search);
+                return params.get('id');
+            }
+            
+            function init() {
+                const postId = getPostIdFromURL();
+                if (postId && posts.find(p => p.id == postId)) {
+                    openSinglePost(parseInt(postId));
+                } else {
+                    renderHome();
+                }
+            }
+            
+            init();
+            
             // افکت fade-up
-            const fadeEls = document.querySelectorAll('.fade-up');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(e => {
                     if (e.isIntersecting) e.target.classList.add('visible');
                 });
             }, { threshold: 0.1 });
-            fadeEls.forEach(el => observer.observe(el));
-
-            // خوشامدگویی
-            setTimeout(() => {
-                if (window.showToast) {
-                    window.showToast('🏋️ به جمع مربیان حرفه‌ای GAMva خوش آمدی! بهترین را برای خود انتخاب کن', 'info', 4000);
-                }
-            }, 800);
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         })();
     </script>
 </body>
-
 </html>

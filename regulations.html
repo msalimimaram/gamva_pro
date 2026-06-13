@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>قوانین و مقررات | GAMva</title>
+    <meta name="description" content="قوانین و مقررات استفاده از پلتفرم GAMva - اکوسیستم هوشمند سلامت">
+    
+    <!-- فونت وزیرمتن و آیکون‌ها -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- استایل اصلی پروژه -->
+    <link rel="stylesheet" href="assets/style.css">
+    
+    <style>
+        /* تنظیمات اختصاصی صفحه قوانین */
+        .terms-container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .terms-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .terms-header h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .glass-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            transition: var(--transition-base);
+            margin-bottom: 2rem;
+        }
+        .glass-card:hover {
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-glow);
+        }
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 1.5rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-right: 3px solid var(--secondary);
+            padding-right: 1rem;
+        }
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+        .terms-text {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: var(--font-sm);
+        }
+        .terms-text p {
+            margin-bottom: 1rem;
+        }
+        .terms-text ul, .terms-text ol {
+            margin: 0.8rem 0 1rem 1.5rem;
+            padding-right: 1rem;
+        }
+        .terms-text li {
+            margin-bottom: 0.3rem;
+        }
+        .update-date {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-glass);
+            padding-top: 1.5rem;
+        }
+        @media (max-width: 650px) {
+            .glass-card {
+                padding: 1.2rem;
+            }
+            .section-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- پس‌زمینه بلور متحرک -->
+    <div class="dynamic-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- هدر شیشه‌ای یکسان با صفحات دیگر -->
+    <header class="glass-header">
+        <div class="logo" onclick="window.location.href='main-page.html'">
+            <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+            <div class="logo-text-container">
+                <span class="logo-val">lueva <span class="logo-gam">GAM</span></span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun"></i>
+            </button>
+            <div class="action-icon" onclick="window.location.href='main-page.html'">
+                <i class="fas fa-home"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="terms-container">
+        <div class="terms-header fade-up">
+            <h1>قوانین و مقررات <span class="gradient-text">GAMva</span></h1>
+            <p style="color: var(--text-muted);">لطفاً این قوانین را با دقت مطالعه کنید</p>
+        </div>
+
+        <div class="glass-card fade-up">
+            <div class="section-title">
+                <i class="fas fa-file-contract"></i>
+                <span>مواد عمومی</span>
+            </div>
+            <div class="terms-text">
+                <p>استفاده از پلتفرم GAMva به معنای پذیرش کامل تمامی شرایط و قوانین زیر است. این قوانین برای حفظ حقوق کاربران، مربیان و فروشندگان تدوین شده‌اند و ممکن است در آینده بروزرسانی شوند. کاربران موظف هستند هر بار از آخرین نسخه قوانین مطلع شوند.</p>
+                <p>GAMva یک اکوسیستم هوشمند سلامت است که خدمات مربیگری آنلاین و حضوری، فروش محصولات ورزشی و ارگانیک، محتوای آموزشی و چالش‌های تعاملی را ارائه می‌دهد.</p>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-user-check"></i>
+                <span>حساب کاربری و مسئولیت‌ها</span>
+            </div>
+            <div class="terms-text">
+                <ul>
+                    <li>برای استفاده از خدمات، کاربر باید حداقل ۱۸ سال سن داشته باشد یا با اجازه والدین/سرپرست قانونی ثبت‌نام کند.</li>
+                    <li>اطلاعات ارائه شده در هنگام ثبت‌نام باید کامل، دقیق و بروز باشد.</li>
+                    <li>هر کاربر مسئول حفظ امنیت رمز عبور و فعالیت‌های انجام شده با حساب خود است.</li>
+                    <li>GAMva حق تعلیق یا حذف حساب کاربری در صورت نقض قوانین یا ارائه اطلاعات نادرست را دارد.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-chalkboard-user"></i>
+                <span>مقررات مربیان و فروشندگان</span>
+            </div>
+            <div class="terms-text">
+                <ul>
+                    <li>مربیان و فروشندگان باید مدارک معتبر و مجوزهای لازم را ارائه دهند و صحت اطلاعات را تضمین کنند.</li>
+                    <li>تعرفه خدمات و محصولات باید قبل از ارائه به تأیید GAMva برسد و هرگونه تغییر باید اطلاع‌رسانی شود.</li>
+                    <li>لغو جلسات یا تأخیر در ارسال سفارشات باید طبق قوانین جبران خسارت عمل شود.</li>
+                    <li>محتوای ارائه شده توسط مربیان (برنامه‌ها، ویدیوها، مقالات) نباید مغایر با اصول علمی و سلامت باشد.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-cart-shopping"></i>
+                <span>خرید و تضمین محصولات</span>
+            </div>
+            <div class="terms-text">
+                <ul>
+                    <li>محصولات فروشگاه GAMva شامل مکمل‌ها، تجهیزات، پوشاک و مواد ارگانیک است.</li>
+                    <li>کلیه محصولات دارای ضمانت اصالت کالا و سلامت فیزیکی می‌باشند.</li>
+                    <li>در صورت وجود نقص یا مغایرت، کاربر می‌تواند ظرف ۷ روز کاری درخواست بازگشت وجه یا تعویض کالا را ارائه دهد.</li>
+                    <li>هزینه ارسال در صورت انصراف پس از ارسال، به عهده خریدار خواهد بود.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-shield-alt"></i>
+                <span>حریم خصوصی و امنیت داده‌ها</span>
+            </div>
+            <div class="terms-text">
+                <ul>
+                    <li>اطلاعات شخصی کاربران تنها برای بهبود خدمات و ارتباط با آنها استفاده می‌شود و به هیچ وجه به اشخاص ثالث فروخته یا منتقل نمی‌گردد، مگر به حکم قانون.</li>
+                    <li>تمامی تراکنش‌های مالی با استفاده از درگاه‌های امن انجام می‌شود.</li>
+                    <li>کاربران حق درخواست حذف حساب و اطلاعات خود را دارند که در این صورت اطلاعات تا ۳۰ روز پس از درخواست پاک خواهد شد.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-gavel"></i>
+                <span>قوانین چالش‌ها و جوایز</span>
+            </div>
+            <div class="terms-text">
+                <ul>
+                    <li>شرکت در چالش‌ها به منزله پذیرش قوانین آن چالش خاص است.</li>
+                    <li>هرگونه تقلب (تغییر دستی داده‌ها، استفاده از روش‌های غیرمجاز) منجر به محرومیت از چالش و بستن حساب خواهد شد.</li>
+                    <li>جوایز چالش‌ها پس از تأیید نهایی تا ۷۲ ساعت کاری به حساب کاربری یا کیف پول GAMva واریز می‌شود.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-ban"></i>
+                <span>موارد ممنوعه</span>
+            </div>
+            <div class="terms-text">
+                <ul>
+                    <li>ارسال محتوای نامناسب، توهین‌آمیز، تبلیغاتی غیرمرتبط یا نقض حقوق مالکیت فکری ممنوع است.</li>
+                    <li>تلاش برای هک، نفوذ یا ایجاد اختلال در سرویس GAMva منجر به پیگرد قانونی خواهد شد.</li>
+                    <li>استفاده از مطالب سایت بدون ذکر منبع و لینک مجاز نمی‌باشد.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-exchange-alt"></i>
+                <span>تغییرات قوانین و فسخ</span>
+            </div>
+            <div class="terms-text">
+                <p>GAMva این حق را دارد که هر زمان قوانین را تغییر دهد. تغییرات حداقل ۷ روز قبل از اجرا از طریق ایمیل یا اعلان در سایت اطلاع‌رسانی می‌شود. در صورت عدم پذیرش تغییرات، کاربر می‌تواند حساب خود را لغو کند.</p>
+                <p>در صورت نقض جدی قوانین، GAMva می‌تواند بدون اطلاع قبلی حساب کاربر را مسدود کند.</p>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-balance-scale"></i>
+                <span>قانون حاکم و حل اختلاف</span>
+            </div>
+            <div class="terms-text">
+                <p>این قوانین مطابق با قوانین جمهوری اسلامی ایران است. در صورت بروز اختلاف، ابتدا از طریق بخش پشتیبانی GAMva اقدام به حل و فصل می‌شود و در غیر این صورت، دعوا در مراجع قضایی تهران قابل پیگیری خواهد بود.</p>
+            </div>
+
+            <div class="update-date">
+                <i class="fas fa-calendar-alt"></i> آخرین به‌روزرسانی: ۲۰ بهمن ۱۴۰۳
+            </div>
+        </div>
+    </main>
+
+    <!-- فوتر یکسان -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">GAMva</div>
+                    <p class="footer-text">اکوسیستم هوشمند سلامت و توسعه فردی با قدرت هوش مصنوعی. همراه شما در مسیر سلامتی.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">اطلاعات</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html"><i class="fas fa-chevron-left"></i> درباره ما</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
+                        <li><a href="terms.html"><i class="fas fa-chevron-left"></i> قوانین و مقررات</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">پشتیبانی</h3>
+                    <ul class="footer-links">
+                        <li><a href="faq.html"><i class="fas fa-chevron-left"></i> سوالات متداول</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> حریم خصوصی</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© ۲۰۲۵ GAMva · حقوق مادی و معنوی این سایت متعلق به GAMva است.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ویجت پشتیبانی -->
+    <div class="support-widget">
+        <a href="telegram_user.html">
+            <button class="support-btn"><i class="fas fa-headset"></i><span class="support-tooltip">پشتیبانی ۲۴/۷</span></button>
+        </a>
+    </div>
+
+    <script src="assets/scripts.js"></script>
+    <script>
+        (function() {
+            // افکت fade-up
+            const fadeEls = document.querySelectorAll('.fade-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) e.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            fadeEls.forEach(el => observer.observe(el));
+
+            // اگر نیاز به بررسی نمایش پیام خوش‌آمد وجود داشت، اینجا چیزی اضافه نمی‌کنیم
+            // چون تابع سراسری در scripts.js یکبار کلید را بررسی می‌کند.
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>تماس با ما | GAMva</title>
+
+    <!-- فونت وزیرمتن و آیکون‌ها -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- استایل اصلی پروژه -->
+    <link rel="stylesheet" href="assets/style.css">
+    
+    <style>
+        /* تنظیمات اختصاصی صفحه تماس با ما */
+        .contact-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .contact-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .contact-header h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        /* شبکه دو ستونه */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        /* کارت‌های شیشه‌ای */
+        .glass-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 1.8rem;
+            transition: var(--transition-base);
+        }
+        .glass-card:hover {
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-glow);
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-glass);
+        }
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-glass-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+        .info-text h3 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+        .info-text p, .info-text a {
+            color: var(--text-muted);
+            font-size: var(--font-sm);
+            text-decoration: none;
+        }
+        .social-links-contact {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+        .social-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--bg-glass-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-base);
+            color: var(--text-secondary);
+        }
+        .social-circle:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        /* فرم تماس */
+        .input-group {
+            margin-bottom: 1.2rem;
+        }
+        .input-group label {
+            display: block;
+            font-size: var(--font-sm);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--text-secondary);
+        }
+        .input-group input, .input-group textarea, .input-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--bg-glass-light);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: var(--font-sm);
+        }
+        .input-group input:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+        .submit-btn {
+            width: 100%;
+            background: var(--gradient-primary);
+            border: none;
+            padding: 0.9rem;
+            border-radius: var(--radius-full);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-base);
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+        /* نقشه ساده (نمایشی) */
+        .map-placeholder {
+            margin-top: 2rem;
+            height: 200px;
+            background: var(--bg-glass-light);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-glass);
+        }
+        @media (max-width: 900px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- پس‌زمینه بلور متحرک -->
+    <div class="dynamic-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- هدر شیشه‌ای -->
+    <header class="glass-header">
+        <div class="logo" onclick="window.location.href='main-page.html'">
+            <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+            <div class="logo-text-container">
+                <span class="logo-val">lueva <span class="logo-gam">GAM</span></span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun"></i>
+            </button>
+            <div class="action-icon" onclick="window.location.href='main-page.html'">
+                <i class="fas fa-home"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="contact-container">
+        <div class="contact-header fade-up">
+            <h1>تماس با <span class="gradient-text">GAMva</span></h1>
+            <p style="color: var(--text-muted);">ما همیشه اینجا هستیم تا به شما کمک کنیم</p>
+        </div>
+
+        <div class="contact-wrapper fade-up">
+            <!-- اطلاعات تماس -->
+            <div class="glass-card">
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="info-text">
+                        <h3>آدرس دفتر مرکزی</h3>
+                        <p>تهران، خیابان ولیعصر، پلاک ۱۲۳، طبقه ۴، واحد ۸</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="info-text">
+                        <h3>شماره تماس</h3>
+                        <p>۰۲۱-۱۲۳۴۵۶۷۸</p>
+                        <p>۰۹۱۲-۱۲۳-۴۵۶۷</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="info-text">
+                        <h3>ایمیل</h3>
+                        <p>info@gamva.com</p>
+                        <p>support@gamva.com</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-clock"></i></div>
+                    <div class="info-text">
+                        <h3>ساعات کاری</h3>
+                        <p>شنبه تا چهارشنبه: ۹ صبح تا ۱۸</p>
+                        <p>پنجشنبه: ۹ صبح تا ۱۳</p>
+                    </div>
+                </div>
+                <div class="social-links-contact">
+                    <a href="#" class="social-circle"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-circle"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-circle"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-circle"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-circle"><i class="fab fa-youtube"></i></a>
+                </div>
+                <!-- نقشه نمایشی -->
+                <div class="map-placeholder">
+                    <i class="fas fa-map" style="font-size: 2rem; color: var(--secondary); margin-left: 0.5rem;"></i>
+                    <span style="color: var(--text-muted);">نمایش نقشه تعاملی</span>
+                </div>
+            </div>
+
+            <!-- فرم تماس -->
+            <div class="glass-card">
+                <h3 style="margin-bottom: 1.2rem;">ارسال پیام</h3>
+                <form id="contactForm">
+                    <div class="input-group">
+                        <label>نام کامل <span class="required">*</span></label>
+                        <input type="text" id="contactName" placeholder="نام و نام خانوادگی">
+                    </div>
+                    <div class="input-group">
+                        <label>ایمیل <span class="required">*</span></label>
+                        <input type="email" id="contactEmail" placeholder="example@email.com">
+                    </div>
+                    <div class="input-group">
+                        <label>موضوع</label>
+                        <select id="contactSubject">
+                            <option value="عمومی">سوال عمومی</option>
+                            <option value="مربیگری">درخواست مربیگری</option>
+                            <option value="فروشگاهی">مشاوره فروشگاهی</option>
+                            <option value="فنی">مشکل فنی</option>
+                            <option value="همکاری">درخواست همکاری</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>پیام <span class="required">*</span></label>
+                        <textarea id="contactMessage" rows="5" placeholder="پیام خود را بنویسید..."></textarea>
+                    </div>
+                    <button type="button" class="submit-btn" id="sendMessageBtn">ارسال پیام</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">GAMva</div>
+                    <p class="footer-text">اکوسیستم هوشمند سلامت و توسعه فردی با قدرت هوش مصنوعی.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">دسترسی سریع</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html"><i class="fas fa-chevron-left"></i> درباره ما</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
+                        <li><a href="faq.html"><i class="fas fa-chevron-left"></i> سوالات متداول</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">پشتیبانی</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> قوانین و مقررات</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> حریم خصوصی</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© ۲۰۲۵ GAMva · همیشه در کنار شما</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ویجت پشتیبانی -->
+    <div class="support-widget">
+        <a href="telegram_user.html">
+            <button class="support-btn"><i class="fas fa-headset"></i><span class="support-tooltip">پشتیبانی ۲۴/۷</span></button>
+        </a>
+    </div>
+
+    <script src="assets/scripts.js"></script>
+    <script>
+        (function() {
+            const sendBtn = document.getElementById('sendMessageBtn');
+            const nameInput = document.getElementById('contactName');
+            const emailInput = document.getElementById('contactEmail');
+            const messageInput = document.getElementById('contactMessage');
+
+            sendBtn.addEventListener('click', () => {
+                const name = nameInput.value.trim();
+                const email = emailInput.value.trim();
+                const message = messageInput.value.trim();
+                if (!name || !email || !message) {
+                    if (window.showToast) window.showToast('لطفاً نام، ایمیل و پیام را وارد کنید', 'warning');
+                    else alert('لطفاً همه فیلدهای الزامی را پر کنید');
+                    return;
+                }
+                const emailRegex = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+                if (!emailRegex.test(email)) {
+                    if (window.showToast) window.showToast('ایمیل معتبر وارد کنید', 'error');
+                    return;
+                }
+                // شبیه‌سازی ارسال
+                if (window.showToast) window.showToast('پیام شما با موفقیت ارسال شد! تیم ما به زودی پاسخگو خواهد بود.', 'success');
+                else alert('پیام ارسال شد');
+                nameInput.value = '';
+                emailInput.value = '';
+                messageInput.value = '';
+                document.getElementById('contactSubject').selectedIndex = 0;
+            });
+
+            // افکت fade-up
+            const fadeEls = document.querySelectorAll('.fade-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) e.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            fadeEls.forEach(el => observer.observe(el));
+        })();
+    </script>
+</body>
+</html>

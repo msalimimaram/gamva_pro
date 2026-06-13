@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>درباره ما | GAMva - اکوسیستم هوشمند سلامت</title>
+
+    <!-- فونت وزیرمتن و آیکون‌ها -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- استایل اصلی پروژه -->
+    <link rel="stylesheet" href="assets/style.css">
+    
+    <style>
+        /* تنظیمات اختصاصی صفحه درباره ما */
+        .about-container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .about-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .about-header h1 {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+        .about-header p {
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        /* کارت‌های شیشه‌ای */
+        .glass-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: var(--transition-base);
+        }
+        .glass-card:hover {
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-glow);
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-right: 3px solid var(--secondary);
+            padding-right: 1rem;
+        }
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .value-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        .value-item i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .team-member {
+            text-align: center;
+            background: var(--bg-glass-light);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: var(--transition-base);
+        }
+        .team-member:hover {
+            transform: translateY(-6px);
+        }
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--secondary);
+        }
+        .stats-row-about {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .stat-about {
+            text-align: center;
+        }
+        .stat-number-about {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        @media (max-width: 768px) {
+            .mission-vision {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- پس‌زمینه بلور متحرک -->
+    <div class="dynamic-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- هدر شیشه‌ای یکسان با صفحه اصلی -->
+    <header class="glass-header">
+        <div class="logo" onclick="window.location.href='main-page.html'">
+            <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+            <div class="logo-text-container">
+                <span class="logo-val">lueva <span class="logo-gam">GAM</span></span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun"></i>
+            </button>
+            <div class="action-icon" onclick="window.location.href='main-page.html'">
+                <i class="fas fa-home"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="about-container">
+        <div class="about-header fade-up">
+            <h1>درباره <span class="gradient-text">GAMva</span></h1>
+            <p>اکوسیستم هوشمند سلامت، جایی که علم، فناوری و تعهد انسانی در کنار هم قرار می‌گیرند</p>
+        </div>
+
+        <!-- داستان ما -->
+        <div class="glass-card fade-up">
+            <div class="section-title">
+                <i class="fas fa-leaf"></i>
+                <span>داستان GAMva</span>
+            </div>
+            <p style="line-height: 1.9; color: var(--text-secondary);">
+                GAMva از دل یک ایده ساده متولد شد: <strong>سلامتی نباید یک کالای لوکس باشد</strong>. ما معتقدیم هر فردی، در هر نقطه‌ای از ایران، شایسته دسترسی به بهترین مربیان، محصولات ارگانیک و محتوای تخصصی ورزشی است. با ترکیب هوش مصنوعی پیشرفته و شبکه‌ای از متخصصان مجرب، پلتفرمی را خلق کرده‌ایم که نه تنها به شما کمک می‌کند به اهداف سلامت خود برسید، بلکه مسیر را لذت‌بخش و پایدار می‌کند.
+                <br><br>
+                امروز، GAMva میزبان بیش از ۵,۰۰۰ کاربر فعال، ۱۲۰ مربی متخصص و ۳۰۰ محصول ارگانیک است. اما این تازه شروع ماجراست. ما به آینده‌ای چشم دوخته‌ایم که در آن هر ایرانی بتواند بهترین نسخه خودش باشد.
+            </p>
+        </div>
+
+        <!-- مأموریت و چشم‌انداز -->
+        <div class="mission-vision fade-up">
+            <div class="glass-card" style="margin-bottom: 0;">
+                <div class="section-title"><i class="fas fa-bullseye"></i> مأموریت ما</div>
+                <p style="color: var(--text-secondary);">توانمندسازی افراد برای دستیابی به سلامت پایدار از طریق فناوری هوشمند، محتوای علمی و ارتباط با متخصصان واقعی. ما به دنبال کاهش موانع دسترسی به خدمات سلامت باکیفیت هستیم.</p>
+            </div>
+            <div class="glass-card" style="margin-bottom: 0;">
+                <div class="section-title"><i class="fas fa-eye"></i> چشم‌انداز ما</div>
+                <p style="color: var(--text-secondary);">تبدیل شدن به معتبرترین اکوسیستم سلامت دیجیتال در خاورمیانه، با تمرکز بر شخصی‌سازی، نوآوری مداوم و ایجاد جامعه‌ای سالم و پویا.</p>
+            </div>
+        </div>
+
+        <!-- ارزش‌های ما -->
+        <div class="glass-card fade-up">
+            <div class="section-title"><i class="fas fa-gem"></i> ارزش‌های ما</div>
+            <div class="stats-row-about">
+                <div class="value-item">
+                    <i class="fas fa-microchip"></i>
+                    <h3>نوآوری</h3>
+                    <p style="color: var(--text-muted); font-size: var(--font-sm);">استفاده از پیشرفته‌ترین تکنولوژی‌های هوش مصنوعی</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h3>همدلی</h3>
+                    <p style="color: var(--text-muted); font-size: var(--font-sm);">درک نیازهای واقعی کاربران و مربیان</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>تعالی</h3>
+                    <p style="color: var(--text-muted); font-size: var(--font-sm);">تلاش بی‌وقفه برای بهبود کیفیت خدمات</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-users"></i>
+                    <h3>جامعه‌گرایی</h3>
+                    <p style="color: var(--text-muted); font-size: var(--font-sm);">ساخت پلی بین متخصصان و عموم مردم</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- آمار کلیدی -->
+        <div class="glass-card fade-up">
+            <div class="section-title"><i class="fas fa-chart-simple"></i> GAMva در یک نگاه</div>
+            <div class="stats-row-about">
+                <div class="stat-about">
+                    <div class="stat-number-about" id="statUsers">+۵,۰۰۰</div>
+                    <div style="color: var(--text-muted);">کاربر فعال</div>
+                </div>
+                <div class="stat-about">
+                    <div class="stat-number-about" id="statCoaches">+۱۲۰</div>
+                    <div style="color: var(--text-muted);">مربی متخصص</div>
+                </div>
+                <div class="stat-about">
+                    <div class="stat-number-about" id="statProducts">+۳۰۰</div>
+                    <div style="color: var(--text-muted);">محصول ارگانیک</div>
+                </div>
+                <div class="stat-about">
+                    <div class="stat-number-about" id="statSessions">+۱۲K</div>
+                    <div style="color: var(--text-muted);">جلسه برگزار شده</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- تیم ما -->
+        <div class="glass-card fade-up">
+            <div class="section-title"><i class="fas fa-user-friends"></i> قلب تپنده GAMva</div>
+            <div class="team-grid" id="teamGrid"></div>
+        </div>
+
+        <!-- دعوت به همکاری -->
+        <div class="glass-card fade-up" style="text-align: center; background: linear-gradient(135deg, rgba(90,75,218,0.1), rgba(0,184,184,0.05));">
+            <i class="fas fa-rocket" style="font-size: 3rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+            <h3>می‌خواهید بخشی از این سفر باشید؟</h3>
+            <p style="color: var(--text-muted); margin: 1rem 0;">چه مربی متخصص باشید، چه فروشنده محصولات ارگانیک، چه توسعه‌دهنده‌ای با ایده‌های نو، ما همیشه به دنبال همکاران پرانرژی هستیم.</p>
+            <a href="request-coach.html" class="btn-primary" style="display: inline-block; text-decoration: none; margin-top: 0.5rem;">همکاری با ما</a>
+        </div>
+    </main>
+
+    <!-- فوتر یکسان -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">GAMva</div>
+                    <p class="footer-text">اکوسیستم هوشمند سلامت و توسعه فردی با قدرت هوش مصنوعی. همراه شما در مسیر سلامتی.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">درباره ما</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html"><i class="fas fa-chevron-left"></i> داستان GAMva</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> فرصت‌های شغلی</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">پشتیبانی</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> سوالات متداول</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> قوانین و مقررات</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© ۲۰۲۵ GAMva · ساختن آینده‌ای سالم‌تر با هم</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ویجت پشتیبانی -->
+    <div class="support-widget">
+        <a href="telegram_user.html">
+            <button class="support-btn"><i class="fas fa-headset"></i><span class="support-tooltip">پشتیبانی ۲۴/۷</span></button>
+        </a>
+    </div>
+
+    <script src="assets/scripts.js"></script>
+    <script>
+        (function() {
+            // تیم ما (داده‌های نمونه)
+            const teamMembers = [
+                { name: "امیرعلی سلیمی", role: "بنیانگذار و مدیرعامل", avatar: "https://randomuser.me/api/portraits/men/32.jpg", bio: "کارآفرین فناوری سلامت" },
+                { name: "دکتر سارا احمدی", role: "رئیس بخش سلامت", avatar: "https://randomuser.me/api/portraits/women/44.jpg", bio: "متخصص طب ورزشی" },
+                { name: "مهسا رضایی", role: "مدیر تجربه کاربری", avatar: "https://randomuser.me/api/portraits/women/68.jpg", bio: "طراح تعاملات انسانی" },
+                { name: "رضا کریمی", role: "مدیر فنی", avatar: "https://randomuser.me/api/portraits/men/45.jpg", bio: "متخصص هوش مصنوعی" }
+            ];
+            const teamContainer = document.getElementById('teamGrid');
+            if (teamContainer) {
+                teamContainer.innerHTML = teamMembers.map(member => `
+                    <div class="team-member">
+                        <img src="${member.avatar}" class="team-avatar" alt="${member.name}">
+                        <h3>${member.name}</h3>
+                        <p style="color: var(--secondary); font-size: var(--font-sm);">${member.role}</p>
+                        <p style="color: var(--text-muted); font-size: var(--font-xs);">${member.bio}</p>
+                    </div>
+                `).join('');
+            }
+
+            // انیمیشن شمارنده‌های آمار (اختیاری)
+            const counters = document.querySelectorAll('.stat-number-about');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        if (el.dataset.animated === 'true') return;
+                        el.dataset.animated = 'true';
+                        const finalText = el.innerText;
+                        let finalNumber = 5000;
+                        if (finalText.includes('+۱۲۰')) finalNumber = 120;
+                        else if (finalText.includes('+۳۰۰')) finalNumber = 300;
+                        else if (finalText.includes('+۱۲K')) finalNumber = 12000;
+                        else finalNumber = 5000;
+                        let current = 0;
+                        const duration = 1500;
+                        const stepTime = 20;
+                        const steps = duration / stepTime;
+                        const increment = finalNumber / steps;
+                        let counter = 0;
+                        const timer = setInterval(() => {
+                            counter++;
+                            current += increment;
+                            if (counter >= steps) {
+                                el.innerText = finalNumber >= 1000 ? `+${(finalNumber/1000).toFixed(0)}K` : `+${finalNumber}`;
+                                clearInterval(timer);
+                            } else {
+                                const val = Math.floor(current);
+                                el.innerText = val >= 1000 ? `+${(val/1000).toFixed(0)}K` : `+${val}`;
+                            }
+                        }, stepTime);
+                    }
+                });
+            }, { threshold: 0.3 });
+            counters.forEach(c => observer.observe(c));
+
+            // افکت fade-up
+            const fadeEls = document.querySelectorAll('.fade-up');
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) e.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            fadeEls.forEach(el => fadeObserver.observe(el));
+        })();
+    </script>
+</body>
+</html>

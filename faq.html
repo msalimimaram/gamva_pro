@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>سوالات متداول | GAMva</title>
+    <meta name="description" content="پاسخ به سوالات رایج درباره GAMva - اکوسیستم هوشمند سلامت">
+    
+    <!-- فونت وزیرمتن و آیکون‌ها -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- استایل اصلی پروژه -->
+    <link rel="stylesheet" href="assets/style.css">
+    
+    <style>
+        /* تنظیمات اختصاصی صفحه سوالات متداول */
+        .faq-container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .faq-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .faq-header h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .faq-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* دسته‌بندی تب‌ها */
+        .faq-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+        .faq-tab {
+            background: var(--bg-glass-light);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-full);
+            padding: 0.6rem 1.5rem;
+            font-size: var(--font-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-base);
+            color: var(--text-muted);
+        }
+        .faq-tab:hover, .faq-tab.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        /* گروه سوالات */
+        .faq-group {
+            display: none;
+            animation: fadeInGroup 0.4s ease;
+        }
+        .faq-group.active {
+            display: block;
+        }
+        @keyframes fadeInGroup {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* کارت شیشه‌ای */
+        .glass-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            margin-bottom: 1.2rem;
+            transition: var(--transition-base);
+        }
+        .glass-card:hover {
+            border-color: var(--primary-light);
+        }
+        
+        /* آیتم سوال (آکاردئون) */
+        .faq-item {
+            border-bottom: 1px solid var(--border-glass);
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            background: transparent;
+        }
+        .faq-question:hover {
+            background: var(--bg-glass-light);
+        }
+        .question-text {
+            font-weight: 700;
+            font-size: var(--font-base);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .question-text i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+        .faq-icon {
+            color: var(--primary);
+            transition: transform 0.3s ease;
+            font-size: 1.2rem;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 1.5rem;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 1.5rem 1.2rem 1.5rem;
+        }
+        .answer-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: var(--font-sm);
+            border-right: 2px solid var(--secondary);
+            padding-right: 1rem;
+        }
+        
+        /* بخش تماس اضافی */
+        .contact-box {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .contact-box h3 {
+            margin-bottom: 0.8rem;
+        }
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: var(--transition-base);
+        }
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        @media (max-width: 650px) {
+            .faq-question {
+                padding: 1rem;
+            }
+            .question-text {
+                font-size: var(--font-sm);
+            }
+            .faq-tab {
+                padding: 0.4rem 1rem;
+                font-size: var(--font-xs);
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- پس‌زمینه بلور متحرک -->
+    <div class="dynamic-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- هدر شیشه‌ای -->
+    <header class="glass-header">
+        <div class="logo" onclick="window.location.href='main-page.html'">
+            <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+            <div class="logo-text-container">
+                <span class="logo-val">lueva <span class="logo-gam">GAM</span></span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun"></i>
+            </button>
+            <div class="action-icon" onclick="window.location.href='main-page.html'">
+                <i class="fas fa-home"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="faq-container">
+        <div class="faq-header fade-up">
+            <h1>سوالات متداول <span class="gradient-text">GAMva</span></h1>
+            <p>پاسخ به رایج‌ترین سوالات شما درباره پلتفرم، مربیان، فروشگاه و خدمات</p>
+        </div>
+
+        <!-- تب‌های دسته‌بندی -->
+        <div class="faq-tabs fade-up">
+            <button class="faq-tab active" data-category="general">عمومی</button>
+            <button class="faq-tab" data-category="coach">مربیان و جلسات</button>
+            <button class="faq-tab" data-category="shop">فروشگاه و محصولات</button>
+            <button class="faq-tab" data-category="account">حساب کاربری و پرداخت</button>
+        </div>
+
+        <!-- دسته عمومی -->
+        <div class="faq-group active" id="general-group">
+            <div class="glass-card">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="question-text"><i class="fas fa-question-circle"></i> GAMva چیست و چه خدماتی ارائه می‌دهد؟</div>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">GAMva یک اکوسیستم هوشمند سلامت است که خدمات زیر را ارائه می‌دهد: ارتباط با مربیان متخصص (بدنسازی، تغذیه، یوگا، روانشناسی و...)، فروشگاه محصولات ارگانیک و تجهیزات ورزشی، چالش‌های انگیزشی و محتوای آموزشی (پادکست، ویدیو، مقاله). همه این خدمات با پشتیبانی هوش مصنوعی شخصی‌سازی می‌شوند.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="question-text"><i class="fas fa-check-circle"></i> آیا استفاده از GAMva رایگان است؟</div>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">عضویت اولیه و دسترسی به برخی محتواها (مقالات، پادکست‌های رایگان، چالش‌های عمومی) رایگان است. برای استفاده از جلسات مربیگری خصوصی، خرید محصولات و برخی محتوای ویژه، هزینه‌های مشخصی اعمال می‌شود که کاملاً شفاف در پروفایل مربیان و صفحه محصولات درج شده است.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="question-text"><i class="fas fa-shield-alt"></i> آیا اطلاعات من در GAMva امن است؟</div>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">بله. ما از پروتکل‌های رمزنگاری پیشرفته برای ذخیره و انتقال داده‌ها استفاده می‌کنیم. اطلاعات شخصی شما هرگز بدون رضایت به فروش نمی‌رسد. برای اطلاعات بیشتر <a href="privacy.html" style="color: var(--primary);">صفحه حریم خصوصی</a> را مطالعه کنید.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- دسته مربیان -->
+        <div class="faq-group" id="coach-group">
+            <div class="glass-card">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="question-text"><i class="fas fa-chalkboard-user"></i> چگونه می‌توانم یک مربی مناسب پیدا کنم؟</div>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">می‌توانید از صفحه «مربیان» استفاده کنید و بر اساس تخصص (بدنسازی، یوگا، تغذیه، روانشناسی)، شهر، جنسیت، نوع جلسه (آنلاین/حضوری) و محدوده قیمت فیلتر کنید. همچنین سیستم هوش مصنوعی GAMva با توجه به اهداف و سطح شما، مربیان مرتبط را پیشنهاد می‌دهد.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="question-text"><i class="fas fa-clock"></i> جلسات مربیگری چگونه برگزار می‌شود؟</div>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">جلسات به دو صورت حضوری (در باشگاه یا محل تعیین شده) و آنلاین (از طریق تماس تصویری در پلتفرم GAMva یا نرم‌افزارهای مورد توافق) برگزار می‌شود. پس از رزرو، اطلاعات دقیق جلسه برای شما ارسال می‌شود.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="question-text"><i class="fas fa-ban"></i> در صورت لغو جلسه چه باید کرد؟</div>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">لغو جلسه حداقل ۱۲ ساعت قبل از زمان مقرر امکان‌پذیر است و مبلغ به کیف پول شما بازگشت می‌یابد. در صورت لغو دیرهنگام یا عدم حضور، جلسه به عنوان انجام شده محاسبه می‌شود (استثنا در موارد اضطراری با تأیید پشتیبانی).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- دسته فروشگاه -->
+        <div class="faq-group" id="shop-group">
+            <div class="glass-card">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="question-text"><i class="fas fa-truck"></i> هزینه ارسال چقدر است و چقدر طول می‌کشد؟</div>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">ارسال برای خریدهای بالای ۱,۰۰۰,۰۰۰ تومان در تهران رایگان است. سایر مناطق بر اساس تعرفه پست محاسبه می‌شود. زمان تحویل معمولاً ۲ تا ۵ روز کاری بسته به محل تحویل است.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="question-text"><i class="fas fa-undo-alt"></i> چگونه می‌توانم کالا را مرجوع کنم؟</div>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">در صورت وجود نقص یا مغایرت، تا ۷ روز کاری پس از تحویل می‌توانید از طریق بخش پیگیری سفارش، درخواست مرجوعی دهید. پس از تأیید، کالا عودت داده شده و وجه به کیف پول شما بازگردانده می‌شود.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="question-text"><i class="fas fa-seedling"></i> آیا محصولات ارگانیک دارای گواهی هستند؟</div>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">بله، تمام محصولات ارگانیک فروشگاه GAMva دارای گواهی رسمی از سازمان غذا و دارو و برچسب اصالت هستند. مدارک مربوطه در صفحه هر محصول قابل مشاهده است.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- دسته حساب کاربری -->
+        <div class="faq-group" id="account-group">
+            <div class="glass-card">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="question-text"><i class="fas fa-key"></i> رمز عبور خود را فراموش کرده‌ام، چه کنم؟</div>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">در صفحه ورود، روی گزینه «فراموشی رمز عبور» کلیک کنید. لینک بازنشانی به ایمیل شما ارسال می‌شود. همچنین می‌توانید از طریق پشتیبانی با ارائه شماره موبایل، رمز جدید دریافت کنید.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="question-text"><i class="fas fa-credit-card"></i> چه روش‌های پرداختی پذیرفته می‌شود؟</div>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">پرداخت آنلاین از طریق درگاه بانکی (تمام کارت‌های عضو شتاب)، کارت به کارت (اطلاعات در صفحه تسویه حساب)، کیف پول GAMva و پرداخت در محل (فقط برای شهر تهران) امکان‌پذیر است.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="question-text"><i class="fas fa-trash-alt"></i> چگونه حساب کاربری خود را حذف کنم؟</div>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">برای حذف حساب، به بخش «تنظیمات حساب» در داشبورد بروید و گزینه «درخواست حذف حساب» را کلیک کنید. درخواست شما ظرف ۷۲ ساعت بررسی و حساب و اطلاعات مرتبط حذف می‌شود (به جز موارد مالی که طبق قانون باید نگهداری شوند).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- باکس تماس اضافی -->
+        <div class="contact-box fade-up">
+            <i class="fas fa-headset" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+            <h3>پاسخ سوال خود را پیدا نکردید؟</h3>
+            <p style="color: var(--text-muted);">تیم پشتیبانی GAMva ۲۴ ساعته آماده پاسخگویی است</p>
+            <a href="contact.html" class="contact-btn">تماس با پشتیبانی <i class="fas fa-arrow-left"></i></a>
+        </div>
+    </main>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">GAMva</div>
+                    <p class="footer-text">اکوسیستم هوشمند سلامت و توسعه فردی با قدرت هوش مصنوعی.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">راهنما</h3>
+                    <ul class="footer-links">
+                        <li><a href="faq.html"><i class="fas fa-chevron-left"></i> سوالات متداول</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
+                        <li><a href="terms.html"><i class="fas fa-chevron-left"></i> قوانین و مقررات</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">پشتیبانی</h3>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html"><i class="fas fa-chevron-left"></i> حریم خصوصی</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> گزارش مشکل</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© ۲۰۲۵ GAMva · پاسخ به سوالات شما افتخار ماست</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ویجت پشتیبانی -->
+    <div class="support-widget">
+        <a href="telegram_user.html">
+            <button class="support-btn"><i class="fas fa-headset"></i><span class="support-tooltip">پشتیبانی ۲۴/۷</span></button>
+        </a>
+    </div>
+
+    <script src="assets/scripts.js"></script>
+    <script>
+        (function() {
+            // ========== آکاردئون ==========
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    // بستن بقیه (اختیاری - برای تجربه کاربری بهتر می‌توان فقط یکی باز باشد)
+                    // faqItems.forEach(i => i.classList.remove('active'));
+                    if (!isActive) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            });
+
+            // ========== تب‌ها ==========
+            const tabs = document.querySelectorAll('.faq-tab');
+            const groups = {
+                general: document.getElementById('general-group'),
+                coach: document.getElementById('coach-group'),
+                shop: document.getElementById('shop-group'),
+                account: document.getElementById('account-group')
+            };
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const category = tab.dataset.category;
+                    // فعال کردن تب
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    // نمایش گروه مربوطه
+                    Object.values(groups).forEach(group => {
+                        if (group) group.classList.remove('active');
+                    });
+                    if (groups[category]) groups[category].classList.add('active');
+                });
+            });
+
+            // افکت fade-up
+            const fadeEls = document.querySelectorAll('.fade-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) e.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            fadeEls.forEach(el => observer.observe(el));
+        })();
+    </script>
+</body>
+</html>
