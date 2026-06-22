@@ -28,7 +28,6 @@
             overflow-x: hidden;
         }
 
-        /* الگوی پس‌زمینه مینیمال برای دسکتاپ */
         body::before {
             content: "";
             position: fixed;
@@ -59,7 +58,7 @@
             width: 100%;
         }
 
-        /* ============ استایل موبایل (پیش‌فرض) ============ */
+        /* ============ استایل موبایل ============ */
         .mobile-card {
             max-width: 460px;
             width: 100%;
@@ -249,7 +248,7 @@
 
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
+            padding-bottom: 56.25%;
             height: 0;
             border-radius: 1.8rem;
             overflow: hidden;
@@ -396,20 +395,16 @@
             opacity: 0.8;
         }
 
-        /* ============ استایل دسکتاپ (حرفه‌ای) ============ */
+        /* ============ استایل دسکتاپ ============ */
         .desktop-layout {
             display: none;
             max-width: 1100px;
             width: 100%;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
             background: #ffffff;
             border-radius: 3rem;
             box-shadow: 0 35px 70px rgba(0, 30, 15, 0.1), 0 15px 30px rgba(0, 0, 0, 0.05);
             padding: 3.5rem 3rem;
-            display: flex;
             align-items: center;
             gap: 3.5rem;
             border: 1px solid rgba(180, 210, 190, 0.3);
@@ -482,7 +477,6 @@
             flex-shrink: 0;
         }
 
-        /* دکمه ضربان‌دار در دسکتاپ */
         .desktop-video-trigger {
             margin-top: 0.5rem;
         }
@@ -490,6 +484,32 @@
         .desktop-video-trigger .heartbeat-btn {
             font-size: 1.15rem;
             padding: 0.9rem 2.4rem;
+        }
+
+        .desktop-webapp-section {
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .desktop-webapp-section .webapp-link {
+            font-size: 1.05rem;
+            padding: 0.85rem 2.5rem;
+            border-color: #6f9e8c;
+            background: #f5fbf8;
+            border-width: 2px;
+        }
+
+        .desktop-webapp-section .webapp-link:hover {
+            background: #e2f0e9;
+            border-color: #0a6b4a;
+            color: #0a3829;
+        }
+
+        .desktop-webapp-section .web-hint {
+            font-size: 0.85rem;
         }
 
         .webapp-desktop-btn {
@@ -636,7 +656,7 @@
                 <div class="divider-text">یا</div>
 
                 <div class="webapp-section">
-                    <a href="https://msalimimaram.github.io/gamva_pro/main-page.html" rel="noopener" class="webapp-link">
+                    <a href="main-page.html" rel="noopener" class="webapp-link">
                         🌐 ورود به نسخه وب
                     </a>
                     <div class="web-hint">💡 بدون نصب، مستقیماً وارد داشبورد شوید</div>
@@ -645,7 +665,7 @@
             </div>
         </div>
 
-        <!-- ================= نسخه دسکتاپ (حرفه‌ای) ================= -->
+        <!-- ================= نسخه دسکتاپ ================= -->
         <div class="desktop-view desktop-layout">
             <!-- سمت راست: معرفی -->
             <div class="desktop-info">
@@ -677,9 +697,13 @@
                         <span style="font-size: 1.2rem;">▶</span>
                     </button>
                 </div>
-
-                <div style="margin-top: 1rem; font-size:0.85rem; color:#4b6b5e; display:flex; align-items:center; gap:0.3rem;">
-                    <span>💻</span> بدون نیاز به نصب • مناسب دسکتاپ و مرورگر
+<br>
+                <!-- دکمه ورود به نسخه وب در دسکتاپ -->
+                <div class="desktop-webapp-section">
+                    <a href="main-page.html" rel="noopener" class="webapp-link">
+                        🌐 ورود به نسخه وب
+                    </a>
+                    <div class="web-hint">💡 بدون نصب، مستقیماً وارد داشبورد شوید</div>
                 </div>
             </div>
 
@@ -719,7 +743,7 @@
             <div class="video-wrapper">
                 <iframe 
                     id="videoIframe"
-                    src="assets/1000527230_auto.mp4"
+                    src=""
                     title="ویدیو معرفی گاموا"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen>
@@ -738,45 +762,36 @@
                 document.getElementById('openVideoBtnDesktop')
             ];
 
-            // تابع باز کردن مودال
+            const videoSrc = 'https://abrehamrahi.ir/o/public/gPDNQr3D/';
+
             function openModal() {
                 modal.classList.add('active');
-                // اطمینان از لود شدن ویدیو (در صورت نیاز)
-                iframe.src = iframe.src; // ریلود نمی‌کنیم، فقط نمایش می‌دهیم
+                iframe.src = videoSrc;
+                document.body.style.overflow = 'hidden';
             }
 
-            // تابع بستن مودال
             function closeModal() {
                 modal.classList.remove('active');
-                // توقف ویدیو با خالی کردن src و دوباره تنظیم (اختیاری)
-                // برای توقف پخش، می‌توانیم src را خالی و دوباره پر کنیم
-                const currentSrc = iframe.src;
                 iframe.src = '';
-                setTimeout(() => {
-                    iframe.src = currentSrc;
-                }, 300);
+                document.body.style.overflow = '';
             }
 
-            // رویداد برای دکمه‌های باز کردن
             openBtns.forEach(btn => {
                 if (btn) {
                     btn.addEventListener('click', openModal);
                 }
             });
 
-            // رویداد برای دکمه بستن
             if (closeBtn) {
                 closeBtn.addEventListener('click', closeModal);
             }
 
-            // کلیک خارج از محتوا نیز بسته شود
             modal.addEventListener('click', function(e) {
                 if (e.target === modal) {
                     closeModal();
                 }
             });
 
-            // بستن با کلید Escape
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && modal.classList.contains('active')) {
                     closeModal();
