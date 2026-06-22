@@ -132,7 +132,6 @@
             flex-wrap: wrap;
         }
 
-        /* دکمه گاموا (ویدیو) با طراحی جدید و جذاب */
         .btn-gamova {
             display: inline-flex;
             align-items: center;
@@ -196,7 +195,6 @@
             background: rgba(255, 255, 255, 0.3);
         }
 
-        /* دکمه ورود به نسخه وب */
         .btn-webapp {
             display: inline-flex;
             align-items: center;
@@ -319,7 +317,7 @@
             opacity: 0.8;
         }
 
-        /* ============ مودال ویدیو با Canvas برای جلوگیری از دانلود ============ */
+        /* ============ مودال ویدیو امن ============ */
         .video-modal {
             display: none;
             position: fixed;
@@ -347,7 +345,7 @@
         }
 
         .modal-content {
-            background: #0b1f18; /* پس‌زمینه تیره برای کادر ویدیو */
+            background: #000;
             border-radius: 2rem;
             max-width: 850px;
             width: 100%;
@@ -361,7 +359,7 @@
         .modal-close {
             position: absolute;
             top: 16px;
-            right: 16px; /* در نسخه راست‌چین */
+            right: 16px;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -387,7 +385,8 @@
             transform: rotate(90deg);
         }
 
-        .player-container {
+        /* استایل پلیر امن */
+        .secure-player {
             position: relative;
             width: 100%;
             background: #000;
@@ -395,16 +394,28 @@
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
+            -webkit-touch-callout: none;
         }
 
-        .player-container canvas {
+        .secure-player video {
             display: block;
             width: 100%;
             height: auto;
-            pointer-events: none; /* از کشیدن و دراپ عکس جلوگیری می‌کنه */
+            pointer-events: none; /* غیرفعال کردن کلیک روی ویدیو */
         }
 
-        /* کنترل‌های سفارشی پخش */
+        /* overlay محافظ */
+        .video-protection-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            background: transparent;
+            pointer-events: all; /* جذب تمام کلیک‌ها */
+        }
+
         .custom-controls {
             position: absolute;
             bottom: 20px;
@@ -440,11 +451,6 @@
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.5);
             transform: scale(1.08);
-        }
-
-        .progress-bar {
-            pointer-events: auto;
-            display: none; /* در صورت نیاز می‌تونید یک progress bar اضافه کنید */
         }
 
         /* ============ استایل دسکتاپ ============ */
@@ -529,7 +535,6 @@
             flex-shrink: 0;
         }
 
-        /* ردیف دکمه‌های دسکتاپ */
         .desktop-hero-actions {
             display: flex;
             align-items: center;
@@ -661,7 +666,6 @@
             </div>
 
             <div class="divider-text">یا</div>
-            <!-- راهنمای نصب نشده حذف شد چون دکمه بالا هست -->
             <div class="footer-note">طراحی برای مربیان حرفه‌ای • نسخه ۲.۰</div>
         </div>
     </div>
@@ -731,12 +735,27 @@
     </div>
 </div>
 
-<!-- ===== مودال ویدیو با Canvas (غیرقابل دانلود مستقیم) ===== -->
+<!-- ===== مودال ویدیو امن ===== -->
 <div class="video-modal" id="videoModal">
     <div class="modal-content">
         <button class="modal-close" id="closeVideoBtn">✕</button>
-        <div class="player-container" id="playerContainer" oncontextmenu="return false;">
-            <canvas id="videoCanvas"></canvas>
+        <div class="secure-player" id="securePlayer" oncontextmenu="return false;">
+            <!-- Overlay محافظ برای جلوگیری از کلیک راست و ذخیره -->
+            <div class="video-protection-overlay"></div>
+            
+            <!-- ویدیو با ویژگی‌های امنیتی -->
+            <video 
+                id="secureVideo"
+                controlsList="nodownload nofullscreen noremoteplayback noplaybackrate"
+                disablePictureInPicture
+                preload="metadata"
+                playsinline
+                webkit-playsinline
+            >
+                <source src="assets/1000527230_auto.mp4" type="video/mp4">
+                مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+            </video>
+            
             <!-- کنترل‌های سفارشی -->
             <div class="custom-controls" id="customControls">
                 <button class="control-btn" id="playPauseBtn" title="پخش / توقف">
@@ -752,103 +771,101 @@
 
 <script>
     (function() {
-        // ---------- المان‌های DOM ----------
+        // المان‌های DOM
         const modal = document.getElementById('videoModal');
-        const canvas = document.getElementById('videoCanvas');
-        const ctx = canvas.getContext('2d');
-        const playerContainer = document.getElementById('playerContainer');
+        const video = document.getElementById('secureVideo');
         const playPauseBtn = document.getElementById('playPauseBtn');
         const playPauseIcon = document.getElementById('playPauseIcon');
         const fullscreenBtn = document.getElementById('fullscreenBtn');
         const closeBtn = document.getElementById('closeVideoBtn');
+        const securePlayer = document.getElementById('securePlayer');
 
         const openBtns = [
             document.getElementById('openVideoBtnMobile'),
             document.getElementById('openVideoBtnDesktop')
         ];
 
-        // آدرس ویدیو (باید روی سرور اجرا بشه، نه فایل محلی صرف)
-        const videoSrc = 'assets/1000527230_auto.mp4';
-        let videoElement = null;
-        let animationFrameId = null;
         let isPlaying = false;
 
-        // ---------- ساخت عنصر ویدیو مخفی ----------
-        function createVideoElement() {
-            if (videoElement) return videoElement;
-            const video = document.createElement('video');
-            video.src = videoSrc;
-            video.crossOrigin = 'anonymous'; // مهم برای CORS
-            video.preload = 'auto';
-            video.muted = false;
-            video.playsInline = true;
-            video.setAttribute('playsinline', '');
-            video.setAttribute('webkit-playsinline', '');
-            // مخفی کردن ویدیوی اصلی
-            video.style.display = 'none';
-            document.body.appendChild(video);
-            videoElement = video;
-            return video;
-        }
+        // ====== اقدامات امنیتی پیشرفته ======
+        function applySecurityMeasures() {
+            // 1. غیرفعال کردن کلیک راست روی کل پلیر
+            securePlayer.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                return false;
+            });
 
-        // ---------- کشیدن فریم روی Canvas ----------
-        function drawFrame() {
-            if (!videoElement || videoElement.paused || videoElement.ended) {
-                return;
-            }
-            // تنظیم ابعاد Canvas متناسب با ویدیو
-            if (canvas.width !== videoElement.videoWidth || canvas.height !== videoElement.videoHeight) {
-                canvas.width = videoElement.videoWidth;
-                canvas.height = videoElement.videoHeight;
-            }
-            ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-            animationFrameId = requestAnimationFrame(drawFrame);
-        }
+            // 2. جلوگیری از کشیدن و دراپ (Drag & Drop)
+            securePlayer.addEventListener('dragstart', (e) => {
+                e.preventDefault();
+                return false;
+            });
 
-        // ---------- پخش و توقف ----------
-        function playVideo() {
-            if (!videoElement) return;
-            videoElement.play().then(() => {
-                isPlaying = true;
-                playPauseIcon.textContent = '⏸';
-                drawFrame();
-            }).catch(err => {
-                console.error('پخش ویدیو با خطا مواجه شد:', err);
-                alert('امکان پخش ویدیو وجود ندارد. لطفاً فایل را روی یک سرور اجرا کنید.');
+            // 3. غیرفعال کردن کلیدهای میانبر (Ctrl+S, Ctrl+U, F12, etc.)
+            document.addEventListener('keydown', (e) => {
+                if (modal.classList.contains('active')) {
+                    // جلوگیری از Ctrl+S, Ctrl+U, Ctrl+Shift+I, F12
+                    if (
+                        (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) ||
+                        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) ||
+                        e.key === 'F12'
+                    ) {
+                        e.preventDefault();
+                        return false;
+                    }
+                }
+            });
+
+            // 4. تنظیم ویژگی‌های امنیتی ویدیو
+            video.setAttribute('controlsList', 'nodownload nofullscreen noremoteplayback noplaybackrate');
+            video.setAttribute('disablePictureInPicture', '');
+            video.setAttribute('oncontextmenu', 'return false;');
+            
+            // 5. جلوگیری از دسترسی به منوی راست‌کلیک مرورگر روی ویدیو
+            video.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                return false;
             });
         }
 
-        function pauseVideo() {
-            if (!videoElement) return;
-            videoElement.pause();
+        // ====== کنترل پخش ======
+        function togglePlay() {
+            if (video.paused) {
+                video.play();
+                isPlaying = true;
+                playPauseIcon.textContent = '⏸';
+            } else {
+                video.pause();
+                isPlaying = false;
+                playPauseIcon.textContent = '▶';
+            }
+        }
+
+        // به‌روزرسانی آیکون بر اساس وضعیت واقعی ویدیو
+        video.addEventListener('play', () => {
+            isPlaying = true;
+            playPauseIcon.textContent = '⏸';
+        });
+
+        video.addEventListener('pause', () => {
             isPlaying = false;
             playPauseIcon.textContent = '▶';
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-                animationFrameId = null;
-            }
-            // نمایش آخرین فریم
-            ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-        }
+        });
 
-        function togglePlay() {
-            if (!videoElement) return;
-            if (isPlaying) {
-                pauseVideo();
-            } else {
-                playVideo();
-            }
-        }
+        video.addEventListener('ended', () => {
+            isPlaying = false;
+            playPauseIcon.textContent = '▶';
+        });
 
-        // ---------- فول‌اسکرین ----------
+        // ====== فول‌اسکرین سفارشی ======
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
-                if (playerContainer.requestFullscreen) {
-                    playerContainer.requestFullscreen();
-                } else if (playerContainer.webkitRequestFullscreen) {
-                    playerContainer.webkitRequestFullscreen();
-                } else if (playerContainer.msRequestFullscreen) {
-                    playerContainer.msRequestFullscreen();
+                if (securePlayer.requestFullscreen) {
+                    securePlayer.requestFullscreen();
+                } else if (securePlayer.webkitRequestFullscreen) {
+                    securePlayer.webkitRequestFullscreen();
+                } else if (securePlayer.msRequestFullscreen) {
+                    securePlayer.msRequestFullscreen();
                 }
             } else {
                 if (document.exitFullscreen) {
@@ -857,41 +874,38 @@
             }
         }
 
-        // ---------- باز و بسته کردن مودال ----------
+        // ====== باز و بسته کردن مودال ======
         function openModal() {
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
-            // ساخت ویدیو اگر وجود نداره
-            const video = createVideoElement();
-            // وقتی ویدیو آماده شد، یک فریم اولیه نشون بده
-            video.addEventListener('loadeddata', function onLoaded() {
-                video.removeEventListener('loadeddata', onLoaded);
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                // شروع خودکار پخش
-                playVideo();
+            
+            // لود ویدیو
+            video.load();
+            
+            // پخش خودکار
+            video.play().then(() => {
+                isPlaying = true;
+                playPauseIcon.textContent = '⏸';
+            }).catch((err) => {
+                console.log('پخش خودکار نیاز به تعامل کاربر دارد:', err);
+                isPlaying = false;
+                playPauseIcon.textContent = '▶';
             });
-            // اگر قبلاً لود شده بود
-            if (video.readyState >= 2) {
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                playVideo();
-            }
         }
 
         function closeModal() {
-            pauseVideo();
+            video.pause();
+            video.currentTime = 0;
+            isPlaying = false;
+            playPauseIcon.textContent = '▶';
             modal.classList.remove('active');
             document.body.style.overflow = '';
-            // ریست Canvas
-            if (canvas) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
         }
 
-        // ---------- رویدادها ----------
+        // ====== Event Listeners ======
+        // اعمال تنظیمات امنیتی در ابتدا
+        applySecurityMeasures();
+
         openBtns.forEach(btn => {
             if (btn) btn.addEventListener('click', openModal);
         });
@@ -911,13 +925,11 @@
         if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
         if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
 
-        // پاکسازی ویدیو هنگام بستن یا ترک صفحه
+        // پاکسازی هنگام بستن صفحه
         window.addEventListener('beforeunload', function() {
-            if (videoElement) {
-                videoElement.pause();
-                videoElement.src = '';
-                videoElement.remove();
-                videoElement = null;
+            if (video) {
+                video.pause();
+                video.src = '';
             }
         });
     })();
