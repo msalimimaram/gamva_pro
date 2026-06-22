@@ -53,7 +53,6 @@
             z-index: 0;
         }
 
-        /* کانتینر اصلی */
         .landing-container {
             position: relative;
             z-index: 1;
@@ -122,6 +121,148 @@
             border-radius: 1.5rem;
             display: inline-block;
             margin: 0 0.1rem;
+        }
+
+        /* ===== دکمه ویدیو با ضربان قلب ===== */
+        .video-trigger-area {
+            margin: 1.2rem 0 0.8rem;
+        }
+
+        .heartbeat-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+            background: linear-gradient(145deg, #e53e3e, #c53030);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.9rem 2rem;
+            border-radius: 3rem;
+            border: none;
+            box-shadow: 0 8px 20px rgba(200, 50, 50, 0.35);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            position: relative;
+            letter-spacing: 0.5px;
+        }
+
+        .heartbeat-btn:hover {
+            transform: scale(1.04);
+            box-shadow: 0 12px 28px rgba(200, 50, 50, 0.5);
+        }
+
+        .heartbeat-btn:active {
+            transform: scale(0.96);
+        }
+
+        .heartbeat-btn .pulse-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.08); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.06); }
+            70% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes pulse-dot {
+            0% { opacity: 1; transform: scale(0.8); }
+            50% { opacity: 0.5; transform: scale(1.4); }
+            100% { opacity: 1; transform: scale(0.8); }
+        }
+
+        /* ===== مودال ویدیو ===== */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 20, 15, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            animation: fadeInModal 0.35s ease;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeInModal {
+            0% { opacity: 0; transform: scale(0.96); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 2.5rem;
+            max-width: 820px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            padding: 1.2rem 1.2rem 1.5rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            left: 16px;
+            background: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: none;
+            color: #fff;
+            font-size: 1.8rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.25s;
+            z-index: 10;
+            line-height: 1;
+            font-weight: 300;
+        }
+
+        .modal-close:hover {
+            background: rgba(200, 50, 50, 0.8);
+            transform: rotate(90deg);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            border-radius: 1.8rem;
+            overflow: hidden;
+            background: #0b1f18;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
         }
 
         .app-buttons {
@@ -274,7 +415,6 @@
             border: 1px solid rgba(180, 210, 190, 0.3);
         }
 
-        /* بخش چپ: توضیحات */
         .desktop-info {
             flex: 1.1;
             text-align: right;
@@ -342,6 +482,16 @@
             flex-shrink: 0;
         }
 
+        /* دکمه ضربان‌دار در دسکتاپ */
+        .desktop-video-trigger {
+            margin-top: 0.5rem;
+        }
+
+        .desktop-video-trigger .heartbeat-btn {
+            font-size: 1.15rem;
+            padding: 0.9rem 2.4rem;
+        }
+
         .webapp-desktop-btn {
             display: inline-flex;
             align-items: center;
@@ -365,7 +515,6 @@
             transform: translateY(-2px);
         }
 
-        /* بخش راست: دکمه‌های دانلود */
         .desktop-downloads {
             flex: 0.95;
             background: #f9fdfb;
@@ -403,7 +552,6 @@
             margin-right: auto;
         }
 
-        /* نمایش هندلینگ */
         .mobile-view {
             display: block;
         }
@@ -432,7 +580,6 @@
             }
         }
 
-        /* میکرو اینتراکشن */
         @media (prefers-reduced-motion: no-preference) {
             .store-btn, .webapp-link, .webapp-desktop-btn {
                 transition: all 0.25s cubic-bezier(0.2, 0.8, 0.3, 1.1);
@@ -459,6 +606,15 @@
                     </p>
                 </div>
 
+                <!-- دکمه ویدیو با ضربان قلب (موبایل) -->
+                <div class="video-trigger-area">
+                    <button class="heartbeat-btn" id="openVideoBtnMobile">
+                        <span class="pulse-dot"></span>
+                        گاموا رو ببینید
+                        <span style="font-size: 1.2rem;">▶</span>
+                    </button>
+                </div>
+
                 <div class="app-buttons">
                     <a href="404.html" rel="noopener" class="store-btn">
                         <span class="store-icon"><img src="assets/img/app-store.svg" width="30" alt=""></span> دانلود از اپ استور
@@ -480,7 +636,7 @@
                 <div class="divider-text">یا</div>
 
                 <div class="webapp-section">
-                    <a href="main-page.html" rel="noopener" class="webapp-link">
+                    <a href="https://msalimimaram.github.io/gamva_pro/main-page.html" rel="noopener" class="webapp-link">
                         🌐 ورود به نسخه وب
                     </a>
                     <div class="web-hint">💡 بدون نصب، مستقیماً وارد داشبورد شوید</div>
@@ -512,11 +668,17 @@
                     <li><span class="feature-icon">📊</span> داشبورد تحلیلی پیشرفت</li>
                     <li><span class="feature-icon">💬</span> ارتباط مستقیم با هنرجویان</li>
                 </ul>
-                <a href="main-page.html" rel="noopener" class="webapp-desktop-btn">
-                    <span>🌐</span> استفاده از نسخه تحت وب (Web App)
-                    <span style="font-size:0.8rem; margin-right:0.2rem;">↗</span>
-                </a>
-                <div style="margin-top: 1.2rem; font-size:0.85rem; color:#4b6b5e; display:flex; align-items:center; gap:0.3rem;">
+
+                <!-- دکمه ویدیو در دسکتاپ -->
+                <div class="desktop-video-trigger">
+                    <button class="heartbeat-btn" id="openVideoBtnDesktop">
+                        <span class="pulse-dot"></span>
+                        گاموا رو ببینید
+                        <span style="font-size: 1.2rem;">▶</span>
+                    </button>
+                </div>
+
+                <div style="margin-top: 1rem; font-size:0.85rem; color:#4b6b5e; display:flex; align-items:center; gap:0.3rem;">
                     <span>💻</span> بدون نیاز به نصب • مناسب دسکتاپ و مرورگر
                 </div>
             </div>
@@ -549,5 +711,78 @@
             </div>
         </div>
     </div>
+
+    <!-- ===== مودال ویدیو ===== -->
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeVideoBtn">✕</button>
+            <div class="video-wrapper">
+                <iframe 
+                    id="videoIframe"
+                    src="assets/1000527230_auto.mp4"
+                    title="ویدیو معرفی گاموا"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+            const closeBtn = document.getElementById('closeVideoBtn');
+            const openBtns = [
+                document.getElementById('openVideoBtnMobile'),
+                document.getElementById('openVideoBtnDesktop')
+            ];
+
+            // تابع باز کردن مودال
+            function openModal() {
+                modal.classList.add('active');
+                // اطمینان از لود شدن ویدیو (در صورت نیاز)
+                iframe.src = iframe.src; // ریلود نمی‌کنیم، فقط نمایش می‌دهیم
+            }
+
+            // تابع بستن مودال
+            function closeModal() {
+                modal.classList.remove('active');
+                // توقف ویدیو با خالی کردن src و دوباره تنظیم (اختیاری)
+                // برای توقف پخش، می‌توانیم src را خالی و دوباره پر کنیم
+                const currentSrc = iframe.src;
+                iframe.src = '';
+                setTimeout(() => {
+                    iframe.src = currentSrc;
+                }, 300);
+            }
+
+            // رویداد برای دکمه‌های باز کردن
+            openBtns.forEach(btn => {
+                if (btn) {
+                    btn.addEventListener('click', openModal);
+                }
+            });
+
+            // رویداد برای دکمه بستن
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeModal);
+            }
+
+            // کلیک خارج از محتوا نیز بسته شود
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // بستن با کلید Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
